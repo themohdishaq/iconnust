@@ -23,7 +23,8 @@ import {
   BarChart3,
   FlaskConical,
   GraduationCap,
-  Layers
+  Layers,
+  Fullscreen
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -126,6 +127,23 @@ const App = () => {
         ]
       }
     },
+    'News': {
+      title: 'News',
+      sidebar: [
+        { name: 'Press Releases', href: '#' },
+        { name: 'Success Stories', href: '#' },
+        { name: 'Events & Webinars', href: '#' },
+        { name: 'Newsletter Signup', href: '#' }
+      ],
+      content: {
+        heading: 'Latest Updates',
+        links: [
+          { label: 'Press Releases', sub: 'Official announcements and media coverage.' },
+          { label: 'Success Stories', sub: 'Highlighting impactful collaborations.' },
+          { label: 'Events & Webinars', sub: 'Join our upcoming industry-focused sessions.' }
+        ]
+      }
+    },
     'Team': {
       title: 'About',
       sidebar: [
@@ -150,7 +168,9 @@ const App = () => {
     { name: 'Innovation & Collaboration', href: '#innovation' },
     { name: 'Industry Services', href: '#industry' },
     { name: 'Support Programs', href: '#support' },
+    { name: 'News', href: '#news'},
     { name: 'Team', href: '#team' },
+    
   ];
 
   const heroSlides = [
@@ -181,15 +201,15 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
+    <div className="min-h-screen  bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden w-full">
       
       {/* Upper Utility Nav */}
-      <div className={`transition-all duration-500 bg-white border-b border-slate-50 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'py-3'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center space-x-6 text-[10px] uppercase tracking-[0.2em] font-black text-slate-400">
+      <div className={`transition-all items-center duration-500 bg-white border-b border-slate-50 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'py-3'}`}>
+        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center space-x-6 text-[10px] uppercase tracking-[0.2em] font-black text-[#1D2758]">
             <a href="#" className="hover:text-blue-900 transition-colors">Resources</a>
-            <a href="#" className="hover:text-blue-900 transition-colors">News</a>
             <a href="#" className="hover:text-blue-900 transition-colors">Events</a>
+            <a href="#" className="hover:text-blue-900 transition-colors">Careers</a>
             <a href="#" className="hover:text-blue-900 transition-colors border-l pl-6 border-slate-100">Partners</a>
           </div>
           <div className="flex items-center space-x-4">
@@ -209,7 +229,7 @@ const App = () => {
       <nav className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white shadow-md py-1 top-0' : 'bg-white/95 backdrop-blur-sm '
       }`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
+        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center relative">
           <div className="flex items-center space-x-4">
             {/* // logo */}
             <Image
@@ -314,7 +334,7 @@ const App = () => {
       </nav>
 
       {/* Hero Section with Dynamic Slider and Integrated Live Dashboard */}
-      <section className="relative pt-16 bg-white h-screen min-h-[95vh] flex flex-col justify-between border-b border-slate-100">
+      <section className=" w-full relative pt-16 bg-white h-screen min-h-[95vh] flex flex-col justify-between border-b border-slate-100">
         
         {/* Background Images Slider */}
         <div className="absolute top-0 right-0 w-full lg:w-2/3 h-full pointer-events-none z-0">
@@ -330,8 +350,10 @@ const App = () => {
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
               >
-                <img 
+                <img
                   src={slide.img} 
+                  width={1000}
+                  height={1000}
                   alt={`Slide ${index + 1}`} 
                   className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${currentSlide === index ? 'scale-100' : 'scale-110'}`}
                 />
@@ -346,7 +368,7 @@ const App = () => {
         </div>
 
         {/* Text Content Slider */}
-        <div className="max-w-7xl mx-auto px-6 w-full relative z-20 flex-grow flex flex-col justify-center mb-16 lg:mb-24">
+        <div className="max-w-8xl mx-auto px-6 w-full relative z-20 flex-grow flex flex-col justify-center mb-16 lg:mb-24">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-7 relative h-[380px] lg:h-[420px]">
               {heroSlides.map((slide, index) => (
@@ -356,11 +378,11 @@ const App = () => {
                     currentSlide === index ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'
                   }`}
                 >
-                  <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
+                  <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
                     <div className="w-12 h-px bg-blue-900/30" />
                     <span>{slide.tag}</span>
                   </div>
-                  <h1 className="text-5xl lg:text-7xl xl:text-8xl font-serif font-medium text-slate-900 leading-[1.02] mb-8 tracking-tight">
+                  <h1 className="text-4xl md:text-7xl 2xl:text-8xl font-serif font-medium text-slate-900 leading-[1.02] mb-8 tracking-tight">
                     {slide.titleLine1} <br />
                     <span className="italic text-blue-900 drop-shadow-sm">{slide.highlight}</span> <br />
                     {slide.titleLine2}
@@ -370,7 +392,7 @@ const App = () => {
                   </p> */}
                   
                   <div className="flex flex-wrap gap-6">
-                    <button className="bg-blue-900 text-white px-10 py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
+                    <button className="bg-blue-900 text-white px-5 py-3 2xl:px-10 2xl:py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
                       Launch Tech Place
                     </button>
                     <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all mt-4 sm:mt-0">
@@ -381,7 +403,7 @@ const App = () => {
               ))}
 
               {/* Slider Navigation Dots */}
-              <div className="absolute -bottom-10 left-0 flex space-x-3">
+              <div className="absolute bottom-16 2xl:-bottom-10 left-0 flex space-x-3">
                  {heroSlides.map((_, idx) => (
                     <button 
                       key={idx}
@@ -396,9 +418,9 @@ const App = () => {
         </div>
 
         {/* Live Dashboard - Impact Snapshot (Integrated Overlay) */}
-        <div className="max-w-7xl mx-auto px-6 w-full relative z-30">
-           <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-xl shadow-2xl overflow-hidden">
-             <div className="px-10 py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+        <div className="max-w-6xl mx-auto px-6 mb-10 -top-28 2xl:-top-5 w-full relative z-30">
+           <div className="bg-white/90  backdrop-blur-xl rounded-xl shadow-xl overflow-hidden">
+             <div className="px-10 py-6   flex justify-between items-center bg-slate-50/50">
                <div className="flex items-center space-x-3 text-blue-900 font-black text-[10px] uppercase tracking-[0.3em]">
                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                  <span>Live Impact Engine</span>
@@ -420,13 +442,13 @@ const App = () => {
                       <div className="text-blue-900 bg-blue-100/50 p-3 rounded-lg group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white transition-all duration-300">
                         {React.cloneElement(stat.icon, { size: 24 })}
                       </div>
-                      <ExternalLink size={14} className="text-slate-300 group-hover:text-blue-400 transition-colors" />
+                      
                     </div>
                     
                     <div className="relative z-10">
                       <div className="flex items-baseline space-x-1 mb-1">
-                        <div className="text-5xl lg:text-6xl font-serif text-slate-900 group-hover:text-blue-950 transition-colors">{stat.value}</div>
-                        <span className="text-2xl font-serif text-blue-600 font-bold">+</span>
+                        <div className="sm:text-4xl 2xl:text-5xl  font-Inter text-slate-900 group-hover:text-blue-950 transition-colors">{stat.value}</div>
+                        <span className="text-xl font-serif text-blue-900 font-bold">+</span>
                       </div>
                       <div className="text-[10px] uppercase tracking-[0.2em] font-black text-slate-500 group-hover:text-blue-900 transition-colors">{stat.label}</div>
                     </div>
@@ -436,16 +458,84 @@ const App = () => {
            </div>
         </div>
       </section>
+       {/* News sections */}
+      <section id="news" className="sm:pt-52 2xl:pt-2 bg-slate-50">
+        <div className="max-w-8xl mx-auto px-6">
+          <div className="mb-16">
+            <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
+              <div className="w-12 h-px bg-blue-900/30" />
+              <span>Latest Updates</span>
+            </div>
+            <h2 className="text-5xl font-serif text-slate-900 mb-4">News & Success Stories</h2>
+            <p className="text-slate-500 text-lg">Discover the latest developments, success stories, and upcoming events from ICON-NUST.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkI1i27WbQ_aPaJi954nGhCWiiIhO14kj3lA&s',
+                tag: 'Success Story',
+                title: 'Tech Startup Scales to $10M Valuation',
+                desc: 'An ICON-NUST supported spin-off secured Series A funding, demonstrating the impact of our entrepreneurial support programs.'
+              },
+              {
+                image: 'https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2023/11/22/4105781-1574885962.jpeg?itok=Ft6FH-_n',
+                tag: 'Partnership',
+                title: 'Strategic MoU with Global Tech Leader',
+                desc: 'NUST and international corporation sign collaboration agreement for joint R&D initiatives in advanced manufacturing.'
+              },
+              {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5kgX-34t6B3g3IH-C7ba_AJIyvNAUcHjCA&s',
+                tag: 'Event',
+                title: 'Innovation Summit 2026 Announced',
+                desc: 'Mark your calendars for our annual summit bringing together entrepreneurs, investors, and industry leaders on May 15th.'
+              },
+              
+            ].map((news, i) => (
+              <div key={i} className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={news.image} 
+                    alt={news.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
+                    {news.tag}
+                  </span>
+                </div>
+                
+                <div className="p-6 lg:p-8">
+                  <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
+                    {news.title}
+                  </h3>
+                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
+                    {news.desc}
+                  </p>
+                  <button className="flex items-center space-x-2 cursor-pointer text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all group/btn">
+                    <span>Read More</span>
+                    <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Industry Services Pillars */}
-      <section id="industry" className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-24">
+      <section id="industry" className="py-4 bg-white">
+        <div className="max-w-8xl mx-auto px-6">
+          <div className="text-left ">
+             <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
+              <div className="w-12 h-px bg-blue-900/30" />
+              <span>Upgraded Labs</span>
+            </div>
             <h2 className="text-5xl font-serif text-slate-900 mb-6">Industry Services</h2>
             <p className="text-slate-500 text-lg">Four key avenues designed to integrate NUST's research excellence with corporate R&D needs.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { title: 'R&D Support', desc: 'Custom research projects designed to solve specific industrial bottlenecks.', icon: <FlaskConical />, bg: 'bg-slate-50' },
               { title: 'Consultancy', desc: 'Expert guidance from world-renowned faculty across multiple domains.', icon: <Users />, bg: 'bg-white border border-slate-100' },
@@ -458,7 +548,7 @@ const App = () => {
                 </div>
                 <h3 className="text-3xl font-serif text-slate-900 mb-4">{service.title}</h3>
                 <p className="text-slate-500 leading-relaxed mb-10 text-lg">{service.desc}</p>
-                <button className="flex items-center space-x-3 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 group/btn">
+                <button className="flex items-center space-x-3 cursor-pointer text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 group/btn">
                   <span>Inquire Now</span>
                   <ArrowRight size={16} className="group-hover/btn:translate-x-2 transition-transform" />
                 </button>
@@ -470,8 +560,8 @@ const App = () => {
 
       {/* Tech Place / Storefront */}
       <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] opacity-5 bg-fixed bg-cover" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] opacity-10 bg-fixed bg-cover" />
+        <div className="max-w-8xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-10">
             <div className="max-w-xl">
               <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">Storefront</span>
@@ -492,7 +582,7 @@ const App = () => {
             ].map((item, i) => (
               <div key={i} className="bg-white/5 border border-white/10 p-10 rounded-sm hover:bg-white/10 transition-all cursor-pointer group">
                 <div className="text-blue-400 mb-6 group-hover:scale-110 transition-transform"><Layers size={32} /></div>
-                <div className="text-5xl font-serif mb-3">{item.count}</div>
+                <div className="text-5xl font-Inter mb-3">{item.count}</div>
                 <div className="text-xl font-serif text-white mb-2">{item.label}</div>
                 <p className="text-slate-500 text-sm">{item.sub}</p>
               </div>
@@ -503,7 +593,7 @@ const App = () => {
 
       {/* The Innovation Brief (Newsletter) */}
       <section className="bg-blue-900 py-24 text-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-8xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <div className="inline-flex items-center space-x-2 text-blue-300 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
@@ -519,15 +609,15 @@ const App = () => {
                 placeholder="Work Email" 
                 className="flex-grow bg-white/10 border border-white/20 px-6 py-5 outline-none focus:bg-white/20 transition-all rounded-sm placeholder:text-blue-200"
               />
-              <button className="bg-white text-blue-900 px-10 py-5 font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all rounded-sm">Subscribe</button>
+              <button className="bg-white text-blue-900 px-10 py-5 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-[#1D2758] hover:text-white transition-all rounded-sm">Subscribe</button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Initiate a Partnership (Contact Section) */}
-      <section id="team" className="py-32 bg-white relative">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="team" className="py-8 bg-white relative">
+        <div className="max-w-8xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-20">
             <div className="lg:col-span-5">
               <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
@@ -595,14 +685,19 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white py-32 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <footer className="bg-white py-12 border-t border-slate-100">
+        <div className="max-w-8xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row justify-between gap-16 mb-24">
             <div className="max-w-sm">
-              <div className="flex flex-col border-l-4 border-blue-900 pl-4 mb-10">
-                <span className="font-black text-4xl tracking-tighter text-blue-900 leading-none">ICON</span>
-                <span className="text-[11px] uppercase tracking-[0.3em] text-slate-500 font-bold mt-1">NUST Innovation</span>
-              </div>
+            {/* // icon logo */}
+            <Image
+              src="/icon-logo.png"
+              alt="ICON Logo"
+              width={250}
+              height={120}
+              className="rounded-sm mb-6"
+            />
+
               <p className="text-slate-500 text-lg leading-relaxed">
                 Empowering the future of Pakistan's economy by transforming world-class research into commercial reality.
               </p>
@@ -634,7 +729,7 @@ const App = () => {
               </div>
             </div>
           </div>
-          <div className="pt-16 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="pt-4 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-8">
             <p className="text-slate-400 text-[11px] font-bold tracking-widest uppercase">© 2026 National University of Sciences & Technology</p>
             <div className="flex space-x-10 text-[11px] font-black text-slate-400 uppercase tracking-widest">
               <span>Privacy</span>
