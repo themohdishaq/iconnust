@@ -180,7 +180,7 @@ const App = () => {
       highlight: "Discovery",
       titleLine2: "Ignites Growth.",
       desc: "The Innovation & Commercialization Network at NUST bridge the gap between academic brilliance and global industrial impact.",
-      img: "https://research.nust.edu.pk/wp-content/uploads/2020/07/campus-life.jpg"
+      img: "campus-life.jpg"
     },
     {
       tag: "Industry Synergy",
