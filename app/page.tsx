@@ -27,6 +27,8 @@ import {
   Fullscreen
 } from 'lucide-react';
 import Image from 'next/image';
+import IndustryServicesPortal from '@/components/Service';
+import Footer from '@/components/Footer';
 
 type MenuKey = 'Innovation & Collaboration' | 'Industry Services' | 'Support Programs' | 'Team';
 
@@ -76,103 +78,7 @@ const App = () => {
     }, 150);
   };
 
-  const menuData = {
-    'Innovation & Collaboration': {
-      title: 'Innovation',
-      sidebar: [
-        { name: 'Research Areas', href: '#' },
-        { name: 'Technology Portfolio', href: '#' },
-        { name: 'IP Policy & Ethics', href: '#' },
-        { name: 'Faculty Experts', href: '#' }
-      ],
-      content: {
-        heading: 'Commercialization Pathways',
-        links: [
-          { label: 'Technology Disclosure', sub: 'The first step in protecting your invention.' },
-          { label: 'Licensing Opportunities', sub: 'Browse 500+ patents ready for market.' },
-          { label: 'Infrastructure Registry', sub: 'View NUST\'s current research capabilities.' }
-        ]
-      }
-    },
-    'Industry Services': {
-      title: 'Industry',
-      sidebar: [
-        { name: 'R&D Support', href: '#' },
-        { name: 'Consultancy', href: '#' },
-        { name: 'Training/Upskilling', href: '#' },
-        { name: 'Testing & Lab Svs', href: '#' }
-      ],
-      content: {
-        heading: 'Strategic Partnerships',
-        links: [
-          { label: 'Engage R&D Support', sub: 'Collaborate on mission-critical technology projects.' },
-          { label: 'Expert Consultancy', sub: 'Access world-class faculty for industry challenges.' },
-          { label: 'Testing & Calibration', sub: 'Use our ISO-certified lab infrastructure.' }
-        ]
-      }
-    },
-    'Support Programs': {
-      title: 'Programs',
-      sidebar: [
-        { name: 'Tech One Incubator', href: '#' },
-        { name: 'Incite Funding', href: '#' },
-        { name: 'Venture Bridge', href: '#' }
-      ],
-      content: {
-        heading: 'Entrepreneurial Support',
-        links: [
-          { label: 'Startup Incubation', sub: 'Nurturing ideas from lab to market.' },
-          { label: 'Proof of Concept Funding', sub: 'Gap funding for early stage prototypes.' },
-          { label: 'Mentor Network', sub: 'Connect with serial entrepreneurs.' }
-        ]
-      }
-    },
-    'News': {
-      title: 'News',
-      sidebar: [
-        { name: 'Press Releases', href: '#' },
-        { name: 'Success Stories', href: '#' },
-        { name: 'Events & Webinars', href: '#' },
-        { name: 'Newsletter Signup', href: '#' }
-      ],
-      content: {
-        heading: 'Latest Updates',
-        links: [
-          { label: 'Press Releases', sub: 'Official announcements and media coverage.' },
-          { label: 'Success Stories', sub: 'Highlighting impactful collaborations.' },
-          { label: 'Events & Webinars', sub: 'Join our upcoming industry-focused sessions.' }
-        ]
-      }
-    },
-    'Team': {
-      title: 'About',
-      sidebar: [
-        { name: 'Who We Are', href: '#' },
-        { name: 'Leadership', href: '#' },
-        { name: 'Program Managers', href: '#' },
-        { name: 'Contact Info', href: '#' }
-      ],
-      content: {
-        heading: 'The ICON Team',
-        links: [
-          { label: 'Meet the Leadership', sub: 'Driving the ICON-NOSIS Communication Engine.' },
-          { label: 'Contact a Program Manager', sub: 'Find domain-specific tech transfer experts.' },
-          { label: 'Governance & Ethics', sub: 'Our commitment to transparent commercialization.' }
-        ]
-      }
-    }
-  };
-
-  const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Innovation & Collaboration', href: '#innovation' },
-    { name: 'Industry Services', href: '#industry' },
-    { name: 'Support Programs', href: '#support' },
-    { name: 'News', href: '#news'},
-    { name: 'Team', href: '#team' },
-    
-  ];
-
+ 
   const heroSlides = [
     {
       tag: "Innovation",
@@ -203,141 +109,11 @@ const App = () => {
   return (
     <div className="min-h-screen  bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden w-full">
       
-      {/* Upper Utility Nav */}
-      <div className={`transition-all items-center duration-500 bg-white border-b border-slate-50 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'py-3'}`}>
-        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center space-x-6 text-[10px] uppercase tracking-[0.2em] font-black text-[#1D2758]">
-            <a href="#" className="hover:text-blue-900 transition-colors">Resources</a>
-            <a href="#" className="hover:text-blue-900 transition-colors">Events</a>
-            <a href="#" className="hover:text-blue-900 transition-colors">Careers</a>
-            <a href="#" className="hover:text-blue-900 transition-colors border-l pl-6 border-slate-100">Partners</a>
-          </div>
-          <div className="flex items-center space-x-4">
-             <div className="relative group">
-                <input 
-                  type="text" 
-                  placeholder="Search Technology..." 
-                  className="pl-8 pr-4 py-1 text-[11px] bg-slate-50 border border-slate-200 rounded-full w-48 focus:border-blue-900 transition-all outline-none"
-                />
-                <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-              </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-1 top-0' : 'bg-white/95 backdrop-blur-sm '
-      }`}>
-        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center relative">
-          <div className="flex items-center space-x-4">
-            {/* // logo */}
-            <Image
-              src="/icon-logo.png"
-              alt="ICON Logo"
-              width={200}
-              height={100}
-              className="rounded-sm"
-            />
-          </div>
-
-          {/* Desktop Links */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <div 
-                key={link.name} 
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(link.name in menuData ? link.name as MenuKey : null)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <a 
-                  href={link.href} 
-                  className={`text-[12px] uppercase tracking-widest font-black transition-colors py-4 block border-b-2 ${
-                    activeMenu === link.name ? 'text-blue-900 border-blue-900' : 'text-slate-600 border-transparent hover:text-blue-900'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              </div>
-            ))}
-            <button className="bg-blue-900 text-white px-6 py-2.5 text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all active:scale-95 ml-4">
-              Portal Login
-            </button>
-          </div>
-
-          {/* Mega Menu Dropdown */}
-          <div 
-            className={`absolute top-[calc(100%+4px)] left-6  right-6 bg-white shadow-2xl transition-all duration-500 rounded-b-xl border border-slate-100 overflow-hidden z-50 ${
-              activeMenu && menuData[activeMenu] ? 'max-h-[600px] opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-4 pointer-events-none'
-            }`}
-            onMouseEnter={() => handleMouseEnter(activeMenu)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {activeMenu && menuData[activeMenu] && (
-              <div className="flex flex-col lg:flex-row min-h-[420px]">
-                <div className="w-full lg:w-1/3 bg-[#0a2342] text-white p-12">
-                  <div className="flex items-center space-x-4 mb-10 group cursor-pointer">
-                    <h2 className="text-4xl font-serif">{menuData[activeMenu].title}</h2>
-                    <CircleArrowRight size={28} className="text-blue-400 group-hover:translate-x-2 transition-transform duration-300" />
-                  </div>
-                  <ul className="space-y-5">
-                    {menuData[activeMenu].sidebar.map((item, idx) => (
-                      <li key={idx} className="group flex items-center">
-                        <div className="w-1 h-0 bg-blue-400 mr-0 transition-all duration-300 group-hover:w-1 group-hover:mr-4 group-hover:h-4" />
-                        <a href={item.href} className="text-[13px] font-bold uppercase tracking-widest text-slate-300 hover:text-white transition-colors">
-                          {item.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="w-full lg:w-2/3 p-12 bg-white flex flex-col justify-center">
-                  <h3 className="text-2xl font-serif text-slate-900 mb-10 border-b border-slate-100 pb-4">{menuData[activeMenu].content.heading}</h3>
-                  <div className="grid md:grid-cols-2 gap-x-12 gap-y-16">
-                    {menuData[activeMenu].content.links.map((link, idx) => (
-                      <div key={idx} className="group cursor-pointer">
-                        <div className="w-10 h-0.5 bg-blue-900 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 mb-4" />
-                        <h4 className="text-xl font-serif font-medium text-slate-900 group-hover:text-blue-900 transition-colors mb-2">
-                          {link.label}
-                        </h4>
-                        <p className="text-slate-500 text-sm leading-relaxed">
-                          {link.sub}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <button className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 p-8 flex flex-col space-y-6 shadow-2xl animate-in fade-in slide-in-from-top-4 overflow-y-auto max-h-[80vh]">
-            {navLinks.map((link) => (
-              <div key={link.name} className="flex flex-col space-y-2">
-                 <a href={link.href} className="text-xl font-black uppercase text-slate-900" onClick={() => setMobileMenuOpen(false)}>
-                  {link.name}
-                </a>
-              </div>
-            ))}
-            <button className="bg-blue-900 text-white px-5 py-4 font-black uppercase tracking-widest text-sm mt-4">
-              Portal Login
-            </button>
-          </div>
-        )}
-      </nav>
-
       {/* Hero Section with Dynamic Slider and Integrated Live Dashboard */}
       <section className=" w-full relative pt-16 bg-white h-screen min-h-[95vh] flex flex-col justify-between border-b border-slate-100">
         
         {/* Background Images Slider */}
-        <div className="absolute top-0 right-0 w-full lg:w-2/3 h-full pointer-events-none z-0">
+        <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
           <div 
             className="absolute inset-0"
             style={{
@@ -358,7 +134,7 @@ const App = () => {
                   className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${currentSlide === index ? 'scale-100' : 'scale-110'}`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-blue-900/10 lg:via-transparent" />
-                <div className="absolute inset-0 shadow-[inset_0px_0px_120px_rgba(255,255,255,1)]" />
+                
               </div>
             ))}
           </div>
@@ -522,9 +298,11 @@ const App = () => {
           </div>
         </div>
       </section>
+      
+      <IndustryServicesPortal/>
 
       {/* Industry Services Pillars */}
-      <section id="industry" className="py-4 bg-white">
+      {/* <section id="industry" className="py-4 bg-white">
         <div className="max-w-8xl mx-auto px-6">
           <div className="text-left ">
              <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
@@ -556,8 +334,29 @@ const App = () => {
             ))}
           </div>
         </div>
+      </section> */}
+ <section className="py-12 bg-white text-slate-900">
+        <div className="max-w-8xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center space-x-2 text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
+                <Mail size={14} />
+                <span>Knowledge Brief</span>
+              </div>
+              <h2 className="text-5xl text-slate-900 font-serif mb-6">The Innovation Brief</h2>
+              <p className="text-slate-700 text-lg opacity-90 max-w-md">Stay ahead of the market with monthly updates on NUST research, licensed tech, and industry roundtables.</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input 
+                type="email" 
+                placeholder="Work Email" 
+                className="flex-grow bg-slate-50 border border-slate-300 px-6 py-5 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900"
+              />
+              <button className="bg-blue-600 text-white px-10 py-5 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-blue-700 transition-all rounded-sm shadow-lg">Subscribe</button>
+            </div>
+          </div>
+        </div>
       </section>
-
       {/* Tech Place / Storefront */}
       <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] opacity-10 bg-fixed bg-cover" />
@@ -592,28 +391,7 @@ const App = () => {
       </section>
 
       {/* The Innovation Brief (Newsletter) */}
-      <section className="bg-blue-900 py-24 text-white">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center space-x-2 text-blue-300 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
-                <Mail size={14} />
-                <span>Knowledge Brief</span>
-              </div>
-              <h2 className="text-5xl font-serif mb-6">The Innovation Brief</h2>
-              <p className="text-blue-100 text-lg opacity-80 max-w-md">Stay ahead of the market with monthly updates on NUST research, licensed tech, and industry roundtables.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <input 
-                type="email" 
-                placeholder="Work Email" 
-                className="flex-grow bg-white/10 border border-white/20 px-6 py-5 outline-none focus:bg-white/20 transition-all rounded-sm placeholder:text-blue-200"
-              />
-              <button className="bg-white text-blue-900 px-10 py-5 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-[#1D2758] hover:text-white transition-all rounded-sm">Subscribe</button>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Initiate a Partnership (Contact Section) */}
       <section id="team" className="py-8 bg-white relative">
@@ -684,61 +462,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-white py-12 border-t border-slate-100">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row justify-between gap-16 mb-24">
-            <div className="max-w-sm">
-            {/* // icon logo */}
-            <Image
-              src="/icon-logo.png"
-              alt="ICON Logo"
-              width={250}
-              height={120}
-              className="rounded-sm mb-6"
-            />
-
-              <p className="text-slate-500 text-lg leading-relaxed">
-                Empowering the future of Pakistan's economy by transforming world-class research into commercial reality.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-16 lg:gap-32">
-              <div>
-                <h5 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-10">Ecosystem</h5>
-                <ul className="space-y-4 text-sm text-slate-500 font-bold">
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">Tech Place</li>
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">Spin-offs</li>
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">IP Academy</li>
-                </ul>
-              </div>
-              <div>
-                <h5 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-10">Links</h5>
-                <ul className="space-y-4 text-sm text-slate-500 font-bold">
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">Careers</li>
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">Policies</li>
-                  <li className="hover:text-blue-900 cursor-pointer transition-colors">Sitemap</li>
-                </ul>
-              </div>
-              <div className="col-span-2 md:col-span-1">
-                <h5 className="text-[11px] font-black uppercase tracking-[0.2em] text-slate-900 mb-10">Stay Connected</h5>
-                <div className="flex space-x-6 text-slate-400">
-                  <Globe size={20} className="hover:text-blue-900 cursor-pointer transition-colors" />
-                  <Briefcase size={20} className="hover:text-blue-900 cursor-pointer transition-colors" />
-                  <Users size={20} className="hover:text-blue-900 cursor-pointer transition-colors" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="pt-4 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-slate-400 text-[11px] font-bold tracking-widest uppercase">© 2026 National University of Sciences & Technology</p>
-            <div className="flex space-x-10 text-[11px] font-black text-slate-400 uppercase tracking-widest">
-              <span>Privacy</span>
-              <span>Legal</span>
-              <span>NUST.EDU.PK</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 };
