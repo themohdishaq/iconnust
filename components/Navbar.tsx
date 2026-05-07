@@ -195,9 +195,7 @@ function Navbar() {
                 </a>
               </div>
             ))}
-            <button className="bg-blue-900 text-white px-6 py-2.5 text-[11px] font-black uppercase tracking-widest hover:bg-slate-900 transition-all active:scale-95 ml-4">
-              Portal Login
-            </button>
+           
           </div>
 
           {/* Mega Menu Dropdown */}

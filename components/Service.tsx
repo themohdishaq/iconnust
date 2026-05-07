@@ -87,25 +87,22 @@ const IndustryServicesPortal = () => {
   ];
 
   return (
-    <div className="py-7 bg-slate-900 text-white relative overflow-hidden">
+    <div className="py-7 my-4 bg-slate-900  text-white relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-8 bg-fixed bg-cover"
+          className="absolute inset-0 opacity-20 bg-fixed bg-cover"
           style={{ backgroundImage: "url('/industrial_bg.png')" }}
         />
       {/* Hero Section: High-Tech Look */}
       <section className="relative py-8 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-4xl mx-auto flex flex-col items-center">
-            <motion.div variants={fadeUp} className="inline-flex items-center space-x-3 bg-white/5 border border-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8">
-              <Network size={14} className="text-blue-400" />
-              <span className="text-blue-300 font-bold text-[10px] uppercase tracking-[0.4em]">Corporate Alliance Network</span>
-            </motion.div>
+            
             
             <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl xl:text-8xl font-serif text-white mb-8 leading-[1.05] tracking-tight">
               Industrial <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Services</span>
             </motion.h1>
             
-            <motion.p variants={fadeUp} className="text-xl text-slate-400 leading-relaxed mb-12 font-light max-w-2xl">
+            <motion.p variants={fadeUp} className="text-xl text-slate-400 leading-relaxed  font-light max-w-2xl">
               Four key avenues designed to seamlessly integrate NUST's world-class research excellence, faculty expertise, and infrastructure with your corporate R&D needs.
             </motion.p>
           </motion.div>
@@ -134,7 +131,7 @@ const IndustryServicesPortal = () => {
                 <img 
                   src={service.img} 
                   alt={service.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110 opacity-40 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-50"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110 opacity-60 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-60"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${service.color} opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-80`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-750 via-slate-850/90 to-transparent" />

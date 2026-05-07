@@ -167,14 +167,7 @@ const App = () => {
                     {slide.desc}
                   </p> */}
                   
-                  <div className="flex flex-wrap gap-6">
-                    <button className="bg-blue-900 text-white px-5 py-3 2xl:px-10 2xl:py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
-                      Launch Tech Place
-                    </button>
-                    <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all mt-4 sm:mt-0">
-                      Impact Dashboard
-                    </button>
-                  </div>
+                 
                 </div>
               ))}
 
@@ -275,10 +268,8 @@ const App = () => {
                     alt={news.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
-                    {news.tag}
-                  </span>
+              
+
                 </div>
                 
                 <div className="p-6 lg:p-8">
@@ -298,7 +289,6 @@ const App = () => {
           </div>
         </div>
       </section>
-      
       <IndustryServicesPortal/>
 
       {/* Industry Services Pillars */}
