@@ -167,7 +167,14 @@ const App = () => {
                     {slide.desc}
                   </p> */}
                   
-                 
+                  <div className="flex flex-wrap gap-6">
+                    <button className="bg-blue-900 text-white px-5 py-3 2xl:px-10 2xl:py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
+                      Launch Tech Place
+                    </button>
+                    <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all mt-4 sm:mt-0">
+                      Impact Dashboard
+                    </button>
+                  </div>
                 </div>
               ))}
 
@@ -268,8 +275,10 @@ const App = () => {
                     alt={news.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-              
-
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                  <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
+                    {news.tag}
+                  </span>
                 </div>
                 
                 <div className="p-6 lg:p-8">
@@ -289,6 +298,7 @@ const App = () => {
           </div>
         </div>
       </section>
+      
       <IndustryServicesPortal/>
 
       {/* Industry Services Pillars */}
@@ -365,9 +375,9 @@ const App = () => {
 
           <div className="grid md:grid-cols-3 gap-10">
             {[
-              { label: 'Ready to License', count: '85', sub: 'Inventions with verified TRL-7+' },
-              { label: 'Active Spin-offs', count: '142', sub: 'Founders creating economic impact' },
-              { label: 'Global Patents', count: '512', sub: 'Strategic IP across 12 territories' }
+              { label: 'Licensed Tech', count: '48', sub: 'Technologies actively licensed to industry partners' },
+              { label: 'Spin-offs', count: '142', sub: 'Ventures founded on NUST intellectual property' },
+              { label: 'Ready to License', count: '85', sub: 'Cutting-edge technologies awaiting commercialization' }
             ].map((item, i) => (
               <div key={i} className="bg-white/5 border border-white/10 p-10 rounded-sm hover:bg-white/10 transition-all cursor-pointer group">
                 <div className="text-blue-400 mb-6 group-hover:scale-110 transition-transform"><Layers size={32} /></div>

@@ -28,53 +28,39 @@ import {
 // Example: https://www.youtube.com/watch?v=VIDEO_ID_HERE
 const researchVideos = {
   featured: {
-    videoId: "dQw4w9WgXcQ", // Replace with actual featured video ID
-    title: "NUST Research Breakthroughs & Innovations",
-    description: "Explore cutting-edge research projects and technological advancements from NUST's Research Directorate."
+    videoId: "QtKVfRdgkJA", // Replace with actual featured video ID
+    title: "Real Time Urban Microclimate Monitoring with AI & IoT",
+    description: "Discover how ICON bridges NUST's research capabilities with industry needs — from joint R&D projects and IP licensing to spin-off creation and workforce development."
   },
   sidebar: [
     {
-      title: "AI Research at NUST",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
+      title: "Teleoperated Decontamination Robot",
+      videoId: "4WcEz9jupYE", // Replace with actual video ID
       duration: "15:30",
       views: "2.1K views",
       date: "2 days ago"
     },
     {
-      title: "Biotechnology Lab Tour",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
+      title: "Made in Pakistan diagnostic Scanner for Modern Vehicles",
+      videoId: "ruZLF1HAp-Q", // Replace with actual video ID
       duration: "12:45",
       views: "1.8K views",
       date: "1 week ago"
     },
     {
-      title: "Sustainable Energy Solutions",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
+      title: "All terrain Reconfigurable Tracked Vehicle ",
+      videoId: "5rtz_ga-vMo", // Replace with actual video ID
       duration: "18:20",
       views: "3.2K views",
       date: "2 weeks ago"
     },
     {
-      title: "Advanced Materials Research",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
+      title: " Otoscope Reinvented: A Simple Tool Making a Big Difference!",
+      videoId: "Z_sxB1NNqmA", // Replace with actual video ID
       duration: "22:15",
       views: "1.5K views",
       date: "3 weeks ago"
     },
-    {
-      title: "NUST Innovation Showcase",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
-      duration: "25:40",
-      views: "4.2K views",
-      date: "1 month ago"
-    },
-    {
-      title: "Research Collaboration Highlights",
-      videoId: "dQw4w9WgXcQ", // Replace with actual video ID
-      duration: "14:55",
-      views: "2.8K views",
-      date: "6 weeks ago"
-    }
   ]
 };
 const fundingData = [
@@ -134,32 +120,32 @@ const RndPortal = () => {
 
       {/* Hero Section */}
       <section className="relative py-20 bg-slate-900 overflow-hidden">
-        <motion.div 
-          initial={{ scale: 1.1, opacity: 0 }} 
-          animate={{ scale: 1, opacity: 0.4 }} 
+        <motion.div
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.4 }}
           transition={{ duration: 2 }}
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent" />
-        
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-700 to-transparent" />
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-3xl">
             <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
               <Activity size={14} />
-              <span>Research Directorate</span>
+              <span>ICON Innovation & Collaboration</span>
             </motion.div>
             <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-white mb-8 leading-[1.1]">
-              Custom R&D to Solve <span className="italic text-blue-400">Industrial Bottlenecks</span>
+              Where Academic Ingenuity Meets <span className="italic text-blue-400">Industry Ambition</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-xl text-slate-300 leading-relaxed mb-12 font-light">
-              We align NUST's world-class faculty, 300+ advanced laboratories, and multi-disciplinary research clusters with the immediate technical challenges of our corporate partners.
+              ICON connects NUST's 3,000+ faculty, 300+ advanced laboratories, and multi-disciplinary research clusters with industry partners to co-create solutions, transfer knowledge, and drive shared impact.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
               <button className="bg-blue-600 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/50">
-                Submit a Challenge
+                Propose a Collaboration
               </button>
               <button className="bg-white/10 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm flex items-center">
-                <Play size={14} className="mr-2" /> Watch Capabilities
+                <Play size={14} className="mr-2" /> Explore Capabilities
               </button>
             </motion.div>
           </motion.div>
@@ -173,14 +159,14 @@ const RndPortal = () => {
       <section id="analytics" className="py-24 bg-white relative -mt-16 z-20 rounded-t-3xl shadow-2xl mx-4 lg:mx-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <h2 className="text-3xl font-serif text-slate-900 mb-2">Research Impact Metrics</h2>
-            <p className="text-slate-500 text-sm">Real-time data visualization of NUST R&D throughput and funding trajectories.</p>
+            <h2 className="text-3xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
+            <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Chart 1: Funding Growth (Area Chart) */}
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-2 bg-slate-50 p-8 rounded-2xl border border-slate-100">
-              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Sponsored Research Funding Growth (Million PKR)</h3>
+              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Collaborative Project Funding Growth (Million PKR)</h3>
               <div className="h-[300px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={fundingData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
@@ -205,7 +191,7 @@ const RndPortal = () => {
 
             {/* Chart 2: Research Domains (Donut Chart) */}
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col">
-              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Active Projects by Domain</h3>
+              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Active Collaborations by Domain</h3>
               <div className="h-[250px] w-full flex-grow">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -243,8 +229,8 @@ const RndPortal = () => {
           <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="mt-12">
             <div className="bg-slate-900 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
                <div className="mb-6 md:mb-0 md:mr-12">
-                 <h3 className="text-2xl font-serif text-white mb-2">High-Impact Publications</h3>
-                 <p className="text-slate-400 text-sm max-w-sm">Quarterly breakdown of Q1-tier academic papers and global citations stemming from sponsored research.</p>
+                 <h3 className="text-2xl font-serif text-white mb-2">Joint Knowledge Output</h3>
+                 <p className="text-slate-400 text-sm max-w-sm">Quarterly breakdown of co-authored Q1-tier publications and global citations arising from ICON-facilitated collaborations.</p>
                </div>
                <div className="h-[150px] w-full md:w-1/2">
                 <ResponsiveContainer width="100%" height="100%">
@@ -267,11 +253,11 @@ const RndPortal = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Research Videos</span>
-              <h2 className="text-4xl font-serif text-slate-900">Latest from Research_NUST</h2>
+              <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
+              <h2 className="text-4xl font-serif text-slate-900">ICON in Action</h2>
             </div>
             <a href="https://www.youtube.com/@Research_NUST" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center space-x-2 text-blue-900 font-bold text-xs uppercase tracking-widest hover:underline">
-              <span>Visit YouTube Channel</span> <ChevronRight size={16} />
+              <span>View All on YouTube</span> <ChevronRight size={16} />
             </a>
           </div>
 
@@ -320,6 +306,9 @@ const RndPortal = () => {
                       <span>{video.date}</span>
                     </div>
                   </div>
+                  {/* view full vides
+                   */}
+                  
                 </motion.div>
               ))}
 
@@ -329,7 +318,7 @@ const RndPortal = () => {
       </section>
 
       {/* Areas of Expertise */}
-      <section id="capabilities" className="py-24 bg-white">
+      {/* <section id="capabilities" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-4xl font-serif text-slate-900 mb-4">Core Research Strengths</h2>
@@ -358,7 +347,7 @@ const RndPortal = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Engagement CTA */}
       <section id="initiate-project" className="py-32 bg-blue-950 text-white relative overflow-hidden">

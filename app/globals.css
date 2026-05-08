@@ -24,3 +24,35 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ── hero animated gradient mesh ── */
+@keyframes hero-mesh-move {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-animated-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 246, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0)   30%,
+    rgba(219, 234, 254, 0.4) 60%,
+    rgba(255, 255, 255, 0)   100%
+  );
+  background-size: 300% 300%;
+  animation: hero-mesh-move 14s ease infinite;
+}
+
+/* ── tech-section grid pattern ── */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(rgba(96, 165, 250, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96, 165, 250, 0.15) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ── number counter tabular digits ── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

@@ -51,7 +51,7 @@ const IndustryServicesPortal = () => {
       icon: <FlaskConical size={32} />, 
       img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80',
       stats: '150+ Active Projects',
-      color: 'from-blue-600 to-blue-900',
+      color: 'from-cyan-600 to-cyan-900',
       href: 'research'
     },
     { 
@@ -61,7 +61,7 @@ const IndustryServicesPortal = () => {
       icon: <Users size={32} />, 
       img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80',
       stats: '500+ Faculty Experts',
-      color: 'from-indigo-600 to-indigo-900',
+      color: 'from-cyan-600 to-cyan-900',
       href: 'experts'
     },
     { 
@@ -71,7 +71,7 @@ const IndustryServicesPortal = () => {
       icon: <GraduationCap size={32} />, 
       img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80',
       stats: '15,000+ Professionals Trained',
-      color: 'from-cyan-600 to-cyan-900',
+      color: 'transparent',
       href: 'training'
     },
     { 
@@ -96,7 +96,6 @@ const IndustryServicesPortal = () => {
       <section className="relative py-8 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center flex flex-col items-center">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-4xl mx-auto flex flex-col items-center">
-            
             
             <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl xl:text-8xl font-serif text-white mb-8 leading-[1.05] tracking-tight">
               Industrial <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Services</span>
@@ -131,9 +130,10 @@ const IndustryServicesPortal = () => {
                 <img 
                   src={service.img} 
                   alt={service.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110 opacity-60 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-60"
+                  loading="eager"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2000ms] ease-out group-hover:scale-110 mix-blend-normal opacity-60"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-t ${service.color} opacity-70 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-80`} />
+                <div className={`absolute inset-0  mix-blend-multiply transition-opacity duration-500`} />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-750 via-slate-850/90 to-transparent" />
 
                 {/* Content Container */}
@@ -158,13 +158,14 @@ const IndustryServicesPortal = () => {
 
                   {/* Action Button */}
                   <div className="absolute bottom-8 left-10 lg:left-12 opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150">
-                    <Link href={service.href} className="flex items-center space-x-3 text-cyan-300 font-black text-[11px] uppercase tracking-[0.2em] border-b border-cyan-300/30 pb-1 hover:border-cyan-300 transition-colors">
-                    <button className="flex items-center space-x-3 text-cyan-300 font-black text-[11px] uppercase tracking-[0.2em] border-b border-cyan-300/30 pb-1 hover:border-cyan-300 transition-colors">
+                    <button className="flex cursor-pointer items-center space-x-3 text-cyan-300 font-black text-[11px] uppercase tracking-[0.2em] border-b border-cyan-300/30 pb-1 hover:border-cyan-300 transition-colors">
+                    {/* <Link href={service.href} className="flex items-center space-x-3 text-cyan-300 font-black text-[11px] uppercase tracking-[0.2em] border-b border-cyan-300/30 pb-1 hover:border-cyan-300 transition-colors"> */}
 
                       <span>Details...</span>
-                      <ArrowRight size={16} />
+                      
+                      {/* </Link> */}
                     </button>
-                    </Link>
+                    
                   </div>
                 </div>
                 
