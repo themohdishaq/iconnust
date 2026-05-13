@@ -97,11 +97,24 @@ const engagementSteps = [
   { step: 4, title: 'Execute & Deliver', desc: 'ICON manages the project end-to-end and ensures timely, quality delivery.', icon: <CheckCircle2 size={20} /> },
 ];
 
-const partners = [
-  { name: 'Engro Corporation', sector: 'Manufacturing', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80' },
-  { name: 'Pak Suzuki', sector: 'Automotive R&D', img: 'https://images.unsplash.com/photo-1563461660947-507ef49e9c47?auto=format&fit=crop&q=80' },
-  { name: 'National Power', sector: 'Energy Solutions', img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80' },
-  { name: 'MedTech Alliance', sector: 'Healthcare Tech', img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80' },
+const partnersRowA = [
+  { name: 'Engro Corporation',   sector: 'Petrochemicals & Fertilizers', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80', size: 'lg' as const },
+  { name: 'Pak Suzuki',          sector: 'Automotive R&D',               img: 'https://images.unsplash.com/photo-1563461660947-507ef49e9c47?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'National Grid',       sector: 'Energy & Utilities',           img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'MedTech Alliance',    sector: 'Healthcare Technology',        img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80', size: 'lg' as const },
+  { name: 'Huawei Pakistan',     sector: 'Telecommunications',           img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'Atlas Honda',         sector: 'Automotive Manufacturing',     img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80', size: 'lg' as const },
+  { name: 'Millat Tractors',     sector: 'Agri-Machinery',               img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80', size: 'sm' as const },
+];
+
+const partnersRowB = [
+  { name: 'Systems Ltd',         sector: 'Information Technology',       img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'SUPARCO',             sector: 'Aerospace & Defense',          img: 'https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?auto=format&fit=crop&q=80', size: 'lg' as const },
+  { name: 'Fauji Foundation',    sector: 'Diversified Conglomerate',     img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'Netsol Technologies', sector: 'Fintech & Software',           img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'Indus Hospital',      sector: 'Healthcare Infrastructure',    img: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80', size: 'lg' as const },
+  { name: 'PTCL',                sector: 'Telecom Infrastructure',       img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80', size: 'sm' as const },
+  { name: 'Turkish Aerospace',   sector: 'Defense & Aviation',           img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80', size: 'lg' as const },
 ];
 
 const faqs = [
@@ -144,6 +157,35 @@ const colorMap: Record<string, { bg: string; text: string; border: string; btn: 
   purple:  { bg: 'bg-purple-50',  text: 'text-purple-700',  border: 'border-purple-200',  btn: 'bg-purple-900 hover:bg-purple-800' },
 };
 
+function PartnerCard({ name, sector, img, size }: { name: string; sector: string; img: string; size: 'lg' | 'sm' }) {
+  return (
+    <motion.div
+      whileHover={{ y: -5, scale: 1.025 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
+      className={`relative flex-shrink-0 overflow-hidden rounded-2xl cursor-pointer group ${
+        size === 'lg' ? 'w-[420px] h-80' : 'w-64 h-80'
+      }`}
+    >
+      <img
+        src={img}
+        alt={name}
+        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
+      <div className="absolute inset-0 bg-blue-950/0 group-hover:bg-blue-950/20 transition-colors duration-300" />
+      <div className="absolute bottom-5 left-4 right-4">
+        <h5 className="text-white font-bold text-sm leading-snug mb-1">{name}</h5>
+        <span className="text-blue-300 text-[9px] uppercase tracking-widest font-bold">{sector}</span>
+      </div>
+      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+          <ArrowRight size={12} className="text-white" />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function IndustryServicesPage() {
   const [activeService, setActiveService] = useState<string>('rd');
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -155,7 +197,7 @@ export default function IndustryServicesPage() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative py-20 bg-white border-b border-slate-200 overflow-hidden">
+      <section className="relative py-10 sm:py-14 lg:py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80')" }}
@@ -167,11 +209,11 @@ export default function IndustryServicesPage() {
           >
             
 
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-slate-900 mb-6 leading-tight tracking-tight">
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-slate-900 mb-5 leading-tight tracking-tight">
               Powering Industry <br /> Through <span className="italic text-blue-700">Academic Excellence</span>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-xl text-slate-600 leading-relaxed font-light mb-12 max-w-2xl">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON bridges the gap between NUST's world-class research capabilities and the evolving needs of Pakistan's industries — delivering R&D support, expert consultancy, workforce training, and precision lab services under one roof.
             </motion.p>
 
@@ -188,9 +230,9 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── STATS BAR ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#0a2342] py-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
+      <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-white text-center">
             {stats.map((s, i) => (
               <motion.div
                 key={i}
@@ -198,9 +240,9 @@ export default function IndustryServicesPage() {
                 viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="flex flex-col items-center"
               >
-                <div className="text-blue-400 mb-3">{s.icon}</div>
-                <div className="text-4xl font-serif font-bold mb-1">{s.value}</div>
-                <div className="text-slate-400 text-[11px] uppercase tracking-widest font-bold">{s.label}</div>
+                <div className="text-blue-400 mb-2 sm:mb-3">{s.icon}</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold mb-1">{s.value}</div>
+                <div className="text-slate-400 text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">{s.label}</div>
               </motion.div>
             ))}
           </div>
@@ -208,11 +250,11 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
-      <section id="services" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+      <section id="services" className="py-10 sm:py-14 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
-            <h2 className="text-4xl lg:text-5xl font-serif text-slate-900">Our Industry Services</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Our Industry Services</h2>
           </div>
 
           {/* Tab switcher */}
@@ -240,14 +282,14 @@ export default function IndustryServicesPage() {
               exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.35 }}
               className="grid lg:grid-cols-2 gap-12 items-center bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden"
             >
-              <div className="p-10 lg:p-14">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${c.bg} ${c.text} mb-6`}>
+              <div className="p-5 sm:p-8 lg:p-10 xl:p-14">
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${c.bg} ${c.text} mb-5`}>
                   {active.icon}
                 </div>
-                <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${c.text} mb-3 block`}>{active.tagline}</span>
-                <h3 className="text-3xl font-serif text-slate-900 mb-4">{active.title}</h3>
-                <p className="text-slate-600 leading-relaxed mb-8">{active.description}</p>
-                <ul className="space-y-3 mb-10">
+                <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${c.text} mb-2 block`}>{active.tagline}</span>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif text-slate-900 mb-3">{active.title}</h3>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6 lg:mb-8">{active.description}</p>
+                <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 lg:mb-10">
                   {active.bullets.map((b, i) => (
                     <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
                       <CheckCircle2 size={16} className={`${c.text} mt-0.5 shrink-0`} />
@@ -260,7 +302,7 @@ export default function IndustryServicesPage() {
                 </button>
               </div>
 
-              <div className="relative h-72 lg:h-full min-h-[380px] overflow-hidden">
+              <div className="relative h-48 sm:h-64 lg:h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden">
                 <img
                   src={active.img}
                   alt={active.title}
@@ -274,17 +316,17 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── HOW TO ENGAGE ─────────────────────────────────────────────────── */}
-      <section id="engage" className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+      <section id="engage" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
             <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Simple Process</span>
-            <h2 className="text-4xl font-serif text-slate-900">How to Engage ICON</h2>
-            <p className="text-slate-500 mt-4 max-w-xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">How to Engage ICON</h2>
+            <p className="text-slate-500 mt-3 max-w-xl mx-auto text-sm sm:text-base">
               From your first enquiry to project delivery, ICON manages the entire process so you can focus on your business.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-6 relative">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 relative">
             <div className="hidden md:block absolute top-[3.5rem] left-0 w-full h-0.5 bg-slate-200 z-0" />
             {engagementSteps.map((item) => (
               <motion.div
@@ -306,12 +348,12 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── SECTORS ────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+      <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
             <div className="max-w-md">
               <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Industries We Serve</span>
-              <h2 className="text-3xl font-serif text-slate-900">Sector-Agnostic, Expertise-Rich</h2>
+              <h2 className="text-2xl sm:text-3xl font-serif text-slate-900">Sector-Agnostic, Expertise-Rich</h2>
               <p className="text-slate-500 mt-3 text-sm leading-relaxed">
                 ICON's faculty network spans virtually every major industrial sector, ensuring that no challenge is too niche or too broad.
               </p>
@@ -333,42 +375,79 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── FEATURED PARTNERS ─────────────────────────────────────────────── */}
-      <section id="partners" className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Proven Partnerships</span>
-            <h2 className="text-4xl font-serif text-slate-900">Who We Work With</h2>
+      <section id="partners" className="py-8 sm:py-10 lg:py-12 bg-slate-50 border-t border-slate-100 overflow-hidden">
+        {/* Header */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10 lg:mb-14">
+          <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
+            <div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-blue-900 font-bold">Who We Work With</h2>
+            </div>
+            <p className="text-slate-500 text-sm leading-relaxed max-w-sm text-center">
+              From global MNCs to innovative local enterprises — ICON's network spans every major sector, driving real-world impact through collaborative research and development.
+            </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {partners.map((p, i) => (
+        </div>
+
+        {/* Row A — large & small cards, scrolls right-to-left at 45s */}
+        <div className="relative mb-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+          <motion.div
+            className="flex w-max gap-4 px-4"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+          >
+            {[...partnersRowA, ...partnersRowA].map((p, i) => (
+              <PartnerCard key={`A-${i}`} {...p} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Row B — different size rhythm, scrolls right-to-left at 65s */}
+        <div className="relative [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+          <motion.div
+            className="flex w-max gap-4 px-4"
+            animate={{ x: ['0%', '-50%'] }}
+            transition={{ duration: 65, repeat: Infinity, ease: 'linear' }}
+            style={{ x: '-10%' }}
+          >
+            {[...partnersRowB, ...partnersRowB].map((p, i) => (
+              <PartnerCard key={`B-${i}`} {...p} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Bottom count strip */}
+        {/* <div className="max-w-7xl mx-auto px-6 mt-12">
+          <div className="flex flex-wrap items-center justify-center gap-8 text-center">
+            {[
+              { value: '200+', label: 'Active Partners' },
+              { value: '14',   label: 'Sectors Covered' },
+              { value: '85%',  label: 'Return Engagement Rate' },
+              { value: '8+',   label: 'Years of Collaboration' },
+            ].map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="group relative rounded-2xl overflow-hidden h-52 cursor-pointer"
+                className="flex flex-col items-center"
               >
-                <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <h5 className="text-white font-bold text-sm leading-snug">{p.name}</h5>
-                  <span className="text-blue-300 text-[9px] uppercase tracking-widest">{p.sector}</span>
-                </div>
+                <span className="text-3xl font-serif text-blue-900 font-bold">{item.value}</span>
+                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-1">{item.label}</span>
               </motion.div>
             ))}
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* ── CTA BANNER ───────────────────────────────────────────────────── */}
-        <section id="initiate-project" className="py-32 bg-blue-950 text-white relative overflow-hidden">
+        <section id="initiate-project" className="py-12 sm:py-16 lg:py-24 bg-blue-950 text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-              <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
                 <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                  <h2 className="text-5xl font-serif mb-6 leading-tight">Ready to solve your industry bottleneck?</h2>
-                  <p className="text-xl text-blue-200 font-light mb-12 max-w-2xl mx-auto">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif mb-4 leading-tight">Ready to solve your industry bottleneck?</h2>
+                  <p className="text-sm sm:text-base lg:text-xl text-blue-200 font-light mb-8 sm:mb-10 max-w-2xl mx-auto">
                     Initiate a sponsored research project today. Our dedicated program managers will match your challenge with the right faculty experts and laboratory infrastructure.
                   </p>
-                  <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 text-left grid md:grid-cols-2 gap-6">
+                  <div className="bg-white/10 backdrop-blur-xl p-5 sm:p-6 lg:p-8 rounded-2xl border border-white/20 text-left grid md:grid-cols-2 gap-4 sm:gap-6">
                     <div className="flex flex-col space-y-2">
                       <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Company Name</label>
                       <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
@@ -396,11 +475,11 @@ export default function IndustryServicesPage() {
               </div>
             </section>
       {/* ── FAQs ─────────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-24 bg-white border-t border-slate-200">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-14">
+      <section id="faq" className="py-10 sm:py-14 lg:py-20 bg-white border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-14">
             <span className="text-slate-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Knowledge Base</span>
-            <h2 className="text-4xl font-serif text-slate-900">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Frequently Asked Questions</h2>
           </div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (

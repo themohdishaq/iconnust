@@ -106,7 +106,7 @@ export default function TeamPage() {
     <div className="min-h-screen bg-white text-slate-900 font-sans">
 
       {/* Hero */}
-      <section className="relative pt-24 pb-24 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800 overflow-hidden">
+      <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-24 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-80 h-80 rounded-full border border-blue-500/10" />
           <div className="absolute top-40 right-40 w-52 h-52 rounded-full border border-blue-500/10" />
@@ -118,10 +118,10 @@ export default function TeamPage() {
               <Users size={14} />
               <span>ICON Team &amp; Organization</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-white mb-6 leading-tight">
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white mb-5 leading-tight">
               The People Behind <span className="italic text-blue-400">ICON</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-slate-300 font-light leading-relaxed mb-12 max-w-2xl">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON — the Innovation &amp; Commercialization Network at NUST — is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
@@ -138,7 +138,7 @@ export default function TeamPage() {
         </div>
 
         {/* Floating metrics */}
-        <div className="absolute right-6 bottom-8 grid grid-cols-2 gap-3">
+        <div className="hidden md:grid absolute right-6 bottom-8 grid-cols-2 gap-3">
           {[
             { val: '45+', lbl: 'Team Members' },
             { val: '12', lbl: 'Expert Domains' },
@@ -153,22 +153,22 @@ export default function TeamPage() {
       </section>
 
       {/* About ICON */}
-      <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10 sm:py-14 lg:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
               <motion.div variants={slideLeft}>
                 <div className="inline-flex items-center space-x-2 text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
                   <div className="w-8 h-px bg-blue-700" />
                   <span>Who We Are</span>
                 </div>
-                <h2 className="text-4xl font-serif text-slate-900 mb-6">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900 mb-4 sm:mb-5">
                   The Innovation &amp; Commercialization Network
                 </h2>
-                <p className="text-slate-600 leading-relaxed mb-6 text-lg">
+                <p className="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base lg:text-lg">
                   ICON serves as NUST's central hub for bridging the gap between world-class academic research and industrial application. We orchestrate the full technology transfer lifecycle — from invention disclosure and IP protection to licensing, spin-off creation, and market deployment.
                 </p>
-                <p className="text-slate-600 leading-relaxed mb-8">
+                <p className="text-slate-600 leading-relaxed mb-6 text-sm sm:text-base">
                   Operating through four interconnected pillars — the Technology Transfer Office (TTO), the Intellectual Property Office (NIPO), the Professional Development Centre (PDC), and the Research Directorate — ICON touches every dimension of NUST's commercial innovation agenda.
                 </p>
                 <div className="grid grid-cols-2 gap-4">
@@ -204,15 +204,15 @@ export default function TeamPage() {
       </section>
 
       {/* Team Competency Visualization */}
-      <section className="py-16 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10 sm:py-12 lg:py-16 bg-white border-y border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <motion.div variants={fadeUp}>
                 <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Team Competencies</h3>
                 <h2 className="text-3xl font-serif text-slate-900 mb-4">A Multi-Disciplinary Centre of Excellence</h2>
                 <p className="text-slate-600 mb-6">ICON's team combines domain expertise across IP law, research management, business development, and technical consulting — enabling end-to-end commercialization support.</p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {competencyData.map((c, i) => (
                     <div key={i} className="flex items-center gap-3">
                       <div className="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
@@ -229,8 +229,8 @@ export default function TeamPage() {
               </motion.div>
               <motion.div variants={fadeUp}>
                 <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 text-center">Team Distribution by Function</h3>
-                <div className="flex items-center gap-6">
-                  <div className="h-[220px] flex-1">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+                  <div className="h-[200px] w-full sm:flex-1">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
                         <Pie data={teamDistribution} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={4} dataKey="value" stroke="none">
@@ -257,12 +257,12 @@ export default function TeamPage() {
       </section>
 
       {/* Leadership */}
-      <section id="leadership" className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="leadership" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-14">
+            <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10 lg:mb-14">
               <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Senior Leadership</span>
-              <h2 className="text-4xl font-serif text-slate-900">Meet the Leadership Team</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Meet the Leadership Team</h2>
             </motion.div>
 
             <motion.div variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -297,17 +297,17 @@ export default function TeamPage() {
       </section>
 
       {/* Program Managers */}
-      <section id="managers" className="py-20 bg-white">
+      {/* <section id="managers" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-14">
               <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Programme Managers</span>
               <h2 className="text-4xl font-serif text-slate-900 mb-4">Domain-Specific Experts</h2>
               <p className="text-slate-500 max-w-xl mx-auto">Each programme manager is a subject-matter expert dedicated to a specific technology domain, enabling precise matchmaking between industry challenges and NUST capabilities.</p>
-            </motion.div>
+            </motion.div> */}
 
             {/* Horizontal Domain Filter */}
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center mb-10">
+            {/* <motion.div variants={fadeUp} className="flex flex-wrap gap-2 justify-center mb-10">
               <button onClick={() => setActiveDomain(null)}
                 className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest transition-all ${!activeDomain ? 'bg-blue-900 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>
                 All Domains
@@ -343,21 +343,21 @@ export default function TeamPage() {
                     </a>
                   </motion.div>
                 ))}
-            </motion.div>
-          </motion.div>
+            </motion.div> */}
+          {/* </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact */}
-      <section id="contact" className="py-20 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="contact" className="py-10 sm:py-14 lg:py-20 bg-slate-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-14">
+            <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10 lg:mb-14">
               <span className="text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Engage with ICON</span>
-              <h2 className="text-4xl font-serif text-white">Contact &amp; Partnerships</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white">Contact &amp; Partnerships</h2>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 xl:gap-16">
               {/* Contact Info */}
               <motion.div variants={slideLeft} className="space-y-8">
                 <div>
@@ -401,7 +401,7 @@ export default function TeamPage() {
               </motion.div>
 
               {/* Contact Form */}
-              <motion.div variants={fadeUp} className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <motion.div variants={fadeUp} className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 lg:p-8">
                 <h3 className="text-2xl font-serif mb-6">Initiate a Partnership</h3>
                 <form className="space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">

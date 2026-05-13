@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:pdc.nust.edu.pk)"
+      "WebFetch(domain:pdc.nust.edu.pk)",
+      "Bash(npx tsc *)"
     ]
   }
 }

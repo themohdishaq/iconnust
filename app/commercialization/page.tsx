@@ -235,7 +235,7 @@ export default function CommercializationPathwaysPage() {
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section className="relative py-24 bg-white border-b border-slate-200 overflow-hidden">
+      <section className="relative py-12 sm:py-16 lg:py-24 bg-white border-b border-slate-200 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80')" }}
@@ -243,10 +243,10 @@ export default function CommercializationPathwaysPage() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl mx-auto text-center flex flex-col items-center">
           
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-slate-900 mb-6 leading-tight tracking-tight">
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-slate-900 mb-5 leading-tight tracking-tight">
               From Research Bench <br /> to <span className="italic text-blue-700">Commercial Reality</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-slate-600 leading-relaxed font-light mb-12 max-w-2xl">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON maps every avenue available to NUST innovators — licensing, spin-off creation, sponsored research, and IP protection — backed by world-class infrastructure and a proven commercialisation team.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
@@ -262,9 +262,9 @@ export default function CommercializationPathwaysPage() {
       </section>
 
       {/* ── STATS BAR ─────────────────────────────────────────────────── */}
-      <section className="bg-[#0a2342] py-10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
+      <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-white text-center">
             {[
               { val: '500+', lbl: 'Patents Filed',       icon: <FileText size={20} /> },
               { val: '85+',  lbl: 'Technologies Licensed', icon: <Award size={20} /> },
@@ -272,9 +272,9 @@ export default function CommercializationPathwaysPage() {
               { val: '300+', lbl: 'Lab Facilities',       icon: <FlaskConical size={20} /> },
             ].map((s, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center">
-                <div className="text-blue-400 mb-3">{s.icon}</div>
-                <div className="text-4xl font-serif font-bold mb-1">{s.val}</div>
-                <div className="text-slate-400 text-[11px] uppercase tracking-widest font-bold">{s.lbl}</div>
+                <div className="text-blue-400 mb-2 sm:mb-3">{s.icon}</div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold mb-1">{s.val}</div>
+                <div className="text-slate-400 text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">{s.lbl}</div>
               </motion.div>
             ))}
           </div>
@@ -282,12 +282,12 @@ export default function CommercializationPathwaysPage() {
       </section>
 
       {/* ── PATHWAYS ──────────────────────────────────────────────────── */}
-      <section id="pathways" className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+      <section id="pathways" className="py-10 sm:py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-14 lg:mb-16">
             <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Avenues</span>
-            <h2 className="text-4xl lg:text-5xl font-serif text-slate-900">Commercialization Pathways</h2>
-            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Commercialization Pathways</h2>
+            <p className="text-slate-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
               Four structured pathways, each suited to a different stage, goal, and type of innovation.
             </p>
           </div>
@@ -318,13 +318,13 @@ export default function CommercializationPathwaysPage() {
               className="grid lg:grid-cols-2 gap-0 items-stretch bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden"
             >
               {/* Left: content */}
-              <div className="p-10 lg:p-14 flex flex-col justify-between">
+              <div className="p-5 sm:p-8 lg:p-10 xl:p-14 flex flex-col justify-between">
                 <div>
                   <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${c.bg} ${c.text} mb-6`}>
                     {pathway.icon}
                   </div>
                   <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${c.text} mb-3 block`}>{pathway.tagline}</span>
-                  <h3 className="text-3xl font-serif text-slate-900 mb-4">{pathway.title}</h3>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif text-slate-900 mb-3">{pathway.title}</h3>
                   <p className="text-slate-600 leading-relaxed mb-6">{pathway.description}</p>
                   <ul className="space-y-3 mb-6">
                     {pathway.bullets.map((b, i) => (
@@ -345,7 +345,7 @@ export default function CommercializationPathwaysPage() {
               </div>
 
               {/* Right: image */}
-              <div className="relative min-h-[360px] overflow-hidden">
+              <div className="relative min-h-[220px] sm:min-h-[300px] lg:min-h-[360px] overflow-hidden">
                 <img src={pathway.img} alt={pathway.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent" />
               </div>
@@ -355,12 +355,12 @@ export default function CommercializationPathwaysPage() {
       </section>
 
       {/* ── INFRASTRUCTURE ────────────────────────────────────────────── */}
-      <section id="infrastructure" className="py-12 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
+      <section id="infrastructure" className="py-10 sm:py-12 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-14 lg:mb-16">
             <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Resources</span>
-            <h2 className="text-4xl font-serif text-slate-900">NUST Commercialization Infrastructure</h2>
-            <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">NUST Commercialization Infrastructure</h2>
+            <p className="text-slate-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
               Innovators and industry partners benefit from one of Pakistan's most comprehensive research and development ecosystems.
             </p>
           </div>
@@ -368,11 +368,11 @@ export default function CommercializationPathwaysPage() {
             {infrastructure.map((item, i) => {
               const cc = colorMap[item.color];
               return (
-                <motion.div key={i} variants={fadeUp} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-8 hover:shadow-lg transition-shadow">
+                <motion.div key={i} variants={fadeUp} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 lg:p-7 hover:shadow-lg transition-shadow">
                   <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${cc.bg} ${cc.text} mb-5`}>
                     {item.icon}
                   </div>
-                  <div className={`text-3xl font-bold ${cc.text} mb-1`}>{item.count}</div>
+                  <div className={`text-2xl sm:text-3xl font-bold ${cc.text} mb-1`}>{item.count}</div>
                   <h4 className="font-bold text-slate-900 mb-3">{item.title}</h4>
                   <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
                 </motion.div>
@@ -384,12 +384,12 @@ export default function CommercializationPathwaysPage() {
 
 
       {/* ── TECH PORTFOLIO ────────────────────────────────────────────── */}
-      <section id="licensing" className="py-24 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+      <section id="licensing" className="py-10 sm:py-14 lg:py-20 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-10 lg:mb-12">
             <div>
               <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Technology Portfolio</span>
-              <h2 className="text-4xl font-serif text-slate-900">Available for Commercialization</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Available for Commercialization</h2>
             </div>
             <button className="text-blue-700 font-bold text-sm hover:underline mt-4 md:mt-0 flex items-center">
               View Full Portfolio <ArrowRight size={16} className="ml-1" />
@@ -409,9 +409,7 @@ export default function CommercializationPathwaysPage() {
                     <span className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
                       <CheckCircle2 size={11} /> {tech.status}
                     </span>
-                    <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">
-                      {tech.trl}
-                    </span>
+                   
                   </div>
                   <h4 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-700 transition-colors leading-snug">{tech.title}</h4>
                   <p className="text-sm font-semibold text-blue-600 flex items-center gap-1.5 mb-2">
@@ -428,12 +426,12 @@ export default function CommercializationPathwaysPage() {
       </section>
 
       {/* ── CTA BANNER ────────────────────────────────────────────────── */}
-      <section className="bg-[#0a2342] py-20 relative overflow-hidden">
+      <section className="bg-[#0a2342] py-10 sm:py-14 lg:py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <Lightbulb size={48} className="mx-auto mb-6 text-blue-400" />
-          <h2 className="text-4xl lg:text-5xl font-serif text-white mb-4">Have an Innovation to Commercialise?</h2>
-          <p className="text-slate-300 max-w-2xl mx-auto mb-10 text-lg leading-relaxed">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+          <Lightbulb size={40} className="mx-auto mb-5 text-blue-400" />
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-white mb-3">Have an Innovation to Commercialise?</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-sm sm:text-base lg:text-lg leading-relaxed">
             Whether you are at the idea stage or have a tested prototype, ICON's commercialisation team will identify the right pathway and support you every step of the way.
           </p>
           <div className="max-w-2xl mx-auto">
@@ -510,11 +508,11 @@ export default function CommercializationPathwaysPage() {
       </section>
 
       {/* ── FAQs ──────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-24 bg-white border-t border-slate-200">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-14">
+      <section id="faq" className="py-10 sm:py-14 lg:py-20 bg-white border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-14">
             <span className="text-slate-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Knowledge Base</span>
-            <h2 className="text-4xl font-serif text-slate-900">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Frequently Asked Questions</h2>
           </div>
           <div className="space-y-4">
             {faqs.map((faq, i) => (

@@ -29,6 +29,7 @@ import {
 import Image from 'next/image';
 import IndustryServicesPortal from '@/components/Service';
 import Footer from '@/components/Footer';
+import PartnersSection from '@/components/Partner';
 
 type MenuKey = 'Innovation & Collaboration' | 'Industry Services' | 'Support Programs' | 'Team';
 
@@ -110,7 +111,7 @@ const App = () => {
     <div className="min-h-screen  bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden w-full">
       
       {/* Hero Section with Dynamic Slider and Integrated Live Dashboard */}
-      <section className=" w-full relative pt-16 bg-white h-screen min-h-[95vh] flex flex-col justify-between border-b border-slate-100">
+      <section className=" w-full relative pt-16 bg-white min-h-screen flex flex-col justify-between border-b border-slate-100">
         
         {/* Background Images Slider */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
@@ -144,9 +145,9 @@ const App = () => {
         </div>
 
         {/* Text Content Slider */}
-        <div className="max-w-8xl mx-auto px-6 w-full relative z-20 flex-grow flex flex-col justify-center mb-16 lg:mb-24">
-          <div className="grid lg:grid-cols-12 gap-16 items-center">
-            <div className="lg:col-span-7 relative h-[380px] lg:h-[420px]">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 w-full relative z-20 flex-grow flex flex-col justify-center mb-6 sm:mb-10 lg:mb-16">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            <div className="lg:col-span-7 relative h-[260px] sm:h-[320px] md:h-[360px] lg:h-[420px]">
               {heroSlides.map((slide, index) => (
                 <div 
                   key={index}
@@ -158,7 +159,7 @@ const App = () => {
                     <div className="w-12 h-px bg-blue-900/30" />
                     <span>{slide.tag}</span>
                   </div>
-                  <h1 className="text-4xl md:text-7xl 2xl:text-8xl font-serif font-medium text-slate-900 leading-[1.02] mb-8 tracking-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif font-medium text-slate-900 leading-[1.02] mb-5 sm:mb-8 tracking-tight">
                     {slide.titleLine1} <br />
                     <span className="italic text-blue-900 drop-shadow-sm">{slide.highlight}</span> <br />
                     {slide.titleLine2}
@@ -167,11 +168,11 @@ const App = () => {
                     {slide.desc}
                   </p> */}
                   
-                  <div className="flex flex-wrap gap-6">
-                    <button className="bg-blue-900 text-white px-5 py-3 2xl:px-10 2xl:py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
+                  <div className="flex flex-wrap gap-4">
+                    <button className="bg-blue-900 text-white px-5 py-3 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
                       Launch Tech Place
                     </button>
-                    <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all mt-4 sm:mt-0">
+                    <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all">
                       Impact Dashboard
                     </button>
                   </div>
@@ -179,7 +180,7 @@ const App = () => {
               ))}
 
               {/* Slider Navigation Dots */}
-              <div className="absolute bottom-16 2xl:-bottom-10 left-0 flex space-x-3">
+              <div className="absolute bottom-4 sm:bottom-8 lg:bottom-16 2xl:-bottom-10 left-0 flex space-x-3">
                  {heroSlides.map((_, idx) => (
                     <button 
                       key={idx}
@@ -194,9 +195,9 @@ const App = () => {
         </div>
 
         {/* Live Dashboard - Impact Snapshot (Integrated Overlay) */}
-        <div className="max-w-6xl mx-auto px-6 mb-10 -top-28 2xl:-top-5 w-full relative z-30">
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 mb-6 sm:mb-8 lg:mb-10 -top-10 sm:-top-16 lg:-top-28 2xl:-top-5 w-full relative z-30">
            <div className="bg-white/90  backdrop-blur-xl rounded-xl shadow-xl overflow-hidden">
-             <div className="px-10 py-6   flex justify-between items-center bg-slate-50/50">
+             <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center bg-slate-50/50">
                <div className="flex items-center space-x-3 text-blue-900 font-black text-[10px] uppercase tracking-[0.3em]">
                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                  <span>Live Impact Engine</span>
@@ -210,23 +211,23 @@ const App = () => {
                   { label: 'Spin-off Ventures', value: stats.spinOffs, icon: <TrendingUp /> },
                   { label: 'Active Patents', value: stats.patents, icon: <ShieldCheck /> }
                 ].map((stat, i) => (
-                  <div key={i} className="p-8 hover:bg-blue-50/50 transition-colors group relative overflow-hidden">
+                  <div key={i} className="p-3 sm:p-4 lg:p-6 hover:bg-blue-50/50 transition-colors group relative overflow-hidden">
                     {/* Background glow effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-100/0 to-blue-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
-                    <div className="relative z-10 flex justify-between items-start mb-6">
-                      <div className="text-blue-900 bg-blue-100/50 p-3 rounded-lg group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white transition-all duration-300">
-                        {React.cloneElement(stat.icon, { size: 24 })}
+                    <div className="relative z-10 flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
+                      <div className="text-blue-900 bg-blue-100/50 p-1.5 sm:p-2 lg:p-3 rounded-lg group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white transition-all duration-300">
+                        {React.cloneElement(stat.icon, { size: 18, className: 'sm:w-5 sm:h-5 lg:w-6 lg:h-6' })}
                       </div>
                       
                     </div>
                     
                     <div className="relative z-10">
                       <div className="flex items-baseline space-x-1 mb-1">
-                        <div className="sm:text-4xl 2xl:text-5xl  font-Inter text-slate-900 group-hover:text-blue-950 transition-colors">{stat.value}</div>
+                        <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-Inter text-slate-900 group-hover:text-blue-950 transition-colors">{stat.value}</div>
                         <span className="text-xl font-serif text-blue-900 font-bold">+</span>
                       </div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] font-black text-slate-500 group-hover:text-blue-900 transition-colors">{stat.label}</div>
+                      <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-black text-slate-500 group-hover:text-blue-900 transition-colors">{stat.label}</div>
                     </div>
                   </div>
                 ))}
@@ -235,18 +236,18 @@ const App = () => {
         </div>
       </section>
        {/* News sections */}
-      <section id="news" className="sm:pt-52 2xl:pt-2 bg-slate-50">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="mb-16">
+      <section id="news" className="pt-6 sm:pt-32 md:pt-40 lg:pt-48 pb-4 2xl:pt-6 bg-slate-50">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
+          <div className="mb-8 sm:mb-12 lg:mb-16">
             <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
               <div className="w-12 h-px bg-blue-900/30" />
               <span>Latest Updates</span>
             </div>
-            <h2 className="text-5xl font-serif text-slate-900 mb-4">News & Success Stories</h2>
-            <p className="text-slate-500 text-lg">Discover the latest developments, success stories, and upcoming events from ICON-NUST.</p>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">News & Success Stories</h2>
+            <p className="text-slate-500 text-sm sm:text-base lg:text-lg">Discover the latest developments, success stories, and upcoming events from ICON-NUST.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {[
               {
                 image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkI1i27WbQ_aPaJi954nGhCWiiIhO14kj3lA&s',
@@ -281,7 +282,7 @@ const App = () => {
                   </span>
                 </div>
                 
-                <div className="p-6 lg:p-8">
+                <div className="p-4 sm:p-6 lg:p-7">
                   <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
                     {news.title}
                   </h3>
@@ -335,54 +336,54 @@ const App = () => {
           </div>
         </div>
       </section> */}
- <section className="py-12 bg-white text-slate-900">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+ <section className="py-8 sm:py-10 lg:py-12 bg-white text-slate-900">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div>
-              <div className="inline-flex items-center space-x-2 text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
+              <div className="inline-flex items-center space-x-2 text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
                 <Mail size={14} />
                 <span>Knowledge Brief</span>
               </div>
-              <h2 className="text-5xl text-slate-900 font-serif mb-6">The Innovation Brief</h2>
-              <p className="text-slate-700 text-lg opacity-90 max-w-md">Stay ahead of the market with monthly updates on NUST research, licensed tech, and industry roundtables.</p>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-slate-900 font-serif mb-4">The Innovation Brief</h2>
+              <p className="text-slate-700 text-sm sm:text-base lg:text-lg opacity-90 max-w-md">Stay ahead of the market with monthly updates on NUST research, licensed tech, and industry roundtables.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <input 
-                type="email" 
-                placeholder="Work Email" 
-                className="flex-grow bg-slate-50 border border-slate-300 px-6 py-5 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900"
+              <input
+                type="email"
+                placeholder="Work Email"
+                className="flex-grow bg-slate-50 border border-slate-300 px-4 py-3 sm:py-4 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900 text-sm sm:text-base"
               />
-              <button className="bg-blue-600 text-white px-10 py-5 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-blue-700 transition-all rounded-sm shadow-lg">Subscribe</button>
+              <button className="bg-blue-600 text-white px-7 py-3 sm:py-4 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-blue-700 transition-all rounded-sm shadow-lg whitespace-nowrap">Subscribe</button>
             </div>
           </div>
         </div>
       </section>
       {/* Tech Place / Storefront */}
-      <section className="py-32 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-14 sm:py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] opacity-10 bg-fixed bg-cover" />
-        <div className="max-w-8xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-20 gap-10">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 sm:mb-14 lg:mb-20 gap-6 lg:gap-10">
             <div className="max-w-xl">
-              <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.4em] mb-4 block">Storefront</span>
-              <h2 className="text-5xl font-serif leading-tight mb-6">Tech Place: Marketplace of Innovation</h2>
-              <p className="text-slate-400 text-lg font-light">Explore 120+ spin-offs and market-ready intellectual property available for strategic licensing.</p>
+              <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.4em] mb-3 block">Storefront</span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif leading-tight mb-4">Tech Place: Marketplace of Innovation</h2>
+              <p className="text-slate-400 text-sm sm:text-base lg:text-lg font-light">Explore 120+ spin-offs and market-ready intellectual property available for strategic licensing.</p>
             </div>
-            <div className="flex gap-4">
-              <button className="bg-white text-slate-900 px-8 py-4 font-black text-[10px] uppercase tracking-widest hover:bg-blue-400 transition-colors">LinkedIn Feed</button>
-              <button className="bg-blue-900 text-white px-8 py-4 font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">Licensed Tech</button>
+            <div className="flex gap-3">
+              <button className="bg-white text-slate-900 px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-400 transition-colors">LinkedIn Feed</button>
+              <button className="bg-blue-900 text-white px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">Licensed Tech</button>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
               { label: 'Licensed Tech', count: '48', sub: 'Technologies actively licensed to industry partners' },
               { label: 'Spin-offs', count: '142', sub: 'Ventures founded on NUST intellectual property' },
               { label: 'Ready to License', count: '85', sub: 'Cutting-edge technologies awaiting commercialization' }
             ].map((item, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 p-10 rounded-sm hover:bg-white/10 transition-all cursor-pointer group">
-                <div className="text-blue-400 mb-6 group-hover:scale-110 transition-transform"><Layers size={32} /></div>
-                <div className="text-5xl font-Inter mb-3">{item.count}</div>
-                <div className="text-xl font-serif text-white mb-2">{item.label}</div>
+              <div key={i} className="bg-white/5 border border-white/10 p-6 sm:p-7 lg:p-8 rounded-sm hover:bg-white/10 transition-all cursor-pointer group">
+                <div className="text-blue-400 mb-4 group-hover:scale-110 transition-transform"><Layers size={28} /></div>
+                <div className="text-4xl font-Inter mb-2">{item.count}</div>
+                <div className="text-lg font-serif text-white mb-2">{item.label}</div>
                 <p className="text-slate-500 text-sm">{item.sub}</p>
               </div>
             ))}
@@ -394,22 +395,22 @@ const App = () => {
      
 
       {/* Initiate a Partnership (Contact Section) */}
-      <section id="team" className="py-8 bg-white relative">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-20">
+      <section id="team" className="py-8 sm:py-12 lg:py-16 bg-white relative">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             <div className="lg:col-span-5">
-              <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
+              <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-5 sm:mb-6 lg:mb-8">
                 <div className="w-12 h-px bg-blue-900/30" />
                 <span>Initiate Engagement</span>
               </div>
-              <h2 className="text-6xl font-serif text-slate-900 mb-10 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif text-slate-900 mb-5 sm:mb-7 lg:mb-10 leading-tight">
                 Partner for <br /> <span className="italic text-blue-900">Success</span>
               </h2>
-              <p className="text-slate-500 text-lg leading-relaxed mb-12">
+              <p className="text-slate-500 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 lg:mb-10">
                 Our Program Managers are subject-matter experts dedicated to facilitating long-term strategic alliances.
               </p>
-              
-              <div className="space-y-10">
+
+              <div className="space-y-5 sm:space-y-7 lg:space-y-10">
                 <div className="flex items-start space-x-6">
                   <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 shrink-0"><Globe size={20} /></div>
                   <div>
@@ -427,8 +428,8 @@ const App = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-7 bg-slate-50 p-12 lg:p-16 rounded-sm">
-              <form className="grid sm:grid-cols-2 gap-8">
+            <div className="lg:col-span-7 bg-slate-50 p-5 sm:p-8 lg:p-12 xl:p-14 rounded-sm">
+              <form className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                 <div className="flex flex-col space-y-2 group">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Organization</label>
                   <input type="text" className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none" />
@@ -450,8 +451,8 @@ const App = () => {
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Message</label>
                   <textarea rows={4} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none resize-none"></textarea>
                 </div>
-                <div className="sm:col-span-2 pt-8">
-                  <button className="w-full bg-blue-900 text-white py-5 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group">
+                <div className="sm:col-span-2 pt-4 sm:pt-6">
+                  <button className="w-full bg-blue-900 text-white py-4 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group">
                     <span>Submit Engagement Request</span>
                     <Send size={16} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -460,6 +461,7 @@ const App = () => {
             </div>
           </div>
         </div>
+        <PartnersSection/>
       </section>
 
       

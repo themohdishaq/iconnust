@@ -37,10 +37,10 @@ function Navbar() {
     'Innovation & Collaboration': {
       title: 'Innovation',
       sidebar: [
-        { name: 'Research Areas', href: '/research' },
-        { name: 'Technology Portfolio', href: '/tto' },
-        { name: 'IP Policy & Ethics', href: '/tto' },
-        { name: 'Faculty Experts', href: '/experts' },
+        { name: 'Research Areas', href: '/#' },
+        { name: 'Technology Portfolio', href: '/#' },
+        { name: 'IP Policy & Ethics', href: '/#' },
+        { name: 'Faculty Experts', href: '/#' },
       ],
       content: {
         heading: 'Innovation and Collaboration',
@@ -54,10 +54,10 @@ function Navbar() {
     'Industry Services': {
       title: 'Industry',
       sidebar: [
-        { name: 'R&D Support', href: '/research' },
-        { name: 'Consultancy', href: '/experts' },
-        { name: 'Training / Upskilling', href: '/training' },
-        { name: 'Testing & Lab Services', href: '/tto' },
+        { name: 'R&D Support', href: '/#' },
+        { name: 'Consultancy', href: '/#' },
+        { name: 'Training / Upskilling', href: '/#' },
+        { name: 'Testing & Lab Services', href: '/#' },
       ],
       content: {
         heading: 'Strategic Partnerships',
@@ -133,9 +133,9 @@ function Navbar() {
   return (
     <div>
       {/* Upper Utility Nav */}
-      <div className={`transition-all duration-500  border-b border-blue-100 ${isScrolled ? 'h-0 opacity-0 overflow-hidden py-0' : 'py-3'}`}>
+      <div className={`transition-all duration-500 bg-[#0a2342] border-b text-white border-blue-100 ${isScrolled ? 'h-0 opacity-0 overflow-hidden py-0' : 'py-3'}`}>
         <div className="max-w-8xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center text-slate-600 border-transparent hover:text-blue-900 space-x-6 text-[10px] uppercase tracking-[0.2em] font-black text-[#1D2758]">
+          <div className="flex items-center  border-transparent  space-x-6 text-[10px] uppercase tracking-[0.2em] font-black ">
             <Link href="/tto" className="hover:text-blue-900 transition-colors">Tech Portfolio</Link>
             <Link href="/news#events" className="hover:text-blue-900 transition-colors">Events</Link>
             <Link href="/team#contact" className="hover:text-blue-900 transition-colors">Careers</Link>
@@ -146,7 +146,7 @@ function Navbar() {
               <input
                 type="text"
                 placeholder="Search Technology..."
-                className="pl-8 pr-4 py-1 text-[11px] bg-slate-50 border border-slate-200 rounded-full w-48 focus:border-blue-900 transition-all outline-none"
+                className="pl-8 pr-4 py-1 text-[11px] text-black bg-slate-50 border border-slate-200 rounded-full w-48 focus:border-blue-900 transition-all outline-none"
               />
               <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             </div>
