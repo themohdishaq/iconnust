@@ -134,14 +134,14 @@ function Navbar() {
     <div>
       {/* Upper Utility Nav */}
       <div className={`transition-all duration-500 bg-[#0a2342] border-b text-white border-blue-100 ${isScrolled ? 'h-0 opacity-0 overflow-hidden py-0' : 'py-3'}`}>
-        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center  border-transparent  space-x-6 text-[10px] uppercase tracking-[0.2em] font-black ">
+        <div className="max-w-8xl mx-auto px-3 md:px-6 flex justify-between items-center">
+          <div className="flex items-center  border-transparent space-x-3.5 md:space-x-6 text-[10px] uppercase tracking-[0.2em] font-black ">
             <Link href="/tto" className="hover:text-blue-900 transition-colors">Tech Portfolio</Link>
             <Link href="/news#events" className="hover:text-blue-900 transition-colors">Events</Link>
             <Link href="/team#contact" className="hover:text-blue-900 transition-colors">Careers</Link>
-            <Link href="/team" className="hover:text-blue-900 transition-colors border-l pl-6 border-slate-100">Partners</Link>
+            <Link href="/team" className="hover:text-blue-900 transition-colors">Partners</Link>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-4">
             <div className="relative">
               <input
                 type="text"
