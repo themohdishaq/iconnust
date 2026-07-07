@@ -10,7 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
-  TooltipProps,
+  TooltipContentProps,
 } from "recharts";
 import { motion } from "framer-motion";
 import {
@@ -43,7 +43,7 @@ const data: ChartData[] = [
 // Tooltip
 // ----------------------
 
-type CustomTooltipProps = TooltipProps<ValueType, NameType>;
+type CustomTooltipProps = TooltipContentProps<ValueType, NameType>;
 
 const CustomTooltip = ({
   active,
@@ -105,11 +105,12 @@ export default function FinancialChart() {
               data={data}
               margin={{ top: 20, right: 10, left: -20, bottom: 20 }}
               onMouseMove={(state) => {
-                if (
-                  state &&
-                  state.activeTooltipIndex !== undefined
-                ) {
-                  setHoveredIndex(state.activeTooltipIndex);
+                if (state && state.activeTooltipIndex !== undefined) {
+                  setHoveredIndex(
+                    typeof state.activeTooltipIndex === "number"
+                      ? state.activeTooltipIndex
+                      : null
+                  );
                 }
               }}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -141,7 +142,7 @@ export default function FinancialChart() {
 
               {/* Tooltip */}
               <Tooltip
-                content={<CustomTooltip />}
+                content={(props) => <CustomTooltip {...props} />}
                 cursor={{ fill: "rgba(255,255,255,0.02)" }}
               />
 
