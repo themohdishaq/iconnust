@@ -31,7 +31,7 @@ const services = [
     id: 'consultancy',
     icon: <Briefcase size={28} />,
     title: 'Expert Consultancy',
-    tagline: 'World-class expertise on demand',
+    tagline: 'Pakistan-based expertise on demand',
     description:
       'Tap into NUST\'s network of 3,000+ faculty across 50+ engineering, science, and business disciplines. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     bullets: [
@@ -213,7 +213,7 @@ export default function IndustryServicesPage() {
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
-              ICON bridges the gap between NUST's world-class research capabilities and the evolving needs of Pakistan's industries — delivering R&D support, expert consultancy, workforce training, and precision lab services under one roof.
+              ICON bridges the gap between NUST's research capabilities and the evolving needs of Pakistan's industries — delivering R&D support, expert consultancy, workforce training, and precision lab services under one roof.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
