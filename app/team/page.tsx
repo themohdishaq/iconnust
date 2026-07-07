@@ -124,32 +124,11 @@ export default function TeamPage() {
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON — the Innovation &amp; Commercialization Network at NUST — is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
             </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <button onClick={() => document.getElementById('leadership')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-blue-600 text-white px-8 py-4 font-black text-xs uppercase tracking-widest hover:bg-blue-500 transition-colors">
-                Meet Leadership
-              </button>
-              <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white/10 text-white px-8 py-4 font-black text-xs uppercase tracking-widest border border-white/20 hover:bg-white/20 transition-colors">
-                Contact Us
-              </button>
-            </motion.div>
+            
           </motion.div>
         </div>
 
-        {/* Floating metrics */}
-        <div className="hidden md:grid absolute right-6 bottom-8 grid-cols-2 gap-3">
-          {[
-            { val: '45+', lbl: 'Team Members' },
-            { val: '12', lbl: 'Expert Domains' },
-          ].map((s, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 + i * 0.2 }}
-              className="bg-white/10 backdrop-blur-md border border-white/10 rounded-xl p-4 text-center">
-              <div className="text-2xl font-bold text-white">{s.val}</div>
-              <div className="text-[10px] text-slate-300 uppercase tracking-widest">{s.lbl}</div>
-            </motion.div>
-          ))}
-        </div>
+      
       </section>
 
       {/* About ICON */}
@@ -171,19 +150,7 @@ export default function TeamPage() {
                 <p className="text-slate-600 leading-relaxed mb-6 text-sm sm:text-base">
                   Operating through four interconnected pillars — the Technology Transfer Office (TTO), the Intellectual Property Office (NIPO), the Professional Development Centre (PDC), and the Research Directorate — ICON touches every dimension of NUST's commercial innovation agenda.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { val: '2008', lbl: 'Established' },
-                    { val: '230+', lbl: 'Industry Partners' },
-                    { val: '512+', lbl: 'Active Patents' },
-                    { val: '142+', lbl: 'Spin-off Ventures' },
-                  ].map((s, i) => (
-                    <div key={i} className="bg-white rounded-xl border border-slate-100 shadow-sm p-5 text-center">
-                      <div className="text-3xl font-bold text-blue-900">{s.val}</div>
-                      <div className="text-xs text-slate-400 font-bold uppercase tracking-widest">{s.lbl}</div>
-                    </div>
-                  ))}
-                </div>
+                
               </motion.div>
 
               {/* Core Values */}
@@ -203,66 +170,14 @@ export default function TeamPage() {
         </div>
       </section>
 
-      {/* Team Competency Visualization */}
-      <section className="py-10 sm:py-12 lg:py-16 bg-white border-y border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <motion.div variants={fadeUp}>
-                <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Team Competencies</h3>
-                <h2 className="text-3xl font-serif text-slate-900 mb-4">A Multi-Disciplinary Centre of Excellence</h2>
-                <p className="text-slate-600 mb-6">ICON's team combines domain expertise across IP law, research management, business development, and technical consulting — enabling end-to-end commercialization support.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                  {competencyData.map((c, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="flex-1 bg-slate-100 rounded-full h-2 overflow-hidden">
-                        <motion.div className="h-full bg-blue-900 rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${c.value}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.8, delay: i * 0.1 }} />
-                      </div>
-                      <div className="text-xs font-bold text-slate-600 w-28 shrink-0">{c.subject}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-              <motion.div variants={fadeUp}>
-                <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 text-center">Team Distribution by Function</h3>
-                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                  <div className="h-[200px] w-full sm:flex-1">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie data={teamDistribution} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={4} dataKey="value" stroke="none">
-                          {teamDistribution.map((d, i) => <Cell key={i} fill={d.color} />)}
-                        </Pie>
-                        <Tooltip contentStyle={{ borderRadius: '8px', border: 'none' }} />
-                      </PieChart>
-                    </ResponsiveContainer>
-                  </div>
-                  <div className="space-y-2">
-                    {teamDistribution.map((d) => (
-                      <div key={d.name} className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: d.color }} />
-                        <div className="text-xs font-bold text-slate-700">{d.name}</div>
-                        <div className="text-xs text-slate-400 ml-auto">{d.value}%</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Leadership */}
       <section id="leadership" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10 lg:mb-14">
-              <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Senior Leadership</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Meet the Leadership Team</h2>
+              
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Meet out Team</h2>
             </motion.div>
 
             <motion.div variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

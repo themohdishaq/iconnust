@@ -4,7 +4,12 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
+.tahoma-font {
+  font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+.icon-brand-font {
+  color: #00558f;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

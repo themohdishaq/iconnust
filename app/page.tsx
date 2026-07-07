@@ -1,58 +1,36 @@
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { 
-  Search, 
   ArrowRight, 
-  Lightbulb, 
-  Briefcase, 
   Users, 
   TrendingUp, 
   Globe, 
   ShieldCheck, 
-  Cpu, 
-  Microscope, 
-  Menu, 
-  X,
-  ExternalLink,
-  ChevronRight,
-  BookOpen,
-  Award,
-  CircleArrowRight,
   Mail,
   Send,
   BarChart3,
-  FlaskConical,
-  GraduationCap,
-  Layers,
-  Fullscreen
+  Layers
 } from 'lucide-react';
-import Image from 'next/image';
 import IndustryServicesPortal from '@/components/Service';
-import Footer from '@/components/Footer';
 import PartnersSection from '@/components/Partner';
-
-type MenuKey = 'Innovation & Collaboration' | 'Industry Services' | 'Support Programs' | 'Team';
+import Link from 'next/link';
 
 const App = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
-  const [stats, setStats] = useState({ partners: 0, projects: 0, spinOffs: 0, patents: 0 });
+  const [stats, setStats] = useState({ partners: 0, projects: 0, spinOffs: 0, awarded: 0, patents: 0 });
   const [currentSlide, setCurrentSlide] = useState(0);
-  const timeoutRef = useRef<number | null>(null);
+  const [expandedNews, setExpandedNews] = useState<number | null>(null);
 
   // Statistics & Slider Animation Logic
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    
     // Simulate dynamic stat loading
     const statInterval = setInterval(() => {
       setStats(prev => ({
-        partners: prev.partners < 230 ? prev.partners + 5 : 230,
-        projects: prev.projects < 85 ? prev.projects + 2 : 85,
-        spinOffs: prev.spinOffs < 142 ? prev.spinOffs + 3 : 142,
-        patents: prev.patents < 512 ? prev.patents + 10 : 512
+        partners: prev.partners < 900 ? prev.partners + 5 : 900,
+        projects: prev.projects < 1360 ? prev.projects + 2 : 130,
+        spinOffs: prev.spinOffs < 80 ? prev.spinOffs + 3 : 80,
+        awarded: prev.awarded < 260 ? prev.awarded + 1 : 260,
+        patents: prev.patents < 112 ? prev.patents + 10 : 112
       }));
     }, 50);
 
@@ -62,24 +40,11 @@ const App = () => {
     }, 6000);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       clearInterval(statInterval);
       clearInterval(slideInterval);
     };
   }, []);
 
-  const handleMouseEnter = (menuName: MenuKey | null) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setActiveMenu(menuName);
-  };
-
-  const handleMouseLeave = () => {
-    timeoutRef.current = window.setTimeout(() => {
-      setActiveMenu(null);
-    }, 150);
-  };
-
- 
   const heroSlides = [
     {
       tag: "Innovation",
@@ -87,7 +52,7 @@ const App = () => {
       highlight: "Discovery",
       titleLine2: "Ignites Growth.",
       desc: "The Innovation & Commercialization Network at NUST bridge the gap between academic brilliance and global industrial impact.",
-      img: "campus-life.jpg"
+      img: "/main-pic/mainoffice.jpg"
     },
     {
       tag: "Industry Synergy",
@@ -95,7 +60,7 @@ const App = () => {
       highlight: "Global Scale",
       titleLine2: "and Impact.",
       desc: "Collaborate with world-class faculty and leverage ISO-certified testing facilities to solve complex industrial bottlenecks.",
-      img: "https://propakistani.pk/wp-content/uploads/2023/09/SP-Global-and-NUST-Strengthen-Linkages-by-Signing-an-MoU.jpg"
+      img: "/main-pic/hero1.jpg"
     },
     {
       tag: "Commercialization",
@@ -103,7 +68,7 @@ const App = () => {
       highlight: "to the Market",
       titleLine2: "Seamlessly.",
       desc: "Navigate the journey from invention disclosure to strategic licensing with our dedicated technology transfer experts.",
-      img: "https://i.pinimg.com/1200x/8c/f4/20/8cf420466c0c85498332512694ef1c63.jpg"
+      img: "/main-pic/lab.jpg"
     }
   ];
 
@@ -127,7 +92,7 @@ const App = () => {
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
               >
-                <img
+                <Image
                   src={slide.img} 
                   width={1000}
                   height={1000}
@@ -159,9 +124,9 @@ const App = () => {
                     <div className="w-12 h-px bg-blue-900/30" />
                     <span>{slide.tag}</span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-serif font-medium text-slate-900 leading-[1.02] mb-5 sm:mb-8 tracking-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-tahoma-font font-medium text-slate-900 leading-[1.02] mb-5 sm:mb-8 tracking-tight">
                     {slide.titleLine1} <br />
-                    <span className="italic text-blue-900 drop-shadow-sm">{slide.highlight}</span> <br />
+                    <span className="italic icon-brand-font drop-shadow-sm">{slide.highlight}</span> <br />
                     {slide.titleLine2}
                   </h1>
                   {/* <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl font-light">
@@ -169,12 +134,14 @@ const App = () => {
                   </p> */}
                   
                   <div className="flex flex-wrap gap-4">
+                    <Link href="#partner-with-us">
                     <button className="bg-blue-900 text-white px-5 py-3 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-all shadow-xl shadow-blue-900/20 active:scale-95">
-                      Launch Tech Place
+                      Partner with us
                     </button>
-                    <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all">
+                    </Link>
+                    {/* <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all">
                       Impact Dashboard
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               ))}
@@ -204,14 +171,15 @@ const App = () => {
                </div>
                
              </div>
-             <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-slate-100">
+             <div className="grid grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-slate-100">
                {[
                   { label: 'Industry Partners', value: stats.partners, icon: <Users /> },
-                  { label: 'Projects In Hand', value: stats.projects, icon: <BarChart3 /> },
+                  { label: 'IP filings', value: stats.projects, icon: <BarChart3 /> },
+                  { label: 'IPRS Awarded', value: stats.awarded, icon: <Globe /> },
                   { label: 'Spin-off Ventures', value: stats.spinOffs, icon: <TrendingUp /> },
-                  { label: 'Active Patents', value: stats.patents, icon: <ShieldCheck /> }
+                  { label: 'IPRS licensed to Industry', value: stats.patents, icon: <ShieldCheck /> }
                 ].map((stat, i) => (
-                  <div key={i} className="p-3 sm:p-4 lg:p-6 hover:bg-blue-50/50 transition-colors group relative overflow-hidden">
+                  <div key={i} className="p-3  hover:bg-blue-50/50 transition-colors group relative overflow-hidden">
                     {/* Background glow effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-100/0 to-blue-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
@@ -235,70 +203,122 @@ const App = () => {
            </div>
         </div>
       </section>
-       {/* News sections */}
-      <section id="news" className="pt-6 sm:pt-32 md:pt-40 lg:pt-48 pb-4 2xl:pt-6 bg-slate-50">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 sm:mb-12 lg:mb-16">
-            <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
-              <div className="w-12 h-px bg-blue-900/30" />
-              <span>Latest Updates</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">News & Success Stories</h2>
-            <p className="text-slate-500 text-sm sm:text-base lg:text-lg">Discover the latest developments, success stories, and upcoming events from ICON-NUST.</p>
-          </div>
+      {/* News Section */}
+<section
+  id="news"
+  className="pt-6  bg-slate-50"
+>
+  <div className="max-w-8xl mx-auto px-4 sm:px-6">
+    <div className="mb-8 sm:mb-12 lg:mb-16">
+      <div className="inline-flex items-center space-x-2 text-blue-900 font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
+        <div className="w-12 h-px bg-blue-900/30" />
+        <span>Latest Updates</span>
+      </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-            {[
-              {
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkI1i27WbQ_aPaJi954nGhCWiiIhO14kj3lA&s',
-                tag: 'Success Story',
-                title: 'Tech Startup Scales to $10M Valuation',
-                desc: 'An ICON-NUST supported spin-off secured Series A funding, demonstrating the impact of our entrepreneurial support programs.'
-              },
-              {
-                image: 'https://www.arabnews.com/sites/default/files/styles/n_670_395/public/2023/11/22/4105781-1574885962.jpeg?itok=Ft6FH-_n',
-                tag: 'Partnership',
-                title: 'Strategic MoU with Global Tech Leader',
-                desc: 'NUST and international corporation sign collaboration agreement for joint R&D initiatives in advanced manufacturing.'
-              },
-              {
-                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF5kgX-34t6B3g3IH-C7ba_AJIyvNAUcHjCA&s',
-                tag: 'Event',
-                title: 'Innovation Summit 2026 Announced',
-                desc: 'Mark your calendars for our annual summit bringing together entrepreneurs, investors, and industry leaders on May 15th.'
-              },
-              
-            ].map((news, i) => (
-              <div key={i} className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={news.image} 
-                    alt={news.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
-                    {news.tag}
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">
+        News & Success Stories
+      </h2>
+
+      <p className="text-slate-500 text-sm sm:text-base lg:text-lg">
+        Discover the latest developments, success stories, and upcoming
+        events from ICON-NUST.
+      </p>
+    </div>
+
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+      {[
+        {
+          image: "/partner/news1.jpeg",
+          tag: "Industry Collaboration",
+          title:
+            "ICON-NUST Hosts Artistic Milliners for Industry-Academia Engagement Session",
+          desc:
+            "ICON-NUST, through its Corporate Advisory Council (CAC), hosted Artistic Milliners in collaboration with the Pakistan Business Council (PBC) to explore partnerships in Industry 4.0, digital transformation, sustainability, advanced manufacturing, data analytics, and applied research. The visit showcased NUST's innovation ecosystem and strengthened long-term industry-academia collaboration.",
+        },
+        {
+          image: "/partner/image.png",
+          tag: "MoU Signing",
+          title:
+            "NUST and JW SEZ Group Partner to Advance Research and Innovation",
+          desc:
+            "NUST and JW SEZ Group - Pakistan signed an MoU to collaborate on research, innovation, commercialization, talent development, internships, industrial engagement, curriculum alignment, and capacity-building initiatives, strengthening industry-academia partnerships for sustainable growth.",
+        },
+        {
+          image: "/partner/news3.jpeg",
+          tag: "Partnership",
+          title:
+            "NUST and ZEUS Energy Sign DoU to Strengthen Industry-Academia Collaboration",
+          desc:
+            "NUST and ZEUS Energy successfully signed a Deed of Understanding (DoU) on 16th February 2026 at the RIC Secretariat. The collaboration aims to strengthen academia-industry linkages and foster joint initiatives in areas of mutual interest through strategic cooperation.",
+        },
+      ].map((news, i) => {
+        const isExpanded = expandedNews === i;
+        const shouldShowButton = news.desc.length > 180;
+
+        return (
+          <div
+            key={i}
+            className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
+          >
+            <div className="relative h-48 overflow-hidden">
+              <Image
+                src={news.image}
+                alt={news.title}
+                width={400}
+                height={300}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+              <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
+                {news.tag}
+              </span>
+            </div>
+
+            <div className="p-4 sm:p-6 lg:p-7 flex flex-col flex-1">
+              <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
+                {news.title}
+              </h3>
+
+              <p className="text-slate-500 text-sm leading-7 mb-5 transition-all duration-300">
+                {isExpanded
+                  ? news.desc
+                  : news.desc.length > 180
+                  ? `${news.desc.substring(0, 180)}...`
+                  : news.desc}
+              </p>
+
+              {shouldShowButton && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setExpandedNews(isExpanded ? null : i)
+                  }
+                  className="mt-auto flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all group/btn w-fit"
+                >
+                  <span>
+                    {isExpanded ? "Read Less" : "Read More"}
                   </span>
-                </div>
-                
-                <div className="p-4 sm:p-6 lg:p-7">
-                  <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
-                    {news.title}
-                  </h3>
-                  <p className="text-slate-500 text-sm leading-relaxed mb-6">
-                    {news.desc}
-                  </p>
-                  <button className="flex items-center space-x-2 cursor-pointer text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all group/btn">
-                    <span>Read More</span>
-                    <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </div>
-              </div>
-            ))}
+
+                  <ArrowRight
+                    size={14}
+                    className={`transition-all duration-300 ${
+                      isExpanded
+                        ? "rotate-90"
+                        : "group-hover/btn:translate-x-1"
+                    }`}
+                  />
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       
       <IndustryServicesPortal/>
 
@@ -353,7 +373,7 @@ const App = () => {
                 placeholder="Work Email"
                 className="flex-grow bg-slate-50 border border-slate-300 px-4 py-3 sm:py-4 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900 text-sm sm:text-base"
               />
-              <button className="bg-blue-600 text-white px-7 py-3 sm:py-4 font-black text-xs uppercase tracking-widest cursor-pointer hover:bg-blue-700 transition-all rounded-sm shadow-lg whitespace-nowrap">Subscribe</button>
+              <button className="bg-[#00558f] text-white px-7 py-3 sm:py-4 font-black text-xs uppercase tracking-widest cursor-pointer  transition-all rounded-sm shadow-lg whitespace-nowrap">Subscribe</button>
             </div>
           </div>
         </div>
@@ -366,19 +386,19 @@ const App = () => {
             <div className="max-w-xl">
               <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.4em] mb-3 block">Storefront</span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif leading-tight mb-4">Tech Place: Marketplace of Innovation</h2>
-              <p className="text-slate-400 text-sm sm:text-base lg:text-lg font-light">Explore 120+ spin-offs and market-ready intellectual property available for strategic licensing.</p>
+              <p className="text-slate-400 text-sm sm:text-base lg:text-lg font-light">Explore 80+ spin-offs and market-ready intellectual property available for strategic licensing.</p>
             </div>
             <div className="flex gap-3">
               <button className="bg-white text-slate-900 px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-400 transition-colors">LinkedIn Feed</button>
-              <button className="bg-blue-900 text-white px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">Licensed Tech</button>
+              <button className="bg-[#00558f] text-white px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">Licensed Tech</button>
             </div>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {[
-              { label: 'Licensed Tech', count: '48', sub: 'Technologies actively licensed to industry partners' },
-              { label: 'Spin-offs', count: '142', sub: 'Ventures founded on NUST intellectual property' },
-              { label: 'Ready to License', count: '85', sub: 'Cutting-edge technologies awaiting commercialization' }
+              { label: 'Licensed Tech', count: '52', sub: 'Technologies actively licensed to industry partners' },
+              { label: 'Spin-offs', count: '80', sub: 'Ventures founded on NUST intellectual property' },
+              { label: 'Ready to License', count: '10', sub: 'Cutting-edge technologies awaiting commercialization' }
             ].map((item, i) => (
               <div key={i} className="bg-white/5 border border-white/10 p-6 sm:p-7 lg:p-8 rounded-sm hover:bg-white/10 transition-all cursor-pointer group">
                 <div className="text-blue-400 mb-4 group-hover:scale-110 transition-transform"><Layers size={28} /></div>
@@ -395,7 +415,7 @@ const App = () => {
      
 
       {/* Initiate a Partnership (Contact Section) */}
-      <section id="team" className="py-8 sm:py-12 lg:py-16 bg-white relative">
+      <section id="partner-with-us" className="py-8 sm:py-12 lg:py-16 bg-white relative">
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             <div className="lg:col-span-5">
@@ -404,10 +424,10 @@ const App = () => {
                 <span>Initiate Engagement</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-serif text-slate-900 mb-5 sm:mb-7 lg:mb-10 leading-tight">
-                Partner for <br /> <span className="italic text-blue-900">Success</span>
+                Partner with<br /> <span className=" text-[#00558F]">ICON</span>
               </h2>
               <p className="text-slate-500 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 lg:mb-10">
-                Our Program Managers are subject-matter experts dedicated to facilitating long-term strategic alliances.
+                Our team experts dedicated to facilitating long-term strategic alliances.
               </p>
 
               <div className="space-y-5 sm:space-y-7 lg:space-y-10">
@@ -422,7 +442,7 @@ const App = () => {
                   <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 shrink-0"><Users size={20} /></div>
                   <div>
                     <h4 className="font-black text-[11px] uppercase tracking-widest text-slate-400 mb-1">Direct Outreach</h4>
-                    <p className="text-slate-900 font-medium">icon@nust.edu.pk | +92 51 9085 1000</p>
+                    <p className="text-slate-900 font-medium">info@icon.nust.edu.pk | +92 51 9085 1000</p>
                   </div>
                 </div>
               </div>

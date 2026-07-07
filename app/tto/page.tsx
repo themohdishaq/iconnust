@@ -20,7 +20,7 @@ const services = [
       'Collaborate with NUST faculty and research teams on mission-critical technology challenges. From feasibility studies to full-scale applied research, ICON structures industry-funded projects with clear IP agreements and deliverables.',
     bullets: [
       'Joint research agreements with defined milestones',
-      'Access to 300+ specialized labs and research centers',
+      'Access to 447+ specialized labs and research centers',
       'Dedicated faculty PI matched to your domain',
       'Confidential project management end-to-end',
     ],
@@ -46,15 +46,14 @@ const services = [
   {
     id: 'training',
     icon: <GraduationCap size={28} />,
-    title: 'Training & Upskilling',
+    title: 'Upscalling and Capacity Building',
     tagline: 'Future-ready workforce development',
     description:
-      'ICON delivers tailored workforce development programs designed in partnership with industry. From technical bootcamps to executive leadership courses, our programs are grounded in real-world application and academic rigor.',
+      'Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.',
     bullets: [
-      'Custom curriculum co-designed with your HR team',
-      'On-site, hybrid, and online delivery formats',
-      'Certified programs in emerging technologies',
-      'Dedicated corporate training portal',
+      'Industry placements lasting from a few days to several weeks',
+      'Creates opportunities for student projects, internships, jobs, and professional training',
+      'Promotes collaborative R&D, innovation, and process improvement',
     ],
     color: 'emerald',
     img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80',
@@ -65,7 +64,7 @@ const services = [
     title: 'Testing & Lab Services',
     tagline: 'Precision analysis, certified results',
     description:
-      'Leverage NUST\'s ISO-certified laboratories for materials testing, product analysis, environmental monitoring, and calibration services. ICON acts as the single point of contact for all analytical and testing requirements.',
+      'Leverage NUST\'s ISO-certified laboratories for materials testing, product analysis, environmental monitoring, and calibration services. ',
     bullets: [
       'ISO/IEC 17025-accredited testing facilities',
       'Materials, chemical, environmental & structural analysis',
@@ -210,7 +209,7 @@ export default function IndustryServicesPage() {
             
 
             <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-slate-900 mb-5 leading-tight tracking-tight">
-              Powering Industry <br /> Through <span className="italic text-blue-700">Academic Excellence</span>
+              Powering Industry <br /> Through <span className="italic text-[#00558F]">Academic Excellence</span>
             </motion.h1>
 
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
@@ -230,7 +229,7 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── STATS BAR ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
+      {/* <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-white text-center">
             {stats.map((s, i) => (
@@ -247,7 +246,7 @@ export default function IndustryServicesPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
       <section id="services" className="py-10 sm:py-14 lg:py-20 bg-white">
@@ -375,105 +374,106 @@ export default function IndustryServicesPage() {
       </section>
 
       {/* ── FEATURED PARTNERS ─────────────────────────────────────────────── */}
-      <section id="partners" className="py-8 sm:py-10 lg:py-12 bg-slate-50 border-t border-slate-100 overflow-hidden">
-        {/* Header */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10 lg:mb-14">
-          <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
-            <div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-blue-900 font-bold">Who We Work With</h2>
-            </div>
-            <p className="text-slate-500 text-sm leading-relaxed max-w-sm text-center">
-              From global MNCs to innovative local enterprises — ICON's network spans every major sector, driving real-world impact through collaborative research and development.
-            </p>
-          </div>
-        </div>
-
-        {/* Row A — large & small cards, scrolls right-to-left at 45s */}
-        <div className="relative mb-4 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-          <motion.div
-            className="flex w-max gap-4 px-4"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
-          >
-            {[...partnersRowA, ...partnersRowA].map((p, i) => (
-              <PartnerCard key={`A-${i}`} {...p} />
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Row B — different size rhythm, scrolls right-to-left at 65s */}
-        <div className="relative [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
-          <motion.div
-            className="flex w-max gap-4 px-4"
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 65, repeat: Infinity, ease: 'linear' }}
-            style={{ x: '-10%' }}
-          >
-            {[...partnersRowB, ...partnersRowB].map((p, i) => (
-              <PartnerCard key={`B-${i}`} {...p} />
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Bottom count strip */}
-        {/* <div className="max-w-7xl mx-auto px-6 mt-12">
-          <div className="flex flex-wrap items-center justify-center gap-8 text-center">
-            {[
-              { value: '200+', label: 'Active Partners' },
-              { value: '14',   label: 'Sectors Covered' },
-              { value: '85%',  label: 'Return Engagement Rate' },
-              { value: '8+',   label: 'Years of Collaboration' },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="flex flex-col items-center"
-              >
-                <span className="text-3xl font-serif text-blue-900 font-bold">{item.value}</span>
-                <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-1">{item.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div> */}
-      </section>
+     
 
       {/* ── CTA BANNER ───────────────────────────────────────────────────── */}
-        <section id="initiate-project" className="py-12 sm:py-16 lg:py-24 bg-blue-950 text-white relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-              <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-                <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif mb-4 leading-tight">Ready to solve your industry bottleneck?</h2>
-                  <p className="text-sm sm:text-base lg:text-xl text-blue-200 font-light mb-8 sm:mb-10 max-w-2xl mx-auto">
-                    Initiate a sponsored research project today. Our dedicated program managers will match your challenge with the right faculty experts and laboratory infrastructure.
-                  </p>
-                  <div className="bg-white/10 backdrop-blur-xl p-5 sm:p-6 lg:p-8 rounded-2xl border border-white/20 text-left grid md:grid-cols-2 gap-4 sm:gap-6">
-                    <div className="flex flex-col space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Company Name</label>
-                      <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
-                    </div>
-                    <div className="flex flex-col space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Technical Domain</label>
-                      <select className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors appearance-none text-white">
-                        <option className="text-slate-900">Select Area of Interest...</option>
-                        <option className="text-slate-900">Manufacturing & Automation</option>
-                        <option className="text-slate-900">Material Sciences</option>
-                        <option className="text-slate-900">Software & AI</option>
-                      </select>
-                    </div>
-                    <div className="md:col-span-2 flex flex-col space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Brief Description of the Challenge</label>
-                      <textarea rows={3} className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors resize-none"></textarea>
-                    </div>
-                    <div className="md:col-span-2 pt-4">
-                      <button className="w-full bg-white text-blue-900 py-4 font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-50 transition-colors flex items-center justify-center">
-                        Submit Research Inquiry <ArrowRight size={16} className="ml-2" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </section>
+       <section
+  id="initiate-project"
+  className="py-12 sm:py-16 lg:py-24 bg-[#00558F] text-white relative overflow-hidden"
+>
+  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
+
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="text-center"
+    >
+      {/* Heading */}
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif mb-4 leading-tight">
+        Ready to solve your industry bottleneck?
+      </h2>
+      {/* Description */}
+      <p className="text-sm sm:text-base lg:text-xl text-blue-200 font-light mb-10 max-w-2xl mx-auto">
+        Initiate a sponsored research project today. Our dedicated program
+        managers will match your challenge with the right faculty experts and
+        laboratory infrastructure.
+      </p>
+
+      {/* Form */}
+      <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-white/20 grid md:grid-cols-2 gap-6">
+
+        {/* Company Name */}
+        <div className="flex flex-col items-center">
+          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
+            Company Name
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter company name"
+            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 focus:border-white focus:ring-0 outline-none transition"
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
+            Professional Email 
+          </label>
+
+          <input
+            type="text"
+            placeholder="Enter your professional email"
+            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 focus:border-white focus:ring-0 outline-none transition"
+          />
+        </div>
+        {/* Technical Domain */}
+        <div className="flex flex-col items-center">
+          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
+            Technical Domain
+          </label>
+
+          <select className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center text-white focus:border-white outline-none appearance-none">
+            <option className="text-gray-900">
+              Select Area of Interest...
+            </option>
+            <option className="text-gray-900">
+              Manufacturing & Automation
+            </option>
+            <option className="text-gray-900">
+              Material Sciences
+            </option>
+            <option className="text-gray-900">
+              Software & AI
+            </option>
+          </select>
+        </div>
+
+        {/* Challenge Description */}
+        <div className="md:col-span-2 flex flex-col items-center">
+          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
+            Brief Description of the Challenge
+          </label>
+
+          <textarea
+            rows={4}
+            placeholder="Describe your research challenge..."
+            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 resize-none focus:border-white outline-none"
+          ></textarea>
+        </div>
+
+        {/* Submit Button */}
+        <div className="md:col-span-2 flex justify-center pt-2">
+          <button className="bg-white text-blue-900 px-10 py-4 rounded-lg font-bold uppercase tracking-[0.2em] hover:bg-blue-50 transition flex items-center">
+            Submit Research Inquiry
+            <ArrowRight size={18} className="ml-2" />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
       {/* ── FAQs ─────────────────────────────────────────────────────────── */}
       <section id="faq" className="py-10 sm:py-14 lg:py-20 bg-white border-t border-slate-200">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">

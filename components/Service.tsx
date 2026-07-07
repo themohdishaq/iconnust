@@ -17,11 +17,11 @@ const services = [
     tagline: 'Co-develop breakthrough solutions',
     desc: 'Custom research projects designed to solve specific industrial bottlenecks through applied science and engineering. From feasibility studies to full-scale applied research, ICON structures industry-funded projects with clear IP agreements.',
     icon: <FlaskConical size={22} />,
-    img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80',
+    img: '/industry-services/rnd.jpg',
     stat: '150+ Active Projects',
     bullets: [
       'Joint research agreements with defined milestones',
-      'Access to 300+ specialized labs and research centers',
+      'Access to 447+ research, teaching, key lab  centers',
       'Dedicated faculty PI matched to your domain',
     ],
   },
@@ -31,35 +31,34 @@ const services = [
     tagline: 'World-class expertise on demand',
     desc: 'Strategic guidance from world-renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
-    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80',
+    img: '/industry-services/consultancy.jpg',
     stat: '500+ Faculty Experts',
     bullets: [
-      '50+ engineering & science domains covered',
-      'Short-term and retainer-based engagement models',
+      'Engineering, science, Architecture and other domains covered',
       'Technical audits, feasibility reviews & expert testimony',
     ],
   },
-  {
-    id: 'training',
-    title: 'Upskilling & Training',
-    tagline: 'Future-ready workforce development',
-    desc: 'Specialized corporate training programs, executive diplomas, and certification workshops tailored for your workforce. Programs are grounded in real-world application and academic rigor.',
-    icon: <GraduationCap size={22} />,
-    img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80',
-    stat: '15,000+ Trained',
-    bullets: [
-      'Custom curriculum co-designed with your HR team',
-      'On-site, hybrid, and online delivery formats',
-      'Certified programs in emerging technologies',
-    ],
-  },
+   {
+  id: 'faculty-placement',
+  title: 'Upscalling and Capacity Building',
+  tagline: 'Bridging academia with industry',
+  desc: "Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.",
+  icon: <Users size={22} />, // or Briefcase, GraduationCap, Building2
+  img: '/industry-services/lectures.jpg',
+  stat: '100+ Faculty Placements',
+  bullets: [
+    'Industry placements lasting from a few days to several weeks',
+    'Promotes collaborative R&D, innovation, and process improvement',
+    'Creates opportunities for student projects, internships, jobs, and professional training',
+  ],
+},
   {
     id: 'testing',
     title: 'Testing & Lab Services',
     tagline: 'Precision analysis, certified results',
-    desc: "Access to NUST's ISO-certified infrastructure, high-end analytical tools, and material testing facilities. ICON acts as the single point of contact for all analytical and testing requirements.",
+    desc: "Access to NUST's ISO-certified infrastructure, high-end analytical tools, and material testing facilities.",
     icon: <Layers size={22} />,
-    img: 'https://media.istockphoto.com/id/1048191122/photo/latin-engineer-on-laptop-in-shop.jpg',
+    img: '/industry-services/labservices.jpg',
     stat: '300+ Advanced Labs',
     bullets: [
       'ISO/IEC 17025-accredited testing facilities',
@@ -80,7 +79,7 @@ function ServiceRow({
   const isEven = index % 2 === 0;
 
   return (
-    <div className="relative py-10 sm:py-14 lg:py-20 xl:py-28">
+    <div className="relative py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
         <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-6 lg:gap-0 items-center">
 
@@ -116,10 +115,7 @@ function ServiceRow({
               ))}
             </ul>
 
-            <button className="flex items-center gap-3 text-white font-black text-[11px] uppercase tracking-[0.25em] border-b border-white/20 pb-1 hover:border-blue-400 hover:text-blue-400 transition-all duration-300 group">
-              <span>Learn More</span>
-              <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
+           
           </motion.div>
 
           {/* ── Center column — connector node ── */}
@@ -266,7 +262,7 @@ const IndustryServicesPortal = () => {
             className="w-full h-full origin-top"
             style={{
               scaleY,
-              background: 'linear-gradient(to bottom, #3b82f6, #06b6d4, #3b82f6)',
+              background: '#00558f',
             }}
           />
         </div>

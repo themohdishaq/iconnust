@@ -393,77 +393,9 @@ export default function NewsPage() {
         </div>
       </section>
 
-      {/* Events */}
-      <section id="events" className="py-20 bg-slate-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="flex items-end justify-between mb-14">
-              <div>
-                <span className="text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Calendar</span>
-                <h2 className="text-4xl font-serif text-white">Events &amp; Webinars</h2>
-              </div>
-            </motion.div>
-            <div className="grid md:grid-cols-2 gap-6">
-              {upcomingEvents.map((event, i) => (
-                <motion.div key={i} variants={fadeUp}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all duration-300 group cursor-pointer flex gap-6">
-                  {/* Date Block */}
-                  <div className="text-center shrink-0">
-                    <div className="w-16 h-16 bg-blue-600 rounded-xl flex flex-col items-center justify-center">
-                      <div className="text-white text-2xl font-black leading-none">{event.date.day}</div>
-                      <div className="text-blue-200 text-[10px] font-bold uppercase">{event.date.month}</div>
-                    </div>
-                    <div className="text-slate-500 text-[10px] mt-1 font-bold">{event.date.year}</div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest">
-                        {event.type}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-white mb-2 group-hover:text-blue-300 transition-colors leading-snug">{event.title}</h3>
-                    <p className="text-slate-400 text-sm leading-relaxed mb-3 line-clamp-2">{event.desc}</p>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-slate-500 flex items-center"><Users size={11} className="mr-1" /> {event.registered} registered</span>
-                      <button className="text-blue-400 font-bold flex items-center hover:text-white transition-colors">
-                        Register <ArrowRight size={12} className="ml-1" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
 
-      {/* Newsletter Signup */}
-      <section id="newsletter" className="py-20 bg-gradient-to-br from-blue-900 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-            <div className="w-16 h-16 bg-blue-700/30 rounded-full flex items-center justify-center mx-auto mb-8 border border-blue-500/30">
-              <Mail size={32} className="text-blue-300" />
-            </div>
-            <h2 className="text-4xl font-serif mb-4">The Innovation Brief</h2>
-            <p className="text-blue-200 text-lg mb-10 max-w-xl mx-auto font-light">
-              Monthly updates on NUST research breakthroughs, technology licensing deals, spin-off news, and upcoming events — delivered to your inbox.
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Your professional email"
-                className="flex-1 bg-white/10 border border-white/20 text-white placeholder-blue-300 px-5 py-4 rounded-xl outline-none focus:border-blue-400 focus:bg-white/15 transition-all"
-              />
-              <button type="button" className="bg-blue-500 text-white px-8 py-4 font-black text-xs uppercase tracking-widest rounded-xl hover:bg-blue-400 transition-colors whitespace-nowrap flex items-center space-x-2 shadow-lg">
-                <Send size={16} />
-                <span>Subscribe</span>
-              </button>
-            </form>
-           
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

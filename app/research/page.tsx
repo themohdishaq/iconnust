@@ -1,27 +1,28 @@
 "use client"
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ArrowLeft, 
-  Play, 
-  FlaskConical, 
-  Cpu, 
-  Globe, 
-  ShieldCheck, 
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
   ChevronRight,
-  Download,
-  Calendar,
-  FileText,
   Activity,
   ArrowRight,
-  Award,
-  Microscope
 } from 'lucide-react';
 import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, BarChart, Bar, Legend
+  AreaChart, Area
 } from 'recharts';
-
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  LabelList,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 // --- YouTube Video Data ---
 // To update videos: Go to https://www.youtube.com/@Research_NUST
 // Click on any video, copy the video ID from the URL (after 'v=')
@@ -63,6 +64,43 @@ const researchVideos = {
     },
   ]
 };
+// Patent domain breakdown (donut chart) — matches the reference exactly
+const patentDomainData = [
+  { name: "Biomedical, Healthcare & Life Sciences", value: 11, color: "#3b82f6" },
+  { name: "Computer Science", value: 8, color: "#5eead4" },
+  { name: "Mechanical, Manufacturing & Robotics", value: 6, color: "#bef264" },
+  { name: "Energy, Environment & Sustainability", value: 5, color: "#fb923c" },
+  { name: "Materials, Chemical & Nanotechnology", value: 5, color: "#fda4af" },
+  { name: "Electrical, Electronics & Communications", value: 3, color: "#d8b4fe" },
+  { name: "Aerospace & Defense", value: 2, color: "#a5b4fc" },
+  { name: "Others", value: 3, color: "#bae6fd" },
+];
+ 
+const totalPatents = patentDomainData.reduce((sum, d) => sum + d.value, 0); // 43
+ 
+// NIPO IP Rights Awarded Summary (2019–2025) — stacked bar chart
+// Category colors match legend: Industrial Design (blue), Copyright (green), Patents (orange), Trademark (red)
+const ipRightsData = [
+  { year: "2019", industrialDesign: 38, copyright: 0, patents: 4, trademark: 4 },
+  { year: "2020", industrialDesign: 25, copyright: 8, patents: 3, trademark: 3 },
+  { year: "2021", industrialDesign: 8, copyright: 19, patents: 0, trademark: 0 },
+  { year: "2022", industrialDesign: 7, copyright: 9, patents: 0, trademark: 0 },
+  { year: "2023", industrialDesign: 12, copyright: 7, patents: 0, trademark: 0 },
+  { year: "2024", industrialDesign: 8, copyright: 4, patents: 0, trademark: 0 },
+  { year: "2025", industrialDesign: 2, copyright: 9, patents: 0, trademark: 0 },
+];
+ 
+// Precompute totals for the labels shown above each stacked bar
+const ipRightsDataWithTotal = ipRightsData.map((d) => ({
+  ...d,
+  total: d.industrialDesign + d.copyright + d.patents + d.trademark,
+}));
+ 
+// const fadeUp = {
+//   initial: { opacity: 0, y: 24 },
+//   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+// };
+ 
 const fundingData = [
   { year: '2020', funding: 420, projects: 120 },
   { year: '2021', funding: 580, projects: 155 },
@@ -99,27 +137,33 @@ const fadeUp = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
 
+const TotalLabel = ({ x, y, width, value }: { x?: number; y?: number; width?: number; value?: string | number }) => {
+  if (value == null) return null;
+  return (
+    <text
+      x={x != null && width != null ? x + width / 2 : x}
+      y={y != null ? y - 8 : 0}
+      fill="#475569"
+      textAnchor="middle"
+      fontSize={12}
+      fontWeight={600}
+    >
+      {value}
+    </text>
+  );
+};
+
 const slideInLeft = {
   initial: { opacity: 0, x: -30 },
   animate: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
 
 const RndPortal = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
-      
-    
-
       {/* Hero Section */}
-      <section className="relative py-20 bg-slate-900 overflow-hidden">
+      <section className="relative py-20  bg-slate-900 overflow-hidden">
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.4 }}
@@ -135,18 +179,16 @@ const RndPortal = () => {
               <span>ICON Innovation & Collaboration</span>
             </motion.div>
             <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-white mb-8 leading-[1.1]">
-              Where Academic Ingenuity Meets <span className="italic text-blue-400">Industry Ambition</span>
+              Transform Your Invention into <span className="italic text-[#00558F]">Global Impact</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-xl text-slate-300 leading-relaxed mb-12 font-light">
-              ICON connects NUST's 3,000+ faculty, 300+ advanced laboratories, and multi-disciplinary research clusters with industry partners to co-create solutions, transfer knowledge, and drive shared impact.
+              We help you legally protect your innovations. Drive breakthrough research through seamless IP filing,multi-disciplinary research clusters with industry partners to co-create solutions and maximizing your potential to change the world tomorrow.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <button className="bg-blue-600 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-500 transition-colors shadow-lg shadow-blue-900/50">
+              <button className="bg-[#00558F] text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em]  transition-colors shadow-lg shadow-blue-900/50">
                 Propose a Collaboration
               </button>
-              <button className="bg-white/10 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] border border-white/20 hover:bg-white/20 transition-colors backdrop-blur-sm flex items-center">
-                <Play size={14} className="mr-2" /> Explore Capabilities
-              </button>
+              
             </motion.div>
           </motion.div>
         </div>
@@ -156,97 +198,153 @@ const RndPortal = () => {
       </section>
 
       {/* Analytics Dashboard (Charts & Graphs) */}
-      <section id="analytics" className="py-24 bg-white relative -mt-16 z-20 rounded-t-3xl shadow-2xl mx-4 lg:mx-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16">
+      
+      <section id="our-impact" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6">
+        
+           <div className="mb-16">
             <h2 className="text-3xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
             <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
           </div>
-
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Chart 1: Funding Growth (Area Chart) */}
-            <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-2 bg-slate-50 p-8 rounded-2xl border border-slate-100">
-              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Collaborative Project Funding Growth (Million PKR)</h3>
-              <div className="h-[300px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={fundingData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorFunding" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#1e3a8a" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#1e3a8a" stopOpacity={0}/>
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                    <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} dy={10} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b' }} />
-                    <Tooltip 
-                      contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
-                      cursor={{ stroke: '#94a3b8', strokeWidth: 1, strokeDasharray: '4 4' }}
-                    />
-                    <Area type="monotone" dataKey="funding" stroke="#1e3a8a" strokeWidth={3} fillOpacity={1} fill="url(#colorFunding)" />
-                  </AreaChart>
-                </ResponsiveContainer>
+ 
+        <div className="grid lg:grid-cols-2 gap-10 items-center">
+          {/* LEFT: Stats + Donut */}
+          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
+            {/* Stat callouts */}
+            <div className="flex flex-wrap gap-x-16 gap-y-6 mb-10">
+              <div>
+                <div className="text-5xl font-black text-red-600 leading-none mb-2">1,360+</div>
+                <div className="text-sm font-semibold text-slate-800">IP Filings</div>
               </div>
-            </motion.div>
-
-            {/* Chart 2: Research Domains (Donut Chart) */}
-            <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col">
-              <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-500 mb-6">Active Collaborations by Domain</h3>
-              <div className="h-[250px] w-full flex-grow">
+              <div>
+                <div className="text-5xl font-black text-red-600 leading-none mb-2">260</div>
+                <div className="text-sm font-semibold text-slate-800">IPRs Awarded</div>
+              </div>
+            </div>
+ 
+            {/* Donut chart + legend */}
+            <div className="flex flex-col sm:flex-row items-center gap-8">
+              <div className="relative w-[260px] h-[260px] shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
-                      data={domainData}
+                      data={patentDomainData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={60}
-                      outerRadius={90}
-                      paddingAngle={5}
+                      innerRadius={62}
+                      outerRadius={125}
+                      paddingAngle={3}
+                      cornerRadius={3}
                       dataKey="value"
-                      stroke="none"
+                      stroke="#fff"
+                      strokeWidth={3}
+                      label={({ value }) => value}
+                      labelLine={false}
                     >
-                      {domainData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      {patentDomainData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Tooltip
+                      formatter={(value: any, name: any) => [String(value), String(name)]}
+                      contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
+                    />
                   </PieChart>
                 </ResponsiveContainer>
+                {/* Center total */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                  <span className="text-3xl font-black text-slate-900">{totalPatents}</span>
+                  <span className="text-[10px] font-semibold text-slate-500 text-center leading-tight">
+                    Total Patents
+                  </span>
+                </div>
               </div>
-              {/* Custom Legend */}
-              <div className="mt-4 grid grid-cols-2 gap-y-2">
-                {domainData.map((entry, index) => (
-                  <div key={index} className="flex items-center text-[10px] font-bold text-slate-600">
-                    <div className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: COLORS[index % COLORS.length] }} />
-                    {entry.name} ({entry.value}%)
+ 
+              {/* Legend */}
+              <div className="space-y-2">
+                {patentDomainData.map((entry) => (
+                  <div key={entry.name} className="flex items-center text-[13px] text-slate-700">
+                    <span
+                      className="w-3 h-3 rounded-full mr-2 shrink-0"
+                      style={{ backgroundColor: entry.color }}
+                    />
+                    <span>
+                      {entry.name} <span className="text-slate-500">({entry.value})</span>
+                    </span>
                   </div>
                 ))}
               </div>
-            </motion.div>
-          </div>
-          
-          {/* Chart 3: Mini Bar Chart for Publications */}
-          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp} className="mt-12">
-            <div className="bg-slate-900 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
-               <div className="mb-6 md:mb-0 md:mr-12">
-                 <h3 className="text-2xl font-serif text-white mb-2">Joint Knowledge Output</h3>
-                 <p className="text-slate-400 text-sm max-w-sm">Quarterly breakdown of co-authored Q1-tier publications and global citations arising from ICON-facilitated collaborations.</p>
-               </div>
-               <div className="h-[150px] w-full md:w-1/2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={publicationData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#94a3b8' }} />
-                    <Tooltip cursor={{ fill: '#1e293b' }} contentStyle={{ backgroundColor: '#0f172a', border: 'none', color: '#fff', borderRadius: '4px' }} />
-                    <Bar dataKey="papers" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={20} />
-                  </BarChart>
-                </ResponsiveContainer>
-               </div>
+            </div>
+          </motion.div>
+ 
+          {/* RIGHT: Stacked Bar Chart */}
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="bg-white border border-slate-200 rounded-lg shadow-lg p-6"
+          >
+            <h3 className="text-sm font-semibold text-slate-800 mb-2">
+              NIPO - IP Rights Awarded Summary (2019-2025)
+            </h3>
+ 
+            <div className="h-[380px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={ipRightsDataWithTotal} margin={{ top: 24, right: 10, left: -10, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                  <XAxis
+                    dataKey="year"
+                    axisLine={{ stroke: "#cbd5e1" }}
+                    tickLine={false}
+                    tick={{ fontSize: 12, fill: "#475569" }}
+                    label={{ value: "Year", position: "insideBottom", offset: -2, style: { fontSize: 11, fill: "#64748b" } }}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fontSize: 12, fill: "#475569" }}
+                    label={{
+                      value: "Number of IPs Awarded",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fontSize: 11, fill: "#64748b", textAnchor: "middle" },
+                    }}
+                  />
+                  <Tooltip
+                    contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
+                    cursor={{ fill: "#f1f5f9" }}
+                  />
+                  <Legend
+                    verticalAlign="top"
+                    align="center"
+                    height={36}
+                    iconType="square"
+                    iconSize={10}
+                    wrapperStyle={{ fontSize: 11, fontWeight: 600, color: "#475569" }}
+                    formatter={(value) => {
+                      const labels: Record<string, string> = {
+                        industrialDesign: "Industrial Design",
+                        copyright: "Copyright",
+                        patents: "Patents",
+                        trademark: "Trademark",
+                      };
+                      return labels[value] ?? value;
+                    }}
+                  />
+                  <Bar dataKey="industrialDesign" stackId="ip" fill="#3b82f6" />
+                  <Bar dataKey="copyright" stackId="ip" fill="#22c55e" />
+                  <Bar dataKey="patents" stackId="ip" fill="#f97316" />
+                  <Bar dataKey="trademark" stackId="ip" fill="#dc2626" radius={[3, 3, 0, 0]}>
+                    <LabelList dataKey="total" content={<TotalLabel />} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </motion.div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Media & Video Hub */}
       <section id="media-hub" className="py-24 bg-slate-50">
@@ -276,11 +374,7 @@ const RndPortal = () => {
                   className="w-full h-[400px] lg:h-[500px]"
                 ></iframe>
               </div>
-              <div className="mt-6">
-                <span className="bg-blue-600 text-white px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest mb-4 inline-block">Featured</span>
-                <h3 className="text-2xl font-serif text-slate-900 mb-2">{researchVideos.featured.title}</h3>
-                <p className="text-slate-600 text-sm">{researchVideos.featured.description}</p>
-              </div>
+             
             </motion.div>
 
             {/* Side Updates & Smaller Videos */}
@@ -350,7 +444,7 @@ const RndPortal = () => {
       </section> */}
 
       {/* Engagement CTA */}
-      <section id="initiate-project" className="py-32 bg-blue-950 text-white relative overflow-hidden">
+      <section id="initiate-project" className="py-16 bg-[#00558f] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
           <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -361,6 +455,10 @@ const RndPortal = () => {
             <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 text-left grid md:grid-cols-2 gap-6">
               <div className="flex flex-col space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Company Name</label>
+                <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
+              </div>
+               <div className="flex flex-col space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Email</label>
                 <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
               </div>
               <div className="flex flex-col space-y-2">

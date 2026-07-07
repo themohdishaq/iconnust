@@ -7,8 +7,10 @@ import {
   ArrowRight, ChevronRight, CheckCircle2,
   Plus, Minus, Users, Award, Network,
   Layers, Microscope, Zap, BookOpen,
-  BarChart3, Factory, TestTube, Mail
+  BarChart3, Factory, TestTube, Mail, X
 } from 'lucide-react';
+import OrgChartSection from '@/components/OrganStruct';
+import FinancialChart from '@/components/BodStats';
 
 // ── DATA ──────────────────────────────────────────────────────────────
 
@@ -48,35 +50,18 @@ const pathways = [
     img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80',
   },
   {
-    id: 'industry-research',
-    icon: <Briefcase size={28} />,
-    title: 'Industry-Sponsored Research',
-    tagline: 'Co-create solutions with guaranteed IP clarity',
-    color: 'emerald',
-    description:
-      'Companies can commission applied research projects directly with NUST faculty through ICON. Sponsored research agreements define deliverables, timelines, IP ownership, and publication rights upfront, removing ambiguity.',
-    bullets: [
-      'Flexible IP terms — exclusive, shared, or sponsor-owned',
-      'Milestone-based project management and reporting',
-      'Access to NUST\'s full laboratory and compute infrastructure',
-      'Option to co-file patents arising from the collaboration',
-    ],
-    suitable: 'Suitable for companies seeking custom R&D solutions with full IP control and academic rigour.',
-    img: 'https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80',
-  },
-  {
     id: 'ip',
     icon: <ShieldCheck size={28} />,
-    title: 'IP Protection & Filing',
+    title: 'Got an Idea? Patent and Protect',
     tagline: 'Secure your invention before commercialising',
     color: 'purple',
     description:
       'Before any commercialisation pathway can be pursued, ICON assists inventors in formally disclosing, evaluating, and protecting their intellectual property through national and international patent filings, design registrations, and trade secret strategies.',
     bullets: [
       'Invention Disclosure Form (IDF) submission and review',
-      'Patentability assessment and freedom-to-operate analysis',
-      'National (IPO Pakistan) and PCT/international filings',
-      'Trade secret and copyright protection strategies',
+      'Patentability assessment and prior art search',
+      'National (IPO Pakistan) and international filings (PCT)',
+      'Drafting and filling of patent, industrial design, copyright and trade mark applications',
     ],
     suitable: 'The essential first step for any researcher with a novel invention or process before disclosure or publication.',
     img: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80',
@@ -165,6 +150,10 @@ const faqs = [
     a: 'Yes. ICON works with inventors to understand their goals and recommends the most suitable pathway — licensing, spin-off, or sponsored research. The final approach is always agreed upon with the inventor.',
   },
   {
+    q: 'How to protect my innovaton through IP filling in Pak and how much at cost?',
+    a: 'ICON manages the entire IP protection process, including patent drafting, filing, and prosecution in Pakistan (IPO Pakistan) and internationally (PCT). Costs vary based on the type of IP and jurisdictions; ICON provides a detailed cost estimate during the evaluation phase.',
+  },
+  {
     q: 'How are royalties or revenues shared with inventors?',
     a: 'Under NUST\'s IP Policy, inventors typically receive 40–50% of net licensing revenues. For spin-offs, founders negotiate equity stakes. ICON ensures the framework is transparent and fair.',
   },
@@ -192,6 +181,27 @@ const colorMap: Record<string, { bg: string; text: string; border: string; btn: 
   rose:   { bg: 'bg-rose-50',    text: 'text-rose-700',   border: 'border-rose-200',   btn: 'bg-rose-800 hover:bg-rose-700',   badge: 'bg-rose-100 text-rose-800' },
 };
 
+// Standard fields for the Invention Disclosure Form modal.
+// NOTE: swap these for the exact fields from ICON's official IDF
+// document once available — this is a reasonable default set covering
+// what most university tech-transfer offices ask for.
+const emptyIdf = {
+  inventionTitle: '',
+  domain: '',
+  inventorNames: '',
+  department: '',
+  studentOrEmployeeId: '',
+  email: '',
+  phone: '',
+  conceptionDate: '',
+  description: '',
+  novelty: '',
+  applications: '',
+  fundingSource: '',
+  priorDisclosure: 'no',
+  priorDisclosureDetails: '',
+};
+
 // ── PAGE ──────────────────────────────────────────────────────────────
 
 export default function CommercializationPathwaysPage() {
@@ -206,6 +216,10 @@ export default function CommercializationPathwaysPage() {
     title: '',
     description: ''
   });
+
+  // ── IDF modal state ──
+  const [idfModalOpen, setIdfModalOpen] = useState(false);
+  const [idfData, setIdfData] = useState(emptyIdf);
 
   const pathway = pathways.find((p) => p.id === activePathway)!;
   const c       = colorMap[pathway.color];
@@ -231,6 +245,31 @@ export default function CommercializationPathwaysPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Opens the IDF modal, pre-filling title/domain from the selected tech card.
+  const openIdfModal = (tech: { title: string; domain: string }) => {
+    setIdfData({ ...emptyIdf, inventionTitle: tech.title, domain: tech.domain });
+    setIdfModalOpen(true);
+  };
+
+  const closeIdfModal = () => {
+    setIdfModalOpen(false);
+  };
+
+  const handleIdfChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setIdfData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleIdfSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Invention Disclosure submitted:', idfData);
+    alert('Thank you — your Invention Disclosure has been submitted. ICON will follow up by email.');
+    setIdfModalOpen(false);
+    setIdfData(emptyIdf);
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
 
@@ -244,42 +283,29 @@ export default function CommercializationPathwaysPage() {
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl mx-auto text-center flex flex-col items-center">
           
             <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-slate-900 mb-5 leading-tight tracking-tight">
-              From Research Bench <br /> to <span className="italic text-blue-700">Commercial Reality</span>
+              From Research Bench <br /> to <span className="italic text-[#00558F]">Commercial Reality</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON maps every avenue available to NUST innovators — licensing, spin-off creation, sponsored research, and IP protection — backed by world-class infrastructure and a proven commercialisation team.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-blue-900 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-blue-800 transition-colors">
+              <button
+                onClick={() => openIdfModal({ title: '', domain: '' })}
+                className="bg-blue-900 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-blue-800 transition-colors"
+              >
                 Submit an Invention Disclosure
               </button>
-              <button className="border border-slate-300 text-slate-700 px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-slate-100 transition-colors flex items-center justify-center gap-2">
-                Browse Tech Portfolio <ChevronRight size={14} />
-              </button>
+            
             </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* ── STATS BAR ─────────────────────────────────────────────────── */}
-      <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-white text-center">
-            {[
-              { val: '500+', lbl: 'Patents Filed',       icon: <FileText size={20} /> },
-              { val: '85+',  lbl: 'Technologies Licensed', icon: <Award size={20} /> },
-              { val: '40+',  lbl: 'Spin-offs Created',   icon: <Zap size={20} /> },
-              { val: '300+', lbl: 'Lab Facilities',       icon: <FlaskConical size={20} /> },
-            ].map((s, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex flex-col items-center">
-                <div className="text-blue-400 mb-2 sm:mb-3">{s.icon}</div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold mb-1">{s.val}</div>
-                <div className="text-slate-400 text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">{s.lbl}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* <section className="bg-[#0a2342] p-4">
+        <FinancialChart/>
+      
+      </section> */}
 
       {/* ── PATHWAYS ──────────────────────────────────────────────────── */}
       <section id="pathways" className="py-10 sm:py-12 bg-white">
@@ -288,7 +314,7 @@ export default function CommercializationPathwaysPage() {
             <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Avenues</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Commercialization Pathways</h2>
             <p className="text-slate-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
-              Four structured pathways, each suited to a different stage, goal, and type of innovation.
+              Following structured pathways, each suited to a different stage, goal, and type of innovation.
             </p>
           </div>
 
@@ -354,33 +380,7 @@ export default function CommercializationPathwaysPage() {
         </div>
       </section>
 
-      {/* ── INFRASTRUCTURE ────────────────────────────────────────────── */}
-      <section id="infrastructure" className="py-10 sm:py-12 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14 lg:mb-16">
-            <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Resources</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">NUST Commercialization Infrastructure</h2>
-            <p className="text-slate-500 mt-3 max-w-2xl mx-auto text-sm sm:text-base">
-              Innovators and industry partners benefit from one of Pakistan's most comprehensive research and development ecosystems.
-            </p>
-          </div>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {infrastructure.map((item, i) => {
-              const cc = colorMap[item.color];
-              return (
-                <motion.div key={i} variants={fadeUp} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 sm:p-6 lg:p-7 hover:shadow-lg transition-shadow">
-                  <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl ${cc.bg} ${cc.text} mb-5`}>
-                    {item.icon}
-                  </div>
-                  <div className={`text-2xl sm:text-3xl font-bold ${cc.text} mb-1`}>{item.count}</div>
-                  <h4 className="font-bold text-slate-900 mb-3">{item.title}</h4>
-                  <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
+    
 
 
       {/* ── TECH PORTFOLIO ────────────────────────────────────────────── */}
@@ -416,7 +416,10 @@ export default function CommercializationPathwaysPage() {
                     <BookOpen size={13} /> {tech.domain}
                   </p>
                 </div>
-                <button className="mt-6 w-full bg-slate-50 text-slate-700 py-3 rounded-xl font-bold text-xs uppercase tracking-widest border border-slate-200 hover:bg-blue-900 hover:text-white hover:border-blue-900 transition-colors">
+                <button
+                  onClick={() => openIdfModal(tech)}
+                  className="mt-6 w-full bg-slate-50 text-slate-700 py-3 rounded-xl font-bold text-xs uppercase tracking-widest border border-slate-200 hover:bg-blue-900 hover:text-white hover:border-blue-900 transition-colors"
+                >
                   Request Details
                 </button>
               </motion.div>
@@ -542,6 +545,249 @@ export default function CommercializationPathwaysPage() {
           </div>
         </div>
       </section>
+
+      {/* ── INVENTION DISCLOSURE MODAL ───────────────────────────────── */}
+      <AnimatePresence>
+        {idfModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-start sm:items-center justify-center bg-slate-900/60 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto"
+            onClick={closeIdfModal}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl my-6 sm:my-10 overflow-hidden"
+            >
+              {/* Modal header */}
+              <div className="bg-[#0a2342] px-6 sm:px-8 py-6 flex items-start justify-between">
+                <div>
+                  <span className="text-blue-300 font-bold text-[10px] uppercase tracking-[0.4em] mb-2 block">
+                    ICON · Intellectual Property Office
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-serif text-white">Invention Disclosure Form</h3>
+                  <p className="text-slate-300 text-xs mt-1">
+                    Confidential submission — reviewed only by the ICON commercialisation team.
+                  </p>
+                </div>
+                <button
+                  onClick={closeIdfModal}
+                  aria-label="Close"
+                  className="text-slate-300 hover:text-white transition-colors shrink-0 ml-4"
+                >
+                  <X size={22} />
+                </button>
+              </div>
+
+              {/* Modal form */}
+              <form onSubmit={handleIdfSubmit} className="px-6 sm:px-8 py-6 sm:py-8 space-y-5 max-h-[70vh] overflow-y-auto">
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Invention Title *
+                  </label>
+                  <input
+                    type="text" name="inventionTitle" required
+                    value={idfData.inventionTitle} onChange={handleIdfChange}
+                    placeholder="e.g. Graphene-based Water Filtration"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Technology Domain
+                  </label>
+                  <input
+                    type="text" name="domain"
+                    value={idfData.domain} onChange={handleIdfChange}
+                    placeholder="e.g. Materials Science, AI & Robotics, Biotech"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Inventor Name(s) *
+                    </label>
+                    <input
+                      type="text" name="inventorNames" required
+                      value={idfData.inventorNames} onChange={handleIdfChange}
+                      placeholder="Full name(s), comma separated"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Department / School *
+                    </label>
+                    <input
+                      type="text" name="department" required
+                      value={idfData.department} onChange={handleIdfChange}
+                      placeholder="e.g. SEECS, SMME, S3H"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Student / Employee ID
+                    </label>
+                    <input
+                      type="text" name="studentOrEmployeeId"
+                      value={idfData.studentOrEmployeeId} onChange={handleIdfChange}
+                      placeholder="Registration or employee number"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Date of Conception
+                    </label>
+                    <input
+                      type="date" name="conceptionDate"
+                      value={idfData.conceptionDate} onChange={handleIdfChange}
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email" name="email" required
+                      value={idfData.email} onChange={handleIdfChange}
+                      placeholder="you@nust.edu.pk"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel" name="phone"
+                      value={idfData.phone} onChange={handleIdfChange}
+                      placeholder="Optional"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Description of the Invention *
+                  </label>
+                  <textarea
+                    name="description" required rows={4}
+                    value={idfData.description} onChange={handleIdfChange}
+                    placeholder="What does it do, how does it work, and what stage is it at?"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Novelty — What Makes It New?
+                  </label>
+                  <textarea
+                    name="novelty" rows={3}
+                    value={idfData.novelty} onChange={handleIdfChange}
+                    placeholder="How is this different from existing solutions or products?"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Potential Applications / Commercial Use
+                  </label>
+                  <textarea
+                    name="applications" rows={3}
+                    value={idfData.applications} onChange={handleIdfChange}
+                    placeholder="Who would use this, and in what industry or market?"
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors resize-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Funding Source
+                  </label>
+                  <select
+                    name="fundingSource"
+                    value={idfData.fundingSource} onChange={handleIdfChange}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 focus:border-blue-600 focus:outline-none transition-colors"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="self">Self-funded</option>
+                    <option value="nust-internal">NUST Internal Grant</option>
+                    <option value="govt">Government Grant</option>
+                    <option value="industry">Industry Sponsored</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
+                    Has this invention been publicly disclosed?
+                  </label>
+                  <div className="flex gap-6 mb-2">
+                    <label className="flex items-center gap-2 text-sm text-slate-700">
+                      <input
+                        type="radio" name="priorDisclosure" value="no"
+                        checked={idfData.priorDisclosure === 'no'} onChange={handleIdfChange}
+                      />
+                      No
+                    </label>
+                    <label className="flex items-center gap-2 text-sm text-slate-700">
+                      <input
+                        type="radio" name="priorDisclosure" value="yes"
+                        checked={idfData.priorDisclosure === 'yes'} onChange={handleIdfChange}
+                      />
+                      Yes
+                    </label>
+                  </div>
+                  {idfData.priorDisclosure === 'yes' && (
+                    <textarea
+                      name="priorDisclosureDetails" rows={2}
+                      value={idfData.priorDisclosureDetails} onChange={handleIdfChange}
+                      placeholder="Where and when (e.g. conference paper, publication, presentation, demo)?"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors resize-none"
+                    />
+                  )}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-blue-900 hover:bg-blue-800 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-lg transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Mail size={16} />
+                    Submit Disclosure
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeIdfModal}
+                    className="px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm border border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
