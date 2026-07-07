@@ -28,7 +28,7 @@ const services = [
   {
     id: 'consultancy',
     title: 'Expert Consultancy',
-    tagline: 'World-class expertise on demand',
+    tagline: 'Pakistan-based expertise on demand',
     desc: 'Strategic guidance from world-renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
     img: '/industry-services/consultancy.jpg',
