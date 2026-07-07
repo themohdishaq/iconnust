@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, animate, useMotionValue, useTransform } from 'framer-motion';
 import { 
   ArrowRight, 
   Users, 
@@ -17,32 +18,40 @@ import PartnersSection from '@/components/Partner';
 import Link from 'next/link';
 import { newsArticles } from '@/data/news';
 
-const App = () => {
-  const [stats, setStats] = useState({ partners: 0, projects: 0, spinOffs: 0, awarded: 0, patents: 0 });
-  const [currentSlide, setCurrentSlide] = useState(0);
+const AnimatedStatValue = ({ value }: { value: number }) => {
+  const motionValue = useMotionValue(0);
+  const displayValue = useTransform(motionValue, (current) =>
+    Math.round(current).toLocaleString('en-US')
+  );
 
-  // Statistics & Slider Animation Logic
   useEffect(() => {
-    // Simulate dynamic stat loading
-    const statInterval = setInterval(() => {
-      setStats(prev => ({
-        partners: prev.partners < 900 ? prev.partners + 5 : 900,
-        projects: prev.projects < 1360 ? prev.projects + 2 : 130,
-        spinOffs: prev.spinOffs < 80 ? prev.spinOffs + 3 : 80,
-        awarded: prev.awarded < 260 ? prev.awarded + 1 : 260,
-        patents: prev.patents < 112 ? prev.patents + 10 : 112
-      }));
-    }, 50);
+    const controls = animate(motionValue, value, {
+      duration: 1.8,
+      ease: 'easeOut',
+    });
 
-    // Hero Slider Auto-rotation
+    return controls.stop;
+  }, [motionValue, value]);
+
+  return <motion.span>{displayValue}</motion.span>;
+};
+
+const App = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const targetStats = {
+    partners: 900,
+    projects: 1360,
+    spinOffs: 80,
+    awarded: 260,
+    patents: 112,
+  };
+
+  useEffect(() => {
     const slideInterval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % 3);
     }, 6000);
 
-    return () => {
-      clearInterval(statInterval);
-      clearInterval(slideInterval);
-    };
+    return () => clearInterval(slideInterval);
   }, []);
 
   const heroSlides = [
@@ -76,7 +85,7 @@ const App = () => {
     <div className="min-h-screen  bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden w-full">
       
       {/* Hero Section with Dynamic Slider and Integrated Live Dashboard */}
-      <section className=" w-full relative pt-16 bg-white min-h-screen flex flex-col justify-between border-b border-slate-100">
+      <section className=" w-full relative pt-16 bg-white sm:mb-24 h-screen flex flex-col justify-between border-b border-slate-100">
         
         {/* Background Images Slider */}
         <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
@@ -173,13 +182,19 @@ const App = () => {
              </div>
              <div className="grid grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-slate-100">
                {[
-                  { label: 'Industry Partners', value: stats.partners, icon: <Users /> },
-                  { label: 'IP filings', value: stats.projects, icon: <BarChart3 /> },
-                  { label: 'IPRS Awarded', value: stats.awarded, icon: <Globe /> },
-                  { label: 'Spin-off Ventures', value: stats.spinOffs, icon: <TrendingUp /> },
-                  { label: 'IPRS licensed to Industry', value: stats.patents, icon: <ShieldCheck /> }
+                  { label: 'Industry Partners', value: targetStats.partners, icon: <Users /> },
+                  { label: 'IP filings', value: targetStats.projects, icon: <BarChart3 /> },
+                  { label: 'IPRS Awarded', value: targetStats.awarded, icon: <Globe /> },
+                  { label: 'Spin-off Ventures', value: targetStats.spinOffs, icon: <TrendingUp /> },
+                  { label: 'IPRS licensed to Industry', value: targetStats.patents, icon: <ShieldCheck /> }
                 ].map((stat, i) => (
-                  <div key={i} className="p-3  hover:bg-blue-50/50 transition-colors group relative overflow-hidden">
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
+                    className="p-3 hover:bg-blue-50/50 transition-colors group relative overflow-hidden"
+                  >
                     {/* Background glow effect on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-100/0 to-blue-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
@@ -192,12 +207,14 @@ const App = () => {
                     
                     <div className="relative z-10">
                       <div className="flex items-baseline space-x-1 mb-1">
-                        <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-Inter text-slate-900 group-hover:text-blue-950 transition-colors">{stat.value}</div>
+                        <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-Inter text-slate-900 group-hover:text-blue-950 transition-colors">
+                          <AnimatedStatValue value={stat.value} />
+                        </div>
                         <span className="text-xl font-serif text-blue-900 font-bold">+</span>
                       </div>
                       <div className="text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em] font-black text-slate-500 group-hover:text-blue-900 transition-colors">{stat.label}</div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
              </div>
            </div>
