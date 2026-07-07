@@ -15,11 +15,11 @@ import {
 import IndustryServicesPortal from '@/components/Service';
 import PartnersSection from '@/components/Partner';
 import Link from 'next/link';
+import { newsArticles } from '@/data/news';
 
 const App = () => {
   const [stats, setStats] = useState({ partners: 0, projects: 0, spinOffs: 0, awarded: 0, patents: 0 });
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [expandedNews, setExpandedNews] = useState<number | null>(null);
 
   // Statistics & Slider Animation Logic
   useEffect(() => {
@@ -226,95 +226,46 @@ const App = () => {
     </div>
 
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
-      {[
-        {
-          image: "/partner/news1.jpeg",
-          tag: "Industry Collaboration",
-          title:
-            "ICON-NUST Hosts Artistic Milliners for Industry-Academia Engagement Session",
-          desc:
-            "ICON-NUST, through its Corporate Advisory Council (CAC), hosted Artistic Milliners in collaboration with the Pakistan Business Council (PBC) to explore partnerships in Industry 4.0, digital transformation, sustainability, advanced manufacturing, data analytics, and applied research. The visit showcased NUST's innovation ecosystem and strengthened long-term industry-academia collaboration.",
-        },
-        {
-          image: "/partner/image.png",
-          tag: "MoU Signing",
-          title:
-            "NUST and JW SEZ Group Partner to Advance Research and Innovation",
-          desc:
-            "NUST and JW SEZ Group - Pakistan signed an MoU to collaborate on research, innovation, commercialization, talent development, internships, industrial engagement, curriculum alignment, and capacity-building initiatives, strengthening industry-academia partnerships for sustainable growth.",
-        },
-        {
-          image: "/partner/news3.jpeg",
-          tag: "Partnership",
-          title:
-            "NUST and ZEUS Energy Sign DoU to Strengthen Industry-Academia Collaboration",
-          desc:
-            "NUST and ZEUS Energy successfully signed a Deed of Understanding (DoU) on 16th February 2026 at the RIC Secretariat. The collaboration aims to strengthen academia-industry linkages and foster joint initiatives in areas of mutual interest through strategic cooperation.",
-        },
-      ].map((news, i) => {
-        const isExpanded = expandedNews === i;
-        const shouldShowButton = news.desc.length > 180;
+      {newsArticles.map((news) => (
+        <Link
+          key={news.id}
+          href={`/news/${news.id}`}
+          className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
+        >
+          <div className="relative h-48 overflow-hidden">
+            <Image
+              src={news.image}
+              alt={news.title}
+              width={400}
+              height={300}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
 
-        return (
-          <div
-            key={i}
-            className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
-          >
-            <div className="relative h-48 overflow-hidden">
-              <Image
-                src={news.image}
-                alt={news.title}
-                width={400}
-                height={300}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-
-              <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
-                {news.tag}
-              </span>
-            </div>
-
-            <div className="p-4 sm:p-6 lg:p-7 flex flex-col flex-1">
-              <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
-                {news.title}
-              </h3>
-
-              <p className="text-slate-500 text-sm leading-7 mb-5 transition-all duration-300">
-                {isExpanded
-                  ? news.desc
-                  : news.desc.length > 180
-                  ? `${news.desc.substring(0, 180)}...`
-                  : news.desc}
-              </p>
-
-              {shouldShowButton && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    setExpandedNews(isExpanded ? null : i)
-                  }
-                  className="mt-auto flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all group/btn w-fit"
-                >
-                  <span>
-                    {isExpanded ? "Read Less" : "Read More"}
-                  </span>
-
-                  <ArrowRight
-                    size={14}
-                    className={`transition-all duration-300 ${
-                      isExpanded
-                        ? "rotate-90"
-                        : "group-hover/btn:translate-x-1"
-                    }`}
-                  />
-                </button>
-              )}
-            </div>
+            <span className="absolute top-4 left-4 bg-blue-900 text-white text-[10px] font-black px-3 py-1 uppercase tracking-widest rounded-sm">
+              {news.category}
+            </span>
           </div>
-        );
-      })}
+
+          <div className="p-4 sm:p-6 lg:p-7 flex flex-col flex-1">
+            <h3 className="text-xl font-serif text-slate-900 mb-3 group-hover:text-blue-900 transition-colors">
+              {news.title}
+            </h3>
+
+            <p className="text-slate-500 text-sm leading-7 mb-5">
+              {news.excerpt.length > 180
+                ? `${news.excerpt.substring(0, 180)}...`
+                : news.excerpt}
+            </p>
+
+            <span className="mt-auto flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 group-hover:text-slate-900 group-hover:border-slate-900 transition-all w-fit">
+              <span>Read More</span>
+              <ArrowRight size={14} className="transition-all duration-300 group-hover:translate-x-1" />
+            </span>
+          </div>
+        </Link>
+      ))}
     </div>
   </div>
 </section>

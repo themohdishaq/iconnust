@@ -10,90 +10,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import Link from 'next/link';
-
-// --- Data ---
-const allNews = [
-  {
-    id: 1,
-    category: 'Licensing',
-    date: 'December 15, 2024',
-    title: 'NUST Licenses 7 New Intellectual Property Rights to Mubarak Hi-Tech Engineering',
-    excerpt: 'Seven intellectual property rights covering advanced engineering solutions have been successfully licensed to Mubarak Hi-Tech Engineering for commercial deployment, representing the largest single licensing deal in NUST TTO history.',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80',
-    readTime: '4 min',
-    featured: true,
-  },
-  {
-    id: 2,
-    category: 'Spinoff',
-    date: 'December 5, 2024',
-    title: 'ESTATECH GIS Plus — NUST Spin-off Successfully Licensed for National Rollout',
-    excerpt: 'EstaTech GIS Plus, a geographic information system technology developed at NUST, has secured its first commercial licensing agreement and will be deployed across multiple government mapping agencies.',
-    image: 'https://images.unsplash.com/photo-1576153192621-7a3be10b356e?auto=format&fit=crop&q=80',
-    readTime: '3 min',
-    featured: false,
-  },
-  {
-    id: 3,
-    category: 'Partnership',
-    date: 'November 22, 2024',
-    title: 'DG FIA Visit Strengthens Industry-Academia Collaboration in Security Tech',
-    excerpt: 'Director General of the Federal Investigation Agency explored partnership opportunities with NUST for development of advanced cybersecurity and surveillance technologies through sponsored research programmes.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80',
-    readTime: '2 min',
-    featured: false,
-  },
-  {
-    id: 4,
-    category: 'Licensing',
-    date: 'November 10, 2024',
-    title: 'PeekaFood IPR Licensing Agreement Signed with Leading Food-Tech Startup',
-    excerpt: 'The innovative PeekaFood intelligent food freshness monitoring technology has been licensed to a leading food-tech startup for integration into retail and logistics supply chain systems.',
-    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&q=80',
-    readTime: '3 min',
-    featured: false,
-  },
-  {
-    id: 5,
-    category: 'Partnership',
-    date: 'October 28, 2024',
-    title: 'Tech Valley Private Limited Signs Strategic R&D MoU with NUST',
-    excerpt: 'Multi-year research and development collaboration agreement signed with Tech Valley Private Limited, covering joint projects in AI, embedded systems, and next-generation communication technologies.',
-    image: 'https://images.unsplash.com/photo-1573164574048-46f8f0bd4e35?auto=format&fit=crop&q=80',
-    readTime: '4 min',
-    featured: false,
-  },
-  {
-    id: 6,
-    category: 'Licensing',
-    date: 'October 15, 2024',
-    title: 'Coal Tab Technology Licensed for Clean Energy Applications',
-    excerpt: 'NUST\'s breakthrough coal-to-fuel tablet technology, capable of reducing emissions by 45%, has been licensed to an energy company for pilot deployment in industrial heating applications.',
-    image: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80',
-    readTime: '5 min',
-    featured: false,
-  },
-  {
-    id: 7,
-    category: 'Award',
-    date: 'September 20, 2024',
-    title: 'NUST TTO Recognized Among Top 10 University Tech Transfer Offices in Asia',
-    excerpt: 'The NUST Technology Transfer Office has been ranked in the top 10 university TTO offices in Asia by the Asian Technology Rankings, citing exceptional spin-off creation and licensing revenue growth.',
-    image: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&q=80',
-    readTime: '2 min',
-    featured: false,
-  },
-  {
-    id: 8,
-    category: 'Innovation',
-    date: 'September 5, 2024',
-    title: 'NUST Researchers Develop Water-from-Air Device for Arid Region Deployment',
-    excerpt: 'A team from NUST\'s Mechanical Engineering department has created an atmospheric water generation device capable of producing 10 litres per day in arid conditions, with patent filing underway.',
-    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80',
-    readTime: '4 min',
-    featured: false,
-  },
-];
+import { newsArticles as allNews } from '@/data/news';
 
 const successStories = [
   {
@@ -176,13 +93,11 @@ const coverageData = [
   { month: 'Aug', press: 9, digital: 32 },
 ];
 
-const categories = ['All', 'Licensing', 'Spinoff', 'Partnership', 'Award', 'Innovation'];
+const categories = ['All', 'Industry Collaboration', 'MoU Signing', 'Partnership'];
 const categoryColors: Record<string, string> = {
-  Licensing: 'bg-emerald-100 text-emerald-800',
-  Spinoff: 'bg-blue-100 text-blue-800',
+  'Industry Collaboration': 'bg-emerald-100 text-emerald-800',
+  'MoU Signing': 'bg-blue-100 text-blue-800',
   Partnership: 'bg-violet-100 text-violet-800',
-  Award: 'bg-amber-100 text-amber-800',
-  Innovation: 'bg-rose-100 text-rose-800',
 };
 
 const stagger = {
@@ -268,10 +183,10 @@ export default function NewsPage() {
                   </div>
                   <h2 className="text-3xl font-serif text-slate-900 mb-4 leading-tight">{featuredNews.title}</h2>
                   <p className="text-slate-600 leading-relaxed mb-6">{featuredNews.excerpt}</p>
-                  <button className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all">
+                  <Link href={`/news/${featuredNews.id}`} className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all w-fit">
                     <span>Read Full Story</span>
                     <ArrowRight size={14} />
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             </motion.div>
@@ -306,31 +221,33 @@ export default function NewsPage() {
             <motion.div key={activeCategory + searchQuery} initial="hidden" animate="show" variants={stagger}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((news) => (
-                <motion.div key={news.id} variants={fadeUp}
-                  className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col">
-                  <div className="relative h-48 overflow-hidden">
-                    <img src={news.image} alt={news.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute top-4 left-4">
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${categoryColors[news.category] || 'bg-slate-100 text-slate-700'}`}>
-                        {news.category}
+                <motion.div key={news.id} variants={fadeUp}>
+                  <Link href={`/news/${news.id}`}
+                    className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col h-full">
+                    <div className="relative h-48 overflow-hidden">
+                      <img src={news.image} alt={news.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <div className="absolute top-4 left-4">
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${categoryColors[news.category] || 'bg-slate-100 text-slate-700'}`}>
+                          {news.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="flex items-center space-x-4 text-slate-400 text-xs mb-3">
+                        <span className="flex items-center"><Calendar size={11} className="mr-1" /> {news.date}</span>
+                        <span className="flex items-center"><Clock size={11} className="mr-1" /> {news.readTime}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-900 transition-colors leading-snug flex-1">
+                        {news.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm leading-relaxed mb-5 line-clamp-3">{news.excerpt}</p>
+                      <span className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest self-start border-b border-blue-900/30 group-hover:border-blue-900 transition-colors">
+                        <span>Read More</span>
+                        <ChevronRight size={12} />
                       </span>
                     </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center space-x-4 text-slate-400 text-xs mb-3">
-                      <span className="flex items-center"><Calendar size={11} className="mr-1" /> {news.date}</span>
-                      <span className="flex items-center"><Clock size={11} className="mr-1" /> {news.readTime}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-blue-900 transition-colors leading-snug flex-1">
-                      {news.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-5 line-clamp-3">{news.excerpt}</p>
-                    <button className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest self-start border-b border-blue-900/30 hover:border-blue-900 transition-colors">
-                      <span>Read More</span>
-                      <ChevronRight size={12} />
-                    </button>
-                  </div>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>
