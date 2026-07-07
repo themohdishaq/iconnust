@@ -40,7 +40,7 @@ const services = [
   },
    {
   id: 'faculty-placement',
-  title: 'Upscalling and Capacity Building',
+  title: 'Upscaling and Capacity Building',
   tagline: 'Bridging academia with industry',
   desc: "Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.",
   icon: <Users size={22} />, // or Briefcase, GraduationCap, Building2

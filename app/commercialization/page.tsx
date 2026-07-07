@@ -47,7 +47,7 @@ const pathways = [
       'Dedicated workspace, mentorship, and go-to-market guidance',
     ],
     suitable: 'Ideal for innovators who want to directly commercialise their technology through an equity-based venture.',
-    img: 'https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&q=80',
+    img: '/industry-services/spinoffnust.jpg',
   },
   {
     id: 'ip',
@@ -64,7 +64,7 @@ const pathways = [
       'Drafting and filling of patent, industrial design, copyright and trade mark applications',
     ],
     suitable: 'The essential first step for any researcher with a novel invention or process before disclosure or publication.',
-    img: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80',
+    img: '/industry-services/patentwall.jpg',
   },
 ];
 

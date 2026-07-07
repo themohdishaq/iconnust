@@ -25,7 +25,7 @@ const services = [
       'Confidential project management end-to-end',
     ],
     color: 'blue',
-    img: 'https://media.istockphoto.com/id/2234793362/photo/research-and-development-technology-concept-with-business-innovation-icons-on-digital-screen.jpg',
+    img: '/industry-services/rnd.jpg',
   },
   {
     id: 'consultancy',
@@ -41,12 +41,12 @@ const services = [
       'Fast turnaround with NDA protection',
     ],
     color: 'indigo',
-    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80',
+    img: '/industry-services/consultancy.jpg',
   },
   {
     id: 'training',
     icon: <GraduationCap size={28} />,
-    title: 'Upscalling and Capacity Building',
+    title: 'Upscaling and Capacity Building',
     tagline: 'Future-ready workforce development',
     description:
       'Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.',
@@ -56,7 +56,7 @@ const services = [
       'Promotes collaborative R&D, innovation, and process improvement',
     ],
     color: 'emerald',
-    img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&q=80',
+    img: '/industry-services/lectures.jpg',
   },
   {
     id: 'testing',
@@ -72,7 +72,7 @@ const services = [
       'Confidential testing under strict NDA protocols',
     ],
     color: 'purple',
-    img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80',
+    img: '/industry-services/labservices.jpg',
   },
 ];
 
