@@ -4,7 +4,12 @@ import Image from 'next/image';
 import { motion, animate, useMotionValue, useTransform } from 'framer-motion';
 import { 
   ArrowRight, 
-  Users, 
+  Users,
+   Handshake,
+  FileText,
+  Award,
+  Rocket,
+  BadgeCheck, 
   TrendingUp, 
   Globe, 
   ShieldCheck, 
@@ -42,7 +47,7 @@ const App = () => {
     partners: 900,
     projects: 1360,
     spinOffs: 80,
-    awarded: 260,
+    awarded: 310,
     patents: 112,
   };
 
@@ -182,11 +187,11 @@ const App = () => {
              </div>
              <div className="grid grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-slate-100">
                {[
-                  { label: 'Industry Partners', value: targetStats.partners, icon: <Users /> },
-                  { label: 'IP filings', value: targetStats.projects, icon: <BarChart3 /> },
-                  { label: 'IPRS Awarded', value: targetStats.awarded, icon: <Globe /> },
-                  { label: 'Spin-off Ventures', value: targetStats.spinOffs, icon: <TrendingUp /> },
-                  { label: 'IPRS licensed to Industry', value: targetStats.patents, icon: <ShieldCheck /> }
+                  { label: 'Industry Partners', value: targetStats.partners, icon: <Handshake /> },
+                  { label: 'IP filings', value: targetStats.projects, icon: <FileText /> },
+                  { label: 'IPRS Awarded', value: targetStats.awarded, icon: <Award /> },
+                  { label: 'Spin-off Ventures', value: targetStats.spinOffs, icon: <Rocket /> },
+                  { label: 'IPRS licensed to Industry', value: targetStats.patents, icon: <BadgeCheck /> }
                 ].map((stat, i) => (
                   <motion.div
                     key={i}
