@@ -8,6 +8,7 @@ import {
   GraduationCap, TestTube, Globe, Handshake,
   BarChart3, Clock, Award, Mail, Phone
 } from 'lucide-react';
+import Image from 'next/image';
 
 // --- DATA ---
 const services = [
@@ -90,10 +91,10 @@ const sectors = [
 ];
 
 const engagementSteps = [
-  { step: 1, title: 'Submit a Brief', desc: 'Describe your technical challenge, timeline, and budget via our online form or by contacting our Industry Desk.', icon: <Mail size={20} /> },
-  { step: 2, title: 'Expert Matching', desc: 'ICON identifies the most suitable faculty leads, labs, or programs within 48 hours.', icon: <Users size={20} /> },
-  { step: 3, title: 'Scope & Agreement', desc: 'Co-develop a project plan with clear deliverables, IP terms, and timelines.', icon: <ShieldCheck size={20} /> },
-  { step: 4, title: 'Execute & Deliver', desc: 'ICON manages the project end-to-end and ensures timely, quality delivery.', icon: <CheckCircle2 size={20} /> },
+  { step: 1, title: 'Submit a Brief', desc: 'Describe your technical challenge, timeline, and budget via our online form or by contacting our Industry Desk.', icon: <Mail size={20} />, color: 'bg-[#084C70]',},
+  { step: 2, title: 'Expert Matching', desc: 'ICON identifies the most suitable faculty leads, labs, or programs within 48 hours.', icon: <Users size={20} />, color: 'bg-[#084C70]', },
+  { step: 3, title: 'Scope & Agreement', desc: 'Co-develop a project plan with clear deliverables, IP terms, and timelines.', icon: <ShieldCheck size={20} />, color: 'bg-[#084C70]', },
+  { step: 4, title: 'Execute & Deliver', desc: 'ICON manages the project end-to-end and ensures timely, quality delivery.', icon: <CheckCircle2 size={20} />,     color: 'bg-[#CA9F3B]', },
 ];
 
 const partnersRowA = [
@@ -199,30 +200,33 @@ export default function IndustryServicesPage() {
       <section className="relative py-10 sm:py-14 lg:py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80')" }}
+          style={{ backgroundImage: "url('/industry-services/consultancy.jpg')" }}
         />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl  px-6 relative z-10">
+          <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2 block">
+            Industry Services
+          </div>
           <motion.div
             initial="hidden" animate="show" variants={stagger}
-            className="max-w-4xl mx-auto text-center flex flex-col items-center"
+            className="w-full mx-auto text-left flex flex-col items-left justify-items-start"
           >
             
 
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-slate-900 mb-5 leading-tight tracking-tight">
-              Powering Industry <br /> Through <span className="italic text-[#00558F]">Academic Excellence</span>
+            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl  font-serif text-slate-900 mb-5 leading-tight tracking-tight">
+              Powering Industry Through <div>Academic Excellence</div>
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-800 leading-relaxed font-normal mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON bridges the gap between NUST's research capabilities and the evolving needs of Pakistan's industries — delivering R&D support, expert consultancy, workforce training, and precision lab services under one roof.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-blue-900 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-xl hover:bg-blue-800 transition-colors">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-items-start items-start ">
+              <button className="bg-[#FCAF17] text-[#0A2A40] px-8 py-4 font-semibold text-xs uppercase tracking-[0.2em] rounded-sm shadow-xl cursor-pointer transition-colors">
                 Submit an Industry Brief
               </button>
-              <button className="border border-slate-300 text-slate-700 px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-slate-100 transition-colors flex items-center justify-center">
+              {/* <button className="border border-slate-300 text-slate-700 px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-slate-100 transition-colors flex items-center justify-center">
                 Download Service Catalogue <ChevronRight size={14} className="ml-2" />
-              </button>
+              </button> */}
             </motion.div>
           </motion.div>
         </div>
@@ -249,26 +253,25 @@ export default function IndustryServicesPage() {
       </section> */}
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
-      <section id="services" className="py-10 sm:py-14 lg:py-20 bg-white">
+      <section id="services" className="py-10 sm:py-14 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
+          <div className="text-left mb-8 sm:mb-12 lg:mb-16">
+            <span className="text-[#FCAF17] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Our Industry Services</h2>
           </div>
 
           {/* Tab switcher */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-items-start gap-4 mb-12 border-b border-slate-200 pb-4">
             {services.map((s) => (
               <button
                 key={s.id}
                 onClick={() => setActiveService(s.id)}
-                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 ${
+                className={`inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition-colors duration-200 ${
                   activeService === s.id
-                    ? 'bg-blue-900 text-white shadow-md'
-                    : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-900'
+                    ? 'text-slate-900 border-b-2 border-[#FCAF17]'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                {React.cloneElement(s.icon as React.ReactElement<{ size: number }>, { size: 14 })}
                 {s.title}
               </button>
             ))}
@@ -279,72 +282,100 @@ export default function IndustryServicesPage() {
               key={activeService}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.35 }}
-              className="grid lg:grid-cols-2 gap-12 items-center bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden"
+              className="grid lg:grid-cols-2 gap-3 items-center"
             >
-              <div className="p-5 sm:p-8 lg:p-10 xl:p-14">
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${c.bg} ${c.text} mb-5`}>
-                  {active.icon}
-                </div>
-                <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${c.text} mb-2 block`}>{active.tagline}</span>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif text-slate-900 mb-3">{active.title}</h3>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-5 sm:mb-6 lg:mb-8">{active.description}</p>
-                <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 lg:mb-10">
+              <div className=" bg-transparent">
+                <span className="text-[#FCAF17] font-bold text-[11px] uppercase tracking-[0.35em] mb-4 inline-block">Co-develop breakthrough solutions</span>
+                <h3 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">{active.title}</h3>
+                <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mb-8">
+                  {active.description}
+                </p>
+                <div className="grid mb-4">
                   {active.bullets.map((b, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-slate-700">
-                      <CheckCircle2 size={16} className={`${c.text} mt-0.5 shrink-0`} />
-                      {b}
-                    </li>
+                    <div key={i} className="flex items-start gap-3 p-2">
+                      <div className={`${c.bg} ${c.text} rounded-full p-2 shrink-0`}>
+                        <CheckCircle2 size={16} />
+                      </div>
+                      <p className="text-slate-700 text-sm leading-relaxed">{b}</p>
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <button className={`${c.btn} text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm transition-colors`}>
                   Enquire About {active.title}
                 </button>
               </div>
 
-              <div className="relative h-48 sm:h-64 lg:h-full min-h-[280px] sm:min-h-[320px] lg:min-h-[380px] overflow-hidden">
-                <img
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                className="relative overflow-hidden border border-slate-200 w-full h-full bg-slate-100 "
+              >
+                <Image
+                  width={1000}
+                  height={1000}
                   src={active.img}
                   alt={active.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent" />
-              </div>
+                
+              </motion.div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
-
-      {/* ── HOW TO ENGAGE ─────────────────────────────────────────────────── */}
-      <section id="engage" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Simple Process</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">How to Engage ICON</h2>
-            <p className="text-slate-500 mt-3 max-w-xl mx-auto text-sm sm:text-base">
-              From your first enquiry to project delivery, ICON manages the entire process so you can focus on your business.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 sm:gap-6 relative">
-            <div className="hidden md:block absolute top-[3.5rem] left-0 w-full h-0.5 bg-slate-200 z-0" />
-            {engagementSteps.map((item) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: item.step * 0.1 }}
-                className="relative z-10 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm text-center"
-              >
-                <div className="w-14 h-14 bg-blue-50 text-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-sm">
-                  {item.icon}
-                </div>
-                <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Step 0{item.step}</div>
-                <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+ <section id="engage" className="py-8 bg-[#F3EFE6] min-h-screen flex items-center">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
+        {/* Header Section */}
+        <div className="mb-8 text-left">
+          <span className="text-[#FCAF17]  text-[11px] uppercase tracking-[0.15em] mb-4 block">
+            Simple Process
+          </span>
+          
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">
+            How to Engage ICON
+          </h2>
+          <p className=" max-w-2xl text-base leading-relaxed">
+            From your first enquiry to project delivery, ICON manages the entire process so you can focus on your business.
+          </p>
         </div>
-      </section>
+
+        {/* Timeline Grid */}
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-10 relative">
+          {/* Connecting Line: 
+            Uses left/right 12.5% to align perfectly with the centers of the 1st and 4th columns in a 4-col grid.
+            top-6 aligns it with the vertical center of the w-12 h-12 (48px) circles.
+          */}
+          <div className="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-[1px] bg-[#d5d0c5] z-0" />
+
+          {/* Steps */}
+          {engagementSteps.map((item) => (
+            <motion.div
+              key={item.step}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: item.step * 0.1 }}
+              className="relative z-10 flex flex-col text-left"
+            >
+              {/* Number Circle */}
+              <div 
+                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-base mb-6 md:mb-8 ${item.color}`}
+              >
+                {item.step.toString().padStart(2, '0')}
+              </div>
+              
+              {/* Text Content */}
+              <h4 className="font-serif font-bold text-lg text-[#084C70] mb-3">
+                {item.title}
+              </h4>
+              <p className="text-[15px] text-slate-600 leading-relaxed pr-4">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  
 
       {/* ── SECTORS ────────────────────────────────────────────────────────── */}
       <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-slate-100">
@@ -378,137 +409,138 @@ export default function IndustryServicesPage() {
 
       {/* ── CTA BANNER ───────────────────────────────────────────────────── */}
        <section
-  id="initiate-project"
-  className="py-12 sm:py-16 lg:py-24 bg-[#00558F] text-white relative overflow-hidden"
->
-  <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-
-  <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-    <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="text-center"
+      id="initiate-project"
+      className="py-8 sm:py-12 bg-[#062539] text-white flex items-center min-h-screen"
     >
-      {/* Heading */}
-      <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif mb-4 leading-tight">
-        Ready to solve your industry bottleneck?
-      </h2>
-      {/* Description */}
-      <p className="text-sm sm:text-base lg:text-xl text-blue-200 font-light mb-10 max-w-2xl mx-auto">
-        Initiate a sponsored research project today. Our dedicated program
-        managers will match your challenge with the right faculty experts and
-        laboratory infrastructure.
-      </p>
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-start">
+        
+        {/* Left Column: Text Section */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-left max-w-lg"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-serif mb-6 leading-[1.2] text-white">
+            Ready to solve your industry bottleneck?
+          </h2>
+          <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
+            Initiate a sponsored research project today. Our dedicated program
+            managers will match your challenge with the right faculty experts and
+            laboratory infrastructure.
+          </p>
+        </motion.div>
 
-      {/* Form */}
-      <div className="bg-white/10 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-white/20 grid md:grid-cols-2 gap-6">
-
-        {/* Company Name */}
-        <div className="flex flex-col items-center">
-          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-            Company Name
-          </label>
-
+        {/* Right Column: Form Section */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col gap-5"
+        >
+          {/* Company Name */}
           <input
             type="text"
-            placeholder="Enter company name"
-            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 focus:border-white focus:ring-0 outline-none transition"
+            placeholder="Company Name"
+            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] focus:border-[#427b9e] focus:ring-0 outline-none transition"
           />
-        </div>
-        <div className="flex flex-col items-center">
-          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-            Professional Email 
-          </label>
 
+          {/* Professional Email */}
           <input
-            type="text"
-            placeholder="Enter your professional email"
-            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 focus:border-white focus:ring-0 outline-none transition"
+            type="email"
+            placeholder="Professional Email"
+            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] focus:border-[#427b9e] focus:ring-0 outline-none transition"
           />
-        </div>
-        {/* Technical Domain */}
-        <div className="flex flex-col items-center">
-          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-            Technical Domain
-          </label>
 
-          <select className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center text-white focus:border-white outline-none appearance-none">
-            <option className="text-gray-900">
-              Select Area of Interest...
-            </option>
-            <option className="text-gray-900">
-              Manufacturing & Automation
-            </option>
-            <option className="text-gray-900">
-              Material Sciences
-            </option>
-            <option className="text-gray-900">
-              Software & AI
-            </option>
-          </select>
-        </div>
+          {/* Technical Domain / Area of Interest */}
+          <div className="relative">
+            <select 
+              defaultValue=""
+              className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-[#6B8394] focus:border-[#427b9e] outline-none appearance-none cursor-pointer"
+            >
+              <option value="" disabled hidden>
+                Select Area of Interest...
+              </option>
+              <option value="manufacturing" className="text-slate-900">Manufacturing & Automation</option>
+              <option value="materials" className="text-slate-900">Material Sciences</option>
+              <option value="software" className="text-slate-900">Software & AI</option>
+            </select>
+            {/* Custom Chevron to match design */}
+            <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="#6B8394" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          </div>
 
-        {/* Challenge Description */}
-        <div className="md:col-span-2 flex flex-col items-center">
-          <label className="text-xs font-bold uppercase tracking-widest text-blue-300 mb-2">
-            Brief Description of the Challenge
-          </label>
-
+          {/* Challenge Description */}
           <textarea
             rows={4}
-            placeholder="Describe your research challenge..."
-            className="w-full bg-transparent border border-white/30 rounded-lg px-4 py-3 text-center placeholder:text-gray-300 resize-none focus:border-white outline-none"
+            placeholder="Brief Description of the Challenge"
+            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] resize-none focus:border-[#427b9e] outline-none transition"
           ></textarea>
+
+          {/* Submit Button */}
+          <button className="w-full bg-[#D7A33B] text-[#062539] py-4 mt-2 font-bold hover:bg-[#c49231] transition flex items-center justify-center">
+            Submit Research Inquiry
+          </button>
+        </motion.div>
+
+      </div>
+    </section>
+      {/* ── FAQs ─────────────────────────────────────────────────────────── */}
+     <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+        
+        {/* Header */}
+        <div className="mb-12 sm:mb-16 text-left">
+          <span className="text-[#CA9F3B] font-bold text-xs uppercase tracking-[0.15em] mb-4 block">
+            Knowledge Base
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">
+            Frequently Asked Questions
+          </h2>
         </div>
 
-        {/* Submit Button */}
-        <div className="md:col-span-2 flex justify-center pt-2">
-          <button className="bg-white text-blue-900 px-10 py-4 rounded-lg font-bold uppercase tracking-[0.2em] hover:bg-blue-50 transition flex items-center">
-            Submit Research Inquiry
-            <ArrowRight size={18} className="ml-2" />
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  </div>
-</section>
-      {/* ── FAQs ─────────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-10 sm:py-14 lg:py-20 bg-white border-t border-slate-200">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8 sm:mb-10 lg:mb-14">
-            <span className="text-slate-500 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Knowledge Base</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900">Frequently Asked Questions</h2>
-          </div>
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
-                >
-                  <span className="font-bold text-slate-800 pr-4">{faq.q}</span>
-                  {openFaq === i
-                    ? <Minus size={18} className="text-blue-600 shrink-0" />
-                    : <Plus size={18} className="text-slate-400 shrink-0" />}
-                </button>
-                <AnimatePresence>
-                  {openFaq === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="px-6 pb-6 text-slate-600 text-sm leading-relaxed"
-                    >
+        {/* FAQ List */}
+        <div className="border-t border-[#E5E0D5]">
+          {faqs.map((faq, i) => (
+            <div key={i} className="border-b border-[#E5E0D5]">
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                className="w-full flex justify-between items-center py-6 sm:py-8 text-left focus:outline-none group"
+              >
+                <span className="font-semibold text-base text-[#084C70] pr-8 group-hover:text-[#0a5e8a] transition-colors">
+                  {faq.q}
+                </span>
+                <span className="text-[#CA9F3B] text-2xl font-light shrink-0 leading-none pb-1">
+                  {openFaq === i ? '−' : '+'}
+                </span>
+              </button>
+              
+              <AnimatePresence>
+                {openFaq === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pb-8 text-slate-600 text-base leading-relaxed pr-8">
                       {faq.a}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
         </div>
-      </section>
+
+      </div>
+    </section>
 
     </div>
   );

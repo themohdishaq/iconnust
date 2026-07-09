@@ -10,7 +10,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import Link from 'next/link';
-import { newsArticles as allNews } from '@/data/news';
+import { newsArticles as allNews, getNewsSlug } from '@/data/news';
 
 const successStories = [
   {
@@ -132,27 +132,18 @@ export default function NewsPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
-            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
+            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-8">
               <Newspaper size={14} />
               <span>News &amp; Media Center</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-white mb-6 leading-tight">
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-5xl font-serif text-white mb-6 leading-tight">
               News, Stories &amp; <span className="italic text-blue-400">Events</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-slate-300 font-light leading-relaxed mb-10">
+            <motion.p variants={fadeUp} className="text-base text-slate-300 font-light leading-relaxed mb-10">
               Stay up to date with NUST's latest technology transfer deals, spin-off milestones, research breakthroughs, and upcoming innovation events.
             </motion.p>
             {/* Search */}
-            <motion.div variants={fadeUp} className="relative max-w-lg">
-              <input
-                type="text"
-                placeholder="Search news and updates..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/10 border border-white/20 text-white placeholder-slate-400 px-5 py-4 rounded-xl outline-none focus:bg-white/15 focus:border-blue-400 transition-all pr-12"
-              />
-              <Search size={20} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
-            </motion.div>
+            
           </motion.div>
         </div>
       </section>
@@ -162,12 +153,9 @@ export default function NewsPage() {
         <section className="bg-white py-12 border-b border-slate-100">
           <div className="max-w-7xl mx-auto px-6">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-              <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
-                <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                <span>Featured Story</span>
-              </motion.div>
+              
               <motion.div variants={fadeUp} className="grid lg:grid-cols-2 gap-10 items-center">
-                <div className="relative rounded-2xl overflow-hidden h-80">
+                <div className="relative rounded-none overflow-hidden h-80">
                   <img src={featuredNews.image} alt={featuredNews.title} className="w-full h-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                   <div className="absolute top-4 left-4">
@@ -183,7 +171,7 @@ export default function NewsPage() {
                   </div>
                   <h2 className="text-3xl font-serif text-slate-900 mb-4 leading-tight">{featuredNews.title}</h2>
                   <p className="text-slate-600 leading-relaxed mb-6">{featuredNews.excerpt}</p>
-                  <Link href={`/news/${featuredNews.id}`} className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all w-fit">
+                  <Link href={`/news/${getNewsSlug(featuredNews)}`} className="flex items-center space-x-2 text-blue-900 font-black text-xs uppercase tracking-widest border-b-2 border-blue-900 pb-1 hover:text-slate-900 hover:border-slate-900 transition-all w-fit">
                     <span>Read Full Story</span>
                     <ArrowRight size={14} />
                   </Link>
@@ -222,7 +210,7 @@ export default function NewsPage() {
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((news) => (
                 <motion.div key={news.id} variants={fadeUp}>
-                  <Link href={`/news/${news.id}`}
+                  <Link href={`/news/${getNewsSlug(news)}`}
                     className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col h-full">
                     <div className="relative h-48 overflow-hidden">
                       <img src={news.image} alt={news.title}

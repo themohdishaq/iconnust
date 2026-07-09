@@ -1,21 +1,21 @@
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { newsArticles, getNewsById } from '@/data/news';
+import { newsArticles, getNewsBySlug, getNewsSlug } from '@/data/news';
 
 export function generateStaticParams() {
-  return newsArticles.map((news) => ({ id: news.id }));
+  return newsArticles.map((news) => ({ slug: getNewsSlug(news) }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const news = getNewsById(id);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const news = getNewsBySlug(slug);
   return { title: news ? `${news.title} | ICON-NUST News` : 'News | ICON-NUST' };
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const news = getNewsById(id);
+export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const news = getNewsBySlug(slug);
 
   if (!news) notFound();
 
@@ -63,7 +63,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
             <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-6 block">More News</span>
             <div className="grid sm:grid-cols-2 gap-8">
               {otherNews.map((n) => (
-                <Link key={n.id} href={`/news/${n.id}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <Link key={n.id} href={`/news/${getNewsSlug(n)}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={n.image} alt={n.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>

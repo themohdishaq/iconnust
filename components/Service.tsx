@@ -79,9 +79,9 @@ function ServiceRow({
   const isEven = index % 2 === 0;
 
   return (
-    <div className="relative py-10 sm:py-16">
+    <div className="relative py-4  ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
-        <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-6 lg:gap-0 items-center">
+        <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-4 lg:gap-0 items-center">
 
           {/* ── Text side ── */}
           <motion.div
@@ -93,22 +93,22 @@ function ServiceRow({
           >
             {/* overline */}
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-blue-400 font-bold text-[10px] uppercase tracking-[0.35em]">
+              <span className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.35em]">
                 {service.tagline}
               </span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-white mb-4 leading-tight tracking-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl  font-serif text-white mb-4 leading-tight tracking-tight">
               {service.title}
             </h3>
 
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md">
+            <p className="text-white text-sm  leading-relaxed mb-6 sm:mb-8 max-w-md">
               {service.desc}
             </p>
 
             <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 lg:mb-10">
               {service.bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-slate-300">
+                <li key={i} className="flex items-start gap-3 text-sm text-white">
                   <CheckCircle2 size={14} className="text-blue-400 mt-0.5 shrink-0" />
                   {b}
                 </li>
@@ -159,7 +159,7 @@ function ServiceRow({
             transition={{ duration: 0.7, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
             className={`px-2 sm:px-4 lg:px-10 ${isEven ? 'lg:order-3' : 'lg:order-1'}`}
           >
-            <div className="relative overflow-hidden rounded-2xl h-[220px] sm:h-[300px] lg:h-[380px] xl:h-[440px] group">
+            <div className="relative overflow-hidden rounded-md h-[220px] sm:h-[300px] lg:h-[380px] xl:h-[440px] group">
               <img
                 src={service.img}
                 alt={service.title}
@@ -229,13 +229,10 @@ const IndustryServicesPortal = () => {
           className="max-w-3xl mx-auto px-4 sm:px-6"
         >
           
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-serif text-white mb-5 leading-tight tracking-tight">
-            Industrial{' '}
-            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-              Services
-            </span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl   text-white mb-5 leading-tight tracking-tight">
+            Industrial Services
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base lg:text-lg leading-relaxed font-light">
+          <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-light">
             Four key avenues designed to seamlessly integrate NUST's world-class research
             excellence, faculty expertise, and infrastructure with your corporate R&D needs.
           </p>
@@ -283,8 +280,8 @@ const IndustryServicesPortal = () => {
         ))}
       </div>
 
-      {/* bottom fade to white */}
-      <div className="h-16 bg-gradient-to-b from-transparent to-slate-50 relative z-10" />
+      {/* bottom fade to white
+      <div className="h-16 bg-gradient-to-b from-transparent to-slate-50 relative z-10" /> */}
     </div>
   );
 };

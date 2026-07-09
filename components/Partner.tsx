@@ -18,7 +18,7 @@ const partners = [
   { name: "Huawei Technologies", logo: "Huawei Technologies.png" },
   { name: "Interactive Group", logo: "Interactive Group.jpg" },
   { name: "Crescent Steel & Allied Products Limited", logo: "Crescent Steel & Allied Products Limited.png" },
-  { name: "Graana.com", logo: "Graana.com.png" },
+  { name: "Graana.com", logo: "Graana.png" },
   { name: "Khushhali Microfinance Bank", logo: "Khushhali Microfinance Bank.png" },
   { name: "Pakistan Telecommunication Authority (PTA)", logo: "Pakistan Telecommunication Authority (PTA).png" },
   { name: "Allied Bank", logo: "Allied Bank logo.png" },
@@ -165,7 +165,7 @@ export default function PartnersSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-slate-50 py-14 lg:py-20"
+      className="relative overflow-hidden bg-slate-50 py-14 "
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 text-center">
@@ -173,9 +173,9 @@ export default function PartnersSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-4xl lg:text-5xl font-serif text-slate-900"
+            className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3"
           >
-            Our <span className="italic text-blue-900">Partners</span>
+            Our Partners
           </motion.h2>
         </div>
 

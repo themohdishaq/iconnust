@@ -49,19 +49,19 @@ function Navbar() {
       </div>
 
       {/* Main Navigation */}
-      <nav className={`fixed  w-full z-50 py-0 mt-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'}`}>
+      <nav className={`fixed  w-full z-50 py-0 sm:py-2 mt-0 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'}`}>
         <div className="max-w-8xl mx-auto px-6 flex justify-between items-center relative">
           <Link href="/" className="flex items-center">
             <Image src="/icon-logo.png" alt="ICON Logo" width={200} height={100} className="rounded-sm" />
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center  space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-[12px] uppercase tracking-widest font-black transition-colors py-4 block border-b-2 text-slate-600 border-transparent hover:text-blue-900"
+                className="text-sm uppercase tracking-widest font-black transition-colors py-4 block border-b-2 text-slate-600 border-transparent hover:text-blue-900"
               >
                 {link.name}
               </Link>
@@ -92,9 +92,7 @@ function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <button className="bg-blue-900 text-white px-5 py-4 font-black uppercase tracking-widest text-sm mt-4 w-full">
-                Portal Login
-              </button>
+             
             </div>
           </div>
         )}

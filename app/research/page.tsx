@@ -174,18 +174,18 @@ const RndPortal = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-3xl">
-            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
+            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2">
               <Activity size={14} />
               <span>ICON Innovation & Collaboration</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-5xl lg:text-7xl font-serif text-white mb-8 leading-[1.1]">
-              Transform Your Invention into <span className="italic text-[#00558F]">Global Impact</span>
+            <motion.h1 variants={fadeUp} className="text-5xl font-serif text-white my-4 leading-[1.1]">
+              Transform Your Invention into <div className=" sm:py-4 text-[#C9962A]">Global Impact</div>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-xl text-slate-300 leading-relaxed mb-12 font-light">
+            <motion.p variants={fadeUp} className="text-lg text-slate-300 leading-relaxed mb-12 font-light">
               We help you legally protect your innovations. Drive breakthrough research through seamless IP filing,multi-disciplinary research clusters with industry partners to co-create solutions and maximizing your potential to change the world tomorrow.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-              <button className="bg-[#00558F] text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em]  transition-colors shadow-lg shadow-blue-900/50">
+              <button className="bg-[#C9962A] text-[#0A2A40] px-8 py-4 font-black text-xs uppercase tracking-[0.2em]  transition-colors shadow-lg shadow-blue-900/50">
                 Propose a Collaboration
               </button>
               
@@ -199,32 +199,85 @@ const RndPortal = () => {
 
       {/* Analytics Dashboard (Charts & Graphs) */}
       
-      <section id="our-impact" className="py-20 bg-white">
+      <section id="our-impact" className="py-8 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-        
-           <div className="mb-16">
-            <h2 className="text-3xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
+          <div className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
+            By the Numbers
+          </div>
+           <div className="mb-8">
+            <h2 className="text-3xl sm:text-4xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
             <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
           </div>
- 
+        <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden">
+        {[
+  {
+    value: "1,360+",
+    label: "IP Filings",
+    bg: "bg-[#0A2D4A]",
+  },
+  {
+    value: "310",
+    label: "IPRs Awarded",
+    bg: "bg-[#0E5E97]",
+  },
+  {
+    value: "43",
+    label: "Total Patents",
+    bg: "bg-[#0A2D4A]",
+  },
+].map((stat, index) => (
+          <div
+            key={index}
+            className={`
+              ${stat.bg}
+              flex flex-col items-center justify-center
+              h-36 sm:h-40 md:h-44
+              border-b sm:border-b-0
+              sm:border-r
+              last:sm:border-r-0
+              border-white/20
+              transition-colors duration-300
+              hover:brightness-110
+            `}
+          >
+            <h2
+              className="
+                text-[#D4A017]
+                font-serif
+                font-semibold
+                text-3xl
+                md:text-4xl
+                leading-none
+              "
+            >
+              {stat.value}
+            </h2>
+
+            <p
+              className="
+                mt-3
+                text-white
+                text-[10px]
+                sm:text-[10px]
+                uppercase
+                tracking-[0.2em]
+                font-medium
+              "
+            >
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           {/* LEFT: Stats + Donut */}
           <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
             {/* Stat callouts */}
-            <div className="flex flex-wrap gap-x-16 gap-y-6 mb-10">
-              <div>
-                <div className="text-5xl font-black text-red-600 leading-none mb-2">1,360+</div>
-                <div className="text-sm font-semibold text-slate-800">IP Filings</div>
-              </div>
-              <div>
-                <div className="text-5xl font-black text-red-600 leading-none mb-2">260</div>
-                <div className="text-sm font-semibold text-slate-800">IPRs Awarded</div>
-              </div>
-            </div>
+           
  
             {/* Donut chart + legend */}
             <div className="flex flex-col sm:flex-row items-center gap-8">
-              <div className="relative w-[260px] h-[260px] shrink-0">
+              <div className="relative w-[260px] m-4 h-[260px] shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -251,13 +304,7 @@ const RndPortal = () => {
                     />
                   </PieChart>
                 </ResponsiveContainer>
-                {/* Center total */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-3xl font-black text-slate-900">{totalPatents}</span>
-                  <span className="text-[10px] font-semibold text-slate-500 text-center leading-tight">
-                    Total Patents
-                  </span>
-                </div>
+                
               </div>
  
               {/* Legend */}
@@ -283,7 +330,7 @@ const RndPortal = () => {
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="bg-white border border-slate-200 rounded-lg shadow-lg p-6"
+            className="bg-white p-6"
           >
             <h3 className="text-sm font-semibold text-slate-800 mb-2">
               NIPO - IP Rights Awarded Summary (2019-2025)
@@ -347,11 +394,11 @@ const RndPortal = () => {
     </section>
 
       {/* Media & Video Hub */}
-      <section id="media-hub" className="py-24 bg-slate-50">
+      <section id="media-hub" className="py-8 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
+              <span className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
               <h2 className="text-4xl font-serif text-slate-900">ICON in Action</h2>
             </div>
             <a href="https://www.youtube.com/@Research_NUST" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center space-x-2 text-blue-900 font-bold text-xs uppercase tracking-widest hover:underline">
@@ -362,7 +409,7 @@ const RndPortal = () => {
           <div className="grid lg:grid-cols-12 gap-8">
             {/* Main Featured Video */}
             <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={slideInLeft} className="lg:col-span-8">
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-black">
+              <div className="relative rounded-md overflow-hidden shadow-2xl bg-black">
                 <iframe
                   width="100%"
                   height="500"
@@ -441,47 +488,62 @@ const RndPortal = () => {
             ))}
           </motion.div>
         </div>
-      </section> */}
+      </section> */} 
 
       {/* Engagement CTA */}
-      <section id="initiate-project" className="py-16 bg-[#00558f] text-white relative overflow-hidden">
+      <section id="initiate-project" className="py-16 bg-[#062539] text-white relative overflow-hidden max-w-7xl">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
-        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <h2 className="text-5xl font-serif mb-6 leading-tight">Ready to solve your industry bottleneck?</h2>
-            <p className="text-xl text-blue-200 font-light mb-12 max-w-2xl mx-auto">
-              Initiate a sponsored research project today. Our dedicated program managers will match your challenge with the right faculty experts and laboratory infrastructure.
-            </p>
-            <div className="bg-white/10 backdrop-blur-xl p-8 rounded-2xl border border-white/20 text-left grid md:grid-cols-2 gap-6">
-              <div className="flex flex-col space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Company Name</label>
-                <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
+              {/* Left: heading */}
+              <div>
+                <h2 className="text-4xl  font-serif mb-4 md:mb-6 leading-tight">Ready to solve your industry bottleneck?</h2>
+                <p className="text-md  text-blue-200 font-light mb-6 md:mb-12 max-w-xl mx-auto md:mx-0">
+                  Initiate a sponsored research project today. Our dedicated program managers will match your challenge with the right faculty experts and laboratory infrastructure.
+                </p>
               </div>
-               <div className="flex flex-col space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Email</label>
-                <input type="text" className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
-              </div>
-              <div className="flex flex-col space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Technical Domain</label>
-                <select className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors appearance-none text-white">
-                  <option className="text-slate-900">Select Area of Interest...</option>
-                  <option className="text-slate-900">Manufacturing & Automation</option>
-                  <option className="text-slate-900">Material Sciences</option>
-                  <option className="text-slate-900">Software & AI</option>
-                </select>
-              </div>
-              <div className="md:col-span-2 flex flex-col space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-blue-300">Brief Description of the Challenge</label>
-                <textarea rows={3} className="bg-transparent border-b border-white/30 py-2 focus:border-white outline-none transition-colors resize-none"></textarea>
-              </div>
-              <div className="md:col-span-2 pt-4">
-                <button className="w-full bg-white text-blue-900 py-4 font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-50 transition-colors flex items-center justify-center">
-                  Submit Research Inquiry <ArrowRight size={16} className="ml-2" />
-                </button>
+
+              {/* Right: form */}
+              <div>
+                <form onSubmit={(e) => e.preventDefault()} className=" md:p-8 rounded-none   text-left">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                      <label htmlFor="company" className="text-[10px] font-black uppercase tracking-widest text-blue-300">Company Name</label>
+                      <input id="company" name="company" type="text" placeholder="Acme Corp" className="mt-2 bg-transparent text-white placeholder:text-blue-200 border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
+                    </div>
+
+                    <div className="flex flex-col">
+                      <label htmlFor="email" className="text-[10px] font-black uppercase tracking-widest text-blue-300">Email</label>
+                      <input id="email" name="email" type="email" placeholder="name@company.com" className="mt-2 bg-transparent text-white placeholder:text-blue-200 border-b border-white/30 py-2 focus:border-white outline-none transition-colors" />
+                    </div>
+
+                    <div className="flex flex-col md:col-span-2">
+                      <label htmlFor="domain" className="text-[10px] font-black uppercase tracking-widest text-blue-300">Technical Domain</label>
+                      <select id="domain" name="domain" className="mt-2 bg-transparent text-white border-b border-white/30 py-2 focus:border-white outline-none transition-colors appearance-none">
+                        <option value="" disabled selected className="text-slate-900">Select Area of Interest...</option>
+                        <option value="manufacturing">Manufacturing & Automation</option>
+                        <option value="materials">Material Sciences</option>
+                        <option value="software">Software & AI</option>
+                      </select>
+                    </div>
+
+                    <div className="flex flex-col md:col-span-2">
+                      <label htmlFor="challenge" className="text-[10px] font-black uppercase tracking-widest text-blue-300">Brief Description of the Challenge</label>
+                      <textarea id="challenge" name="challenge" rows={3} placeholder="Describe your challenge..." className="mt-2 bg-transparent text-white placeholder:text-blue-200 border-b border-white/30 py-2 focus:border-white outline-none transition-colors resize-none"></textarea>
+                    </div>
+
+                    <div className="md:col-span-2  pt-2">
+                      <button type="submit" className="w-full py-3 bg-[#C9962A] text-[#0A2A40] md:py-4 font-black text-sm uppercase tracking-[0.12em] hover:bg-blue-50 transition-colors flex items-center justify-center">
+                        Submit Research Inquiry <ArrowRight size={16} className="ml-2" />
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </section>
 
     

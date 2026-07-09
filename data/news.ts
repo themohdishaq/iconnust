@@ -67,6 +67,18 @@ export const newsArticles: NewsArticle[] = [
   },
 ];
 
-export function getNewsById(id: string): NewsArticle | undefined {
-  return newsArticles.find((n) => n.id === id);
+export function slugify(title: string): string {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+export function getNewsSlug(news: NewsArticle): string {
+  return slugify(news.title);
+}
+
+export function getNewsBySlug(slug: string): NewsArticle | undefined {
+  return newsArticles.find((n) => getNewsSlug(n) === slug);
 }

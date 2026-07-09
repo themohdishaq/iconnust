@@ -106,7 +106,7 @@ export default function TeamPage() {
     <div className="min-h-screen bg-white text-slate-900 font-sans">
 
       {/* Hero */}
-      <section className="relative pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-24 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800 overflow-hidden">
+      <section className="relative py-8 pt-20 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-20 right-20 w-80 h-80 rounded-full border border-blue-500/10" />
           <div className="absolute top-40 right-40 w-52 h-52 rounded-full border border-blue-500/10" />
@@ -114,14 +114,14 @@ export default function TeamPage() {
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
-            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
+            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-8">
               <Users size={14} />
               <span>ICON Team &amp; Organization</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-serif text-white mb-5 leading-tight">
-              The People Behind <span className="italic text-blue-400">ICON</span>
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl  font-serif text-white mb-5 leading-tight">
+              The People Behind <span className=" text-blue-400">ICON</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
+            <motion.p variants={fadeUp} className="text-sm sm:text-base  text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON — the Innovation &amp; Commercialization Network at NUST — is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
             </motion.p>
             
@@ -132,7 +132,7 @@ export default function TeamPage() {
       </section>
 
       {/* About ICON */}
-      <section className="py-10 sm:py-14 lg:py-20 bg-slate-50">
+      <section className="py-10  bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
@@ -169,8 +169,6 @@ export default function TeamPage() {
           </motion.div>
         </div>
       </section>
-
-
       {/* Leadership */}
       <section id="leadership" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -263,97 +261,7 @@ export default function TeamPage() {
         </div>
       </section> */}
 
-      {/* Contact */}
-      <section id="contact" className="py-10 sm:py-14 lg:py-20 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10 lg:mb-14">
-              <span className="text-blue-400 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Engage with ICON</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-white">Contact &amp; Partnerships</h2>
-            </motion.div>
-
-            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 xl:gap-16">
-              {/* Contact Info */}
-              <motion.div variants={slideLeft} className="space-y-8">
-                <div>
-                  <h3 className="text-2xl font-serif mb-6">Reach Us Directly</h3>
-                  <div className="space-y-5">
-                    {[
-                      { icon: <MapPin size={20} />, label: 'Main Office', val: 'Scholar House, Sector H-12, Islamabad, Pakistan' },
-                      { icon: <Mail size={20} />, label: 'General Inquiries', val: 'icon@nust.edu.pk' },
-                      { icon: <Phone size={20} />, label: 'Phone', val: '+92 51 9085 1000' },
-                      { icon: <Clock size={20} />, label: 'Office Hours', val: 'Monday – Friday · 9:00 AM – 5:00 PM PKT' },
-                    ].map((c, i) => (
-                      <div key={i} className="flex items-start space-x-4">
-                        <div className="w-10 h-10 bg-blue-900/40 border border-blue-700/30 rounded-xl flex items-center justify-center text-blue-400 shrink-0">{c.icon}</div>
-                        <div>
-                          <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-0.5">{c.label}</div>
-                          <div className="text-white font-medium">{c.val}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="border-t border-white/10 pt-8">
-                  <h4 className="font-bold mb-4 text-slate-300">Specialist Contacts</h4>
-                  <div className="space-y-3">
-                    {[
-                      { unit: 'TTO — Licensing', email: 'tto@nust.edu.pk' },
-                      { unit: 'NIPO — IP Office', email: 'nipo@nust.edu.pk' },
-                      { unit: 'PDC — Training', email: 'pdc@nust.edu.pk' },
-                      { unit: 'R&D Directorate', email: 'research@nust.edu.pk' },
-                    ].map((c, i) => (
-                      <div key={i} className="flex items-center justify-between text-sm border-b border-white/5 pb-3">
-                        <span className="text-slate-400 font-bold">{c.unit}</span>
-                        <a href={`mailto:${c.email}`} className="text-blue-400 hover:text-white transition-colors flex items-center gap-1">
-                          <Mail size={12} /> {c.email}
-                        </a>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Contact Form */}
-              <motion.div variants={fadeUp} className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 lg:p-8">
-                <h3 className="text-2xl font-serif mb-6">Initiate a Partnership</h3>
-                <form className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Organization</label>
-                      <input type="text" className="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 px-4 py-3 rounded-xl outline-none focus:border-blue-400 transition-colors" />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Professional Email</label>
-                      <input type="email" className="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 px-4 py-3 rounded-xl outline-none focus:border-blue-400 transition-colors" />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Inquiry Type</label>
-                    <select className="w-full bg-white/10 border border-white/20 text-white px-4 py-3 rounded-xl outline-none focus:border-blue-400 transition-colors appearance-none">
-                      <option className="text-slate-900">Technology Licensing</option>
-                      <option className="text-slate-900">Sponsored R&D</option>
-                      <option className="text-slate-900">Corporate Training (PDC)</option>
-                      <option className="text-slate-900">Expert Consultancy</option>
-                      <option className="text-slate-900">Incubation / Funding</option>
-                      <option className="text-slate-900">General Partnership</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Message</label>
-                    <textarea rows={4} className="w-full bg-white/10 border border-white/20 text-white placeholder-slate-500 px-4 py-3 rounded-xl outline-none focus:border-blue-400 transition-colors resize-none" />
-                  </div>
-                  <button type="button" className="w-full bg-blue-600 text-white py-4 font-black text-xs uppercase tracking-widest rounded-xl hover:bg-blue-500 transition-colors flex items-center justify-center space-x-2 shadow-lg">
-                    <Send size={16} />
-                    <span>Submit Engagement Request</span>
-                  </button>
-                </form>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* Leader Profile Modal */}
       <AnimatePresence>
