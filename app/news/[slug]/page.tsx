@@ -1,25 +1,26 @@
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { newsArticles, getNewsBySlug, getNewsSlug } from '@/data/news';
+import { connectDB } from '@/lib/db';
+import News from '@/lib/models/News';
 
-export function generateStaticParams() {
-  return newsArticles.map((news) => ({ slug: getNewsSlug(news) }));
-}
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const news = getNewsBySlug(slug);
+  await connectDB();
+  const news = await News.findOne({ slug }).lean();
   return { title: news ? `${news.title} | ICON-NUST News` : 'News | ICON-NUST' };
 }
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const news = getNewsBySlug(slug);
+  await connectDB();
 
+  const news = await News.findOne({ slug }).lean();
   if (!news) notFound();
 
-  const otherNews = newsArticles.filter((n) => n.id !== news.id).slice(0, 2);
+  const otherNews = await News.find({ _id: { $ne: news._id } }).sort({ createdAt: -1 }).limit(2).lean();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
@@ -48,7 +49,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             <img src={news.image} alt={news.title} className="w-full h-full object-cover" />
           </div>
           <div className="space-y-6">
-            {news.content.map((paragraph, i) => (
+            {news.content.map((paragraph: string, i: number) => (
               <p key={i} className="text-slate-700 text-lg leading-relaxed">
                 {paragraph}
               </p>
@@ -63,7 +64,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-6 block">More News</span>
             <div className="grid sm:grid-cols-2 gap-8">
               {otherNews.map((n) => (
-                <Link key={n.id} href={`/news/${getNewsSlug(n)}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <Link key={n._id.toString()} href={`/news/${n.slug}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={n.image} alt={n.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>

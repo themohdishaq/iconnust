@@ -21,7 +21,16 @@ import {
 import IndustryServicesPortal from '@/components/Service';
 import PartnersSection from '@/components/Partner';
 import Link from 'next/link';
-import { newsArticles, getNewsSlug } from '@/data/news';
+import { useInquiryForm } from '@/lib/useInquiryForm';
+
+type HomeNewsItem = {
+  id: string;
+  slug: string;
+  category: string;
+  title: string;
+  excerpt: string;
+  image: string;
+};
 
 const AnimatedStatValue = ({ value }: { value: number }) => {
   const motionValue = useMotionValue(0);
@@ -43,6 +52,8 @@ const AnimatedStatValue = ({ value }: { value: number }) => {
 
 const App = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [newsArticles, setNewsArticles] = useState<HomeNewsItem[]>([]);
+  const { values, setField, status, error, handleSubmit } = useInquiryForm('home');
   const targetStats = {
     partners: 900,
     projects: 1360,
@@ -57,6 +68,13 @@ const App = () => {
     }, 6000);
 
     return () => clearInterval(slideInterval);
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/news?limit=3')
+      .then((res) => res.json())
+      .then((data: HomeNewsItem[]) => setNewsArticles(data))
+      .catch(() => setNewsArticles([]));
   }, []);
 
   const heroSlides = [
@@ -140,7 +158,7 @@ const App = () => {
                   </div>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl   font-tahoma-font font-medium text-slate-900 leading-[1.02] mb-5 sm:mb-8 tracking-tight">
                     {slide.titleLine1} <br />
-                    <span className=" icon-brand-font drop-shadow-sm">{slide.highlight}</span> <br />
+                    <span className=" icon-brand-font font-tahoma-font drop-shadow-sm">{slide.highlight}</span> <br />
                     {slide.titleLine2}
                   </h1>
                   {/* <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl font-light">
@@ -212,7 +230,7 @@ const App = () => {
                     
                     <div className="relative z-10 flex flex-col items-center justify-center">
                       <div className="flex items-baseline justify-center space-x-1 mb-1">
-                        <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-tahoma icon-brand-font-secondary transition-colors">
+                        <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-tahoma-font icon-brand-font-secondary transition-colors">
                           <AnimatedStatValue value={stat.value} />
                         </div>
                         <span className="text-xl font-serif icon-brand-font-secondary font-bold">+</span>
@@ -281,7 +299,7 @@ const App = () => {
                 placeholder="Work Email"
                 className="flex-grow bg-slate-50 border border-slate-300 px-2 py-2 sm:py-3 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900 text-sm sm:text-base"
               />
-              <button className="bg-[#FCAF17] text-white hover:text-[#0A2A40] px-7 py-3 sm:py-4 font-black text-xs uppercase tracking-widest cursor-pointer  transition-all rounded-sm shadow-lg whitespace-nowrap">Subscribe</button>
+              <button className="bg-[#FCAF17] text-white] text-white px-6 py-3 font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">Subscribe</button>
             </div>
           </div>
         </div>
@@ -333,7 +351,8 @@ const App = () => {
         <div className="w-12 h-px bg-[#C9962A]" />
         <span>Latest Updates</span>
       </div>
-
+      <div className="flex items-center justify-between mb-6 sm:mb-8 lg:mb-10">
+        <div>
       <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">
         News & Success Stories
       </h2>
@@ -342,13 +361,21 @@ const App = () => {
         Discover the latest developments, success stories, and upcoming
         events from ICON-NUST.
       </p>
+      </div>
+      <button className="bg-[#FCAF17] text-white font-black text-[10px] uppercase tracking-widest hover:bg-blue-800 border border-blue-700 transition-colors">
+        <Link href="/news" className="flex items-center space-x-2 px-6 py-3 ">
+        View all news
+        </Link>
+      </button>
+      </div>
+      
     </div>
 
     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
       {newsArticles.map((news) => (
         <Link
           key={news.id}
-          href={`/news/${getNewsSlug(news)}`}
+          href={`/news/${news.slug}`}
           className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
         >
           <div className="relative h-48 overflow-hidden">
@@ -418,39 +445,63 @@ const App = () => {
                   <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 shrink-0"><Users size={20} /></div>
                   <div>
                     <h4 className="font-black text-[11px] uppercase tracking-widest text-slate-400 mb-1">Direct Outreach</h4>
-                    <p className="text-slate-900 font-medium">info@icon.nust.edu.pk | +92 51 9085 1000</p>
+                    <a href="mailto:info@icon.nust.edu.pk" className="text-slate-900 font-medium hover:text-blue-900 transition-all">
+                      info@icon.nust.edu.pk
+                    </a>
+                    
                   </div>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-7 bg-slate-50 p-5 sm:p-8 lg:p-12 xl:p-14 rounded-sm">
-              <form className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+              <form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                <input
+                  type="text"
+                  value={values.website}
+                  onChange={setField('website')}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute w-px h-px overflow-hidden opacity-0"
+                  style={{ clip: 'rect(0,0,0,0)' }}
+                />
                 <div className="flex flex-col space-y-2 group">
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">Organization</label>
-                  <input type="text" className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none" />
+                  <input type="text" required value={values.organization} onChange={setField('organization')} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none" />
                 </div>
                 <div className="flex flex-col space-y-2 group">
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">Professional Email</label>
-                  <input type="email" className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none" />
+                  <input type="email" required value={values.email} onChange={setField('email')} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none" />
                 </div>
                 <div className="sm:col-span-2 flex flex-col space-y-2 group">
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">Inquiry Nature</label>
-                  <select className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none appearance-none">
-                    <option>Technology Licensing</option>
-                    <option>Sponsored R&D</option>
-                    <option>Invention Disclosure</option>
-                    <option>Lab Services Request</option>
+                  <select value={values.domain} onChange={setField('domain')} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none appearance-none">
+                    <option value="">Select Inquiry Nature...</option>
+                    <option value="Technology Licensing">Technology Licensing</option>
+                    <option value="Sponsored R&D">Sponsored R&D</option>
+                    <option value="Invention Disclosure">Invention Disclosure</option>
+                    <option value="Lab Services Request">Lab Services Request</option>
                   </select>
                 </div>
                 <div className="sm:col-span-2 flex flex-col space-y-2 group">
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">Message</label>
-                  <textarea rows={4} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none resize-none"></textarea>
+                  <textarea rows={4} value={values.message} onChange={setField('message')} className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none resize-none"></textarea>
                 </div>
-                <div className="sm:col-span-2 pt-4 sm:pt-6">
-                  <button className="w-full bg-[#FCAF17] text-[#0A2A40] py-4 font-black text-xs uppercase tracking-[0.2em]  transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group">
-                    <span>Submit Engagement Request</span>
-                    <Send size={16} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+                {status === 'success' && (
+                  <div className="sm:col-span-2 text-emerald-700 text-sm font-medium bg-emerald-50 border border-emerald-100 rounded-lg px-4 py-3">
+                    Thank you — your inquiry has been received. Our team will be in touch shortly.
+                  </div>
+                )}
+                {status === 'error' && (
+                  <div className="sm:col-span-2 text-red-600 text-sm font-medium bg-red-50 border border-red-100 rounded-lg px-4 py-3">
+                    {error}
+                  </div>
+                )}
+                <div className="sm:col-span-2 pt-4 sm:pt-6 ">
+                  <button type="submit" disabled={status === 'submitting'} className="w-full bg-[#FCAF17] cursor-pointer text-[#0A2A40] py-4 font-black text-xs uppercase tracking-[0.2em]  transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group disabled:opacity-60">
+                    <span>{status === 'submitting' ? 'Submitting…' : 'Submit Engagement Request'}</span>
+                    <Send size={16}/>
                   </button>
                 </div>
               </form>

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteChrome from "@/components/SiteChrome";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -31,10 +30,8 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full w-full flex flex-col" >
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-full w-full flex flex-col">
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

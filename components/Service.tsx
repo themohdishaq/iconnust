@@ -220,7 +220,7 @@ const IndustryServicesPortal = () => {
       />
 
       {/* ── Section header ── */}
-      <div className="relative z-10 pt-8 pb-4 text-center">
+      <div className="relative z-10  py-2 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -229,7 +229,7 @@ const IndustryServicesPortal = () => {
           className="max-w-3xl mx-auto px-4 sm:px-6"
         >
           
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl   text-white mb-5 leading-tight tracking-tight">
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl   text-white mb-3 leading-tight tracking-tight">
             Industrial Services
           </h2>
           <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-light">
@@ -243,7 +243,7 @@ const IndustryServicesPortal = () => {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mx-auto mt-10 h-px w-48 origin-center bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
+          className="mx-auto mt-4 h-px w-48 origin-center bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
         />
       </div>
 

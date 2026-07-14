@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileText, ShieldCheck, Lightbulb, Briefcase,
@@ -132,14 +132,7 @@ const iconSupport: Record<string, string[]> = {
   '9':   ['License execution', 'Revenue sharing', 'Export & international licensing'],
 };
 
-const techPortfolio = [
-  { title: 'Graphene-based Water Filtration', domain: 'Materials Science', status: 'Ready for Licensing', trl: 'TRL 7' },
-  { title: 'Autonomous Swarm Navigation Algorithm', domain: 'AI & Robotics', status: 'Prototype Available', trl: 'TRL 5' },
-  { title: 'Biodegradable Smart Polymers', domain: 'Biotech', status: 'Ready for Licensing', trl: 'TRL 8' },
-  { title: 'Quantum Grid Load Optimizer', domain: 'Energy', status: 'Pilot Tested', trl: 'TRL 6' },
-  { title: 'EMG-Controlled Prosthetic Gripper', domain: 'MedTech', status: 'Ready for Licensing', trl: 'TRL 7' },
-  { title: 'AI Early-Crop Disease Detector', domain: 'AgriTech', status: 'Prototype Available', trl: 'TRL 5' },
-];
+type PublishedTech = { id: string; title: string; domain: string; status: string; trl: string };
 
 const faqs = [
   {
@@ -201,44 +194,76 @@ const emptyIdf = {
   fundingSource: '',
   priorDisclosure: 'no',
   priorDisclosureDetails: '',
+  website: '', // honeypot — must stay empty
 };
 
 // ── PAGE ──────────────────────────────────────────────────────────────
+
+const emptyQuickForm = {
+  inquiryType: 'disclosure',
+  name: '',
+  email: '',
+  phone: '',
+  title: '',
+  description: '',
+  website: '', // honeypot — must stay empty
+};
 
 export default function CommercializationPathwaysPage() {
   const [activePathway, setActivePathway] = useState('licensing');
   const [activeTrl, setActiveTrl]         = useState('3');
   const [openFaq, setOpenFaq]             = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    inquiryType: 'disclosure',
-    name: '',
-    email: '',
-    phone: '',
-    title: '',
-    description: ''
-  });
+  const [formData, setFormData] = useState(emptyQuickForm);
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formError, setFormError] = useState('');
 
   // ── IDF modal state ──
   const [idfModalOpen, setIdfModalOpen] = useState(false);
   const [idfData, setIdfData] = useState(emptyIdf);
+  const [idfStatus, setIdfStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [idfError, setIdfError] = useState('');
+
+  // ── Published (approved) technologies for "Available for Commercialization" ──
+  const [techPortfolio, setTechPortfolio] = useState<PublishedTech[]>([]);
+
+  useEffect(() => {
+    fetch('/api/invention-disclosures')
+      .then((res) => res.json())
+      .then((data: PublishedTech[]) => setTechPortfolio(data))
+      .catch(() => setTechPortfolio([]));
+  }, []);
 
   const pathway = pathways.find((p) => p.id === activePathway)!;
   const c       = colorMap[pathway.color];
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      inquiryType: 'disclosure',
-      name: '',
-      email: '',
-      phone: '',
-      title: '',
-      description: ''
-    });
-    alert('Thank you for your submission! We will get back to you soon.');
+    setFormStatus('submitting');
+    setFormError('');
+    try {
+      const res = await fetch('/api/invention-disclosures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'quick-form',
+          inventionTitle: formData.title,
+          contactEmail: formData.email,
+          contactPhone: formData.phone,
+          inventorNames: formData.name,
+          description: formData.description,
+          website: formData.website,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+      setFormStatus('success');
+      setFormData(emptyQuickForm);
+    } catch (err) {
+      setFormStatus('error');
+      setFormError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -249,11 +274,16 @@ export default function CommercializationPathwaysPage() {
   // Opens the IDF modal, pre-filling title/domain from the selected tech card.
   const openIdfModal = (tech: { title: string; domain: string }) => {
     setIdfData({ ...emptyIdf, inventionTitle: tech.title, domain: tech.domain });
+    setIdfStatus('idle');
+    setIdfError('');
     setIdfModalOpen(true);
   };
 
   const closeIdfModal = () => {
     setIdfModalOpen(false);
+    setIdfData(emptyIdf);
+    setIdfStatus('idle');
+    setIdfError('');
   };
 
   const handleIdfChange = (
@@ -263,12 +293,42 @@ export default function CommercializationPathwaysPage() {
     setIdfData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleIdfSubmit = (e: React.FormEvent) => {
+  const handleIdfSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Invention Disclosure submitted:', idfData);
-    alert('Thank you — your Invention Disclosure has been submitted. ICON will follow up by email.');
-    setIdfModalOpen(false);
-    setIdfData(emptyIdf);
+    setIdfStatus('submitting');
+    setIdfError('');
+    try {
+      const res = await fetch('/api/invention-disclosures', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          source: 'idf-modal',
+          inventionTitle: idfData.inventionTitle,
+          domain: idfData.domain,
+          inventorNames: idfData.inventorNames,
+          department: idfData.department,
+          studentOrEmployeeId: idfData.studentOrEmployeeId,
+          contactEmail: idfData.email,
+          contactPhone: idfData.phone,
+          conceptionDate: idfData.conceptionDate,
+          description: idfData.description,
+          novelty: idfData.novelty,
+          applications: idfData.applications,
+          fundingSource: idfData.fundingSource,
+          priorDisclosure: idfData.priorDisclosure,
+          priorDisclosureDetails: idfData.priorDisclosureDetails,
+          website: idfData.website,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Something went wrong. Please try again.');
+      }
+      setIdfStatus('success');
+    } catch (err) {
+      setIdfStatus('error');
+      setIdfError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -399,10 +459,16 @@ export default function CommercializationPathwaysPage() {
             </button>
           </div>
 
+          {techPortfolio.length === 0 && (
+            <p className="text-slate-400 text-sm py-8">
+              No technologies are published yet — approved invention disclosures will appear here.
+            </p>
+          )}
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {techPortfolio.map((tech, i) => (
               <motion.div
-                key={i}
+                key={tech.id}
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: i * 0.07 }}
                 className="bg-white rounded-none border border-slate-100 shadow-sm p-7 hover:shadow-xl transition-shadow group flex flex-col justify-between"
@@ -438,11 +504,21 @@ export default function CommercializationPathwaysPage() {
           
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-white mb-3">Have an Innovation to Commercialise?</h2>
           <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-sm sm:text-base lg:text-lg leading-relaxed">
-            Whether you are at the idea stage or have a tested prototype, ICON's commercialisation team will identify the right pathway and support you every step of the way.
+            Whether you are at the idea stage or have a tested prototype, ICON&apos;s commercialisation team will identify the right pathway and support you every step of the way.
           </p>
           <div className="max-w-2xl mx-auto">
             <form onSubmit={handleFormSubmit} className="space-y-6">
-              
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleInputChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute w-px h-px overflow-hidden opacity-0"
+                style={{ clip: 'rect(0,0,0,0)' }}
+              />
 
               {/* Name and Email */}
               <div className="grid sm:grid-cols-2 gap-4">
@@ -500,13 +576,23 @@ export default function CommercializationPathwaysPage() {
                 className="w-full px-4 py-3 bg-white/10 border border-blue-400/30 rounded-md text-white placeholder-slate-300 focus:border-blue-400 focus:outline-none transition-colors resize-none"
               />
 
+              {formStatus === 'success' && (
+                <p className="text-emerald-400 text-sm font-medium bg-emerald-400/10 border border-emerald-400/30 rounded-md px-4 py-3">
+                  Thank you — your disclosure has been submitted for review. ICON will follow up by email.
+                </p>
+              )}
+              {formStatus === 'error' && (
+                <p className="text-red-400 text-sm font-medium bg-red-400/10 border border-red-400/30 rounded-md px-4 py-3">{formError}</p>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full  bg-[#FCAF17] text-[#0A2A40] #FCAF17 px-8 py-4 font-black text-sm uppercase tracking-[0.2em] rounded-md shadow-xl transition-colors flex items-center justify-center gap-2"
+                disabled={formStatus === 'submitting'}
+                className="w-full  bg-[#FCAF17] text-[#0A2A40] #FCAF17 px-8 py-4 font-black text-sm uppercase tracking-[0.2em] rounded-md shadow-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
               >
                 <Mail size={16} />
-                {formData.inquiryType === 'disclosure' ? 'Submit Invention Disclosure' : 'Send Message'}
+                {formStatus === 'submitting' ? 'Submitting…' : formData.inquiryType === 'disclosure' ? 'Submit Invention Disclosure' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -586,7 +672,30 @@ export default function CommercializationPathwaysPage() {
               </div>
 
               {/* Modal form */}
+              {idfStatus === 'success' ? (
+                <div className="px-6 sm:px-8 py-10 text-center">
+                  <CheckCircle2 size={40} className="mx-auto mb-4 text-emerald-600" />
+                  <h4 className="text-lg font-bold text-slate-900 mb-2">Disclosure Submitted</h4>
+                  <p className="text-slate-500 text-sm mb-6">
+                    Thank you — your Invention Disclosure has been submitted for review. ICON&apos;s commercialisation team will follow up by email.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={closeIdfModal}
+                    className="px-8 py-3 font-black text-xs uppercase tracking-[0.2em] rounded-sm bg-blue-900 text-white hover:bg-blue-800 transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
               <form onSubmit={handleIdfSubmit} className="px-6 sm:px-8 py-6 sm:py-8 space-y-5 max-h-[70vh] overflow-y-auto">
+                <input
+                  type="text" name="website"
+                  value={idfData.website} onChange={handleIdfChange}
+                  tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  className="absolute w-px h-px overflow-hidden opacity-0"
+                  style={{ clip: 'rect(0,0,0,0)' }}
+                />
 
                 <div>
                   <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
@@ -770,13 +879,18 @@ export default function CommercializationPathwaysPage() {
                   )}
                 </div>
 
+                {idfStatus === 'error' && (
+                  <p className="text-red-600 text-sm font-medium bg-red-50 border border-red-100 rounded-md px-4 py-3">{idfError}</p>
+                )}
+
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
                     type="submit"
-                    className="flex-1 bg-blue-900 hover:bg-blue-800 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-lg transition-colors flex items-center justify-center gap-2"
+                    disabled={idfStatus === 'submitting'}
+                    className="flex-1 bg-blue-900 hover:bg-blue-800 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     <Mail size={16} />
-                    Submit Disclosure
+                    {idfStatus === 'submitting' ? 'Submitting…' : 'Submit Disclosure'}
                   </button>
                   <button
                     type="button"
@@ -787,6 +901,7 @@ export default function CommercializationPathwaysPage() {
                   </button>
                 </div>
               </form>
+              )}
             </motion.div>
           </motion.div>
         )}

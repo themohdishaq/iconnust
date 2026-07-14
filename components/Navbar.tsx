@@ -17,12 +17,13 @@ function Navbar() {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Innovation & Collaboration', href: '/research' },
-    { name: 'Industry Services', href: '/tto' },
+    { name: 'Innovation & Collaboration', href: '/innovation-collaboration' },
+    { name: 'Industry Services', href: '/industry-services' },
     { name: 'Commercialization Pathways', href: '/commercialization' },
     { name: 'News', href: '/news' },
     { name: 'Team', href: '/team' },
   ];
+
 
   return (
     <div>
@@ -61,7 +62,7 @@ function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm uppercase tracking-widest font-black transition-colors py-4 block border-b-2 text-slate-600 border-transparent hover:text-blue-900"
+                className="text-sm uppercase tracking-widest font-black transition-colors py-4 block border-b-2 icon-brand-font border-transparent hover:text-blue-900"
               >
                 {link.name}
               </Link>
