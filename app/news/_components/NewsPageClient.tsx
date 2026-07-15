@@ -250,9 +250,7 @@ export default function NewsPageClient({
                   <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Proven Impact</span>
                   <h2 className="text-4xl font-serif text-slate-900">Success Stories</h2>
                 </div>
-                <Link href="/tto" className="hidden md:flex items-center space-x-2 text-blue-900 font-bold text-sm hover:underline">
-                  <span>All Stories</span> <ChevronRight size={16} />
-                </Link>
+                
               </motion.div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

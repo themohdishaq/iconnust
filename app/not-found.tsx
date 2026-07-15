@@ -1,6 +1,14 @@
-"use client"
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, Home, Search, FlaskConical } from 'lucide-react';
+import { Home, FlaskConical } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Page Not Found',
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (
@@ -35,45 +43,17 @@ export default function NotFound() {
       </p>
 
       {/* Quick links */}
-      <div className="flex flex-col sm:flex-row gap-3 mb-12">
+      <div className="flex flex-col sm:flex-row  mb-12">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 bg-blue-900 text-white px-7 py-3 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-colors shadow-lg shadow-blue-900/20"
+          className="inline-flex items-center justify-center  bg-blue-900 text-white px-7 py-3 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-900 transition-colors shadow-lg shadow-blue-900/20"
         >
           <Home size={14} />
           Back to Home
         </Link>
-        <Link
-          href="/tto"
-          className="inline-flex items-center justify-center gap-2 border border-slate-300 text-slate-700 px-7 py-3 font-black text-xs uppercase tracking-[0.2em] hover:bg-slate-50 transition-colors"
-        >
-          <Search size={14} />
-          Industry Services
-        </Link>
+        
       </div>
 
-      {/* Helpful links grid */}
-      <div className="w-full max-w-lg border-t border-slate-100 pt-8">
-        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 mb-5">
-          Explore ICON
-        </p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { label: 'Commercialization', href: '/commercialization' },
-            { label: 'Industry Services', href: '/tto' },
-            { label: 'Our Team',          href: '/team' },
-            { label: 'Research',          href: '/research' },
-          ].map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="bg-slate-50 border border-slate-200 rounded-lg px-3 py-3 text-[10px] font-black uppercase tracking-widest text-slate-500 hover:bg-blue-900 hover:text-white hover:border-blue-900 transition-colors text-center"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

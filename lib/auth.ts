@@ -100,12 +100,7 @@ export async function logout() {
   });
 }
 
-/**
- * Creates a short-lived, httpOnly cookie identifying an admin who passed
- * the password check but still needs to submit their OTP code.
- * Deliberately separate from the real session cookie/JWT purpose so a
- * pending-OTP token can never be mistaken for (or reused as) a full session.
- */
+
 export async function createOtpPendingSession(adminId: string) {
   const token = await new SignJWT({ adminId, purpose: 'admin-otp' })
     .setProtectedHeader({ alg: 'HS256' })

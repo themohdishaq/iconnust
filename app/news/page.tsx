@@ -1,10 +1,33 @@
+import type { Metadata } from 'next';
 import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
 import NewsPageClient from './_components/NewsPageClient';
+import { SITE_NAME } from '@/lib/seo';
 
 export const revalidate = 60;
+
+const title = 'News & Success Stories';
+const description =
+  'Discover the latest developments, success stories, spin-off ventures, and upcoming events from ICON-NUST.';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  alternates: {
+    canonical: '/news',
+  },
+  openGraph: {
+    title: `${title} | ${SITE_NAME}`,
+    description,
+    url: '/news',
+  },
+  twitter: {
+    title: `${title} | ${SITE_NAME}`,
+    description,
+  },
+};
 
 export default async function NewsPage() {
   await connectDB();
