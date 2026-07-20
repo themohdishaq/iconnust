@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { connectDB } from '@/lib/db';
+import { requireAdminSession } from '@/lib/auth';
 import TeamMember from '@/lib/models/TeamMember';
 import { saveUploadedImage, deleteUploadedImage } from '@/lib/uploads';
 
@@ -22,6 +22,7 @@ function buildDoc(formData: FormData) {
 }
 
 export async function createTeamMemberAction(_prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
@@ -32,7 +33,6 @@ export async function createTeamMemberAction(_prevState: FormState, formData: Fo
     return { error: 'Please choose a photo.' };
   }
 
-  await connectDB();
   const image = await saveUploadedImage(imageFile, 'team');
   await TeamMember.create({ ...doc, image });
 
@@ -42,6 +42,7 @@ export async function createTeamMemberAction(_prevState: FormState, formData: Fo
 }
 
 export async function updateTeamMemberAction(id: string, _prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
@@ -49,7 +50,6 @@ export async function updateTeamMemberAction(id: string, _prevState: FormState, 
     return { error: 'Please fill in all required fields.' };
   }
 
-  await connectDB();
   const existing = await TeamMember.findById(id);
   if (!existing) {
     return { error: 'Team member not found.' };
@@ -62,7 +62,7 @@ export async function updateTeamMemberAction(id: string, _prevState: FormState, 
     await deleteUploadedImage(existing.image);
   }
 
-  await TeamMember.findByIdAndUpdate(id, update);
+  await TeamMember.update(id, update);
 
   revalidatePath('/admin/team');
   revalidatePath('/team');
@@ -70,8 +70,8 @@ export async function updateTeamMemberAction(id: string, _prevState: FormState, 
 }
 
 export async function deleteTeamMemberAction(id: string) {
-  await connectDB();
-  const existing = await TeamMember.findByIdAndDelete(id);
+  await requireAdminSession();
+  const existing = await TeamMember.remove(id);
   if (existing) {
     await deleteUploadedImage(existing.image);
   }

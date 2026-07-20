@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import Event from '@/lib/models/Event';
 import EventForm from '../../_components/EventForm';
 import { updateEventAction } from '../../actions';
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await connectDB();
-  const event = await Event.findById(id).lean();
+  const event = await Event.findById(id);
 
   if (!event) notFound();
 

@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import Story from '@/lib/models/Story';
 import StoryForm from '../../_components/StoryForm';
 import { updateStoryAction } from '../../actions';
 
 export default async function EditStoryPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await connectDB();
-  const story = await Story.findById(id).lean();
+  const story = await Story.findById(id);
 
   if (!story) notFound();
 

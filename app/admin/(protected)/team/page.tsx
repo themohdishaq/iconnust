@@ -1,15 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import TeamMember from '@/lib/models/TeamMember';
 import { deleteTeamMemberAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminTeamListPage() {
-  await connectDB();
-  const members = await TeamMember.find().sort({ order: 1, createdAt: -1 }).lean();
+  const members = await TeamMember.list();
 
   return (
     <div>
@@ -33,7 +31,7 @@ export default async function AdminTeamListPage() {
         ) : (
           <ul className="divide-y divide-slate-100">
             {members.map((m) => (
-              <li key={m._id.toString()} className="flex items-center gap-4 p-4">
+              <li key={m.id.toString()} className="flex items-center gap-4 p-4">
                 <div className="relative w-14 h-14 rounded-full overflow-hidden shrink-0 bg-slate-100">
                   <Image src={m.image} alt="" fill className="object-cover" />
                 </div>
@@ -42,7 +40,7 @@ export default async function AdminTeamListPage() {
                   <p className="text-slate-400 text-xs mt-0.5">{m.title}</p>
                 </div>
                 <Link
-                  href={`/admin/team/${m._id.toString()}/edit`}
+                  href={`/admin/team/${m.id.toString()}/edit`}
                   className="p-2 text-slate-400 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                 >
                   <Pencil size={16} />
@@ -50,7 +48,7 @@ export default async function AdminTeamListPage() {
                 <form
                   action={async () => {
                     'use server';
-                    await deleteTeamMemberAction(m._id.toString());
+                    await deleteTeamMemberAction(m.id.toString());
                   }}
                 >
                   <button type="submit" className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">

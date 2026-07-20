@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { connectDB } from '@/lib/db';
 import InventionDisclosure, { type DisclosureSource } from '@/lib/models/InventionDisclosure';
 import { isRateLimited } from '@/lib/rateLimit';
 import { notifyDepartment } from '@/lib/departments';
@@ -18,14 +17,11 @@ function str(v: unknown, max: number): string {
 }
 
 export async function GET() {
-  await connectDB();
-  const published = await InventionDisclosure.find({ status: 'approved' })
-    .sort({ updatedAt: -1 })
-    .lean();
+  const published = await InventionDisclosure.listApproved();
 
   return NextResponse.json(
     published.map((d) => ({
-      id: d._id.toString(),
+      id: d.id.toString(),
       title: d.inventionTitle,
       domain: d.domain,
       status: d.displayStatus,
@@ -81,9 +77,8 @@ export async function POST(request: NextRequest) {
   const department = str(data.department, 200);
   const contactPhone = str(data.contactPhone, 50);
 
-  await connectDB();
   await InventionDisclosure.create({
-    source: data.source,
+    source: data.source as DisclosureSource,
     inventionTitle,
     domain,
     inventorNames,

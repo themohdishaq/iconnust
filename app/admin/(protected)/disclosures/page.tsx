@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { ChevronRight } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import InventionDisclosure from '@/lib/models/InventionDisclosure';
 
 export const dynamic = 'force-dynamic';
@@ -17,10 +16,7 @@ const sourceLabels: Record<string, string> = {
 };
 
 export default async function AdminDisclosuresPage() {
-  await connectDB();
-  const disclosures = await InventionDisclosure.find()
-    .sort({ status: 1, createdAt: -1 })
-    .lean();
+  const disclosures = await InventionDisclosure.listAll();
 
   const pendingCount = disclosures.filter((d) => d.status === 'pending').length;
 
@@ -39,9 +35,9 @@ export default async function AdminDisclosuresPage() {
         ) : (
           <ul className="divide-y divide-slate-100">
             {disclosures.map((d) => (
-              <li key={d._id.toString()}>
+              <li key={d.id.toString()}>
                 <Link
-                  href={`/admin/disclosures/${d._id.toString()}`}
+                  href={`/admin/disclosures/${d.id.toString()}`}
                   className="flex items-center gap-4 p-5 hover:bg-slate-50 transition-colors"
                 >
                   <div className="flex-1 min-w-0">

@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import { SITE_NAME } from '@/lib/seo';
 
@@ -14,8 +13,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  await connectDB();
-  const news = await News.findOne({ slug }).lean();
+  const news = await News.findBySlug(slug);
 
   if (!news) {
     return { title: 'News' };
@@ -47,12 +45,11 @@ export async function generateMetadata({
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  await connectDB();
 
-  const news = await News.findOne({ slug }).lean();
+  const news = await News.findBySlug(slug);
   if (!news) notFound();
 
-  const otherNews = await News.find({ _id: { $ne: news._id } }).sort({ createdAt: -1 }).limit(2).lean();
+  const otherNews = await News.listOthers(news.id, 2);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
@@ -96,7 +93,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-6 block">More News</span>
             <div className="grid sm:grid-cols-2 gap-8">
               {otherNews.map((n) => (
-                <Link key={n._id.toString()} href={`/news/${n.slug}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
+                <Link key={n.id.toString()} href={`/news/${n.slug}`} className="group bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300">
                   <div className="relative h-40 overflow-hidden">
                     <img src={n.image} alt={n.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>

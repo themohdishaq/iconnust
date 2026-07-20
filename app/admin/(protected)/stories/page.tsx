@@ -1,15 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import Story from '@/lib/models/Story';
 import { deleteStoryAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminStoriesListPage() {
-  await connectDB();
-  const stories = await Story.find().sort({ order: 1, createdAt: -1 }).lean();
+  const stories = await Story.list();
 
   return (
     <div>
@@ -33,7 +31,7 @@ export default async function AdminStoriesListPage() {
         ) : (
           <ul className="divide-y divide-slate-100">
             {stories.map((s) => (
-              <li key={s._id.toString()} className="flex items-center gap-4 p-4">
+              <li key={s.id.toString()} className="flex items-center gap-4 p-4">
                 <div className="relative w-20 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-100">
                   <Image src={s.image} alt="" fill className="object-cover" />
                 </div>
@@ -42,7 +40,7 @@ export default async function AdminStoriesListPage() {
                   <p className="text-slate-400 text-xs mt-0.5">{s.tag} · {s.founder} · {s.funding}</p>
                 </div>
                 <Link
-                  href={`/admin/stories/${s._id.toString()}/edit`}
+                  href={`/admin/stories/${s.id.toString()}/edit`}
                   className="p-2 text-slate-400 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                 >
                   <Pencil size={16} />
@@ -50,7 +48,7 @@ export default async function AdminStoriesListPage() {
                 <form
                   action={async () => {
                     'use server';
-                    await deleteStoryAction(s._id.toString());
+                    await deleteStoryAction(s.id.toString());
                   }}
                 >
                   <button type="submit" className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">

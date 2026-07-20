@@ -2,7 +2,6 @@
 
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import Admin from '@/lib/models/Admin';
 import {
   createSession,
@@ -28,8 +27,7 @@ export async function loginAction(_prevState: LoginState, formData: FormData): P
     return { step: 'credentials', error: 'Too many attempts. Please try again later.' };
   }
 
-  await connectDB();
-  const admin = await Admin.findOne({ email });
+  const admin = await Admin.findByEmail(email);
   if (!admin) {
     return { step: 'credentials', error: 'Invalid email or password.' };
   }
@@ -40,10 +38,11 @@ export async function loginAction(_prevState: LoginState, formData: FormData): P
   }
 
   const code = generateOtpCode();
-  admin.otpCodeHash = hashOtpCode(code);
-  admin.otpExpiresAt = new Date(Date.now() + OTP_TTL_MS);
-  admin.otpAttempts = 0;
-  await admin.save();
+  await Admin.updateOtp(admin.id, {
+    otpCodeHash: hashOtpCode(code),
+    otpExpiresAt: new Date(Date.now() + OTP_TTL_MS),
+    otpAttempts: 0,
+  });
 
   try {
     await sendMail({
@@ -59,7 +58,7 @@ export async function loginAction(_prevState: LoginState, formData: FormData): P
     return { step: 'credentials', error: 'Could not send a verification code. Please try again.' };
   }
 
-  await createOtpPendingSession(admin._id.toString());
+  await createOtpPendingSession(admin.id.toString());
   return { step: 'otp', email: admin.email };
 }
 
@@ -75,7 +74,6 @@ export async function verifyOtpAction(_prevState: LoginState, formData: FormData
     return { step: 'otp', error: 'Enter the verification code.' };
   }
 
-  await connectDB();
   const admin = await Admin.findById(adminId);
   if (!admin || !admin.otpCodeHash || !admin.otpExpiresAt) {
     await clearOtpPendingSession();
@@ -83,35 +81,25 @@ export async function verifyOtpAction(_prevState: LoginState, formData: FormData
   }
 
   if (admin.otpExpiresAt.getTime() < Date.now()) {
-    admin.otpCodeHash = undefined;
-    admin.otpExpiresAt = undefined;
-    admin.otpAttempts = 0;
-    await admin.save();
+    await Admin.clearOtp(admin.id);
     await clearOtpPendingSession();
     return { step: 'credentials', error: 'Code expired. Please sign in again.' };
   }
 
   if (admin.otpAttempts >= MAX_OTP_ATTEMPTS) {
-    admin.otpCodeHash = undefined;
-    admin.otpExpiresAt = undefined;
-    admin.otpAttempts = 0;
-    await admin.save();
+    await Admin.clearOtp(admin.id);
     await clearOtpPendingSession();
     return { step: 'credentials', error: 'Too many incorrect attempts. Please sign in again.' };
   }
 
   if (hashOtpCode(code) !== admin.otpCodeHash) {
-    admin.otpAttempts += 1;
-    await admin.save();
+    await Admin.incrementOtpAttempts(admin.id);
     return { step: 'otp', error: 'Incorrect code. Please try again.', email: admin.email };
   }
 
-  admin.otpCodeHash = undefined;
-  admin.otpExpiresAt = undefined;
-  admin.otpAttempts = 0;
-  await admin.save();
+  await Admin.clearOtp(admin.id);
   await clearOtpPendingSession();
 
-  await createSession(admin._id.toString(), admin.email, admin.role);
+  await createSession(admin.id.toString(), admin.email, admin.role);
   redirect('/admin');
 }

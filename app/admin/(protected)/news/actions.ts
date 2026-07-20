@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { connectDB } from '@/lib/db';
+import { requireAdminSession } from '@/lib/auth';
 import News from '@/lib/models/News';
 import { saveUploadedImage, deleteUploadedImage } from '@/lib/uploads';
 import { slugify } from '@/lib/slugify';
@@ -20,13 +20,14 @@ async function uniqueSlug(title: string, ignoreId?: string) {
   const base = slugify(title);
   let slug = base;
   let n = 1;
-  while (await News.exists({ slug, ...(ignoreId ? { _id: { $ne: ignoreId } } : {}) })) {
+  while (await News.slugExists(slug, ignoreId)) {
     slug = `${base}-${++n}`;
   }
   return slug;
 }
 
 export async function createNewsAction(_prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const title = String(formData.get('title') || '').trim();
   const category = String(formData.get('category') || '').trim();
   const excerpt = String(formData.get('excerpt') || '').trim();
@@ -43,7 +44,6 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
     return { error: 'Please choose an image.' };
   }
 
-  await connectDB();
   const image = await saveUploadedImage(imageFile, 'news');
   const slug = await uniqueSlug(title);
 
@@ -55,6 +55,7 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
 }
 
 export async function updateNewsAction(id: string, _prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const title = String(formData.get('title') || '').trim();
   const category = String(formData.get('category') || '').trim();
   const excerpt = String(formData.get('excerpt') || '').trim();
@@ -68,7 +69,6 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
     return { error: 'Please fill in all required fields.' };
   }
 
-  await connectDB();
   const existing = await News.findById(id);
   if (!existing) {
     return { error: 'News article not found.' };
@@ -88,7 +88,7 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
     await deleteUploadedImage(existing.image);
   }
 
-  await News.findByIdAndUpdate(id, update);
+  await News.update(id, update);
 
   revalidatePath('/admin/news');
   revalidatePath('/news');
@@ -97,8 +97,8 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
 }
 
 export async function deleteNewsAction(id: string) {
-  await connectDB();
-  const existing = await News.findByIdAndDelete(id);
+  await requireAdminSession();
+  const existing = await News.remove(id);
   if (existing) {
     await deleteUploadedImage(existing.image);
   }

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { ArrowRight, Home, Building2, Handshake } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import HomeInquiry from '@/lib/models/HomeInquiry';
 import IndustryServiceInquiry from '@/lib/models/IndustryServiceInquiry';
 import InnovationInquiry from '@/lib/models/InnovationInquiry';
@@ -14,14 +13,13 @@ const sections = [
 ] as const;
 
 export default async function InquiriesIndexPage() {
-  await connectDB();
   const [homeTotal, homeUnread, industryTotal, industryUnread, innovationTotal, innovationUnread] = await Promise.all([
-    HomeInquiry.countDocuments(),
-    HomeInquiry.countDocuments({ status: 'new' }),
-    IndustryServiceInquiry.countDocuments(),
-    IndustryServiceInquiry.countDocuments({ status: 'new' }),
-    InnovationInquiry.countDocuments(),
-    InnovationInquiry.countDocuments({ status: 'new' }),
+    HomeInquiry.count(),
+    HomeInquiry.countUnread(),
+    IndustryServiceInquiry.count(),
+    IndustryServiceInquiry.countUnread(),
+    InnovationInquiry.count(),
+    InnovationInquiry.countUnread(),
   ]);
 
   const counts: Record<string, { total: number; unread: number }> = {

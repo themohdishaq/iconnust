@@ -1,4 +1,3 @@
-import { connectDB } from '@/lib/db';
 import HomeInquiry from '@/lib/models/HomeInquiry';
 import InquiryList from '@/components/admin/InquiryList';
 import { markReadAction, deleteInquiryAction } from './actions';
@@ -6,10 +5,9 @@ import { markReadAction, deleteInquiryAction } from './actions';
 export const dynamic = 'force-dynamic';
 
 export default async function HomeInquiriesPage() {
-  await connectDB();
-  const docs = await HomeInquiry.find().sort({ status: 1, createdAt: -1 }).lean();
+  const docs = await HomeInquiry.list();
   const items = docs.map((d) => ({
-    id: d._id.toString(),
+    id: d.id.toString(),
     organization: d.organization,
     email: d.email,
     domain: d.domain,

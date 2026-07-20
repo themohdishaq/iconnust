@@ -1,17 +1,17 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { connectDB } from '@/lib/db';
+import { requireAdminSession } from '@/lib/auth';
 import InnovationInquiry from '@/lib/models/InnovationInquiry';
 
 export async function markReadAction(id: string) {
-  await connectDB();
-  await InnovationInquiry.findByIdAndUpdate(id, { status: 'read' });
+  await requireAdminSession();
+  await InnovationInquiry.update(id, { status: 'read' });
   revalidatePath('/admin/inquiries/innovation-collaboration');
 }
 
 export async function deleteInquiryAction(id: string) {
-  await connectDB();
-  await InnovationInquiry.findByIdAndDelete(id);
+  await requireAdminSession();
+  await InnovationInquiry.remove(id);
   revalidatePath('/admin/inquiries/innovation-collaboration');
 }

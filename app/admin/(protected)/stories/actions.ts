@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { connectDB } from '@/lib/db';
+import { requireAdminSession } from '@/lib/auth';
 import Story from '@/lib/models/Story';
 import { saveUploadedImage, deleteUploadedImage } from '@/lib/uploads';
 
@@ -20,6 +20,7 @@ function buildDoc(formData: FormData) {
 }
 
 export async function createStoryAction(_prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
@@ -30,7 +31,6 @@ export async function createStoryAction(_prevState: FormState, formData: FormDat
     return { error: 'Please choose an image.' };
   }
 
-  await connectDB();
   const image = await saveUploadedImage(imageFile, 'stories');
   await Story.create({ ...doc, image });
 
@@ -40,6 +40,7 @@ export async function createStoryAction(_prevState: FormState, formData: FormDat
 }
 
 export async function updateStoryAction(id: string, _prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
@@ -47,7 +48,6 @@ export async function updateStoryAction(id: string, _prevState: FormState, formD
     return { error: 'Please fill in all required fields.' };
   }
 
-  await connectDB();
   const existing = await Story.findById(id);
   if (!existing) {
     return { error: 'Success story not found.' };
@@ -60,7 +60,7 @@ export async function updateStoryAction(id: string, _prevState: FormState, formD
     await deleteUploadedImage(existing.image);
   }
 
-  await Story.findByIdAndUpdate(id, update);
+  await Story.update(id, update);
 
   revalidatePath('/admin/stories');
   revalidatePath('/news');
@@ -68,8 +68,8 @@ export async function updateStoryAction(id: string, _prevState: FormState, formD
 }
 
 export async function deleteStoryAction(id: string) {
-  await connectDB();
-  const existing = await Story.findByIdAndDelete(id);
+  await requireAdminSession();
+  const existing = await Story.remove(id);
   if (existing) {
     await deleteUploadedImage(existing.image);
   }

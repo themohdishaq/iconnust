@@ -1,14 +1,12 @@
 import Link from 'next/link';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import Event from '@/lib/models/Event';
 import { deleteEventAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminEventsListPage() {
-  await connectDB();
-  const events = await Event.find().sort({ order: 1, createdAt: -1 }).lean();
+  const events = await Event.list();
 
   return (
     <div>
@@ -32,7 +30,7 @@ export default async function AdminEventsListPage() {
         ) : (
           <ul className="divide-y divide-slate-100">
             {events.map((e) => (
-              <li key={e._id.toString()} className="flex items-center gap-4 p-4">
+              <li key={e.id.toString()} className="flex items-center gap-4 p-4">
                 <div className="w-14 h-14 rounded-lg bg-blue-50 text-blue-900 flex flex-col items-center justify-center shrink-0">
                   <span className="text-lg font-black leading-none">{e.day}</span>
                   <span className="text-[9px] font-bold uppercase">{e.month}</span>
@@ -42,7 +40,7 @@ export default async function AdminEventsListPage() {
                   <p className="text-slate-400 text-xs mt-0.5">{e.type} · {e.location} · {e.registered} registered</p>
                 </div>
                 <Link
-                  href={`/admin/events/${e._id.toString()}/edit`}
+                  href={`/admin/events/${e.id.toString()}/edit`}
                   className="p-2 text-slate-400 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                 >
                   <Pencil size={16} />
@@ -50,7 +48,7 @@ export default async function AdminEventsListPage() {
                 <form
                   action={async () => {
                     'use server';
-                    await deleteEventAction(e._id.toString());
+                    await deleteEventAction(e.id.toString());
                   }}
                 >
                   <button type="submit" className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">

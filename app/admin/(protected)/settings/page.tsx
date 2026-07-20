@@ -1,12 +1,10 @@
-import { connectDB } from '@/lib/db';
 import Admin from '@/lib/models/Admin';
 import { getSession } from '@/lib/auth';
 import SettingsForm from './_components/SettingsForm';
 
 export default async function AdminSettingsPage() {
   const session = await getSession();
-  await connectDB();
-  const admin = await Admin.findById(session?.userId).lean();
+  const admin = session ? await Admin.findById(session.userId) : null;
 
   return (
     <div className="min-h-screen flex justify-center items-center bg-slate-50 text-slate-900 font-sans overflow-x-hidden py-14 sm:py-16 lg:py-24">

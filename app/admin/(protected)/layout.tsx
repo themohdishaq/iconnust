@@ -1,6 +1,5 @@
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth';
-import { connectDB } from '@/lib/db';
 import HomeInquiry from '@/lib/models/HomeInquiry';
 import IndustryServiceInquiry from '@/lib/models/IndustryServiceInquiry';
 import InnovationInquiry from '@/lib/models/InnovationInquiry';
@@ -14,12 +13,11 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
     redirect('/admin/login');
   }
 
-  await connectDB();
   const [homeUnread, industryUnread, innovationUnread, pendingDisclosures] = await Promise.all([
-    HomeInquiry.countDocuments({ status: 'new' }),
-    IndustryServiceInquiry.countDocuments({ status: 'new' }),
-    InnovationInquiry.countDocuments({ status: 'new' }),
-    InventionDisclosure.countDocuments({ status: 'pending' }),
+    HomeInquiry.countUnread(),
+    IndustryServiceInquiry.countUnread(),
+    InnovationInquiry.countUnread(),
+    InventionDisclosure.countByStatus('pending'),
   ]);
   const unreadInquiries = homeUnread + industryUnread + innovationUnread;
 

@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import { SITE_URL } from '@/lib/seo';
 
@@ -39,8 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  await connectDB();
-  const newsDocs = await News.find().select('slug updatedAt').lean();
+  const newsDocs = await News.list();
 
   const newsRoutes: MetadataRoute.Sitemap = newsDocs.map((n) => ({
     url: `${SITE_URL}/news/${n.slug}`,

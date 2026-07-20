@@ -1,15 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Plus, Pencil, Trash2, Star } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import { deleteNewsAction } from './actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminNewsListPage() {
-  await connectDB();
-  const news = await News.find().sort({ createdAt: -1 }).lean();
+  const news = await News.list();
 
   return (
     <div>
@@ -33,7 +31,7 @@ export default async function AdminNewsListPage() {
         ) : (
           <ul className="divide-y divide-slate-100">
             {news.map((n) => (
-              <li key={n._id.toString()} className="flex items-center gap-4 p-4">
+              <li key={n.id.toString()} className="flex items-center gap-4 p-4">
                 <div className="relative w-20 h-14 rounded-lg overflow-hidden shrink-0 bg-slate-100">
                   <Image src={n.image} alt="" fill className="object-cover" />
                 </div>
@@ -45,7 +43,7 @@ export default async function AdminNewsListPage() {
                   <p className="text-slate-400 text-xs mt-0.5">{n.category} · {n.date}</p>
                 </div>
                 <Link
-                  href={`/admin/news/${n._id.toString()}/edit`}
+                  href={`/admin/news/${n.id.toString()}/edit`}
                   className="p-2 text-slate-400 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition-colors"
                 >
                   <Pencil size={16} />
@@ -53,7 +51,7 @@ export default async function AdminNewsListPage() {
                 <form
                   action={async () => {
                     'use server';
-                    await deleteNewsAction(n._id.toString());
+                    await deleteNewsAction(n.id.toString());
                   }}
                 >
                   <button type="submit" className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">

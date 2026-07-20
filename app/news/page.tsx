@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
@@ -30,16 +29,14 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsPage() {
-  await connectDB();
-
   const [newsDocs, eventDocs, storyDocs] = await Promise.all([
-    News.find().sort({ createdAt: -1 }).lean(),
-    Event.find().sort({ order: 1, createdAt: -1 }).lean(),
-    Story.find().sort({ order: 1, createdAt: -1 }).lean(),
+    News.list(),
+    Event.list(),
+    Story.list(),
   ]);
 
   const newsList = newsDocs.map((n) => ({
-    id: n._id.toString(),
+    id: n.id.toString(),
     slug: n.slug,
     category: n.category,
     date: n.date,
@@ -51,7 +48,7 @@ export default async function NewsPage() {
   }));
 
   const events = eventDocs.map((e) => ({
-    id: e._id.toString(),
+    id: e.id.toString(),
     day: e.day,
     month: e.month,
     year: e.year,
@@ -63,7 +60,7 @@ export default async function NewsPage() {
   }));
 
   const stories = storyDocs.map((s) => ({
-    id: s._id.toString(),
+    id: s.id.toString(),
     name: s.name,
     tag: s.tag,
     desc: s.desc,

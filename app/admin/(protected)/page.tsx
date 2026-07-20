@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
@@ -22,16 +21,15 @@ const cards = [
 ] as const;
 
 export default async function AdminDashboardPage() {
-  await connectDB();
   const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount] = await Promise.all([
-    News.countDocuments(),
-    Event.countDocuments(),
-    Story.countDocuments(),
-    TeamMember.countDocuments(),
-    HomeInquiry.countDocuments(),
-    IndustryServiceInquiry.countDocuments(),
-    InnovationInquiry.countDocuments(),
-    InventionDisclosure.countDocuments(),
+    News.count(),
+    Event.count(),
+    Story.count(),
+    TeamMember.count(),
+    HomeInquiry.count(),
+    IndustryServiceInquiry.count(),
+    InnovationInquiry.count(),
+    InventionDisclosure.count(),
   ]);
   const inquiriesCount = homeInq + industryInq + innovationInq;
 

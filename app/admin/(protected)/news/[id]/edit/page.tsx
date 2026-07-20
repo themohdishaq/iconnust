@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import News from '@/lib/models/News';
 import NewsForm from '../../_components/NewsForm';
 import { updateNewsAction } from '../../actions';
 
 export default async function EditNewsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await connectDB();
-  const news = await News.findById(id).lean();
+  const news = await News.findById(id);
 
   if (!news) notFound();
 

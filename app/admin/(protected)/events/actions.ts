@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { connectDB } from '@/lib/db';
+import { requireAdminSession } from '@/lib/auth';
 import Event from '@/lib/models/Event';
 
 export type FormState = { error?: string };
@@ -21,12 +21,12 @@ function buildDoc(formData: FormData) {
 }
 
 export async function createEventAction(_prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   if (!doc.day || !doc.month || !doc.year || !doc.title || !doc.type || !doc.location || !doc.desc) {
     return { error: 'Please fill in all required fields.' };
   }
 
-  await connectDB();
   await Event.create(doc);
 
   revalidatePath('/admin/events');
@@ -35,14 +35,14 @@ export async function createEventAction(_prevState: FormState, formData: FormDat
 }
 
 export async function updateEventAction(id: string, _prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
   const doc = buildDoc(formData);
   if (!doc.day || !doc.month || !doc.year || !doc.title || !doc.type || !doc.location || !doc.desc) {
     return { error: 'Please fill in all required fields.' };
   }
 
-  await connectDB();
-  const existing = await Event.findByIdAndUpdate(id, doc);
-  if (!existing) {
+  const updated = await Event.update(id, doc);
+  if (!updated) {
     return { error: 'Event not found.' };
   }
 
@@ -52,8 +52,8 @@ export async function updateEventAction(id: string, _prevState: FormState, formD
 }
 
 export async function deleteEventAction(id: string) {
-  await connectDB();
-  await Event.findByIdAndDelete(id);
+  await requireAdminSession();
+  await Event.remove(id);
   revalidatePath('/admin/events');
   revalidatePath('/news');
 }

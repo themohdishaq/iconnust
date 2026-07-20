@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Mail, Phone } from 'lucide-react';
-import { connectDB } from '@/lib/db';
 import InventionDisclosure from '@/lib/models/InventionDisclosure';
 import ApproveForm from '../_components/ApproveForm';
 import { approveDisclosureAction, rejectDisclosureAction, resetToPendingAction, deleteDisclosureAction } from '../actions';
@@ -24,8 +23,7 @@ function Field({ label, value }: { label: string; value: string }) {
 
 export default async function DisclosureDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await connectDB();
-  const d = await InventionDisclosure.findById(id).lean();
+  const d = await InventionDisclosure.findById(id);
 
   if (!d) notFound();
 

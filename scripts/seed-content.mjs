@@ -1,36 +1,13 @@
-import mongoose from 'mongoose';
+import mysql from 'mysql2/promise';
 
-const MONGODB_URI = process.env.MONGODB_URI;
-if (!MONGODB_URI) throw new Error('Missing MONGODB_URI (run with: node --env-file=.env.local scripts/seed-content.mjs)');
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+if (!DB_HOST || !DB_USER || !DB_NAME) {
+  throw new Error('Missing DB_HOST / DB_USER / DB_NAME (run with: node --env-file=.env.local scripts/seed-content.mjs)');
+}
 
 function slugify(title) {
   return title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
-
-const NewsSchema = new mongoose.Schema(
-  {
-    title: String, slug: { type: String, unique: true }, category: String, excerpt: String,
-    content: [String], image: String, date: String, readTime: String, featured: Boolean,
-  },
-  { timestamps: true }
-);
-const EventSchema = new mongoose.Schema(
-  { day: String, month: String, year: String, title: String, type: String, location: String, desc: String, registered: Number, order: Number },
-  { timestamps: true }
-);
-const StorySchema = new mongoose.Schema(
-  { name: String, tag: String, desc: String, founder: String, funding: String, image: String, order: Number },
-  { timestamps: true }
-);
-const TeamMemberSchema = new mongoose.Schema(
-  { name: String, title: String, dept: String, bio: String, focus: [String], image: String, email: String, order: Number },
-  { timestamps: true }
-);
-
-const News = mongoose.models.News || mongoose.model('News', NewsSchema);
-const Event = mongoose.models.Event || mongoose.model('Event', EventSchema);
-const Story = mongoose.models.Story || mongoose.model('Story', StorySchema);
-const TeamMember = mongoose.models.TeamMember || mongoose.model('TeamMember', TeamMemberSchema);
 
 const newsSeed = [
   {
@@ -104,47 +81,64 @@ const teamSeed = [
   { name: 'Dr. Naveed Qadir', title: 'Head, Research Directorate', dept: 'Sponsored Research & Industry Projects', bio: "Dr. Naveed leads NUST's sponsored research function, connecting corporate partners with the right research groups. Under his leadership, annual sponsored research funding has grown from PKR 420M to PKR 1.8B.", focus: ['Sponsored R&D', 'Grant Management', 'Industry Projects'], img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80', email: 'research@nust.edu.pk' },
 ];
 
-await mongoose.connect(MONGODB_URI);
+const pool = mysql.createPool({
+  host: DB_HOST,
+  port: DB_PORT ? Number(DB_PORT) : 3306,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+});
 
 for (const n of newsSeed) {
   const slug = slugify(n.title);
-  await News.findOneAndUpdate({ slug }, { ...n, slug }, { upsert: true, returnDocument: 'after' });
+  await pool.execute(
+    `INSERT INTO news (title, slug, category, excerpt, content, image, date, read_time, featured)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ON DUPLICATE KEY UPDATE title = VALUES(title), category = VALUES(category), excerpt = VALUES(excerpt),
+       content = VALUES(content), image = VALUES(image), date = VALUES(date), read_time = VALUES(read_time),
+       featured = VALUES(featured)`,
+    [n.title, slug, n.category, n.excerpt, JSON.stringify(n.content), n.image, n.date, n.readTime, n.featured]
+  );
 }
 console.log(`Seeded ${newsSeed.length} news articles.`);
 
-if ((await Event.countDocuments()) === 0) {
-  await Event.insertMany(
-    eventsSeed.map((e, i) => ({
-      day: e.date.day, month: e.date.month, year: e.date.year,
-      title: e.title, type: e.type, location: e.location, desc: e.desc,
-      registered: e.registered, order: i,
-    }))
-  );
+const [[{ c: eventCount }]] = await pool.query('SELECT COUNT(*) AS c FROM events');
+if (eventCount === 0) {
+  for (const [i, e] of eventsSeed.entries()) {
+    await pool.execute(
+      'INSERT INTO events (day, month, year, title, type, location, description, registered, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [e.date.day, e.date.month, e.date.year, e.title, e.type, e.location, e.desc, e.registered, i]
+    );
+  }
   console.log(`Seeded ${eventsSeed.length} events.`);
 } else {
   console.log('Events already exist — skipped.');
 }
 
-if ((await Story.countDocuments()) === 0) {
-  await Story.insertMany(
-    storiesSeed.map((s, i) => ({
-      name: s.name, tag: s.tag, desc: s.desc, founder: s.founder, funding: s.funding, image: s.img, order: i,
-    }))
-  );
+const [[{ c: storyCount }]] = await pool.query('SELECT COUNT(*) AS c FROM stories');
+if (storyCount === 0) {
+  for (const [i, s] of storiesSeed.entries()) {
+    await pool.execute(
+      'INSERT INTO stories (name, tag, description, founder, funding, image, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [s.name, s.tag, s.desc, s.founder, s.funding, s.img, i]
+    );
+  }
   console.log(`Seeded ${storiesSeed.length} success stories.`);
 } else {
   console.log('Success stories already exist — skipped.');
 }
 
-if ((await TeamMember.countDocuments()) === 0) {
-  await TeamMember.insertMany(
-    teamSeed.map((t, i) => ({
-      name: t.name, title: t.title, dept: t.dept, bio: t.bio, focus: t.focus, image: t.img, email: t.email, order: i,
-    }))
-  );
+const [[{ c: teamCount }]] = await pool.query('SELECT COUNT(*) AS c FROM team_members');
+if (teamCount === 0) {
+  for (const [i, t] of teamSeed.entries()) {
+    await pool.execute(
+      'INSERT INTO team_members (name, title, dept, bio, focus, image, email, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+      [t.name, t.title, t.dept, t.bio, JSON.stringify(t.focus), t.img, t.email, i]
+    );
+  }
   console.log(`Seeded ${teamSeed.length} team members.`);
 } else {
   console.log('Team members already exist — skipped.');
 }
 
-await mongoose.disconnect();
+await pool.end();

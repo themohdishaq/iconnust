@@ -1,37 +1,36 @@
-import mongoose from 'mongoose';
+import mysql from 'mysql2/promise';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const DB_HOST = process.env.DB_HOST;
+const DB_PORT = process.env.DB_PORT;
+const DB_USER = process.env.DB_USER;
+const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_NAME = process.env.DB_NAME;
 
-if (!MONGODB_URI) {
-  throw new Error('Missing MONGODB_URI environment variable');
+if (!DB_HOST || !DB_USER || !DB_NAME) {
+  throw new Error('Missing DB_HOST / DB_USER / DB_NAME environment variables');
 }
 
-type MongooseCache = {
-  conn: typeof mongoose | null;
-  promise: Promise<typeof mongoose> | null;
-};
+// Cached on `global` so hot-reload in dev doesn't spawn a new pool per request.
+const globalForMysql = global as unknown as { mysqlPool?: mysql.Pool };
 
-// Cached on `global` so hot-reload in dev doesn't spawn a new connection per request.
-const globalForMongoose = global as unknown as { mongoose?: MongooseCache };
-
-const cached: MongooseCache = globalForMongoose.mongoose ?? { conn: null, promise: null };
-globalForMongoose.mongoose = cached;
-
-export async function connectDB() {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI as string, {
-      bufferCommands: false,
+export function getPool(): mysql.Pool {
+  if (!globalForMysql.mysqlPool) {
+    globalForMysql.mysqlPool = mysql.createPool({
+      host: DB_HOST,
+      port: DB_PORT ? Number(DB_PORT) : 3306,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      database: DB_NAME,
+      waitForConnections: true,
+      connectionLimit: 10,
+      timezone: 'Z',
     });
   }
+  return globalForMysql.mysqlPool;
+}
 
-  try {
-    cached.conn = await cached.promise;
-  } catch (err) {
-    cached.promise = null;
-    throw err;
-  }
-
-  return cached.conn;
+export async function query<T = mysql.RowDataPacket[]>(sql: string, params?: unknown[]): Promise<T> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [rows] = await getPool().execute(sql, params as any[]);
+  return rows as T;
 }

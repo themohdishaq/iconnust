@@ -10,7 +10,10 @@ type SessionPayload = {
   expires: Date;
 };
 
-const SECRET_KEY = process.env.JWT_SECRET ;
+const SECRET_KEY = process.env.JWT_SECRET;
+if (!SECRET_KEY || SECRET_KEY.length < 32) {
+  throw new Error('Missing or too-short JWT_SECRET environment variable (must be at least 32 characters).');
+}
 const key = new TextEncoder().encode(SECRET_KEY);
 
 /**
@@ -141,9 +144,25 @@ export async function clearOtpPendingSession() {
   cookieStore.set('otp_pending', '', {
     expires: new Date(0),
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
   });
+}
+
+/**
+ * Guard for Server Actions. `proxy.ts` middleware already blocks unauthenticated
+ * requests to /admin/:path* (which covers Server Action POSTs to those routes),
+ * but Server Actions are independently invocable endpoints — this is a
+ * defense-in-depth check so an action never executes on the strength of routing
+ * alone. Throws if there's no valid session; callers should let it propagate.
+ */
+export async function requireAdminSession(): Promise<SessionPayload> {
+  const session = await getSession();
+  if (!session) {
+    throw new Error('Unauthorized: no active admin session.');
+  }
+  return session;
 }
 
 /**

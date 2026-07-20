@@ -1,17 +1,15 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { connectDB } from '@/lib/db';
 import HomeInquiry from '@/lib/models/HomeInquiry';
 import IndustryServiceInquiry from '@/lib/models/IndustryServiceInquiry';
 import InnovationInquiry from '@/lib/models/InnovationInquiry';
-import type { Model } from 'mongoose';
-import type { IInquiry } from '@/lib/models/inquiryModelFactory';
+import type { InquiryModel } from '@/lib/models/inquiryModelFactory';
 import { isRateLimited } from '@/lib/rateLimit';
 import { notifyDepartment, type NotificationSource } from '@/lib/departments';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const modelsBySource: Record<string, Model<IInquiry>> = {
+const modelsBySource: Record<string, InquiryModel> = {
   home: HomeInquiry,
   'industry-services': IndustryServiceInquiry,
   'innovation-collaboration': InnovationInquiry,
@@ -61,7 +59,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Message is too long.' }, { status: 400 });
   }
 
-  await connectDB();
   const Model = modelsBySource[source];
   await Model.create({
     organization: organization.trim(),

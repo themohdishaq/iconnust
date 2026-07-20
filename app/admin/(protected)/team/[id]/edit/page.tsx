@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation';
-import { connectDB } from '@/lib/db';
 import TeamMember from '@/lib/models/TeamMember';
 import TeamMemberForm from '../../_components/TeamMemberForm';
 import { updateTeamMemberAction } from '../../actions';
 
 export default async function EditTeamMemberPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  await connectDB();
-  const member = await TeamMember.findById(id).lean();
+  const member = await TeamMember.findById(id);
 
   if (!member) notFound();
 
