@@ -7,9 +7,6 @@ import {
   Activity,
   ArrowRight,
 } from 'lucide-react';
-import { 
-  AreaChart, Area
-} from 'recharts';
 import {
   ResponsiveContainer,
   BarChart,
@@ -25,6 +22,7 @@ import {
   Cell,
 } from "recharts";
 import Link from 'next/link';
+
 // --- YouTube Video Data ---
 // To update videos: Go to https://www.youtube.com/@Research_NUST
 // Click on any video, copy the video ID from the URL (after 'v=')
@@ -66,67 +64,48 @@ const researchVideos = {
     },
   ]
 };
-// Patent domain breakdown (donut chart) — matches the reference exactly
+
+// --- IP Area breakdown (donut chart) — matches reference: 1,418 Total IP Filed ---
 const patentDomainData = [
-  { name: "Biomedical, Healthcare & Life Sciences", value: 11, color: "#3b82f6" },
-  { name: "Computer Science", value: 8, color: "#5eead4" },
-  { name: "Mechanical, Manufacturing & Robotics", value: 6, color: "#bef264" },
-  { name: "Energy, Environment & Sustainability", value: 5, color: "#fb923c" },
-  { name: "Materials, Chemical & Nanotechnology", value: 5, color: "#fda4af" },
-  { name: "Electrical, Electronics & Communications", value: 3, color: "#d8b4fe" },
-  { name: "Aerospace & Defense", value: 2, color: "#a5b4fc" },
-  { name: "Others", value: 3, color: "#bae6fd" },
+  { name: "Designs", value: 673, color: "#3B82C4" },     // blue
+  { name: "Patents", value: 446, color: "#C3D62E" },     // olive / yellow-green
+  { name: "Copyrights", value: 245, color: "#98DF8A" },  // light green
+  { name: "Trademarks", value: 54, color: "#8E44AD" },   // purple
 ];
- 
-const totalPatents = patentDomainData.reduce((sum, d) => sum + d.value, 0); // 43
- 
-// NIPO IP Rights Awarded Summary (2019–2025) — stacked bar chart
-// Category colors match legend: Industrial Design (blue), Copyright (green), Patents (orange), Trademark (red)
-const ipRightsData = [
-  { year: "2019", industrialDesign: 38, copyright: 0, patents: 4, trademark: 4 },
-  { year: "2020", industrialDesign: 25, copyright: 8, patents: 3, trademark: 3 },
-  { year: "2021", industrialDesign: 8, copyright: 19, patents: 0, trademark: 0 },
-  { year: "2022", industrialDesign: 7, copyright: 9, patents: 0, trademark: 0 },
-  { year: "2023", industrialDesign: 12, copyright: 7, patents: 0, trademark: 0 },
-  { year: "2024", industrialDesign: 8, copyright: 4, patents: 0, trademark: 0 },
-  { year: "2025", industrialDesign: 2, copyright: 9, patents: 0, trademark: 0 },
+
+const totalIPFiledDonut = patentDomainData.reduce((sum, d) => sum + d.value, 0); // 1,418
+
+// --- IPs Filed (2020–2026) — stacked bar chart, matches reference ---
+const ipsFiledData = [
+  { year: "2020", industrialDesign: 89, copyright: 33, patents: 92, trademark: 19 },
+  { year: "2021", industrialDesign: 66, copyright: 43, patents: 65, trademark: 27 },
+  { year: "2022", industrialDesign: 59, copyright: 23, patents: 30, trademark: 0 },
+  { year: "2023", industrialDesign: 112, copyright: 30, patents: 24, trademark: 2 },
+  { year: "2024", industrialDesign: 8, copyright: 27, patents: 8, trademark: 12 },
+  { year: "2025", industrialDesign: 76, copyright: 44, patents: 9, trademark: 0 },
+  { year: "2026", industrialDesign: 35, copyright: 15, patents: 28, trademark: 0 },
 ];
- 
+
+// --- IPs Awarded (2020–2026) — stacked bar chart, matches reference (NIPO summary) ---
+const ipsAwardedData = [
+  { year: "2020", industrialDesign: 11, copyright: 1, patents: 4, trademark: 0 },
+  { year: "2021", industrialDesign: 30, copyright: 0, patents: 2, trademark: 0 },
+  { year: "2022", industrialDesign: 32, copyright: 19, patents: 1, trademark: 3 },
+  { year: "2023", industrialDesign: 6, copyright: 6, patents: 0, trademark: 1 },
+  { year: "2024", industrialDesign: 1, copyright: 21, patents: 0, trademark: 0 },
+  { year: "2025", industrialDesign: 12, copyright: 1, patents: 0, trademark: 1 },
+  { year: "2026", industrialDesign: 39, copyright: 16, patents: 3, trademark: 0 },
+];
+
 // Precompute totals for the labels shown above each stacked bar
-const ipRightsDataWithTotal = ipRightsData.map((d) => ({
-  ...d,
-  total: d.industrialDesign + d.copyright + d.patents + d.trademark,
-}));
- 
-// const fadeUp = {
-//   initial: { opacity: 0, y: 24 },
-//   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-// };
- 
-const fundingData = [
-  { year: '2020', funding: 420, projects: 120 },
-  { year: '2021', funding: 580, projects: 155 },
-  { year: '2022', funding: 750, projects: 198 },
-  { year: '2023', funding: 980, projects: 250 },
-  { year: '2024', funding: 1350, projects: 310 },
-  { year: '2025', funding: 1800, projects: 405 },
-];
+const withTotal = (rows: typeof ipsFiledData) =>
+  rows.map((d) => ({
+    ...d,
+    total: d.industrialDesign + d.copyright + d.patents + d.trademark,
+  }));
 
-const domainData = [
-  { name: 'AI & Robotics', value: 35 },
-  { name: 'Energy & Environment', value: 25 },
-  { name: 'Health & Biotech', value: 20 },
-  { name: 'Advanced Materials', value: 15 },
-  { name: 'Defense Systems', value: 5 },
-];
-const COLORS = ['#1e3a8a', '#3b82f6', '#60a5fa', '#93c5fd', '#1e40af'];
-
-const publicationData = [
-  { name: 'Q1', papers: 320, citations: 1200 },
-  { name: 'Q2', papers: 450, citations: 1800 },
-  { name: 'Q3', papers: 510, citations: 2400 },
-  { name: 'Q4', papers: 680, citations: 3100 },
-];
+const ipsFiledDataWithTotal = withTotal(ipsFiledData);
+const ipsAwardedDataWithTotal = withTotal(ipsAwardedData);
 
 // --- Animation Variants ---
 const staggerContainer = {
@@ -159,6 +138,81 @@ const slideInLeft = {
   initial: { opacity: 0, x: -30 },
   animate: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
+
+// Reusable stacked-bar chart block used for both "IPs Filed" and "IPs Awarded"
+const IPStackedBarChart = ({
+  title,
+  data,
+  yAxisLabel,
+}: {
+  title: string;
+  data: (typeof ipsFiledDataWithTotal);
+  yAxisLabel: string;
+}) => (
+  <motion.div
+    initial="initial"
+    whileInView="animate"
+    viewport={{ once: true }}
+    variants={fadeUp}
+    className="bg-white p-6"
+  >
+    <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">{title}</h3>
+
+    <div className="h-[380px] w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 24, right: 16, left: 16, bottom: 24 }}>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+          <XAxis
+            dataKey="year"
+            axisLine={{ stroke: "#cbd5e1" }}
+            tickLine={false}
+            tick={{ fontSize: 12, fill: "#475569" }}
+            label={{ value: "Year", position: "insideBottom", offset: -8, style: { fontSize: 12, fill: "#64748b" } }}
+          />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            tick={{ fontSize: 12, fill: "#475569" }}
+            label={{
+              value: yAxisLabel,
+              angle: -90,
+              position: "insideLeft",
+              offset: 0,
+              style: { fontSize: 12, fill: "#64748b", textAnchor: "middle" },
+            }}
+          />
+          <Tooltip
+            contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
+            cursor={{ fill: "#f1f5f9" }}
+          />
+          <Legend
+            verticalAlign="top"
+            align="center"
+            height={36}
+            iconType="square"
+            iconSize={10}
+            wrapperStyle={{ fontSize: 11, fontWeight: 600, color: "#475569" }}
+            formatter={(value) => {
+              const labels: Record<string, string> = {
+                industrialDesign: "Industrial Design",
+                copyright: "Copyright",
+                patents: "Patents",
+                trademark: "Trademark",
+              };
+              return labels[value] ?? value;
+            }}
+          />
+          <Bar dataKey="industrialDesign" stackId="ip" fill="#3b82f6" />
+          <Bar dataKey="copyright" stackId="ip" fill="#22c55e" />
+          <Bar dataKey="patents" stackId="ip" fill="#f97316" />
+          <Bar dataKey="trademark" stackId="ip" fill="#dc2626" radius={[3, 3, 0, 0]}>
+            <LabelList dataKey="total" content={<TotalLabel />} />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  </motion.div>
+);
 
 const RndPortal = () => {
   const { values, setField, status, error, handleSubmit } = useInquiryForm('innovation-collaboration');
@@ -201,84 +255,87 @@ const RndPortal = () => {
       </section>
 
       {/* Analytics Dashboard (Charts & Graphs) */}
-      
       <section id="our-impact" className="py-8 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
             By the Numbers
           </div>
-           <div className="mb-8">
+          <div className="mb-8">
             <h2 className="text-3xl sm:text-4xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
             <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
           </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden">
-        {[
-  {
-    value: "1,400+",
-    label: "IP Filings",
-    bg: "bg-[#0A2D4A]",
-  },
-  {
-    value: "310",
-    label: "IPRs Awarded",
-    bg: "bg-[#0E5E97]",
-  },
-  {
-    value: "43",
-    label: "Total Patents",
-    bg: "bg-[#0A2D4A]",
-  },
-].map((stat, index) => (
-          <div
-            key={index}
-            className={`
-              ${stat.bg}
-              flex flex-col items-center justify-center
-              h-36 sm:h-40 md:h-44
-              border-b sm:border-b-0
-              sm:border-r
-              last:sm:border-r-0
-              border-white/20
-              transition-colors duration-300
-              hover:brightness-110
-            `}
-          >
-            <h2
-              className="
-                text-[#D4A017]
-                font-serif
-                font-semibold
-                text-3xl
-                md:text-4xl
-                leading-none
-              "
-            >
-              {stat.value}
-            </h2>
 
-            <p
-              className="
-                mt-3
-                text-white
-                text-[10px]
-                sm:text-[10px]
-                uppercase
-                tracking-[0.2em]
-                font-medium
-              "
-            >
-              {stat.label}
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden mb-10">
+            {[
+              {
+                value: "1,418",
+                label: "IP Filings",
+                bg: "bg-[#0A2D4A]",
+              },
+              {
+                value: "310",
+                label: "IPRs Awarded",
+                bg: "bg-[#0E5E97]",
+              },
+              {
+                value: "43",
+                label: "Total Patents",
+                bg: "bg-[#0A2D4A]",
+              },
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className={`
+                  ${stat.bg}
+                  flex flex-col items-center justify-center
+                  h-36 sm:h-40 md:h-44
+                  border-b sm:border-b-0
+                  sm:border-r
+                  last:sm:border-r-0
+                  border-white/20
+                  transition-colors duration-300
+                  hover:brightness-110
+                `}
+              >
+                <h2
+                  className="
+                    text-[#D4A017]
+                    font-serif
+                    font-semibold
+                    text-3xl
+                    md:text-4xl
+                    leading-none
+                  "
+                >
+                  {stat.value}
+                </h2>
+
+                <p
+                  className="
+                    mt-3
+                    text-white
+                    text-[10px]
+                    sm:text-[10px]
+                    uppercase
+                    tracking-[0.2em]
+                    font-medium
+                  "
+                >
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* LEFT: Stats + Donut */}
-          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={fadeUp}>
-            {/* Stat callouts */}
-           
- 
-            {/* Donut chart + legend */}
+
+          {/* ROW 1: Donut chart, centered, alone in its own column */}
+          <motion.div
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="flex flex-col items-center mb-10"
+          >
+            <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">IP Area Key</h3>
             <div className="flex flex-col sm:flex-row items-center gap-8">
               <div className="relative w-[260px] m-4 h-[260px] shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
@@ -307,94 +364,48 @@ const RndPortal = () => {
                     />
                   </PieChart>
                 </ResponsiveContainer>
-                
+
+                {/* Center label overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                  <span className="text-2xl font-bold text-slate-900">{totalIPFiledDonut}</span>
+                  <span className="text-[10px] uppercase tracking-wide text-slate-500 text-center leading-tight">
+                    Total IP Filed
+                  </span>
+                </div>
               </div>
- 
+
               {/* Legend */}
               <div className="space-y-2">
                 {patentDomainData.map((entry) => (
                   <div key={entry.name} className="flex items-center text-[13px] text-slate-700">
                     <span
-                      className="w-3 h-3 rounded-full mr-2 shrink-0"
+                      className="w-3 h-3 rounded-sm mr-2 shrink-0"
                       style={{ backgroundColor: entry.color }}
                     />
                     <span>
-                      {entry.name} <span className="text-slate-500">({entry.value})</span>
+                      {entry.name} <span className="text-slate-500">- {entry.value}</span>
                     </span>
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
- 
-          {/* RIGHT: Stacked Bar Chart */}
-          <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="bg-white p-6"
-          >
-            <h3 className="text-sm font-semibold text-slate-800 mb-2">
-              NIPO - IP Rights Awarded Summary (2019-2025)
-            </h3>
- 
-            <div className="h-[380px] w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={ipRightsDataWithTotal} margin={{ top: 24, right: 10, left: -10, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                  <XAxis
-                    dataKey="year"
-                    axisLine={{ stroke: "#cbd5e1" }}
-                    tickLine={false}
-                    tick={{ fontSize: 12, fill: "#475569" }}
-                    label={{ value: "Year", position: "insideBottom", offset: -2, style: { fontSize: 11, fill: "#64748b" } }}
-                  />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 12, fill: "#475569" }}
-                    label={{
-                      value: "Number of IPs Awarded",
-                      angle: -90,
-                      position: "insideLeft",
-                      style: { fontSize: 11, fill: "#64748b", textAnchor: "middle" },
-                    }}
-                  />
-                  <Tooltip
-                    contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
-                    cursor={{ fill: "#f1f5f9" }}
-                  />
-                  <Legend
-                    verticalAlign="top"
-                    align="center"
-                    height={36}
-                    iconType="square"
-                    iconSize={10}
-                    wrapperStyle={{ fontSize: 11, fontWeight: 600, color: "#475569" }}
-                    formatter={(value) => {
-                      const labels: Record<string, string> = {
-                        industrialDesign: "Industrial Design",
-                        copyright: "Copyright",
-                        patents: "Patents",
-                        trademark: "Trademark",
-                      };
-                      return labels[value] ?? value;
-                    }}
-                  />
-                  <Bar dataKey="industrialDesign" stackId="ip" fill="#3b82f6" />
-                  <Bar dataKey="copyright" stackId="ip" fill="#22c55e" />
-                  <Bar dataKey="patents" stackId="ip" fill="#f97316" />
-                  <Bar dataKey="trademark" stackId="ip" fill="#dc2626" radius={[3, 3, 0, 0]}>
-                    <LabelList dataKey="total" content={<TotalLabel />} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </motion.div>
+
+          {/* ROW 2: IPs Filed + IPs Awarded, side by side */}
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            <IPStackedBarChart
+              title="IPs Filed (2020 - 2026)"
+              data={ipsFiledDataWithTotal}
+              yAxisLabel="Number of IP Filed"
+            />
+            <IPStackedBarChart
+              title="IPs Awarded (2020 - 2026)"
+              data={ipsAwardedDataWithTotal}
+              yAxisLabel="Number of IP Awarded"
+            />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Media & Video Hub */}
       <section id="media-hub" className="py-8 bg-slate-50">
@@ -450,48 +461,12 @@ const RndPortal = () => {
                       <span>{video.date}</span>
                     </div>
                   </div>
-                  {/* view full vides
-                   */}
-                  
                 </motion.div>
               ))}
-
             </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Areas of Expertise */}
-      {/* <section id="capabilities" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl font-serif text-slate-900 mb-4">Core Research Strengths</h2>
-            <p className="text-slate-500">Multidisciplinary clusters designed to tackle the 21st century's most pressing industrial and societal challenges.</p>
-          </div>
-
-          <motion.div initial="initial" whileInView="animate" viewport={{ once: true }} variants={staggerContainer} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: 'AI & Autonomous Systems', icon: <Cpu />, desc: 'Machine learning, swarm robotics, and predictive modeling for manufacturing.' },
-              { title: 'Health & Biotechnology', icon: <Microscope />, desc: 'Genomics, bioinformatics, and advanced medical diagnostics development.' },
-              { title: 'Energy & Sustainability', icon: <Globe />, desc: 'Renewable microgrids, water purification tech, and climate modeling.' },
-              { title: 'Advanced Materials', icon: <ShieldCheck />, desc: 'Nanotechnology, smart polymers, and aerospace-grade structural composites.' }
-            ].map((area, idx) => (
-              <motion.div key={idx} variants={fadeUp} className="bg-slate-50 border border-slate-100 p-8 rounded-2xl hover:bg-blue-900 hover:text-white transition-colors duration-300 group">
-                <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-800 group-hover:text-white transition-colors">
-                  {React.cloneElement(area.icon, { size: 24 })}
-                </div>
-                <h3 className="text-xl font-serif mb-3 font-medium text-slate-900 group-hover:text-white">{area.title}</h3>
-                <p className="text-sm text-slate-500 group-hover:text-blue-100 leading-relaxed mb-6">
-                  {area.desc}
-                </p>
-                <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 group-hover:text-blue-300 flex items-center mt-auto">
-                  View Labs & Projects <ArrowRight size={12} className="ml-1" />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section> */} 
 
       {/* Engagement CTA */}
       <section id="propose-colloboration" className="py-16 bg-[#062539] text-white relative overflow-hidden max-w-7xl">
@@ -555,8 +530,6 @@ const RndPortal = () => {
           </div>
         </motion.div>
       </section>
-
-    
     </div>
   );
 };

@@ -38,7 +38,8 @@ export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   keywords: [
     "ICON NUST",
-    "NUST industry collaboration",
+    "national university of science and technology nust",
+    "NUST innovation collaboration",
     "technology licensing Pakistan",
     "university spin-offs",
     "sponsored R&D",

@@ -21,7 +21,7 @@ function Navbar() {
     { name: "Industry Services", href: "/industry-services" },
     { name: "Commercialization Pathways", href: "/commercialization" },
     { name: "News", href: "/news" },
-    { name: "Team", href: "/team" },
+    { name: "About", href: "/about-us" },
   ];
 
   return (
@@ -40,17 +40,12 @@ function Navbar() {
       >
         <div className="max-w-8xl mx-auto px-3 md:px-6 flex justify-between items-center">
           <div className="flex tahoma-font items-center border-transparent space-x-3.5 md:space-x-6 text-[10px] uppercase tracking-[0.2em] font-black">
-            <Link href="/tto" className=" transition-colors">
-              Tech Portfolio
-            </Link>
+            
             <Link href="/news#events" className=" transition-colors">
               Events
             </Link>
-            <Link href="/team#contact" className=" transition-colors">
-              Careers
-            </Link>
             <Link href="/team" className="transition-colors">
-              Partners
+              Team
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">

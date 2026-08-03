@@ -27,7 +27,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
-  alternateName: "Industry Collaboration and Commercialization Office, NUST",
+  alternateName: "Innovation Collaboration and Commercialization Office, NUST",
   url: SITE_URL,
   logo: `${SITE_URL}/icon-logo.png`,
   parentOrganization: {
@@ -36,7 +36,7 @@ const organizationJsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Scholar House, Sector H-12",
+    streetAddress: "CIE Building, NUST Campus, sector H-12",
     addressLocality: "Islamabad",
     addressCountry: "PK",
   },

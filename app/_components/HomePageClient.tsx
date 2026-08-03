@@ -56,10 +56,10 @@ const App = () => {
   const { values, setField, status, error, handleSubmit } = useInquiryForm('home');
   const targetStats = {
     partners: 900,
-    projects: 1400,
+    projects: 1418,
     spinOffs: 80,
     awarded: 310,
-    patents: 112,
+    patents: 446,
   };
 
   useEffect(() => {
