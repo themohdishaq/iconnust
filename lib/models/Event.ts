@@ -55,6 +55,12 @@ async function list(): Promise<IEvent[]> {
   return rows.map(mapRow);
 }
 
+async function search(q: string): Promise<IEvent[]> {
+  const like = `%${q}%`;
+  const rows = await query<EventRow[]>('SELECT * FROM events WHERE title LIKE ? OR description LIKE ? OR location LIKE ? ORDER BY sort_order ASC, created_at DESC', [like, like, like]);
+  return rows.map(mapRow);
+}
+
 async function findById(id: string | number): Promise<IEvent | null> {
   const rows = await query<EventRow[]>('SELECT * FROM events WHERE id = ? LIMIT 1', [id]);
   return rows[0] ? mapRow(rows[0]) : null;
@@ -103,6 +109,6 @@ async function count(): Promise<number> {
   return Number(rows[0].c);
 }
 
-const Event = { list, findById, create, update, remove, count };
+const Event = { list, search, findById, create, update, remove, count };
 
 export default Event;

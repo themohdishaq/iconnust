@@ -32,7 +32,7 @@ type ChartData = {
 // Data
 // ----------------------
 
-const data: ChartData[] = [
+const defaultData: ChartData[] = [
   { year: "2022-23", amount: 125.41, isTotal: false },
   { year: "2024-25", amount: 228.44, isTotal: false },
   { year: "2026 (To-date)", amount: 94.54, isTotal: false },
@@ -84,7 +84,7 @@ const CustomTooltip = ({
 // Main Component
 // ----------------------
 
-export default function FinancialChart() {
+export default function FinancialChart({ data = defaultData }: { data?: ChartData[] }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (

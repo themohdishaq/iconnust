@@ -340,7 +340,7 @@ export default function CommercializationPathwaysPage() {
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80')" }}
         />
-        <div className="max-w-7xl  relative z-10 px-4">
+        <div className="max-w-8xl  relative z-10 px-4">
           <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block">
             Commercialization Pathways
           </div>
@@ -365,19 +365,15 @@ export default function CommercializationPathwaysPage() {
         </div>
       </section>
 
-      {/* ── STATS BAR ─────────────────────────────────────────────────── */}
-      {/* <section className="bg-[#0a2342] p-4">
-        <FinancialChart/>
-      
-      </section> */}
+     
 
       {/* ── PATHWAYS ──────────────────────────────────────────────────── */}
       <section id="pathways" className="py-8 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="text-left mb-10 sm:mb-14 lg:mb-16">
             <span className="text-[#C9962A] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Avenues</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-slate-900 mb-3">Commercialization Pathways</h2>
-            <p className="text-slate-500 mt-3 max-w-7xl mx-auto text-sm sm:text-base">
+            <p className="text-slate-500 mt-3 mx-auto text-sm sm:text-base">
               Following structured pathways, each suited to a different stage, goal, and type of innovation.
             </p>
           </div>
@@ -447,16 +443,13 @@ export default function CommercializationPathwaysPage() {
 
       {/* ── TECH PORTFOLIO ────────────────────────────────────────────── */}
       <section id="licensing" className="py-10 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-10 lg:mb-12">
             <div>
               <span className="text-[#FCAF17] font-bold text-[11px] uppercase tracking-[0.4em] mb-3 block">Technology Portfolio</span>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">Available for Commercialization</h2>
             </div>
-            <button className="text-blue-700 font-bold text-sm hover:underline mt-4 md:mt-0 flex items-center">
-              View Full Portfolio <ArrowRight size={16} className="ml-1" />
-            </button>
           </div>
 
           {techPortfolio.length === 0 && (
@@ -601,7 +594,7 @@ export default function CommercializationPathwaysPage() {
 
       {/* ── FAQs ──────────────────────────────────────────────────────── */}
       <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
-         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+         <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
         
         {/* Header */}
         <div className="mb-12 sm:mb-16 text-left">

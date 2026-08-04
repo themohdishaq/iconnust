@@ -61,14 +61,17 @@ export default function NewsPageClient({
   newsList,
   stories,
   events,
+  initialSearch,
 }: {
   newsList: NewsItem[];
   stories: StoryItem[];
   events: EventItem[];
+  initialSearch: string;
 }) {
   const categories = useMemo(() => ['All', ...Array.from(new Set(newsList.map((n) => n.category)))], [newsList]);
   const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
 
   const filtered = useMemo(() => {
     return newsList.filter((n) => {

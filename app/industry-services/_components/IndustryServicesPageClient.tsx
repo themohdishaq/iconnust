@@ -205,7 +205,7 @@ export default function IndustryServicesPage() {
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: "url('/industry-services/consultancy.jpg')" }}
         />
-        <div className="max-w-7xl  px-6 relative z-10">
+        <div className="max-w-8xl  px-6 relative z-10">
           <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2 block">
             Industry Services
           </div>
@@ -235,29 +235,10 @@ export default function IndustryServicesPage() {
         </div>
       </section>
 
-      {/* ── STATS BAR ─────────────────────────────────────────────────────── */}
-      {/* <section className="bg-[#0a2342] py-6 sm:py-8 lg:py-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-white text-center">
-            {stats.map((s, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="flex flex-col items-center"
-              >
-                <div className="text-blue-400 mb-2 sm:mb-3">{s.icon}</div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold mb-1">{s.value}</div>
-                <div className="text-slate-400 text-[10px] sm:text-[11px] uppercase tracking-widest font-bold">{s.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       {/* ── SERVICES ─────────────────────────────────────────────────────── */}
       <section id="services" className="py-10 sm:py-14 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="text-left mb-8 sm:mb-12 lg:mb-16">
             <span className="text-[#FCAF17] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Our Industry Services</h2>
@@ -326,7 +307,7 @@ export default function IndustryServicesPage() {
         </div>
       </section>
  <section id="engage" className="py-8 bg-[#F3EFE6] min-h-screen flex items-center">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
+      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
         {/* Header Section */}
         <div className="mb-8 text-left">
           <span className="text-[#FCAF17]  text-[11px] uppercase tracking-[0.15em] mb-4 block">
@@ -382,7 +363,7 @@ export default function IndustryServicesPage() {
 
       {/* ── SECTORS ────────────────────────────────────────────────────────── */}
       <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
             <div className="max-w-md">
               <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Industries We Serve</span>
@@ -415,7 +396,7 @@ export default function IndustryServicesPage() {
       id="industry-brief"
       className="py-8 sm:py-12 bg-[#062539] text-white flex items-center min-h-screen"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-start">
         
         {/* Left Column: Text Section */}
         <motion.div
@@ -522,7 +503,7 @@ export default function IndustryServicesPage() {
     </section>
       {/* ── FAQs ─────────────────────────────────────────────────────────── */}
      <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12">
+      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
         
         {/* Header */}
         <div className="mb-12 sm:mb-16 text-left">

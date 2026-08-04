@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import InnovationCollaborationPageClient from "./_components/InnovationCollaborationPageClient";
 import { SITE_NAME } from "@/lib/seo";
+import StatTile from "@/lib/models/StatTile";
+import IpBreakdown from "@/lib/models/IpBreakdown";
+import IpYearlyStat from "@/lib/models/IpYearlyStat";
 
 const title = "Innovation & Collaboration";
 const description =
@@ -23,6 +26,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <InnovationCollaborationPageClient />;
+export default async function Page() {
+  const [tiles, ipBreakdown, ipsFiled, ipsAwarded] = await Promise.all([
+    StatTile.list('innovation'),
+    IpBreakdown.list(),
+    IpYearlyStat.list('filed'),
+    IpYearlyStat.list('awarded'),
+  ]);
+
+  const stats = tiles.map((t) => ({ label: t.label, value: t.value }));
+
+  return (
+    <InnovationCollaborationPageClient
+      stats={stats}
+      ipBreakdown={ipBreakdown}
+      ipsFiled={ipsFiled}
+      ipsAwarded={ipsAwarded}
+    />
+  );
 }

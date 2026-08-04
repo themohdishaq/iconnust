@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import HomePageClient from "./_components/HomePageClient";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import StatTile from "@/lib/models/StatTile";
+import Partner from "@/lib/models/Partner";
 
 const title = "Home";
 const description =
-  "The Innovation & Commercialization Network (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
+  "Innovation & Commercialization Office (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
 
 export const metadata: Metadata = {
   title,
@@ -43,14 +45,20 @@ const organizationJsonLd = {
   email: "info@icon.nust.edu.pk",
 };
 
-export default function Page() {
+export default async function Page() {
+  const tiles = await StatTile.list('home');
+  const stats = tiles.map((t) => ({ label: t.label, value: t.value }));
+
+  const partnerDocs = await Partner.list();
+  const partners = partnerDocs.map((p) => ({ name: p.name, logo: p.logo }));
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <HomePageClient />
+      <HomePageClient stats={stats} partners={partners} />
     </>
   );
 }

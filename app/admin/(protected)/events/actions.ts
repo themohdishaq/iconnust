@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { requireAdminSession } from '@/lib/auth';
 import Event from '@/lib/models/Event';
+import { notifySubscribers } from '@/lib/notifySubscribers';
 
 export type FormState = { error?: string };
 
@@ -28,6 +29,8 @@ export async function createEventAction(_prevState: FormState, formData: FormDat
   }
 
   await Event.create(doc);
+
+  await notifySubscribers({ subject: `New Event: ${doc.title}`, title: doc.title, path: '/news#events' });
 
   revalidatePath('/admin/events');
   revalidatePath('/news');

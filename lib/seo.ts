@@ -4,5 +4,5 @@ export const SITE_NAME = "ICON - NUST";
 export const DEFAULT_TITLE =
   "ICON NUST | Innovation & Commercialization Office NUST";
 export const DEFAULT_DESCRIPTION =
-  "NUST's Research and Innovation Hub: bridging academia and industry through technology licensing, spin-off creation, sponsored R&D, IP protection, and industry-facing lab services.";
+  "ICON NUST's Research and Innovation Hub: bridging academia and industry through technology licensing, spin-off creation, sponsored R&D, IP protection, and industry-facing lab services.";
 export const DEFAULT_OG_IMAGE = "/icon-logo.png";

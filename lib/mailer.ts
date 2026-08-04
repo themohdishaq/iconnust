@@ -37,15 +37,25 @@ async function getAccessToken(): Promise<string> {
   return tokenCache.token;
 }
 
-export async function sendMail(options: { to: string | string[]; subject: string; html: string }): Promise<void> {
+function toRecipientList(addresses: string | string[]) {
+  return (Array.isArray(addresses) ? addresses : [addresses])
+    .map((address) => address.trim())
+    .filter(Boolean)
+    .map((address) => ({ emailAddress: { address } }));
+}
+
+export async function sendMail(options: {
+  to: string | string[];
+  bcc?: string | string[];
+  subject: string;
+  html: string;
+}): Promise<void> {
   if (!SENDER) {
     throw new Error('Missing MS_GRAPH_SENDER environment variable.');
   }
 
-  const toRecipients = (Array.isArray(options.to) ? options.to : [options.to])
-    .map((address) => address.trim())
-    .filter(Boolean)
-    .map((address) => ({ emailAddress: { address } }));
+  const toRecipients = toRecipientList(options.to);
+  const bccRecipients = options.bcc ? toRecipientList(options.bcc) : [];
 
   if (toRecipients.length === 0) {
     throw new Error('sendMail requires at least one recipient.');
@@ -64,6 +74,7 @@ export async function sendMail(options: { to: string | string[]; subject: string
         subject: options.subject,
         body: { contentType: 'HTML', content: options.html },
         toRecipients,
+        ...(bccRecipients.length > 0 ? { bccRecipients } : {}),
       },
       saveToSentItems: false,
     }),

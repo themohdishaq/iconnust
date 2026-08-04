@@ -58,6 +58,15 @@ async function list(options?: { limit?: number }): Promise<INews[]> {
   return rows.map(mapRow);
 }
 
+async function search(q: string): Promise<INews[]> {
+  const like = `%${q}%`;
+  const rows = await query<NewsRow[]>(
+    'SELECT * FROM news WHERE title LIKE ? OR excerpt LIKE ? OR content LIKE ? ORDER BY created_at DESC',
+    [like, like, like]
+  );
+  return rows.map(mapRow);
+}
+
 async function findById(id: string | number): Promise<INews | null> {
   const rows = await query<NewsRow[]>('SELECT * FROM news WHERE id = ? LIMIT 1', [id]);
   return rows[0] ? mapRow(rows[0]) : null;
@@ -141,6 +150,6 @@ async function count(): Promise<number> {
   return Number(rows[0].c);
 }
 
-const News = { list, findById, findBySlug, slugExists, listOthers, create, update, remove, count };
+const News = { list, search, findById, findBySlug, slugExists, listOthers, create, update, remove, count };
 
 export default News;

@@ -40,6 +40,8 @@ export const metadata: Metadata = {
     "ICON NUST",
     "national university of science and technology nust",
     "NUST innovation collaboration",
+    "nust university",
+    "Pakistan technology transfer",
     "technology licensing Pakistan",
     "university spin-offs",
     "sponsored R&D",

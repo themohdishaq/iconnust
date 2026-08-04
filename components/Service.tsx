@@ -80,7 +80,7 @@ function ServiceRow({
 
   return (
     <div className="relative py-4  ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 relative">
         <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-4 lg:gap-0 items-center">
 
           {/* ── Text side ── */}

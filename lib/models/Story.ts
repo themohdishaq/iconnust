@@ -49,6 +49,12 @@ async function list(): Promise<IStory[]> {
   return rows.map(mapRow);
 }
 
+async function search(q: string): Promise<IStory[]> {
+  const like = `%${q}%`;
+  const rows = await query<StoryRow[]>('SELECT * FROM stories WHERE name LIKE ? OR description LIKE ? OR tag LIKE ? ORDER BY sort_order ASC, created_at DESC', [like, like, like]);
+  return rows.map(mapRow);
+}
+
 async function findById(id: string | number): Promise<IStory | null> {
   const rows = await query<StoryRow[]>('SELECT * FROM stories WHERE id = ? LIMIT 1', [id]);
   return rows[0] ? mapRow(rows[0]) : null;
@@ -102,6 +108,6 @@ async function count(): Promise<number> {
   return Number(rows[0].c);
 }
 
-const Story = { list, findById, create, update, remove, count };
+const Story = { list, search, findById, create, update, remove, count };
 
 export default Story;

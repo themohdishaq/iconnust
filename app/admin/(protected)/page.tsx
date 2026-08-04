@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight } from 'lucide-react';
+import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight, Mail, Handshake } from 'lucide-react';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
@@ -8,6 +8,8 @@ import HomeInquiry from '@/lib/models/HomeInquiry';
 import IndustryServiceInquiry from '@/lib/models/IndustryServiceInquiry';
 import InnovationInquiry from '@/lib/models/InnovationInquiry';
 import InventionDisclosure from '@/lib/models/InventionDisclosure';
+import Subscriber from '@/lib/models/Subscriber';
+import Partner from '@/lib/models/Partner';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,11 +19,13 @@ const cards = [
   { key: 'news', label: 'News Articles', href: '/admin/news', icon: Newspaper },
   { key: 'events', label: 'Upcoming Events', href: '/admin/events', icon: CalendarDays },
   { key: 'stories', label: 'Success Stories', href: '/admin/stories', icon: Award },
+  { key: 'partners', label: 'Partners', href: '/admin/partners', icon: Handshake },
   { key: 'team', label: 'Team Members', href: '/admin/team', icon: Users },
+  { key: 'subscribers', label: 'Subscribers', href: '/admin/subscribers', icon: Mail },
 ] as const;
 
 export default async function AdminDashboardPage() {
-  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount] = await Promise.all([
+  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount, subscribersCount, partnersCount] = await Promise.all([
     News.count(),
     Event.count(),
     Story.count(),
@@ -30,6 +34,8 @@ export default async function AdminDashboardPage() {
     IndustryServiceInquiry.count(),
     InnovationInquiry.count(),
     InventionDisclosure.count(),
+    Subscriber.count(),
+    Partner.count(),
   ]);
   const inquiriesCount = homeInq + industryInq + innovationInq;
 
@@ -40,6 +46,8 @@ export default async function AdminDashboardPage() {
     team: teamCount,
     inquiries: inquiriesCount,
     disclosures: disclosuresCount,
+    subscribers: subscribersCount,
+    partners: partnersCount,
   };
 
   return (

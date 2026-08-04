@@ -1,5 +1,4 @@
-import { Briefcase, Globe, Users } from 'lucide-react'
-import Image from 'next/image'
+
 import React from 'react'
 
 function Footer() {
@@ -78,14 +77,11 @@ function Footer() {
               Ecosystem
             </div>
             <div className="flex flex-col gap-3 text-sm font-semibold text-white/80">
-              <a href="#" className="transition hover:text-white">
-                Tech Place
+              <a href="/innovation-collaboration" className="transition hover:text-white">
+                Innnovation & Collaboration
               </a>
-              <a href="#" className="transition hover:text-white">
-                Spin-offs
-              </a>
-              <a href="#" className="transition hover:text-white">
-                IP Academy
+              <a href="/industry-services" className="transition hover:text-white">
+                Industry Services
               </a>
             </div>
           </div>
@@ -100,9 +96,6 @@ function Footer() {
               </a>
               <a href="#" className="transition hover:text-white">
                 Policies
-              </a>
-              <a href="#" className="transition hover:text-white">
-                Sitemap
               </a>
             </div>
           </div>

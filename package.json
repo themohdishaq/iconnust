@@ -9,7 +9,8 @@
     "lint": "eslint",
     "db:schema": "node --env-file=.env.local scripts/apply-schema.mjs",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
-    "seed:content": "node --env-file=.env.local scripts/seed-content.mjs"
+    "seed:content": "node --env-file=.env.local scripts/seed-content.mjs",
+    "seed:partners": "node --env-file=.env.local scripts/seed-partners.mjs"
   },
   "dependencies": {
     "axios": "^1.18.1",

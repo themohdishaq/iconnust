@@ -27,13 +27,16 @@ export const metadata: Metadata = {
     description,
   },
 };
+export default async function NewsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const { q } = await searchParams;
 
-export default async function NewsPage() {
-  const [newsDocs, eventDocs, storyDocs] = await Promise.all([
-    News.list(),
-    Event.list(),
-    Story.list(),
-  ]);
+  const [newsDocs, eventDocs, storyDocs] = q
+    ? await Promise.all([News.search(q), Event.search(q), Story.search(q)])
+    : await Promise.all([News.list(), Event.list(), Story.list()]);
 
   const newsList = newsDocs.map((n) => ({
     id: n.id.toString(),
@@ -69,5 +72,13 @@ export default async function NewsPage() {
     image: s.image,
   }));
 
-  return <NewsPageClient newsList={newsList} stories={stories} events={events} />;
+  return (
+  <NewsPageClient
+  newsList={newsList}
+  stories={stories}
+  events={events}
+  initialSearch={q ?? ""}
+/>
+  )
+  
 }

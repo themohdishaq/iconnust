@@ -65,47 +65,16 @@ const researchVideos = {
   ]
 };
 
-// --- IP Area breakdown (donut chart) — matches reference: 1,418 Total IP Filed ---
-const patentDomainData = [
-  { name: "Designs", value: 673, color: "#3B82C4" },     // blue
-  { name: "Patents", value: 446, color: "#C3D62E" },     // olive / yellow-green
-  { name: "Copyrights", value: 245, color: "#98DF8A" },  // light green
-  { name: "Trademarks", value: 54, color: "#8E44AD" },   // purple
-];
-
-const totalIPFiledDonut = patentDomainData.reduce((sum, d) => sum + d.value, 0); // 1,418
-
-// --- IPs Filed (2020–2026) — stacked bar chart, matches reference ---
-const ipsFiledData = [
-  { year: "2020", industrialDesign: 89, copyright: 33, patents: 92, trademark: 19 },
-  { year: "2021", industrialDesign: 66, copyright: 43, patents: 65, trademark: 27 },
-  { year: "2022", industrialDesign: 59, copyright: 23, patents: 30, trademark: 0 },
-  { year: "2023", industrialDesign: 112, copyright: 30, patents: 24, trademark: 2 },
-  { year: "2024", industrialDesign: 8, copyright: 27, patents: 8, trademark: 12 },
-  { year: "2025", industrialDesign: 76, copyright: 44, patents: 9, trademark: 0 },
-  { year: "2026", industrialDesign: 35, copyright: 15, patents: 28, trademark: 0 },
-];
-
-// --- IPs Awarded (2020–2026) — stacked bar chart, matches reference (NIPO summary) ---
-const ipsAwardedData = [
-  { year: "2020", industrialDesign: 11, copyright: 1, patents: 4, trademark: 0 },
-  { year: "2021", industrialDesign: 30, copyright: 0, patents: 2, trademark: 0 },
-  { year: "2022", industrialDesign: 32, copyright: 19, patents: 1, trademark: 3 },
-  { year: "2023", industrialDesign: 6, copyright: 6, patents: 0, trademark: 1 },
-  { year: "2024", industrialDesign: 1, copyright: 21, patents: 0, trademark: 0 },
-  { year: "2025", industrialDesign: 12, copyright: 1, patents: 0, trademark: 1 },
-  { year: "2026", industrialDesign: 39, copyright: 16, patents: 3, trademark: 0 },
-];
+type IpBreakdownEntry = { name: string; value: number; color: string };
+type IpYearlyEntry = { year: string; industrialDesign: number; copyright: number; patents: number; trademark: number };
+type StatTileEntry = { label: string; value: number };
 
 // Precompute totals for the labels shown above each stacked bar
-const withTotal = (rows: typeof ipsFiledData) =>
+const withTotal = (rows: IpYearlyEntry[]) =>
   rows.map((d) => ({
     ...d,
     total: d.industrialDesign + d.copyright + d.patents + d.trademark,
   }));
-
-const ipsFiledDataWithTotal = withTotal(ipsFiledData);
-const ipsAwardedDataWithTotal = withTotal(ipsAwardedData);
 
 // --- Animation Variants ---
 const staggerContainer = {
@@ -146,7 +115,7 @@ const IPStackedBarChart = ({
   yAxisLabel,
 }: {
   title: string;
-  data: (typeof ipsFiledDataWithTotal);
+  data: (IpYearlyEntry & { total: number })[];
   yAxisLabel: string;
 }) => (
   <motion.div
@@ -214,8 +183,22 @@ const IPStackedBarChart = ({
   </motion.div>
 );
 
-const RndPortal = () => {
+const RndPortal = ({
+  stats,
+  ipBreakdown,
+  ipsFiled,
+  ipsAwarded,
+}: {
+  stats: StatTileEntry[];
+  ipBreakdown: IpBreakdownEntry[];
+  ipsFiled: IpYearlyEntry[];
+  ipsAwarded: IpYearlyEntry[];
+}) => {
   const { values, setField, status, error, handleSubmit } = useInquiryForm('innovation-collaboration');
+
+  const totalIPFiled = ipBreakdown.reduce((sum, d) => sum + d.value, 0);
+  const ipsFiledDataWithTotal = withTotal(ipsFiled);
+  const ipsAwardedDataWithTotal = withTotal(ipsAwarded);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
@@ -229,7 +212,7 @@ const RndPortal = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-700 to-transparent" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-8xl mx-auto px-6 relative z-10">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-3xl">
             <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2">
               <Activity size={14} />
@@ -256,7 +239,7 @@ const RndPortal = () => {
 
       {/* Analytics Dashboard (Charts & Graphs) */}
       <section id="our-impact" className="py-8 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-8xl mx-auto px-6">
           <div className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
             By the Numbers
           </div>
@@ -266,27 +249,11 @@ const RndPortal = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden mb-10">
-            {[
-              {
-                value: "1,418",
-                label: "IP Filings",
-                bg: "bg-[#0A2D4A]",
-              },
-              {
-                value: "310",
-                label: "IPRs Awarded",
-                bg: "bg-[#0E5E97]",
-              },
-              {
-                value: "43",
-                label: "Total Patents",
-                bg: "bg-[#0A2D4A]",
-              },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <div
                 key={index}
                 className={`
-                  ${stat.bg}
+                  ${index % 2 === 0 ? "bg-[#0A2D4A]" : "bg-[#0E5E97]"}
                   flex flex-col items-center justify-center
                   h-36 sm:h-40 md:h-44
                   border-b sm:border-b-0
@@ -307,7 +274,7 @@ const RndPortal = () => {
                     leading-none
                   "
                 >
-                  {stat.value}
+                  {stat.value.toLocaleString('en-US')}
                 </h2>
 
                 <p
@@ -341,7 +308,7 @@ const RndPortal = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
-                      data={patentDomainData}
+                      data={ipBreakdown}
                       cx="50%"
                       cy="50%"
                       innerRadius={62}
@@ -354,7 +321,7 @@ const RndPortal = () => {
                       label={({ value }) => value}
                       labelLine={false}
                     >
-                      {patentDomainData.map((entry, index) => (
+                      {ipBreakdown.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
@@ -367,7 +334,7 @@ const RndPortal = () => {
 
                 {/* Center label overlay */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-2xl font-bold text-slate-900">{totalIPFiledDonut}</span>
+                  <span className="text-2xl font-bold text-slate-900">{totalIPFiled}</span>
                   <span className="text-[10px] uppercase tracking-wide text-slate-500 text-center leading-tight">
                     Total IP Filed
                   </span>
@@ -376,7 +343,7 @@ const RndPortal = () => {
 
               {/* Legend */}
               <div className="space-y-2">
-                {patentDomainData.map((entry) => (
+                {ipBreakdown.map((entry) => (
                   <div key={entry.name} className="flex items-center text-[13px] text-slate-700">
                     <span
                       className="w-3 h-3 rounded-sm mr-2 shrink-0"
@@ -409,7 +376,7 @@ const RndPortal = () => {
 
       {/* Media & Video Hub */}
       <section id="media-hub" className="py-8 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-8xl mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
             <div>
               <span className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
@@ -469,10 +436,10 @@ const RndPortal = () => {
       </section>
 
       {/* Engagement CTA */}
-      <section id="propose-colloboration" className="py-16 bg-[#062539] text-white relative overflow-hidden max-w-7xl">
+      <section id="propose-colloboration" className="py-16 bg-[#062539] text-white relative ">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
         <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="max-w-8xl mx-auto px-6 relative z-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
               {/* Left: heading */}
               <div>

@@ -6,6 +6,7 @@ import { requireAdminSession } from '@/lib/auth';
 import News from '@/lib/models/News';
 import { saveUploadedImage, deleteUploadedImage } from '@/lib/uploads';
 import { slugify } from '@/lib/slugify';
+import { notifySubscribers } from '@/lib/notifySubscribers';
 
 export type FormState = { error?: string };
 
@@ -48,6 +49,8 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
   const slug = await uniqueSlug(title);
 
   await News.create({ title, slug, category, excerpt, content, image, date, readTime, featured });
+
+  await notifySubscribers({ subject: `New Article: ${title}`, title, path: `/news/${slug}` });
 
   revalidatePath('/admin/news');
   revalidatePath('/news');

@@ -60,7 +60,7 @@ export default function TeamPageClient({ leadership }: { leadership: Leader[] })
               The People Behind <span className=" text-blue-400">ICON</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-sm sm:text-base  text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
-              ICON — the Innovation &amp; Commercialization Network at NUST — is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
+              ICON — the Innovation &amp; Commercialization Office NUST — is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
             </motion.p>
           </motion.div>
         </div>
@@ -77,7 +77,7 @@ export default function TeamPageClient({ leadership }: { leadership: Leader[] })
                   <span>Who We Are</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-slate-900 mb-4 sm:mb-5">
-                  The Innovation &amp; Commercialization Network
+                  Innovation &amp; Commercialization Office
                 </h2>
                 <p className="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base lg:text-lg">
                   ICON serves as NUST&apos;s central hub for bridging the gap between world-class academic research and industrial application. We orchestrate the full technology transfer lifecycle — from invention disclosure and IP protection to licensing, spin-off creation, and market deployment.

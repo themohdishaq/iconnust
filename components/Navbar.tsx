@@ -4,24 +4,33 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search, Menu, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 
 function Navbar() {
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
+  const [query, setQuery] = useState("");
+  const router = useRouter();
+  const handleSearch = () => {
+    const value = query.trim();
+    if (!value) return;
 
+    router.push(`/news?q=${encodeURIComponent(value)}`);
+  };
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20);
   });
 
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "About", href: "/about-us" },
     { name: "Innovation & Collaboration", href: "/innovation-collaboration" },
     { name: "Industry Services", href: "/industry-services" },
     { name: "Commercialization Pathways", href: "/commercialization" },
     { name: "News", href: "/news" },
-    { name: "About", href: "/about-us" },
   ];
 
   return (
@@ -52,10 +61,19 @@ function Navbar() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search Technology..."
+                value={query}
+                maxLength={30}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSearch();
+                }}
+                placeholder="Search news, stories..."
                 className="pl-8 pr-4 py-1 text-[11px] text-black bg-slate-50 border border-slate-200 rounded-full w-48 focus:border-blue-900 transition-all outline-none"
               />
+              <button
+                onClick={handleSearch}> 
               <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              </button>
             </div>
           </div>
         </div>
