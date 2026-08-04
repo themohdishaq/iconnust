@@ -1,6 +1,4 @@
 -- ICON-NUST MySQL schema.
--- Apply with: mysql -u <user> -p <database> < lib/db/schema.sql
--- (or node --env-file=.env.local scripts/apply-schema.mjs)
 
 CREATE TABLE IF NOT EXISTS admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
