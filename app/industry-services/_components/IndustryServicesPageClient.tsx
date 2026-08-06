@@ -284,9 +284,7 @@ export default function IndustryServicesPage() {
                     </div>
                   ))}
                 </div>
-                <button className={`${c.btn} text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm transition-colors`}>
-                  Enquire About {active.title}
-                </button>
+                
               </div>
 
               <motion.div
