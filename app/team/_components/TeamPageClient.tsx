@@ -20,7 +20,7 @@ const leadership: Leader[] = [
     name: 'Dr. Hassan Waqar Rana',
     title: 'Director',
     dept: 'ICON NUST',
-    img: '/team/waqar.jpeg',
+    img: '/team/waqar.jpg',
   },
   {
     id: '2',
@@ -55,7 +55,7 @@ const leadership: Leader[] = [
     name: 'Ambreen Munir',
     title: 'Manager',
     dept: 'TTO NUST',
-    img: '/team/ambreen.jpeg',
+    img: '/team/ambreen.jpg',
   },
   {
     id: '7',

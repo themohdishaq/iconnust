@@ -37,7 +37,7 @@ const departments = [
     name: "NUST Intellectual Property Office",
     description:
       "Offering IP services since 2008 — initially dedicated to TIC incubatees — NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
-    image: "/main-pic/ipo.jpg",
+    image: "/main-pic/IPO.jpg",
     link: "https://nipo.nust.edu.pk/",
   },
   {

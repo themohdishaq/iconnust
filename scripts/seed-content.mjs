@@ -60,26 +60,6 @@ const newsSeed = [
   },
 ];
 
-const eventsSeed = [
-  { date: { day: '15', month: 'May', year: '2026' }, title: 'NUST Innovation Summit 2026', type: 'Conference', location: 'NUST H-12 Auditorium, Islamabad', desc: 'Annual flagship event bringing together entrepreneurs, investors, industry leaders, and researchers. Keynotes, startup exhibitions, and live pitch competitions.', registered: 850 },
-  { date: { day: '22', month: 'May', year: '2026' }, title: 'IP Commercialization Masterclass', type: 'Workshop', location: 'CIE Building, NUST', desc: 'A one-day intensive workshop on patent strategy, licensing negotiations, and IP monetization for researchers and innovators.', registered: 120 },
-  { date: { day: '05', month: 'Jun', year: '2026' }, title: 'Industry Connect Forum — AI & Robotics', type: 'Webinar', location: 'Online (Zoom)', desc: 'Industry leaders from the AI and robotics sector meet NUST researchers for matchmaking and sponsored R&D discussions.', registered: 340 },
-  { date: { day: '18', month: 'Jun', year: '2026' }, title: 'Startup Pitch Day — Incite Cohort 6', type: 'Pitch Event', location: 'NUST Tech One Incubator', desc: 'Six funded teams present their proof-of-concept results to a panel of investors and corporate partners.', registered: 200 },
-];
-
-const storiesSeed = [
-  { name: 'EKKO', tag: 'Health Tech', desc: 'A therapeutic wave device for neuro-rehabilitation of patients with cerebral palsy, autism, and speech disorders — now deployed in 8 hospitals.', founder: 'Dr. Ahmed Khan', funding: '$2.5M', img: 'https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80' },
-  { name: 'DermaVision', tag: 'AI Diagnostics', desc: 'AI-powered dermatological imaging with 94% accuracy for early skin cancer detection, licensed to 12 hospitals across Pakistan.', founder: 'Dr. Sara Ahmed', funding: '$1.8M', img: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80' },
-  { name: 'Myobionics', tag: 'Medical Devices', desc: 'EMG-controlled prosthetic gripper restoring mobility to upper-limb amputees at a fraction of global market cost.', founder: 'Dr. Faisal Mehmood', funding: '$3.2M', img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80' },
-  { name: 'Radwi Electronics', tag: 'AgriTech', desc: 'Smart irrigation controller deployed across 500+ farms, reducing water consumption by 35% and increasing yield by 22%.', founder: 'Eng. Zubair Ahmed', funding: '$1.2M', img: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80' },
-];
-
-const teamSeed = [
-  { name: 'Dr Hassan Waqar Raja', title: 'Director, ICON — NUST', dept: 'Innovation & Commercialization Network', bio: "Mr Hassan Waqar Raja leads ICON's strategic vision for transforming NUST's research output into economic value. With over two decades of experience in academia-industry collaboration, he has been instrumental in building NUST's commercialization infrastructure.", focus: ['Strategic Partnerships', 'Policy Development', 'Stakeholder Engagement'], img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80', email: 'director.icon@nust.edu.pk' },
-  { name: 'Mr Salam khan', title: 'Head, NIPO — Intellectual Property Office', dept: 'CIE Building, NUST H-12', bio: "Associate Professor at NUST and CEO of N-ovative Health Technologies NHT Pvt Ltd. Dr. Murtaza leads NIPO with a systematic approach to IP management, ensuring researchers can protect and commercialize their innovations with ease.", focus: ['IP Management', 'Patent Strategy', 'TISC Services'], img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80', email: 'nipo@nust.edu.pk' },
-  { name: 'Ms. Amna Farooq', title: 'Manager, Technology Transfer Office', dept: 'TTO — Licensing & Commercialization', bio: "Amna manages NUST's technology licensing portfolio and coordinates between industry partners and research groups. She has overseen 40+ licensing agreements and is a certified technology transfer professional (RTTP).", focus: ['Licensing', 'Industry Liaison', 'Spin-off Creation'], img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80', email: 'tto@nust.edu.pk' },
-  { name: 'Dr. Naveed Qadir', title: 'Head, Research Directorate', dept: 'Sponsored Research & Industry Projects', bio: "Dr. Naveed leads NUST's sponsored research function, connecting corporate partners with the right research groups. Under his leadership, annual sponsored research funding has grown from PKR 420M to PKR 1.8B.", focus: ['Sponsored R&D', 'Grant Management', 'Industry Projects'], img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80', email: 'research@nust.edu.pk' },
-];
 
 const pool = mysql.createPool({
   host: DB_HOST,
