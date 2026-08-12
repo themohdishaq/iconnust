@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 const title = 'Leadership Team';
 const description =
-  "Meet the leadership and faculty driving ICON's mission to connect NUST research with industry through commercialization, IP, and R&D partnerships.";
+  "Meet the leadership and faculty driving ICON's mission to connect NUST research with industry through commercialisation, IP, and R&D partnerships.";
 
 export const metadata: Metadata = {
   title,

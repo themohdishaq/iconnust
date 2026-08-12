@@ -13,7 +13,7 @@ function revalidateAll() {
   revalidatePath('/admin/stats');
   revalidatePath('/');
   revalidatePath('/innovation-collaboration');
-  revalidatePath('/commercialization');
+  revalidatePath('/commercialisation');
 }
 
 // ---- Stat Tiles (home / innovation impact numbers) ----

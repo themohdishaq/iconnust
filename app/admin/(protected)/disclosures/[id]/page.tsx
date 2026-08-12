@@ -88,7 +88,7 @@ export default async function DisclosureDetailPage({ params }: { params: Promise
 
       {d.status === 'approved' && (
         <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-6 mb-6">
-          <p className="text-emerald-900 text-sm font-bold mb-1">Published to the Commercialization page</p>
+          <p className="text-emerald-900 text-sm font-bold mb-1">Published to the Commercialisation page</p>
           <p className="text-emerald-700 text-sm">Status: {d.displayStatus} · {d.trl}</p>
         </div>
       )}

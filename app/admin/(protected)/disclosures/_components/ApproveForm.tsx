@@ -24,7 +24,7 @@ export default function ApproveForm({
 
   return (
     <form action={formAction} className="space-y-4 bg-emerald-50 border border-emerald-100 rounded-2xl p-6">
-      <h3 className="font-bold text-emerald-900 text-sm">Approve &amp; Publish to Commercialization Page</h3>
+      <h3 className="font-bold text-emerald-900 text-sm">Approve &amp; Publish to Commercialisation Page</h3>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className={labelClass}>Display Status</label>

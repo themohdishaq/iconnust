@@ -5,7 +5,7 @@ import StatTile from "@/lib/models/StatTile";
 
 const title = "Home";
 const description =
-  "Innovation & Commercialization Office (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
+  "Innovation & Commercialisation Office (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
 
 export const metadata: Metadata = {
   title,
@@ -28,7 +28,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
-  alternateName: "Innovation Collaboration and Commercialization Office, NUST",
+  alternateName: "Innovation Collaboration and Commercialisation Office, NUST",
   url: SITE_URL,
   logo: `${SITE_URL}/icon-logo.png`,
   parentOrganization: {

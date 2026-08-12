@@ -20,7 +20,7 @@ export async function approveDisclosureAction(id: string, _prevState: ApproveSta
 
   revalidatePath('/admin/disclosures');
   revalidatePath(`/admin/disclosures/${id}`);
-  revalidatePath('/commercialization');
+  revalidatePath('/commercialisation');
   redirect('/admin/disclosures');
 }
 
@@ -36,12 +36,12 @@ export async function resetToPendingAction(id: string) {
   await InventionDisclosure.update(id, { status: 'pending' });
   revalidatePath('/admin/disclosures');
   revalidatePath(`/admin/disclosures/${id}`);
-  revalidatePath('/commercialization');
+  revalidatePath('/commercialisation');
 }
 
 export async function deleteDisclosureAction(id: string) {
   await requireAdminSession();
   await InventionDisclosure.remove(id);
   revalidatePath('/admin/disclosures');
-  revalidatePath('/commercialization');
+  revalidatePath('/commercialisation');
 }

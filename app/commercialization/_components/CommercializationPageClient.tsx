@@ -196,7 +196,7 @@ const nustShowcaseProducts: PublishedTech[] = [
     id: 'swarm-robotics-kits',
     title: 'Swarm Robotics Kits',
     domain: 'Robotics & STEM Education',
-    status: 'Ready for Commercialization',
+    status: 'Ready for Commercialisation',
     trl: '7–8',
     impact:
       'Indigenous multi-robot kits for universities, colleges, and schools, built to programme collective robot behaviour.',
@@ -453,7 +453,7 @@ export default function CommercializationPathwaysPage() {
         />
         <div className="max-w-8xl  relative z-10 px-4">
           <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block">
-            Commercialization Pathways
+            Commercialisation Pathways
           </div>
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-7xl  mx-auto text-left flex flex-col items-left">
 
@@ -558,7 +558,7 @@ export default function CommercializationPathwaysPage() {
             <div>
               <span className="text-[#FCAF17] font-bold text-[11px] uppercase tracking-[0.4em] mb-3 block">Technology Portfolio</span>
 
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">Available for Commercialization</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">Available for Commercialisation</h2>
             </div>
           </div>
 

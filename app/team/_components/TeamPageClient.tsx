@@ -123,7 +123,7 @@ const slideLeft = {
 };
 
 export default function TeamPageClient() {
-  const [selectedLeader, setSelectedLeader] = useState<Leader | null>(null);
+  
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans">

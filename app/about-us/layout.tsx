@@ -7,14 +7,14 @@ import {
 
 const title = "About ICON NUST";
 const description =
-  "Learn about the Innovation and Commercialization Office (ICON) at NUST. Discover our mission, constituent offices, technology transfer initiatives, intellectual property services, corporate partnerships, and commitment to transforming research into real-world innovation.";
+  "Learn about the Innovation and Commercialisation Office (ICON) at NUST. Discover our mission, constituent offices, technology transfer initiatives, intellectual property services, corporate partnerships, and commitment to transforming research into real-world innovation.";
 
 export const metadata: Metadata = {
   title,
   description,
   keywords: [
     "About ICON NUST",
-    "Innovation and Commercialization Office",
+    "Innovation and Commercialisation Office",
     "ICON NUST",
     "NUST",
     "National University of Sciences and Technology",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     "Corporate Advisory Council",
     "CAC NUST",
     "Technology Transfer Pakistan",
-    "Research Commercialization",
+    "Research Commercialisation",
     "University Innovation",
     "Intellectual Property",
     "Patent Support Pakistan",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     "Sponsored Research",
     "University Research",
     "Innovation Ecosystem Pakistan",
-    "Commercialization of Research",
+    "Commercialisation of Research",
     "University Spin-offs",
     "Research Partnerships",
     "Innovation Office Pakistan",

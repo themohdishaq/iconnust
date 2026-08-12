@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${SITE_URL}/commercialization`,
+      url: `${SITE_URL}/commercialisation`,
       changeFrequency: 'monthly',
       priority: 0.8,
     },

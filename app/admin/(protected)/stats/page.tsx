@@ -59,7 +59,7 @@ export default async function AdminStatsPage() {
     <div>
       <h1 className="text-2xl font-serif text-slate-900 mb-1">Stats & Impact</h1>
       <p className="text-slate-500 text-sm mb-8">
-        Manage the numbers and chart data shown on the Home, Innovation &amp; Collaboration, and Commercialization pages.
+        Manage the numbers and chart data shown on the Home, Innovation &amp; Collaboration, and Commercialisation pages.
       </p>
 
       <div className="space-y-6">

@@ -152,7 +152,7 @@ const App = ({
       titleLine1: "Innovation",
       highlight: "Par Excellence",
       titleLine2: " ",
-      desc: "The Innovation & Commercialization Network at NUST bridge the gap between academic brilliance and global industrial impact.",
+      desc: "The Innovation & Commercialisation Network at NUST bridge the gap between academic brilliance and global industrial impact.",
       img: "/main-pic/mainoffice.jpg",
     },
     {
@@ -164,7 +164,7 @@ const App = ({
       img: "/main-pic/hero1.jpg",
     },
     {
-      tag: "Commercialization",
+      tag: "Commercialisation",
       titleLine1: "Seamless",
       highlight: "Technology",
       titleLine2: "Transformation",
@@ -222,13 +222,13 @@ const App = ({
                       : "opacity-0 translate-y-8 pointer-events-none"
                   }`}
                 >
-                  <div className="inline-flex items-center space-x-2 text-[#C9962A] font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
+                  <div className="inline-flex uppercase items-center space-x-2 text-[#C9962A] font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
                     <div className="w-12 h-px bg-[#C9962A]" />
                     <span>{slide.tag}</span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4  font-tahoma-font font-medium text-slate-900 leading-[1.02]  tracking-tight">
+                  <h1 className="text-3xl sm:text-4xl uppercase md:text-5xl lg:text-6xl mt-4  font-tahoma-font font-medium text-slate-900 leading-[1.02]  tracking-tight">
                     {slide.titleLine1} <br />
-                    <span className=" icon-brand-font font-tahoma-font drop-shadow-sm">
+                    <span className=" uppercase icon-brand-font font-tahoma-font drop-shadow-sm">
                       {slide.highlight}
                     </span>{" "}
                     <br />
@@ -408,7 +408,7 @@ const App = ({
                 label: "Ready to License",
                 count: "10",
                 icon: BadgeCheck,
-                sub: "Cutting-edge technologies awaiting commercialization",
+                sub: "Cutting-edge technologies awaiting commercialisation",
               },
             ].map((item, i) => {
               const Icon = item.icon;
