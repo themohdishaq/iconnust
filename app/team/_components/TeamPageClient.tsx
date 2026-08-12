@@ -169,7 +169,7 @@ export default function TeamPageClient() {
                   ICON serves as NUST&apos;s central hub for bridging the gap between world-class academic research and industrial application. We orchestrate the full technology transfer lifecycle — from invention disclosure and IP protection to licensing, spin-off creation, and market deployment.
                 </p>
                 <p className="text-slate-600 leading-relaxed mb-6 text-sm sm:text-base">
-                  Operating through four interconnected pillars — the Technology Transfer Office (TTO), the Intellectual Property Office (NIPO), the Professional Development Centre (PDC), and the Research Directorate — ICON touches every dimension of NUST&apos;s commercial innovation agenda.
+                  Operating through three constituent offices — the Corporate Advisory Council (CAC), NUST Intellectual Property Office (NIPO), and Technology Transfer Office (TTO) — ICON touches every dimension of NUST's commercial innovation agenda.
                 </p>
               </motion.div>
 
