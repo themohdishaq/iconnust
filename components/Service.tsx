@@ -18,7 +18,6 @@ const services = [
     desc: 'Custom research projects designed to solve specific industrial bottlenecks through applied science and engineering. From feasibility studies to full-scale applied research, ICON structures industry-funded projects with clear IP agreements.',
     icon: <FlaskConical size={22} />,
     img: '/industry-services/rnd.jpg',
-    stat: '150+ Active Projects',
     bullets: [
       'Joint research agreements with defined milestones',
       'Access to 447+ research, teaching, key lab  centers',
@@ -32,7 +31,6 @@ const services = [
     desc: 'Strategic guidance from world-renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
     img: '/industry-services/consultancy.jpg',
-    stat: '500+ Faculty Experts',
     bullets: [
       'Engineering, science, Architecture and other domains covered',
       'Technical audits, feasibility reviews & expert testimony',
@@ -45,7 +43,6 @@ const services = [
   desc: "Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.",
   icon: <Users size={22} />, // or Briefcase, GraduationCap, Building2
   img: '/industry-services/lectures.jpg',
-  stat: '100+ Faculty Placements',
   bullets: [
     'Industry placements lasting from a few days to several weeks',
     'Promotes collaborative R&D, innovation, and process improvement',
@@ -174,18 +171,7 @@ function ServiceRow({
                 }`}
               />
 
-              {/* stat badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.45 }}
-                className="absolute bottom-6 left-6 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 rounded-xl"
-              >
-                <span className="text-[10px] font-black uppercase tracking-widest text-white">
-                  {service.stat}
-                </span>
-              </motion.div>
+              
 
               {/* watermark index */}
               <div className="absolute top-4 right-5 text-white/[0.07] font-serif text-[110px] leading-none select-none pointer-events-none font-bold">

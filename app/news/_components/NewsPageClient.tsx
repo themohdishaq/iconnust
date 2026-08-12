@@ -2,8 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowRight, Calendar, Tag, Search, ChevronRight, Mail,
-  Send, Filter, ExternalLink, Play, Clock, Users, TrendingUp,
+  ArrowRight, Calendar, Tag, Search, ChevronRight,  Play, Clock, Users, TrendingUp,
   Newspaper, Award, Zap, Globe, BookOpen
 } from 'lucide-react';
 import Link from 'next/link';

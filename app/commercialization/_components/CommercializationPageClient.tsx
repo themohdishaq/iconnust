@@ -132,7 +132,112 @@ const iconSupport: Record<string, string[]> = {
   '9':   ['License execution', 'Revenue sharing', 'Export & international licensing'],
 };
 
-type PublishedTech = { id: string; title: string; domain: string; status: string; trl: string };
+type PublishedTech = {
+  id: string;
+  title: string;
+  domain: string;
+  status: string;
+  trl: string;
+  impact?: string; // Optional societal-impact / one-line pitch shown on the card
+};
+
+// ── NUST TOP HIGH-IMPACT PRODUCTS (SHOWCASE) ────────────────────────────
+// Sourced from "Top High-Impact Products Showcasing NUST's Societal
+// Contribution" — used as a curated flagship showcase and as a fallback
+// for the "Available for Commercialization" grid whenever the live
+// invention-disclosure API has not yet published any approved entries.
+const nustShowcaseProducts: PublishedTech[] = [
+  {
+    id: 'nab-ai-portal',
+    title: 'NAB AI Portal',
+    domain: 'AI & Public Sector',
+    status: 'Commercialized',
+    trl: '9',
+    impact:
+      'Intelligent financial crime analysis platform that automates case review, detects anomalies, and speeds up investigation and decision-making.',
+  },
+  {
+    id: 'infinitary-tactical-simulator',
+    title: 'Infinitary Tactical Simulator',
+    domain: 'Defense & VR Training',
+    status: 'Commercialized',
+    trl: '9',
+    impact:
+      'High-realism VR training platform for law-enforcement and military, reducing training cost and safety risk versus live-fire exercises.',
+  },
+  {
+    id: 'safe-smart-cities',
+    title: 'Safe Smart Cities',
+    domain: 'AI & Urban Security',
+    status: 'Commercialized',
+    trl: '9',
+    impact:
+      'Real-time AI detection of vehicles, people, and abnormal activity, deployed in Lahore (PSCA) and Mardan (KPK) Safe City projects.',
+  },
+  {
+    id: 'digital-human-project',
+    title: 'Digital Human Project',
+    domain: 'Healthcare AI',
+    status: 'Commercialized',
+    trl: '9',
+    impact:
+      'AI solutions for medical imaging, diagnostics, and surgical planning — Brain MRI, Pulmonary AI, Breast Cancer Detection, DICOM Viewer.',
+  },
+  {
+    id: 'myo-prosthetic-upper-limb',
+    title: 'Myo Prosthetic Upper Limb',
+    domain: 'Biomedical Devices',
+    status: 'Commercialized',
+    trl: '9',
+    impact:
+      'Below-elbow prosthetic limb developed by NCRA NUST, already sold to patients and reducing Pakistan\'s import bill for assistive devices.',
+  },
+  {
+    id: 'swarm-robotics-kits',
+    title: 'Swarm Robotics Kits',
+    domain: 'Robotics & STEM Education',
+    status: 'Ready for Commercialization',
+    trl: '7–8',
+    impact:
+      'Indigenous multi-robot kits for universities, colleges, and schools, built to programme collective robot behaviour.',
+  },
+  {
+    id: 'heritage-preservation-arvr',
+    title: 'Heritage Preservation through AR/VR',
+    domain: 'AR/VR & Cultural Heritage',
+    status: 'Preparing for UNESCO Scale-up',
+    trl: '6',
+    impact:
+      'AR/VR reconstructions of Pakistani heritage sites — 2 completed (Jandial Temple, Taxila, Dharmarajika), 3 more in development for UNESCO World Heritage Sites.',
+  },
+  {
+    id: 'ai-smart-agriculture',
+    title: 'AI Portal & App for Smart Agriculture',
+    domain: 'AgriTech',
+    status: 'Under Development — Deployment Phase',
+    trl: '6',
+    impact:
+      'Web and mobile advisory platform for farmers and agri-officers, giving real-time crop, weather, irrigation, and pest-control guidance.',
+  },
+  {
+    id: 'four-legged-robot',
+    title: '4-Legged Robot',
+    domain: 'Robotics & STEM Education',
+    status: 'Under Development',
+    trl: '4–5',
+    impact:
+      'Quadruped research robot platform for higher-level robotics research at universities and R&D organisations.',
+  },
+  {
+    id: 'multi-dof-upper-limb-prosthesis',
+    title: 'Multi DoF Upper Limb Prosthesis',
+    domain: 'Biomedical Devices',
+    status: 'Under Development',
+    trl: '4–5',
+    impact:
+      'Multi-degree-of-freedom prosthetic arm with all fingers, including the thumb, mimicking natural hand movement — in final development.',
+  },
+];
 
 const faqs = [
   {
@@ -224,13 +329,18 @@ export default function CommercializationPathwaysPage() {
   const [idfError, setIdfError] = useState('');
 
   // ── Published (approved) technologies for "Available for Commercialization" ──
-  const [techPortfolio, setTechPortfolio] = useState<PublishedTech[]>([]);
+  // Falls back to the curated NUST showcase products whenever the API
+  // hasn't published any approved disclosures yet (or the call fails),
+  // so the section is never empty.
+  const [techPortfolio, setTechPortfolio] = useState<PublishedTech[]>(nustShowcaseProducts);
 
   useEffect(() => {
     fetch('/api/invention-disclosures')
       .then((res) => res.json())
-      .then((data: PublishedTech[]) => setTechPortfolio(data))
-      .catch(() => setTechPortfolio([]));
+      .then((data: PublishedTech[]) =>
+        setTechPortfolio(data && data.length > 0 ? data : nustShowcaseProducts)
+      )
+      .catch(() => setTechPortfolio(nustShowcaseProducts));
   }, []);
 
   const pathway = pathways.find((p) => p.id === activePathway)!;
@@ -254,6 +364,7 @@ export default function CommercializationPathwaysPage() {
           website: formData.website,
         }),
       });
+
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error || 'Something went wrong. Please try again.');
@@ -345,7 +456,7 @@ export default function CommercializationPathwaysPage() {
             Commercialization Pathways
           </div>
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-7xl  mx-auto text-left flex flex-col items-left">
-          
+
             <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl  font-serif text-slate-900 mb-5 leading-tight tracking-tight">
               From Research Bench to <div >Commercial Reality</div>
             </motion.h1>
@@ -359,13 +470,13 @@ export default function CommercializationPathwaysPage() {
               >
                 Submit an Invention Disclosure
               </button>
-            
+
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-     
+
 
       {/* ── PATHWAYS ──────────────────────────────────────────────────── */}
       <section id="pathways" className="py-8 bg-white">
@@ -379,7 +490,7 @@ export default function CommercializationPathwaysPage() {
           </div>
 
           {/* Tab switcher */}
-          
+
           <div className="flex flex-wrap justify-items-start gap-4  border-b border-slate-200 mb-4 pb-4">
             {pathways.map((s) => (
               <button
@@ -406,7 +517,7 @@ export default function CommercializationPathwaysPage() {
               {/* Left: content */}
               <div className="p-5   flex flex-col justify-between">
                 <div>
-                  
+
                   <span className={`text-[10px] font-black uppercase text-[#FCAF17] tracking-[0.4em]  mb-3 block`}>{pathway.tagline}</span>
                   <h3 className="text-xl sm:text-2xl lg:text-3xl font-serif font-tahoma-font text-slate-900 mb-3">{pathway.title}</h3>
                   <p className="text-slate-600 leading-relaxed mb-6">{pathway.description}</p>
@@ -438,7 +549,6 @@ export default function CommercializationPathwaysPage() {
         </div>
       </section>
 
-    
 
 
       {/* ── TECH PORTFOLIO ────────────────────────────────────────────── */}
@@ -471,12 +581,17 @@ export default function CommercializationPathwaysPage() {
                     <span className=" icon-brand-font px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1">
                       <CheckCircle2 size={11} /> {tech.status}
                     </span>
-                   
+
                   </div>
                   <h4 className="text-lg font-bold text-slate-900 mb-2  transition-colors leading-snug">{tech.title}</h4>
                   <p className="text-sm font-semibold text-[#FCAF17] flex items-center gap-1.5 mb-2">
                     <BookOpen size={13} /> {tech.domain}
                   </p>
+                  {tech.impact && (
+                    <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
+                      {tech.impact}
+                    </p>
+                  )}
                 </div>
                 <button
                   onClick={() => openIdfModal(tech)}
@@ -494,7 +609,7 @@ export default function CommercializationPathwaysPage() {
       <section className="bg-[#0a2342] py-10 sm:py-14 lg:py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-          
+
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-white mb-3">Have an Innovation to Commercialise?</h2>
           <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-sm sm:text-base lg:text-lg leading-relaxed">
             Whether you are at the idea stage or have a tested prototype, ICON&apos;s commercialisation team will identify the right pathway and support you every step of the way.
@@ -595,7 +710,7 @@ export default function CommercializationPathwaysPage() {
       {/* ── FAQs ──────────────────────────────────────────────────────── */}
       <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
          <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
-        
+
         {/* Header */}
         <div className="mb-12 sm:mb-16 text-left">
           <span className="text-[#CA9F3B] font-bold text-xs uppercase tracking-[0.15em] mb-4 block">
@@ -604,7 +719,7 @@ export default function CommercializationPathwaysPage() {
           <h2 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">
             Frequently Asked Questions
           </h2>
-          
+
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <div key={i} className="border-b border-[#E5E0D5]">
@@ -657,9 +772,9 @@ export default function CommercializationPathwaysPage() {
                   <span className="text-blue-300 font-bold text-[10px] uppercase tracking-[0.4em] mb-2 block">
                     ICON · Intellectual Property Office
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-serif font-tahoma-font text-white">Invention Disclosure Form</h3>
+                  <h3 className="text-xl sm:text-2xl font-serif font-tahoma-font text-white">Invention Form</h3>
                   <p className="text-slate-300 text-xs mt-1">
-                    Confidential submission — reviewed only by the ICON commercialisation team.
+                  Your form will reviewed only by the ICON commercialisation team.
                   </p>
                 </div>
                 <button
@@ -831,57 +946,6 @@ export default function CommercializationPathwaysPage() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
-                    Funding Source
-                  </label>
-                  <select
-                    name="fundingSource"
-                    value={idfData.fundingSource} onChange={handleIdfChange}
-                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 focus:border-blue-600 focus:outline-none transition-colors"
-                  >
-                    <option value="">Select an option</option>
-                    <option value="self">Self-funded</option>
-                    <option value="nust-internal">NUST Internal Grant</option>
-                    <option value="govt">Government Grant</option>
-                    <option value="industry">Industry Sponsored</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
-                    Has this invention been publicly disclosed?
-                  </label>
-                  <div className="flex gap-6 mb-2">
-                    <label className="flex items-center gap-2 text-sm text-slate-700">
-                      <input
-                        type="radio" name="priorDisclosure" value="no"
-                        checked={idfData.priorDisclosure === 'no'} onChange={handleIdfChange}
-                      />
-                      No
-                    </label>
-                    <label className="flex items-center gap-2 text-sm text-slate-700">
-                      <input
-                        type="radio" name="priorDisclosure" value="yes"
-                        checked={idfData.priorDisclosure === 'yes'} onChange={handleIdfChange}
-                      />
-                      Yes
-                    </label>
-                  </div>
-                  {idfData.priorDisclosure === 'yes' && (
-                    <textarea
-                      name="priorDisclosureDetails" rows={2}
-                      value={idfData.priorDisclosureDetails} onChange={handleIdfChange}
-                      placeholder="Where and when (e.g. conference paper, publication, presentation, demo)?"
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-md text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:outline-none transition-colors resize-none"
-                    />
-                  )}
-                </div>
-
-                {idfStatus === 'error' && (
-                  <p className="text-red-600 text-sm font-medium bg-red-50 border border-red-100 rounded-md px-4 py-3">{idfError}</p>
-                )}
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
@@ -890,7 +954,7 @@ export default function CommercializationPathwaysPage() {
                     className="flex-1 bg-blue-900 hover:bg-blue-800 text-white px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm shadow-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     <Mail size={16} />
-                    {idfStatus === 'submitting' ? 'Submitting…' : 'Submit Disclosure'}
+                    {idfStatus === 'submitting' ? 'Submitting…' : 'Submit Form'}
                   </button>
                   <button
                     type="button"

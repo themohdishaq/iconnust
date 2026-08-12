@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import HomePageClient from "./_components/HomePageClient";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import StatTile from "@/lib/models/StatTile";
-import Partner from "@/lib/models/Partner";
 
 const title = "Home";
 const description =
@@ -49,8 +48,6 @@ export default async function Page() {
   const tiles = await StatTile.list('home');
   const stats = tiles.map((t) => ({ label: t.label, value: t.value }));
 
-  const partnerDocs = await Partner.list();
-  const partners = partnerDocs.map((p) => ({ name: p.name, logo: p.logo }));
 
   return (
     <>
@@ -58,7 +55,7 @@ export default async function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
       />
-      <HomePageClient stats={stats} partners={partners} />
+      <HomePageClient stats={stats}  />
     </>
   );
 }

@@ -27,18 +27,6 @@ export const metadata: Metadata = {
 };
 
 export default async function TeamPage() {
-  const members = await TeamMember.list();
-
-  const leadership = members.map((m) => ({
-    id: m.id.toString(),
-    name: m.name,
-    title: m.title,
-    dept: m.dept,
-    bio: m.bio,
-    focus: m.focus,
-    img: m.image,
-    email: m.email,
-  }));
-
-  return <TeamPageClient leadership={leadership} />;
+  
+  return <TeamPageClient  />;
 }

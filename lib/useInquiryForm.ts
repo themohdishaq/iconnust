@@ -5,14 +5,32 @@ import { useState, type ChangeEvent, type FormEvent } from 'react';
 type Source = 'home' | 'industry-services' | 'innovation-collaboration';
 
 type Values = {
+  name: string;
   organization: string;
+  industry: string;
+  phoneNumber: string;
   email: string;
+  province: string;
+  address: string;
+  briefAboutCompany: string;
   domain: string;
   message: string;
   website: string; // honeypot — must stay empty
 };
 
-const initialValues: Values = { organization: '', email: '', domain: '', message: '', website: '' };
+const initialValues: Values = {
+  name: '',
+  organization: '',
+  industry: '',
+  phoneNumber: '',
+  email: '',
+  province: '',
+  address: '',
+  briefAboutCompany: '',
+  domain: '',
+  message: '',
+  website: '',
+};
 
 export function useInquiryForm(source: Source) {
   const [values, setValues] = useState<Values>(initialValues);

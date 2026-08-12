@@ -9,7 +9,13 @@ export default async function HomeInquiriesPage() {
   const items = docs.map((d) => ({
     id: d.id.toString(),
     organization: d.organization,
+    name: d.name,
+    industry: d.industry,
+    phoneNumber: d.phoneNumber,
     email: d.email,
+    province: d.province,
+    address: d.address,
+    briefAboutCompany: d.briefAboutCompany,
     domain: d.domain,
     message: d.message,
     status: d.status,

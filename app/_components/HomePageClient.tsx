@@ -47,12 +47,47 @@ const AnimatedStatValue = ({ value }: { value: number }) => {
 type StatTileData = { label: string; value: number };
 type PartnerData = { name: string; logo: string | null };
 
+const partners: PartnerData[] = [
+  { name: 'Toyota Indus Motor Company', logo: '/toyota.jpg' },
+  { name: 'Attock Refinery Limited (ARL)', logo: '/Attock Refinery Limited (ARL).png' },
+  { name: 'Pakistan Business Council (PBC)', logo: '/Pakistan Business Council (PBC).svg' },
+  { name: 'Scotmann Pharmaceuticals', logo: '/Scotmann Pharmaceuticals.png' },
+  { name: "Wilson's Pharmaceuticals", logo: "/Wilson's Pharmaceuticals logo.jpg" },
+  { name: 'Fauji Fertilizer Company (FFC)', logo: '/Fauji Fertilizer Company (FFC).png' },
+  { name: 'AGP Limited', logo: '/AGP Limited.jpg' },
+  { name: 'Honda', logo: '/Honda.png' },
+  { name: 'CTGI', logo: '/CTGI logo.jpg' },
+  { name: 'Huawei Technologies', logo: '/Huawei Technologies.png' },
+  { name: 'Interactive Group', logo: '/Interactive Group.jpg' },
+  { name: 'Crescent Steel & Allied Products Limited', logo: '/Crescent Steel & Allied Products Limited.png' },
+  { name: 'Graana.com', logo: '/Graana.png' },
+  { name: 'Khushhali Microfinance Bank', logo: '/Khushhali Microfinance Bank.png' },
+  { name: 'Pakistan Telecommunication Authority (PTA)', logo: '/Pakistan Telecommunication Authority (PTA).png' },
+  { name: 'Allied Bank', logo: '/Allied Bank logo.png' },
+  { name: 'Oracle', logo: '/Oracle.webp' },
+  { name: 'Rastgar Engineering Company', logo: null },
+  { name: 'Sustainable Development Policy Institute (SDPI)', logo: '/Sustainable Development Policy Institute (SDPI).webp' },
+  { name: 'Nayatel', logo: '/Nayatel.jpg' },
+  { name: 'Netsol Technologies', logo: '/Netsol Technologies.svg' },
+  { name: 'NADRA', logo: '/NADRA.png' },
+  { name: 'Serena Hotels', logo: '/Serena Hotels.png' },
+  { name: 'Keystone', logo: null },
+  { name: 'Moftak Solutions', logo: '/Moftak Solutions.jpg' },
+  { name: 'PepsiCo', logo: '/PepsiCo.jpg' },
+  { name: 'Askari Bank', logo: '/Askari Bank.jpg' },
+  { name: 'National Bank of Pakistan (NBP)', logo: '/National Bank of Pakistan (NBP).jpg' },
+  { name: 'Jazz', logo: '/Jazz.jpg' },
+  { name: 'Habib Bank Limited (HBL)', logo: '/Habib Bank Limited (HBL).jpg' },
+  { name: 'Pakistan Tobacco Company (PTC)', logo: '/Pakistan Tobacco Company (PTC).png' },
+  { name: 'International Finance Corporation (IFC)', logo: '/International Finance Corporation (IFC).jpg' },
+  { name: 'Islamabad Chamber of Commerce & Industry (ICCI)', logo: '/Islamabad Chamber of Commerce & Industry (ICCI).jpg' },
+  { name: 'Pakistan Agricultural Research Council (PARC)', logo: '/Pakistan Agricultural Research Council (PARC).jpg' },
+  { name: 'Pakistan Telecommunication Company Limited (PTCL)', logo: '/Pakistan Telecommunication Company Limited (PTCL).png' },
+];
 const App = ({
   stats,
-  partners,
 }: {
   stats: StatTileData[];
-  partners: PartnerData[];
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [newsArticles, setNewsArticles] = useState<HomeNewsItem[]>([]);
@@ -114,25 +149,25 @@ const App = ({
   const heroSlides = [
     {
       tag: "Innovation",
-      titleLine1: "Where",
-      highlight: "Discovery",
-      titleLine2: "Ignites Growth.",
+      titleLine1: "Innovation",
+      highlight: "Par Excellence",
+      titleLine2: " ",
       desc: "The Innovation & Commercialization Network at NUST bridge the gap between academic brilliance and global industrial impact.",
       img: "/main-pic/mainoffice.jpg",
     },
     {
       tag: "Industry Synergy",
-      titleLine1: "Partnering for",
-      highlight: "Global Scale",
-      titleLine2: "and Impact.",
+      titleLine1: "Global",
+      highlight: "Partnerships",
+      titleLine2: "",
       desc: "Collaborate with world-class faculty and leverage ISO-certified testing facilities to solve complex industrial bottlenecks.",
       img: "/main-pic/hero1.jpg",
     },
     {
       tag: "Commercialization",
-      titleLine1: "From Lab Bench",
-      highlight: "to the Market",
-      titleLine2: "Seamlessly.",
+      titleLine1: "Seamless",
+      highlight: "Technology",
+      titleLine2: "Transformation",
       desc: "Navigate the journey from invention disclosure to strategic licensing with our dedicated technology transfer experts.",
       img: "/main-pic/lab.jpg",
     },
@@ -191,41 +226,38 @@ const App = ({
                     <div className="w-12 h-px bg-[#C9962A]" />
                     <span>{slide.tag}</span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl   font-tahoma-font font-medium text-slate-900 leading-[1.02] mb-5 sm:mb-8 tracking-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-4  font-tahoma-font font-medium text-slate-900 leading-[1.02]  tracking-tight">
                     {slide.titleLine1} <br />
                     <span className=" icon-brand-font font-tahoma-font drop-shadow-sm">
                       {slide.highlight}
                     </span>{" "}
                     <br />
-                    {slide.titleLine2}
+                    {slide?.titleLine2}
                   </h1>
-                  {/* <p className="text-xl text-slate-500 mb-10 leading-relaxed max-w-xl font-light">
-                    {slide.desc}
-                  </p> */}
-
-                  <div className="flex flex-wrap gap-4 pt-5">
-                    <Link href="#partner-with-us">
-                      <button className="bg-[#FCAF17] text-[#0A2A40] px-5 py-3 font-black text-xs uppercase tracking-[0.2em]  transition-all shadow-xl shadow-blue-900/20 active:scale-95">
-                        Partner with us
-                      </button>
-                    </Link>
-                    {/* <button className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] border-b-2 border-slate-900 pb-1 hover:text-blue-900 hover:border-blue-900 transition-all">
-                      Impact Dashboard
-                    </button> */}
-                  </div>
                 </div>
               ))}
 
               {/* Slider Navigation Dots */}
               <div className="absolute bottom-4 sm:bottom-8 lg:bottom-16 2xl:-bottom-10 left-0 flex space-x-3">
-                {heroSlides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentSlide(idx)}
-                    className={`h-1.5 transition-all duration-500 rounded-full ${currentSlide === idx ? "w-10 bg-blue-900" : "w-3 bg-slate-200 hover:bg-blue-400"}`}
-                    aria-label={`Go to slide ${idx + 1}`}
-                  />
-                ))}
+                <div className=" flex flex-col pt-5">
+                  <Link
+                    href="#partner-with-us"
+                    className="cursor-pointer bg-[#FCAF17] text-[#0A2A40] px-5 py-3 font-black text-xs uppercase tracking-[0.2em]  transition-all shadow-xl shadow-blue-900/20 active:scale-95"
+                  >
+                    Partner with us
+                  </Link>
+
+                  <div className="flex left-0 flex space-x-3 mt-4 sm:mt-6 ">
+                    {heroSlides.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentSlide(idx)}
+                        className={`h-1.5 transition-all duration-500 rounded-full ${currentSlide === idx ? "w-10 bg-blue-900" : "w-3 bg-slate-200 hover:bg-blue-400"}`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -255,13 +287,6 @@ const App = ({
                 >
                   {/* Background glow effect on hover */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  {/* <div className="relative z-10 flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
-                      <div className="text-blue-900 bg-blue-100/50 p-1.5 sm:p-2 lg:p-3 rounded-lg group-hover:scale-110 group-hover:bg-blue-900 group-hover:text-white transition-all duration-300">
-                        {React.cloneElement(stat.icon, { size: 18, className: 'sm:w-5 sm:h-5 lg:w-6 lg:h-6' })}
-                      </div>
-                      
-                    </div> */}
 
                   <div className="relative z-10 flex flex-col items-center justify-center">
                     <div className="flex items-baseline justify-center space-x-1 mb-1">
@@ -339,16 +364,16 @@ const App = ({
         </div>
       </section>
       {/* Tech Place / Storefront */}
-      <section className="py-14 sm:py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-8  bg-slate-900 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] opacity-10 bg-fixed bg-cover" />
         <div className="max-w-8xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 sm:mb-14 lg:mb-20 gap-6 lg:gap-10">
             <div className="max-w-xl">
               <span className="icon-brand-font-secondary text-[11px] font-black uppercase tracking-[0.4em] mb-3 block">
-                Storefront
+                Where innovation meets education
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif leading-tight mb-4">
-                Tech Place: Marketplace of Innovation
+                Powering the university of tomorrow
               </h2>
               <p className="text-white text-sm sm:text-base lg:text-lg font-light">
                 Explore 80+ spin-offs and market-ready intellectual property
@@ -362,9 +387,6 @@ const App = ({
               >
                 LinkedIn Feed
               </Link>
-              <button className="bg-[#FCAF17] text-white] text-white px-6 py-3 font-black text-[12px] uppercase tracking-widest hover:bg-[#00558F] border border-[#00558F] transition-colors">
-                Licensed Tech
-              </button>
             </div>
           </div>
 
@@ -542,6 +564,8 @@ const App = ({
                 onSubmit={handleSubmit}
                 className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
               >
+                {" "}
+                {/* Honeypot */}{" "}
                 <input
                   type="text"
                   value={values.website}
@@ -551,89 +575,161 @@ const App = ({
                   aria-hidden="true"
                   className="absolute w-px h-px overflow-hidden opacity-0"
                   style={{ clip: "rect(0,0,0,0)" }}
-                />
+                />{" "}
+                {/* Name */}{" "}
                 <div className="flex flex-col space-y-2 group">
+                  {" "}
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
-                    Organization
-                  </label>
+                    {" "}
+                    Name{" "}
+                  </label>{" "}
+                  <input
+                    type="text"
+                    required
+                    value={values.name}
+                    onChange={setField("name")}
+                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
+                  />{" "}
+                </div>{" "}
+                {/* Company Name */}{" "}
+                <div className="flex flex-col space-y-2 group">
+                  {" "}
+                  <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
+                    {" "}
+                    Company Name{" "}
+                  </label>{" "}
                   <input
                     type="text"
                     required
                     value={values.organization}
                     onChange={setField("organization")}
                     className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
-                  />
-                </div>
+                  />{" "}
+                </div>{" "}
+                {/* Industry / Sector */}{" "}
                 <div className="flex flex-col space-y-2 group">
+                  {" "}
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
-                    Professional Email
-                  </label>
+                    {" "}
+                    Industry / Sector{" "}
+                  </label>{" "}
+                  <input
+                    type="text"
+                    required
+                    value={values.industry}
+                    onChange={setField("industry")}
+                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
+                  />{" "}
+                </div>{" "}
+                {/* Phone Number */}{" "}
+                <div className="flex flex-col space-y-2 group">
+                  {" "}
+                  <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
+                    {" "}
+                    Phone Number{" "}
+                  </label>{" "}
+                  <input
+                    type="tel"
+                    required
+                    value={values.phoneNumber}
+                    onChange={setField("phoneNumber")}
+                    autoComplete="tel"
+                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
+                  />{" "}
+                </div>{" "}
+                {/* Email */}{" "}
+                <div className="flex flex-col space-y-2 group">
+                  {" "}
+                  <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
+                    {" "}
+                    Email{" "}
+                  </label>{" "}
                   <input
                     type="email"
                     required
                     value={values.email}
                     onChange={setField("email")}
+                    autoComplete="email"
                     className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
-                  />
-                </div>
-                <div className="sm:col-span-2 flex flex-col space-y-2 group">
+                  />{" "}
+                </div>{" "}
+                {/* Province */}{" "}
+                <div className="flex flex-col space-y-2 group">
+                  {" "}
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
-                    Inquiry Nature
-                  </label>
-                  <select
-                    value={values.domain}
-                    onChange={setField("domain")}
-                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none appearance-none"
-                  >
-                    <option value="">Select Inquiry Nature...</option>
-                    <option value="Technology Licensing">
-                      Technology Licensing
-                    </option>
-                    <option value="Sponsored R&D">Sponsored R&D</option>
-                    <option value="Invention Disclosure">
-                      Invention Disclosure
-                    </option>
-                    <option value="Lab Services Request">
-                      Lab Services Request
-                    </option>
-                  </select>
-                </div>
+                    {" "}
+                    Province{" "}
+                  </label>{" "}
+                  <input
+                    type="text"
+                    required
+                    value={values.province}
+                    onChange={setField("province")}
+                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
+                  />{" "}
+                </div>{" "}
+                {/* Address */}{" "}
                 <div className="sm:col-span-2 flex flex-col space-y-2 group">
+                  {" "}
                   <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
-                    Message
-                  </label>
+                    {" "}
+                    Address{" "}
+                  </label>{" "}
+                  <input
+                    type="text"
+                    required
+                    value={values.address}
+                    onChange={setField("address")}
+                    autoComplete="street-address"
+                    className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none"
+                  />{" "}
+                </div>{" "}
+               
+                {/* Brief About Company */}{" "}
+                <div className="sm:col-span-2 flex flex-col space-y-2 group">
+                  {" "}
+                  <label className="text-[12px] font-black uppercase tracking-widest text-slate-400">
+                    {" "}
+                    Brief About Company{" "}
+                  </label>{" "}
                   <textarea
                     rows={4}
-                    value={values.message}
-                    onChange={setField("message")}
+                    value={values.briefAboutCompany}
+                    onChange={setField("briefAboutCompany")}
                     className="bg-transparent border-b border-slate-300 py-3 focus:border-blue-900 transition-all outline-none resize-none"
-                  ></textarea>
-                </div>
+                  ></textarea>{" "}
+                </div>{" "}
+              
                 {status === "success" && (
                   <div className="sm:col-span-2 text-emerald-700 text-sm font-medium bg-emerald-50 border border-emerald-100 rounded-lg px-4 py-3">
+                    {" "}
                     Thank you — your inquiry has been received. Our team will be
-                    in touch shortly.
+                    in touch shortly.{" "}
                   </div>
-                )}
+                )}{" "}
                 {status === "error" && (
                   <div className="sm:col-span-2 text-red-600 text-sm font-medium bg-red-50 border border-red-100 rounded-lg px-4 py-3">
-                    {error}
+                    {" "}
+                    {error}{" "}
                   </div>
-                )}
-                <div className="sm:col-span-2 pt-4 sm:pt-6 ">
+                )}{" "}
+                <div className="sm:col-span-2 pt-4 sm:pt-6">
+                  {" "}
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full bg-[#FCAF17] cursor-pointer text-[#0A2A40] py-4 font-black text-xs uppercase tracking-[0.2em]  transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group disabled:opacity-60"
+                    className="w-full bg-[#FCAF17] cursor-pointer text-[#0A2A40] py-4 font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center space-x-4 shadow-xl shadow-blue-900/20 group disabled:opacity-60"
                   >
+                    {" "}
                     <span>
+                      {" "}
                       {status === "submitting"
                         ? "Submitting…"
-                        : "Submit Engagement Request"}
-                    </span>
-                    <Send size={16} />
-                  </button>
-                </div>
+                        : "Submit Engagement Request"}{" "}
+                    </span>{" "}
+                    <Send size={16} />{" "}
+                  </button>{" "}
+                </div>{" "}
               </form>
             </div>
           </div>

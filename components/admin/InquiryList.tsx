@@ -3,7 +3,13 @@ import { Mail, Trash2, CheckCircle2, Circle } from 'lucide-react';
 export type InquiryListItem = {
   id: string;
   organization: string;
+  name: string;
+  industry: string;
+  phoneNumber: string;
   email: string;
+  province: string;
+  address: string;
+  briefAboutCompany: string;
   domain: string;
   message: string;
   status: 'new' | 'read';
@@ -42,6 +48,7 @@ export default function InquiryList({
                   )}
                   <h3 className="font-bold text-slate-900 truncate">{s.organization}</h3>
                 </div>
+                {s.name && <p className="text-slate-500 text-xs">{s.name}</p>}
                 <p className="text-slate-400 text-xs">{new Date(s.createdAt).toLocaleString()}</p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
@@ -78,9 +85,23 @@ export default function InquiryList({
                 <Mail size={13} />
                 {s.email}
               </a>
+              {s.phoneNumber && (
+                <a href={`tel:${s.phoneNumber}`} className="text-slate-600 hover:text-blue-700 transition-colors">
+                  {s.phoneNumber}
+                </a>
+              )}
+              {s.industry && <div className="text-slate-500">{s.industry}</div>}
               {s.domain && <div className="text-slate-500">{s.domain}</div>}
+              {(s.address || s.province) && (
+                <div className="text-slate-500 sm:col-span-2">
+                  {[s.address, s.province].filter(Boolean).join(', ')}
+                </div>
+              )}
             </div>
 
+            {s.briefAboutCompany && (
+              <p className="text-slate-600 text-sm leading-relaxed bg-slate-50 rounded-lg p-3 mb-2">{s.briefAboutCompany}</p>
+            )}
             {s.message && <p className="text-slate-600 text-sm leading-relaxed bg-slate-50 rounded-lg p-3">{s.message}</p>}
           </li>
         ))}

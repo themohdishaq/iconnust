@@ -219,7 +219,7 @@ const RndPortal = ({
               <span>ICON Innovation & Collaboration</span>
             </motion.div>
             <motion.h1 variants={fadeUp} className="text-5xl font-serif text-white my-4 leading-[1.1]">
-              Transform Your Invention into <div className=" sm:py-4 text-[#C9962A]">Global Impact</div>
+              Transform Invention into <div className=" sm:py-4 text-[#C9962A]">Innovation</div>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-slate-300 leading-relaxed mb-12 font-light">
               We help you legally protect your innovations. Drive breakthrough research through seamless IP filing,multi-disciplinary research clusters with industry partners to co-create solutions and maximizing your potential to change the world tomorrow.
@@ -359,18 +359,19 @@ const RndPortal = ({
           </motion.div>
 
           {/* ROW 2: IPs Filed + IPs Awarded, side by side */}
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
+          {/* <div className="grid lg:grid-cols-2 gap-10 items-start">
             <IPStackedBarChart
               title="IPs Filed (2020 - 2026)"
               data={ipsFiledDataWithTotal}
               yAxisLabel="Number of IP Filed"
             />
             <IPStackedBarChart
+            
               title="IPs Awarded (2020 - 2026)"
               data={ipsAwardedDataWithTotal}
               yAxisLabel="Number of IP Awarded"
             />
-          </div>
+          </div> */}
         </div>
       </section>
 

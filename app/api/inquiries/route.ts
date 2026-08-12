@@ -36,7 +36,20 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
-  const { source, organization, email, domain, message, website } = body as Record<string, unknown>;
+  const {
+    source,
+    organization,
+    email,
+    domain,
+    message,
+    website,
+    name,
+    industry,
+    phoneNumber,
+    province,
+    address,
+    briefAboutCompany,
+  } = body as Record<string, unknown>;
 
   // Honeypot: real users never fill this hidden field; bots often do.
   if (typeof website === 'string' && website.trim() !== '') {
@@ -47,7 +60,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid submission source.' }, { status: 400 });
   }
   if (typeof organization !== 'string' || organization.trim().length === 0 || organization.length > 200) {
-    return NextResponse.json({ error: 'Organization is required.' }, { status: 400 });
+    return NextResponse.json({ error: 'Company name is required.' }, { status: 400 });
   }
   if (typeof email !== 'string' || !EMAIL_RE.test(email) || email.length > 200) {
     return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 });
@@ -62,14 +75,26 @@ export async function POST(request: NextRequest) {
   const Model = modelsBySource[source];
   await Model.create({
     organization: organization.trim(),
+    name: typeof name === 'string' ? name.trim() : '',
+    industry: typeof industry === 'string' ? industry.trim() : '',
+    phoneNumber: typeof phoneNumber === 'string' ? phoneNumber.trim() : '',
     email: email.trim().toLowerCase(),
+    province: typeof province === 'string' ? province.trim() : '',
+    address: typeof address === 'string' ? address.trim() : '',
+    briefAboutCompany: typeof briefAboutCompany === 'string' ? briefAboutCompany.trim() : '',
     domain: typeof domain === 'string' ? domain.trim() : '',
     message: typeof message === 'string' ? message.trim() : '',
   });
 
   await notifyDepartment(source as NotificationSource, [
     ['Organization', organization.trim()],
+    ['Name', typeof name === 'string' && name.trim() ? name.trim() : '—'],
+    ['Industry / Sector', typeof industry === 'string' && industry.trim() ? industry.trim() : '—'],
+    ['Phone Number', typeof phoneNumber === 'string' && phoneNumber.trim() ? phoneNumber.trim() : '—'],
     ['Email', email.trim().toLowerCase()],
+    ['Province', typeof province === 'string' && province.trim() ? province.trim() : '—'],
+    ['Address', typeof address === 'string' && address.trim() ? address.trim() : '—'],
+    ['Brief About Company', typeof briefAboutCompany === 'string' && briefAboutCompany.trim() ? briefAboutCompany.trim() : '—'],
     ['Domain', typeof domain === 'string' && domain.trim() ? domain.trim() : '—'],
     ['Message', typeof message === 'string' && message.trim() ? message.trim() : '—'],
   ]);

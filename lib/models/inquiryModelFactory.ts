@@ -4,7 +4,13 @@ import type { RowDataPacket } from 'mysql2';
 export interface IInquiry {
   id: number;
   organization: string;
+  name: string;
+  industry: string;
+  phoneNumber: string;
   email: string;
+  province: string;
+  address: string;
+  briefAboutCompany: string;
   domain: string;
   message: string;
   status: 'new' | 'read';
@@ -15,7 +21,13 @@ export interface IInquiry {
 interface InquiryRow extends RowDataPacket {
   id: number;
   organization: string;
+  name: string;
+  industry: string;
+  phone_number: string;
   email: string;
+  province: string;
+  address: string;
+  brief_about_company: string;
   domain: string;
   message: string | null;
   status: 'new' | 'read';
@@ -27,7 +39,13 @@ function mapRow(row: InquiryRow): IInquiry {
   return {
     id: row.id,
     organization: row.organization,
+    name: row.name ?? '',
+    industry: row.industry ?? '',
+    phoneNumber: row.phone_number ?? '',
     email: row.email,
+    province: row.province ?? '',
+    address: row.address ?? '',
+    briefAboutCompany: row.brief_about_company ?? '',
     domain: row.domain,
     message: row.message ?? '',
     status: row.status,
@@ -36,7 +54,18 @@ function mapRow(row: InquiryRow): IInquiry {
   };
 }
 
-export type NewInquiry = { organization: string; email: string; domain: string; message: string };
+export type NewInquiry = {
+  organization: string;
+  name?: string;
+  industry?: string;
+  phoneNumber?: string;
+  email: string;
+  province?: string;
+  address?: string;
+  briefAboutCompany?: string;
+  domain: string;
+  message: string;
+};
 
 /**
  * Each inquiry form (Home / Industry Services / Innovation & Collaboration)
@@ -44,12 +73,21 @@ export type NewInquiry = { organization: string; email: string; domain: string; 
  */
 export function getInquiryModel(tableName: string) {
   async function create(data: NewInquiry): Promise<void> {
-    await query(`INSERT INTO ${tableName} (organization, email, domain, message) VALUES (?, ?, ?, ?)`, [
-      data.organization,
-      data.email,
-      data.domain,
-      data.message,
-    ]);
+    await query(
+      `INSERT INTO ${tableName} (organization, name, industry, phone_number, email, province, address, brief_about_company, domain, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        data.organization,
+        data.name ?? '',
+        data.industry ?? '',
+        data.phoneNumber ?? '',
+        data.email,
+        data.province ?? '',
+        data.address ?? '',
+        data.briefAboutCompany ?? '',
+        data.domain,
+        data.message,
+      ],
+    );
   }
 
   async function list(): Promise<IInquiry[]> {

@@ -29,7 +29,7 @@ function Navbar() {
     { name: "About", href: "/about-us" },
     { name: "Innovation & Collaboration", href: "/innovation-collaboration" },
     { name: "Industry Services", href: "/industry-services" },
-    { name: "Commercialization Pathways", href: "/commercialization" },
+    { name: "Commercialisation Pathways", href: "/commercialization" },
     { name: "News", href: "/news" },
   ];
 
@@ -48,7 +48,7 @@ function Navbar() {
         className="bg-[#00558F] border-b text-white border-blue-100"
       >
         <div className="max-w-8xl mx-auto px-3 md:px-6 flex justify-between items-center">
-          <div className="flex tahoma-font items-center border-transparent space-x-3.5 md:space-x-6 text-[10px] uppercase tracking-[0.2em] font-black">
+          <div className="flex font-tahoma-font  items-center border-transparent space-x-3.5 md:space-x-6 text-[10px] uppercase tracking-[0.2em] font-black">
             
             <Link href="/news#events" className=" transition-colors">
               Events
@@ -101,7 +101,7 @@ function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="group relative text-sm uppercase tracking-widest font-black transition-colors py-4 block icon-brand-font"
+                className="group relative text-[16px] uppercase font-tahoma-font font-medium tracking-wide font-black transition-colors py-4 block icon-brand-font"
               >
                 {/* <span className="transition-colors group-hover:text-blue-900">{link.name}</span> */}
                 <span className="absolute left-0 bottom-2 h-0.5 w-0 bg-blue-900 transition-all duration-300 group-hover:w-full" />

@@ -29,7 +29,7 @@ const departments = [
     name: "Corporate Advisory Council",
     description:
       "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government — engaging in advisory work, consultation, and joint R&D collaboration.",
-    image: "/main-pic/cacnust.jpg",
+    image: "/main-pic/CAC_team.jpg",
     link: "https://cac.nust.edu.pk/",
   },
   {
@@ -37,7 +37,7 @@ const departments = [
     name: "NUST Intellectual Property Office",
     description:
       "Offering IP services since 2008 — initially dedicated to TIC incubatees — NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
-    image: "/main-pic/niponust.jpg",
+    image: "/main-pic/ipo.jpg",
     link: "https://nipo.nust.edu.pk/",
   },
   {
@@ -45,9 +45,17 @@ const departments = [
     name: "Technology Transfer Office",
     description:
       "Being cognizant of the significant role that universities play in the knowledge economy, NUST established its Technology Transfer Office in 2011. The office is responsible for transferring knowledge and translating scientific results into real-world innovation — building entrepreneurial spirit, organising the transfer of new technological approaches, and arranging early-stage financing for transfer projects. It works to place NUST's own innovations into local industry, maintaining a clear path from research to commercial exploitation.",
-    image: "/main-pic/ttonust.jpg",
+    image: "/main-pic/TTO_team.jpg",
     link: "https://tto.nust.edu.pk/",
     
+  },
+  {
+    tag: "BDO",
+    name: "Business Development Office",
+    description:
+      "The Business Development Office (BDO) was established at RIC NUST in 2021 as a focal point for providing guidance and support to NUST constituent institutions and faculty members in activities related to industrial and consultancy projects with industries through tender-based business opportunities. BDO identifies and tracks strategic tender opportunities, facilitates collaboration between industry and NUST faculty, evaluates proposals, coordinates joint ventures and consortia, and supports the approval, negotiation, and execution of agreements. The office also works to strengthen industrial linkages and create commercial opportunities for NUST professors, students, spinoffs, and startups.",
+    image: "/main-pic/BDO_team.jpg",
+    link: "#",
   },
 ]
 
@@ -56,14 +64,15 @@ function About() {
     <main className="relative bg-slate-50">
 
       {/* Hero */}
-      <section className="relative py-8 pt-24 bg-slate-900 overflow-hidden">
+      <section className="relative mt-16 py-12  bg-slate-900 overflow-hidden">
         <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.35 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0 bg-[url('/inc-about.jpg')] bg-contain bg-center"
+          className="absolute inset-0 bg-[url('/main-pic/BDO_team.jpg')] bg-cover bg-no-repeat bg-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-00 via-slate-500/85 to-slate-900/40" />
+
+        {/* <div className="absolute inset-0 bg-gradient-to-r from-slate-00 via-slate-500/85 to-slate-900/40" /> */}
 
         <div className="max-w-8xl mx-auto px-6 sm:px-8 relative z-10">
           <motion.div initial="initial" animate="animate" variants={staggerContainer} className="max-w-3xl">
@@ -72,8 +81,8 @@ function About() {
               <span>About ICON</span>
             </motion.div>
             <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-6xl font-serif text-white leading-[1.08]">
-              Driving innovation
-              <span className="block text-[#C9962A]">for a better future</span>
+              Towards
+              <span className="block text-[#C9962A]">a tech-driven future</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-base sm:text-lg text-slate-300 leading-relaxed mt-6 max-w-xl font-light">
               We connect researchers, industry leaders, and entrepreneurs to transform ideas into meaningful impact — through partnerships, intellectual property support, and collaborative innovation that shape tomorrow.
@@ -123,12 +132,10 @@ function About() {
       {/* Departments */}
       <section className="py-8 sm:py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6 sm:px-8">
-          <div className="mb-12 sm:mb-16 max-w-2xl">
-            <span className="text-[#0E5E97] font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">
-              Constituent Offices
-            </span>
+          <div className="mb-8 max-w-2xl">
+         
             <h2 className="text-2xl sm:text-3xl font-serif text-slate-900 leading-tight">
-              Our Departments
+               Constituent Offices
             </h2>
           </div>
 
@@ -165,15 +172,7 @@ function About() {
                     <p className="text-slate-600 leading-relaxed text-[15px]">
                       {department.description}
                     </p>
-                    <Link
-                      href={department.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[#0A2A40] hover:text-[#C9962A] font-bold text-xs uppercase tracking-widest mt-6 transition-colors group"
-                    >
-                      Visit Website
-                      <ArrowUpRight size={15} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </Link>
+                    
                   </div>
                 </motion.div>
               );
