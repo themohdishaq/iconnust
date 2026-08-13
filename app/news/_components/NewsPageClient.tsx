@@ -91,12 +91,12 @@ export default function NewsPageClient({
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
-            <motion.div variants={fadeUp} className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-8">
+            <motion.div variants={fadeUp} className="inline-flex font-tahoma-font items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-8">
               <Newspaper size={14} />
               <span>News &amp; Media Center</span>
             </motion.div>
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-5xl font-serif text-white mb-6 leading-tight">
-              News, Stories &amp; <span className="italic text-blue-400">Events</span>
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-5xl font-tahoma-font text-white mb-6 leading-tight">
+              News, Stories &amp; Events
             </motion.h1>
             <motion.p variants={fadeUp} className="text-base text-slate-300 font-light leading-relaxed mb-10">
               Stay up to date with NUST&apos;s latest technology transfer deals, spin-off milestones, research breakthroughs, and upcoming innovation events.
