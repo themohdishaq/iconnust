@@ -525,8 +525,9 @@ const App = ({
                   <Image
                     src={news.image}
                     alt={news.title}
-                    width={400}
-                    height={300}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    unoptimized
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
 

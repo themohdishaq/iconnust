@@ -36,9 +36,9 @@ const services = [
     title: 'Expert Consultancy',
     tagline: 'Pakistan-based expertise on demand',
     description:
-      'Tap into NUST\'s network of 3,000+ faculty across 50+ engineering, science, and business disciplines. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
+      'The ICON NUST facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     bullets: [
-      '50+ engineering & science domains covered',
+      'Engineering & science domains covered',
       'Short-term and retainer-based engagement models',
       'Technical audits, feasibility reviews, and expert testimony',
       'Fast turnaround with NDA protection',
@@ -100,9 +100,6 @@ const sectors = [
   'Chemicals & Advanced Materials',
   'Media, Creative & Digital Industries',
   'Tourism & Hospitality',
-  'Government & Public Sector',
-  'International Organizations, Donors & NGOs',
-  'Research & Science & Technology Organizations',
 ];
 
 const engagementSteps = [
@@ -159,10 +156,6 @@ const faqs = [
   {
     q: 'What types of industry–academia engagements can CAC facilitate?',
     a: 'CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcases and expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.',
-  },
-  {
-    q: 'How can industry collaborate with NUST through ICON and CAC?',
-    a: 'Organizations can engage with NUST by sharing industry challenges, research requirements or areas of interest. ICON and CAC can facilitate connections with relevant experts and support opportunities such as collaborative R&D, industry-sponsored projects, faculty and student engagement, technology development and strategic partnerships.',
   },
   {
     q: 'What is Finding Innovative & Creative Solutions (FICS), and how can industry engage with it?',

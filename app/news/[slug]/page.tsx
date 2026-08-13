@@ -61,9 +61,6 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             <ArrowLeft size={14} />
             <span>Back to News</span>
           </Link>
-          <span className="inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-blue-900 text-white mb-6">
-            {news.category}
-          </span>
           <h1 className="text-3xl lg:text-5xl font-serif text-white mb-6 leading-tight">{news.title}</h1>
           <div className="flex items-center space-x-6 text-slate-300 text-sm">
             <span className="flex items-center"><Calendar size={14} className="mr-2" /> {news.date}</span>
