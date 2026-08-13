@@ -224,7 +224,7 @@ export default function IndustryServicesPage() {
       <section className="relative py-10 sm:py-14 lg:py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('/industry-services/consultancy.jpg')" }}
+          style={{ backgroundImage: "url('/industry-services/icon-industry.jpg')" }}
         />
         <div className="max-w-8xl  px-6 relative z-10">
           <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2 block">
