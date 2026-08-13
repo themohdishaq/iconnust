@@ -238,7 +238,7 @@ const RndPortal = ({
       </section>
 
       {/* Analytics Dashboard (Charts & Graphs) */}
-      <section id="our-impact" className="py-8 bg-white">
+      <section id="our-impact" className="pt-4 bg-white">
         <div className="max-w-8xl mx-auto px-6">
           <div className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
             By the Numbers
@@ -300,19 +300,19 @@ const RndPortal = ({
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="flex flex-col items-center mb-10"
+            className="flex flex-col items-center mb-4"
           >
             <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">IP Area Key</h3>
             <div className="flex flex-col sm:flex-row items-center gap-8">
-              <div className="relative w-[260px] m-4 h-[260px] shrink-0">
+              <div className="relative w-[300px]  h-[300px] shrink-0">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={ipBreakdown}
                       cx="50%"
                       cy="50%"
-                      innerRadius={62}
-                      outerRadius={125}
+                      innerRadius={50}
+                      outerRadius={100}
                       paddingAngle={3}
                       cornerRadius={3}
                       dataKey="value"
@@ -376,7 +376,7 @@ const RndPortal = ({
       </section>
 
       {/* Media & Video Hub */}
-      <section id="media-hub" className="py-8 bg-slate-50">
+      <section id="media-hub" className="py-4 bg-slate-50">
         <div className="max-w-8xl mx-auto px-6">
           <div className="flex justify-between items-end mb-12">
             <div>
