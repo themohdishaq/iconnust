@@ -131,27 +131,42 @@ const partnersRowB = [
   { name: 'PTCL',                sector: 'Telecom Infrastructure',       img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80', size: 'sm' as const },
   { name: 'Turkish Aerospace',   sector: 'Defense & Aviation',           img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80', size: 'lg' as const },
 ];
-
 const faqs = [
   {
-    q: 'How quickly can ICON respond to an industry brief?',
+    q: 'How can ICON respond to an industry brief?',
     a: 'Our Industry Desk acknowledges all enquiries within 24 hours. Expert matching and an initial consultation call are typically arranged within 48–72 hours of receiving a brief.',
-  },
-  {
-    q: 'Who owns the IP generated in a collaborative R&D project?',
-    a: 'IP ownership is negotiated on a project-by-project basis. Industry sponsors can obtain exclusive or non-exclusive licenses. ICON ensures transparent agreements that protect both parties from the outset.',
-  },
-  {
-    q: 'Can we request a custom training program for our team?',
-    a: "Yes. ICON's Training & Upskilling team works directly with corporate HR and technical leads to design bespoke curricula, from one-day workshops to semester-long certification programs.",
-  },
-  {
-    q: 'Are testing services available on a one-off basis?',
-    a: 'Absolutely. Clients can request individual tests or subscribe to a testing retainer for regular analytical needs. All services are covered by confidentiality agreements.',
   },
   {
     q: 'What sectors does ICON currently serve?',
     a: 'ICON engages with a diverse range of sectors, including Digital, AI & Intelligent Systems; Energy, Climate & Sustainability; Health, Pharma & Biomedical Systems; Agriculture & Food Systems; Mobility & Automotive Systems; Defence & Strategic Technologies; Finance & Digital Economy; Smart Infrastructure & Urban Systems; Education, Society & Human Development; Manufacturing & Industrial Technologies; Chemicals & Advanced Materials; Media, Creative & Digital Industries; Tourism & Hospitality; Government & Public Sector; International Organizations. ICON also remains open to engagements across other emerging and specialized sectors based on industry and partner requirements.',
+  },
+  {
+    q: 'What is the role of the Corporate Advisory Council (CAC) at NUST?',
+    a: 'The Corporate Advisory Council (CAC) serves as a bridge between academia and industry by connecting organizations with relevant NUST faculty, researchers, students, laboratories and technical expertise. It facilitates collaboration, knowledge exchange, industry engagement and opportunities for joint research and innovation.',
+  },
+  {
+    q: 'How can an organization engage with NUST through the Corporate Advisory Council (CAC)?',
+    a: 'CAC facilitates structured engagement between industry, government, NUST and other external stakeholders. Organizations can engage through industry consultations, collaborative projects, advisory engagements, faculty and student interactions, industry visits, faculty placements, and other customized collaboration opportunities.',
+  },
+  {
+    q: 'Can organizations share industry challenges or requirements with NUST?',
+    a: 'Yes. Organizations can share specific challenges, technology requirements, research needs, skills gaps, or other areas of interest with CAC. The Council works with relevant NUST stakeholders to identify suitable expertise and explore potential solutions or collaboration opportunities.',
+  },
+  {
+    q: 'Can CAC help us connect with relevant NUST faculty or technical experts?',
+    a: 'Yes. CAC can facilitate connections with relevant NUST faculty, researchers, schools, centres, and technical experts based on an organization’s specific requirements, subject to availability and the nature of the engagement.',
+  },
+  {
+    q: 'What types of industry–academia engagements can CAC facilitate?',
+    a: 'CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcases and expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.',
+  },
+  {
+    q: 'How can industry collaborate with NUST through ICON and CAC?',
+    a: 'Organizations can engage with NUST by sharing industry challenges, research requirements or areas of interest. ICON and CAC can facilitate connections with relevant experts and support opportunities such as collaborative R&D, industry-sponsored projects, faculty and student engagement, technology development and strategic partnerships.',
+  },
+  {
+    q: 'What is Finding Innovative & Creative Solutions (FICS), and how can industry engage with it?',
+    a: 'Finding Innovative & Creative Solutions (FICS) is NUST’s innovation and entrepreneurship platform that enables students to develop technology-driven solutions to real-world challenges. Industry can engage by sharing problem statements, mentoring teams, providing technical guidance, supporting promising ideas and exploring potential collaboration with innovative projects.',
   },
 ];
 

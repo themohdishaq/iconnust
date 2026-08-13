@@ -243,7 +243,7 @@ const faqs = [
     a: 'Yes. ICON works with inventors to understand their goals and recommends the most suitable pathway — licensing, spin-off, or sponsored research. The final approach is always agreed upon with the inventor.',
   },
   {
-    q: 'How to protect my innovaton through IP filling in Pak and how much at cost?',
+    q: 'How to protect my innovaton through IP filling in Pakistan and how much at cost?',
     a: 'ICON manages the entire IP protection process, including patent drafting, filing, and prosecution in Pakistan (IPO Pakistan) and internationally (PCT). Costs vary based on the type of IP and jurisdictions; ICON provides a detailed cost estimate during the evaluation phase.',
   },
   {
@@ -258,22 +258,15 @@ const faqs = [
     q: 'How long does it take to license a technology?',
     a: 'Standard licensing negotiations take 4–10 weeks depending on complexity. ICON expedites this through standardised term sheets and a dedicated corporate licensing desk.',
   },
+  
   {
-    q: 'How can an organization engage with NUST through the Corporate Advisory Council (CAC)?',
-    a: 'CAC facilitates structured engagement between industry, government, NUST and other external stakeholders. Organizations can engage through industry consultations, collaborative projects, advisory engagements, faculty and student interactions, industry visits, faculty placements, and other customized collaboration opportunities.'
+    q: 'Who owns the IP generated in a collaborative R&D project?',
+    a: 'IP ownership is negotiated on a project-by-project basis. Industry sponsors can obtain exclusive or non-exclusive licenses. ICON ensures transparent agreements that protect both parties from the outset.',
   },
   {
-    q: 'Can CAC help us connect with relevant NUST faculty or technical experts?',
-    a: 'Yes. CAC can facilitate connections with relevant NUST faculty, researchers, schools, centres, and technical experts based on an organization’s specific requirements, subject to availability and the nature of the engagement.'
+    q: 'Are testing services available on a one-off basis?',
+    a: 'Absolutely. Clients can request individual tests or subscribe to a testing retainer for regular analytical needs. All services are covered by confidentiality agreements.',
   },
-  {
-    q: 'Can organizations share industry challenges or requirements with NUST?',
-    a: 'Yes. Organizations can share specific challenges, technology requirements, research needs, skills gaps, or other areas of interest with CAC. The Council works with relevant NUST stakeholders to identify suitable expertise and explore potential solutions or collaboration opportunities.'
-  },
-  {
-    q: 'What types of industry–academia engagements can CAC facilitate?',
-    a: 'CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcase/expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.'
-  }
 ];
 
 // ── ANIMATION ─────────────────────────────────────────────────────────
