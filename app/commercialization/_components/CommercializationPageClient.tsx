@@ -140,12 +140,6 @@ type PublishedTech = {
   trl: string;
   impact?: string; // Optional societal-impact / one-line pitch shown on the card
 };
-
-// ── NUST TOP HIGH-IMPACT PRODUCTS (SHOWCASE) ────────────────────────────
-// Sourced from "Top High-Impact Products Showcasing NUST's Societal
-// Contribution" — used as a curated flagship showcase and as a fallback
-// for the "Available for Commercialization" grid whenever the live
-// invention-disclosure API has not yet published any approved entries.
 const nustShowcaseProducts: PublishedTech[] = [
   {
     id: 'nab-ai-portal',
@@ -264,6 +258,22 @@ const faqs = [
     q: 'How long does it take to license a technology?',
     a: 'Standard licensing negotiations take 4–10 weeks depending on complexity. ICON expedites this through standardised term sheets and a dedicated corporate licensing desk.',
   },
+  {
+    q: 'How can an organization engage with NUST through the Corporate Advisory Council (CAC)?',
+    a: 'CAC facilitates structured engagement between industry, government, NUST and other external stakeholders. Organizations can engage through industry consultations, collaborative projects, advisory engagements, faculty and student interactions, industry visits, faculty placements, and other customized collaboration opportunities.'
+  },
+  {
+    q: 'Can CAC help us connect with relevant NUST faculty or technical experts?',
+    a: 'Yes. CAC can facilitate connections with relevant NUST faculty, researchers, schools, centres, and technical experts based on an organization’s specific requirements, subject to availability and the nature of the engagement.'
+  },
+  {
+    q: 'Can organizations share industry challenges or requirements with NUST?',
+    a: 'Yes. Organizations can share specific challenges, technology requirements, research needs, skills gaps, or other areas of interest with CAC. The Council works with relevant NUST stakeholders to identify suitable expertise and explore potential solutions or collaboration opportunities.'
+  },
+  {
+    q: 'What types of industry–academia engagements can CAC facilitate?',
+    a: 'CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcase/expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.'
+  }
 ];
 
 // ── ANIMATION ─────────────────────────────────────────────────────────
@@ -458,7 +468,9 @@ export default function CommercializationPathwaysPage() {
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-7xl  mx-auto text-left flex flex-col items-left">
 
             <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl  font-serif text-slate-900 mb-5 leading-tight tracking-tight">
-              From Research Bench to <div >Commercial Reality</div>
+              From University-Driven <br/>
+              Research to Market Impact
+            
             </motion.h1>
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
               ICON maps every avenue available to NUST innovators — licensing, spin-off creation, sponsored research, and IP protection — backed by world-class infrastructure and a proven commercialisation team.

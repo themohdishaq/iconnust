@@ -39,7 +39,7 @@ const leadership: Leader[] = [
   {
     id: '4',
     name: 'Fawad kashan',
-    title: 'Senior Manager',
+    title: 'Senior Manager Corporate Relations',
     dept: 'CAC NUST',
     img: '/team/fawad.jpg',
   },

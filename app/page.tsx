@@ -4,6 +4,7 @@ import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import StatTile from "@/lib/models/StatTile";
 
 const title = "Home";
+
 const description =
   "Innovation & Commercialisation Office (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
 
@@ -37,7 +38,7 @@ const organizationJsonLd = {
   },
   address: {
     "@type": "PostalAddress",
-    streetAddress: "CIE Building, NUST Campus, sector H-12",
+    streetAddress: "CIE Building, NUST Campus, Sector H-12",
     addressLocality: "Islamabad",
     addressCountry: "PK",
   },
@@ -45,17 +46,23 @@ const organizationJsonLd = {
 };
 
 export default async function Page() {
-  const tiles = await StatTile.list('home');
-  const stats = tiles.map((t) => ({ label: t.label, value: t.value }));
+  const tiles = await StatTile.list("home");
 
+  const stats = tiles.map((tile) => ({
+    label: String(tile.label ?? ""),
+    value: Number(tile.value ?? 0),
+  }));
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationJsonLd),
+        }}
       />
-      <HomePageClient stats={stats}  />
+
+      <HomePageClient stats={stats} />
     </>
   );
 }

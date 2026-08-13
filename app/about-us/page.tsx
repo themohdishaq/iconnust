@@ -109,8 +109,7 @@ function About() {
                 About the ICON
               </h2>
               <p className="text-slate-600 leading-relaxed text-[15px] sm:text-base">
-                The role of the ICON is to encapsulate NUST&rsquo;s research and intellectual
-                property opportunities at the earliest stage, and to translate these benefits to industry.
+                The ICON’s role is to bring NUST’s research and innovation together, and to translate these benefits to industry.
                 External relationships have grown into meaningful and lasting partnerships: more than 900+
                 industry partners — SMEs, multinationals, large national firms, public-sector and non-profit
                 organisations — work with our constituent offices on mutually beneficial initiatives. Our
@@ -118,11 +117,6 @@ function About() {
                 innovative research, world-class researchers, and brilliant young students, creating value for
                 the university and stakeholders alike, and impacting the technological, social, and economic
                 progression of Pakistan.
-              </p>
-              <p className="text-slate-600 leading-relaxed text-[15px] sm:text-base mt-4">
-                The Directorate is also responsible for moving research results from the laboratory to the
-                marketplace — staying closely attuned to university R&amp;D activity, R&amp;D disclosures, and
-                market needs.
               </p>
             </motion.div>
           </div>

@@ -4,26 +4,6 @@ import Image from 'next/image';
 function Footer() {
   const socialLinks = [
     {
-      name: 'Instagram',
-      href: '#',
-      icon: (
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-        </svg>
-      ),
-    },
-    {
       name: 'LinkedIn',
       href: 'https://www.linkedin.com/company/icon-nust',
       icon: (
@@ -110,12 +90,15 @@ function Footer() {
             </h1>
 
             <div className="flex flex-col gap-3 text-sm font-semibold text-white/80">
-              <a href="#" className="transition hover:text-white">
-                Careers
+            <a href="/about-us" className="transition hover:text-white">
+                About
+              </a>
+              <a href="/news" className="transition hover:text-white">
+                News
               </a>
 
-              <a href="#" className="transition hover:text-white">
-                Policies
+              <a href="/team" className="transition hover:text-white">
+                Team
               </a>
             </div>
           </div>

@@ -87,9 +87,22 @@ const stats = [
 ];
 
 const sectors = [
-  'Manufacturing', 'Healthcare & Pharma', 'Energy & Utilities',
-  'Agriculture & Food', 'Defense & Aerospace', 'IT & Software',
-  'Construction & Infrastructure', 'Telecommunications',
+  'Digital, AI & Intelligent Systems',
+  'Energy, Climate & Sustainability',
+  'Health, Pharma & Biomedical Systems',
+  'Agriculture & Food Systems',
+  'Mobility & Automotive Systems',
+  'Defence & Strategic Technologies',
+  'Finance & Digital Economy',
+  'Smart Infrastructure & Urban Systems',
+  'Education, Society & Human Development',
+  'Manufacturing & Industrial Technologies',
+  'Chemicals & Advanced Materials',
+  'Media, Creative & Digital Industries',
+  'Tourism & Hospitality',
+  'Government & Public Sector',
+  'International Organizations, Donors & NGOs',
+  'Research & Science & Technology Organizations',
 ];
 
 const engagementSteps = [
@@ -130,7 +143,7 @@ const faqs = [
   },
   {
     q: 'Can we request a custom training program for our team?',
-    a: 'Yes. ICON\'s Training & Upskilling team works directly with corporate HR and technical leads to design bespoke curricula, from one-day workshops to semester-long certification programs.',
+    a: "Yes. ICON's Training & Upskilling team works directly with corporate HR and technical leads to design bespoke curricula, from one-day workshops to semester-long certification programs.",
   },
   {
     q: 'Are testing services available on a one-off basis?',
@@ -138,7 +151,7 @@ const faqs = [
   },
   {
     q: 'What sectors does ICON currently serve?',
-    a: 'ICON has active partnerships across manufacturing, healthcare, energy, agriculture, defense, IT, construction, and telecommunications — with growing capacity in emerging sectors.',
+    a: 'ICON engages with a diverse range of sectors, including Digital, AI & Intelligent Systems; Energy, Climate & Sustainability; Health, Pharma & Biomedical Systems; Agriculture & Food Systems; Mobility & Automotive Systems; Defence & Strategic Technologies; Finance & Digital Economy; Smart Infrastructure & Urban Systems; Education, Society & Human Development; Manufacturing & Industrial Technologies; Chemicals & Advanced Materials; Media, Creative & Digital Industries; Tourism & Hospitality; Government & Public Sector; International Organizations. ICON also remains open to engagements across other emerging and specialized sectors based on industry and partner requirements.',
   },
 ];
 
@@ -362,15 +375,15 @@ export default function IndustryServicesPage() {
       {/* ── SECTORS ────────────────────────────────────────────────────────── */}
       <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-slate-100">
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8">
-            <div className="max-w-md">
+          <div className="flex flex-col ">
+            <div className="max-w-8xl text-left">
               <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Industries We Serve</span>
               <h2 className="text-2xl sm:text-3xl font-serif text-slate-900">Sector-Agnostic, Expertise-Rich</h2>
               <p className="text-slate-500 mt-3 text-sm leading-relaxed">
                 ICON's faculty network spans virtually every major industrial sector, ensuring that no challenge is too niche or too broad.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 max-w-xl">
+            <div className="flex mt-4 flex-wrap gap-2 max-w-8xl">
               {sectors.map((sec, i) => (
                 <motion.span
                   key={i}
