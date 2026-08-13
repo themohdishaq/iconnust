@@ -142,25 +142,7 @@ export default function NewsPageClient({
       {/* News Grid */}
       <section className="py-16 bg-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Horizontal Filter Bar */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-200 ${
-                  activeCategory === cat
-                    ? 'bg-blue-900 text-white shadow-md'
-                    : 'bg-white text-slate-500 border border-slate-200 hover:border-blue-300'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-            <div className="ml-auto text-sm text-slate-400 self-center">
-              {filtered.length} {filtered.length === 1 ? 'result' : 'results'}
-            </div>
-          </div>
+        
 
           <AnimatePresence mode="wait">
             <motion.div key={activeCategory + searchQuery} initial="hidden" animate="show" variants={stagger}
