@@ -30,7 +30,7 @@ const services = [
     tagline: 'Pakistan-based expertise on demand',
     desc: 'Strategic guidance from renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
-    img: '/industry-services/consultancy.jpg',
+    img: '/industry-services/expertconsultancy.jpg',
     bullets: [
       'Engineering, science, Architecture and other domains covered',
       'Technical audits, feasibility reviews & expert testimony',

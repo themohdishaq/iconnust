@@ -44,7 +44,7 @@ const services = [
       'Fast turnaround with NDA protection',
     ],
     color: 'indigo',
-    img: '/industry-services/consultancy.jpg',
+    img: '/industry-services/expertconsultancy.jpg',
   },
   {
     id: 'training',
@@ -59,7 +59,7 @@ const services = [
       'Promotes collaborative R&D, innovation, and process improvement',
     ],
     color: 'emerald',
-    img: '/industry-services/lectures.jpg',
+    img: '/capacity_building.jpeg',
   },
   {
     id: 'testing',
