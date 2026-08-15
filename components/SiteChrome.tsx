@@ -16,7 +16,9 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
     <>
       <Navbar />
       <main className="flex-1 w-full">
-        <div className="mx-auto w-full max-w-7xl">{children}</div>
+        <div className="mx-auto w-full max-w-7xl">
+          {children}
+        </div>
       </main>
       <Footer />
     </>

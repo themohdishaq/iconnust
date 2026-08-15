@@ -28,7 +28,7 @@ const services = [
     id: 'consultancy',
     title: 'Expert Consultancy',
     tagline: 'Pakistan-based expertise on demand',
-    desc: 'Strategic guidance from world-renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
+    desc: 'Strategic guidance from renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
     img: '/industry-services/consultancy.jpg',
     bullets: [
@@ -219,7 +219,7 @@ const IndustryServicesPortal = () => {
             Industrial Services
           </h2>
           <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-light">
-            Four key avenues designed to seamlessly integrate NUST's world-class research
+            Four key avenues designed to seamlessly integrate NUST's research
             excellence, faculty expertise, and infrastructure with your corporate R&D needs.
           </p>
         </motion.div>

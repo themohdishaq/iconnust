@@ -17,10 +17,10 @@ export type Leader = {
 const leadership: Leader[] = [
   {
     id: '1',
-    name: 'Dr. Hassan Waqar Rana',
+    name: 'Mr Hassan Waqar Raja',
     title: 'Director',
     dept: 'ICON NUST',
-    img: '/team/waqar.jpg',
+    img: '/team/hassanwaqarraja.jpg',
   },
   {
     id: '2',
@@ -55,7 +55,7 @@ const leadership: Leader[] = [
     name: 'Ambreen Munir',
     title: 'Manager',
     dept: 'TTO NUST',
-    img: '/team/ambreen.jpg',
+    img: '/team/ambreenmuneer.jpg',
   },
   {
     id: '7',
@@ -69,14 +69,14 @@ const leadership: Leader[] = [
     name: 'Muhammad Salman Khan',
     title: 'Assistant Manager',
     dept: 'IP&LA NUST',
-    img: '/team/salman.jpg',
+    img: '/team/salmankhan.jpg'
   },
   {
     id: '9',
     name: 'Aasia',
     title: 'Assistant Manager',
     dept: 'IP&LA NUST',
-    img: '/team/asiyahussain.jpg',
+    img: '/team/aasia.jpg'
   },
   {
     id: '10',
@@ -202,8 +202,8 @@ export default function TeamPageClient() {
               {leadership.map((leader) => (
                 <motion.div key={leader.id} variants={fadeUp}
                   className="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
-                  <div className="relative h-56 overflow-hidden ">
-                    <img src={leader.img} alt={leader.name} className="w-full h-full object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"/>
+                  <div className="relative sm:h-96 overflow-hidden ">
+                    <img src={leader.img} alt={leader.name} className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"/>
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     
                   </div>

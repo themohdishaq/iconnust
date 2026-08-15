@@ -557,7 +557,7 @@ export default function CommercializationPathwaysPage() {
 
 
       {/* ── TECH PORTFOLIO ────────────────────────────────────────────── */}
-      <section id="licensing" className="py-10 bg-slate-50 border-t border-slate-100">
+      {/* <section id="licensing" className="py-10 bg-slate-50 border-t border-slate-100">
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-8 sm:mb-10 lg:mb-12">
             <div>
@@ -608,7 +608,7 @@ export default function CommercializationPathwaysPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ── CTA BANNER ────────────────────────────────────────────────── */}
       <section className="bg-[#0a2342] py-10 sm:py-14 lg:py-20 relative overflow-hidden">

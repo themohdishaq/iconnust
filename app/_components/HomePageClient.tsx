@@ -212,7 +212,7 @@ const App = ({
       titleLine1: "Global",
       highlight: "Partnerships",
       titleLine2: "",
-      desc: "Collaborate with world-class faculty and leverage ISO-certified testing facilities to solve complex industrial bottlenecks.",
+      desc: "Collaborate with faculty and leverage ISO-certified testing facilities to solve complex industrial bottlenecks.",
       img: "/main-pic/hero1.jpg",
     },
     {
