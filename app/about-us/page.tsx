@@ -30,16 +30,14 @@ const departments = [
     name: "Corporate Advisory Council",
     description:
       "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government — engaging in advisory work, consultation, and joint R&D collaboration.",
-    image: "/main-pic/CAC_team.jpg",
-    link: "https://cac.nust.edu.pk/",
+    image: "#",
   },
   {
     tag: "NIPO",
     name: "NUST Intellectual Property Office",
     description:
       "Offering IP services since 2008 — initially dedicated to TIC incubatees — NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
-    image: "/main-pic/IPO.jpg",
-    link: "https://nipo.nust.edu.pk/",
+    image: "#",
   },
   {
     tag: "TTO",
@@ -47,8 +45,7 @@ const departments = [
     description:
       "Being cognizant of the significant role that universities play in the knowledge economy, NUST established its Technology Transfer Office in 2011. The office is responsible for transferring knowledge and translating scientific results into real-world innovation — building entrepreneurial spirit, organising the transfer of new technological approaches, and arranging early-stage financing for transfer projects. It works to place NUST's own innovations into local industry, maintaining a clear path from research to commercial exploitation.",
     image: "/main-pic/TTO_team.jpg",
-    link: "https://tto.nust.edu.pk/",
-    
+    link: "#",
   },
   {
     tag: "BDO",
