@@ -231,7 +231,7 @@ export default function HomeHero({ stats }: HomeHeroProps) {
             flex min-h-[620px]
             flex-col
             sm:px-16 sm:py-6
-    
+            p-4
           "
         >
           {/* slide main content */}

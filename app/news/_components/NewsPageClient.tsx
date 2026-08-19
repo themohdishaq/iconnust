@@ -86,7 +86,7 @@ export default function NewsPageClient({
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
 
       {/* Hero */}
-      <section className="relative pt-24 pb-20 bg-slate-900 overflow-hidden">
+      <section className="relative py-8 bg-slate-900 overflow-hidden">
         <div className="absolute opacity-50 inset-0 bg-[url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
         <div className="max-w-8xl mx-auto px-6 relative z-10">

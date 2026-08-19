@@ -2,11 +2,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  FlaskConical, Briefcase, ChevronRight,
-  Lightbulb, ShieldCheck, Users, ArrowRight,
-  CheckCircle2, Building2, Cpu,
-  GraduationCap, TestTube, Globe, Handshake,
-  BarChart3, Clock, Award, Mail, Phone
+  FlaskConical, Briefcase, ShieldCheck, Users, ArrowRight,
+  CheckCircle2, GraduationCap, TestTube, Mail
 } from 'lucide-react';
 import Image from 'next/image';
 import { useInquiryForm } from '@/lib/useInquiryForm';
@@ -28,7 +25,6 @@ const services = [
       'Dedicated faculty PI matched to your domain',
       'Confidential project management end-to-end',
     ],
-    color: 'blue',
     img: '/industry-services/rnd.jpg',
   },
   {
@@ -44,7 +40,6 @@ const services = [
       'Technical audits, feasibility reviews, and expert testimony',
       'Fast turnaround with NDA protection',
     ],
-    color: 'indigo',
     img: '/industry-services/expertconsultancy.jpg',
   },
   {
@@ -59,7 +54,6 @@ const services = [
       'Creates opportunities for student projects, internships, jobs, and professional training',
       'Promotes collaborative R&D, innovation, and process improvement',
     ],
-    color: 'emerald',
     img: '/capacity_building.jpeg',
   },
   {
@@ -75,16 +69,8 @@ const services = [
       'Rapid turnaround with detailed technical reports',
       'Confidential testing under strict NDA protocols',
     ],
-    color: 'purple',
     img: '/industry-services/labservices.jpg',
   },
-];
-
-const stats = [
-  { value: '200+', label: 'Industry Partners', icon: <Building2 size={20} /> },
-  { value: '50+', label: 'Research Domains', icon: <Cpu size={20} /> },
-  { value: '300+', label: 'Lab Facilities', icon: <FlaskConical size={20} /> },
-  { value: '500+', label: 'Projects Delivered', icon: <Award size={20} /> },
 ];
 
 const sectors = [
@@ -104,31 +90,12 @@ const sectors = [
 ];
 
 const engagementSteps = [
-  { step: 1, title: 'Submit a Brief', desc: 'Describe your technical challenge, timeline, and budget via our online form or by contacting our Industry Desk.', icon: <Mail size={20} />, color: 'bg-[#084C70]',},
-  { step: 2, title: 'Expert Matching', desc: 'ICON identifies the most suitable faculty leads, labs, or programs within 48 hours.', icon: <Users size={20} />, color: 'bg-[#084C70]', },
-  { step: 3, title: 'Scope & Agreement', desc: 'Co-develop a project plan with clear deliverables, IP terms, and timelines.', icon: <ShieldCheck size={20} />, color: 'bg-[#084C70]', },
-  { step: 4, title: 'Execute & Deliver', desc: 'ICON manages the project end-to-end and ensures timely, quality delivery.', icon: <CheckCircle2 size={20} />,     color: 'bg-[#CA9F3B]', },
+  { step: 1, title: 'Submit a Brief', desc: 'Describe your technical challenge, timeline, and budget via our online form or by contacting our Industry Desk.', icon: <Mail size={20} /> },
+  { step: 2, title: 'Expert Matching', desc: 'ICON identifies the most suitable faculty leads, labs, or programs within 48 hours.', icon: <Users size={20} /> },
+  { step: 3, title: 'Scope & Agreement', desc: 'Co-develop a project plan with clear deliverables, IP terms, and timelines.', icon: <ShieldCheck size={20} /> },
+  { step: 4, title: 'Execute & Deliver', desc: 'ICON manages the project end-to-end and ensures timely, quality delivery.', icon: <CheckCircle2 size={20} /> },
 ];
 
-const partnersRowA = [
-  { name: 'Engro Corporation',   sector: 'Petrochemicals & Fertilizers', img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80', size: 'lg' as const },
-  { name: 'Pak Suzuki',          sector: 'Automotive R&D',               img: 'https://images.unsplash.com/photo-1563461660947-507ef49e9c47?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'National Grid',       sector: 'Energy & Utilities',           img: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'MedTech Alliance',    sector: 'Healthcare Technology',        img: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80', size: 'lg' as const },
-  { name: 'Huawei Pakistan',     sector: 'Telecommunications',           img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'Atlas Honda',         sector: 'Automotive Manufacturing',     img: 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80', size: 'lg' as const },
-  { name: 'Millat Tractors',     sector: 'Agri-Machinery',               img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80', size: 'sm' as const },
-];
-
-const partnersRowB = [
-  { name: 'Systems Ltd',         sector: 'Information Technology',       img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'SUPARCO',             sector: 'Aerospace & Defense',          img: 'https://images.unsplash.com/photo-1446776709462-d6b525c57bd3?auto=format&fit=crop&q=80', size: 'lg' as const },
-  { name: 'Fauji Foundation',    sector: 'Diversified Conglomerate',     img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'Netsol Technologies', sector: 'Fintech & Software',           img: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'Indus Hospital',      sector: 'Healthcare Infrastructure',    img: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80', size: 'lg' as const },
-  { name: 'PTCL',                sector: 'Telecom Infrastructure',       img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80', size: 'sm' as const },
-  { name: 'Turkish Aerospace',   sector: 'Defense & Aviation',           img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80', size: 'lg' as const },
-];
 // --- ANIMATION VARIANTS ---
 const stagger = {
   hidden: { opacity: 0 },
@@ -139,110 +106,90 @@ const fadeUp = {
   show: { opacity: 1, y: 0 },
 };
 
-const colorMap: Record<string, { bg: string; text: string; border: string; btn: string }> = {
-  blue:    { bg: 'bg-blue-50',    text: 'text-blue-700',    border: 'border-blue-200',    btn: 'bg-blue-900 hover:bg-blue-800' },
-  indigo:  { bg: 'bg-indigo-50',  text: 'text-indigo-700',  border: 'border-indigo-200',  btn: 'bg-indigo-900 hover:bg-indigo-800' },
-  emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200', btn: 'bg-emerald-800 hover:bg-emerald-700' },
-  purple:  { bg: 'bg-purple-50',  text: 'text-purple-700',  border: 'border-purple-200',  btn: 'bg-purple-900 hover:bg-purple-800' },
-};
-
-function PartnerCard({ name, sector, img, size }: { name: string; sector: string; img: string; size: 'lg' | 'sm' }) {
-  return (
-    <motion.div
-      whileHover={{ y: -5, scale: 1.025 }}
-      transition={{ duration: 0.25, ease: 'easeOut' }}
-      className={`relative flex-shrink-0 overflow-hidden rounded-2xl cursor-pointer group ${
-        size === 'lg' ? 'w-[420px] h-80' : 'w-64 h-80'
-      }`}
-    >
-      <img
-        src={img}
-        alt={name}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
-      <div className="absolute inset-0 bg-blue-950/0 group-hover:bg-blue-950/20 transition-colors duration-300" />
-      <div className="absolute bottom-5 left-4 right-4">
-        <h5 className="text-white font-bold text-sm leading-snug mb-1">{name}</h5>
-        <span className="text-blue-300 text-[9px] uppercase tracking-widest font-bold">{sector}</span>
-      </div>
-      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className="w-7 h-7 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-          <ArrowRight size={12} className="text-white" />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function IndustryServicesPage({ faqs }: { faqs: FaqItem[] }) {
   const [activeService, setActiveService] = useState<string>('rd');
   const { values, setField, status, error, handleSubmit } = useInquiryForm('industry-services');
 
   const active = services.find((s) => s.id === activeService) ?? services[0];
-  const c = colorMap[active.color];
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
-
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative py-10 sm:py-14 lg:py-20 bg-white border-b border-slate-200 overflow-hidden">
+    <div className="min-h-screen overflow-x-hidden bg-white font-sans text-[#003B70]">
+      <section className="relative isolate flex min-h-[520px] items-center overflow-hidden bg-[#003B70] sm:min-h-[600px]">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
+          className="absolute inset-0 -z-20 bg-cover bg-center"
           style={{ backgroundImage: "url('/industry-services/icon-industry.jpg')" }}
         />
-        <div className="max-w-8xl  px-6 relative z-10">
-          <div className="text-[#003B70] font-tahoma-font text-[11px] uppercase tracking-[0.4em] my-2 block">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#003B70] via-[#003B70]/90 to-[#003B70]/45" />
+        <div className="absolute -right-24 top-16 h-72 w-72 rounded-full border border-white/15 sm:h-96 sm:w-96" />
+        <div className="absolute -right-8 top-32 h-48 w-48 rounded-full border border-[#FCAF17]/50 sm:h-64 sm:w-64" />
+
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={stagger}
+          className="relative mx-auto w-full max-w-8xl px-5  sm:px-8 lg:px-12 "
+        >
+          <motion.div variants={fadeUp} className="mb-5 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">
+            <span className="h-px w-10 bg-[#FCAF17]" />
             Industry Services
-          </div>
-          <motion.div
-            initial="hidden" animate="show" variants={stagger}
-            className="w-full mx-auto text-left flex flex-col items-left justify-items-start"
-          >
-            
-
-            <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl  font-serif text-slate-900 mb-5 leading-tight tracking-tight">
-              Powering Industry Through <div>Academic Excellence</div>
-            </motion.h1>
-
-            <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-800 leading-relaxed font-normal mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
-              ICON bridges the gap between NUST's research capabilities and the evolving needs of Pakistan's industries — delivering R&D support, expert consultancy, workforce training, and precision lab services under one roof.
-            </motion.p>
-
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-items-start items-start ">
-              <Link href="#industry-brief" className="bg-[#FCAF17] text-[#0A2A40] px-8 py-4 font-semibold text-xs uppercase tracking-[0.2em] rounded-sm shadow-xl cursor-pointer transition-colors">
-                Submit an Industry Brief
-              </Link>
-              {/* <button className="border border-slate-300 text-slate-700 px-8 py-4 font-black text-xs uppercase tracking-[0.2em] rounded-sm hover:bg-slate-100 transition-colors flex items-center justify-center">
-                Download Service Catalogue <ChevronRight size={14} className="ml-2" />
-              </button> */}
-            </motion.div>
           </motion.div>
-        </div>
+          <motion.h1 variants={fadeUp} className="max-w-4xl font-tahoma-font text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Powering Industry Through
+            <span className="mt-2 block text-[#FCAF17]">Academic Excellence</span>
+          </motion.h1>
+          <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
+            ICON bridges NUST&apos;s research capabilities with the evolving needs of Pakistan&apos;s industries through R&amp;D, expert consultancy, workforce training, and precision lab services.
+          </motion.p>
+          <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="#industry-brief"
+              className="group inline-flex w-full items-center justify-center gap-3 bg-[#FCAF17] px-7 py-4 text-xs font-bold uppercase tracking-[0.18em] text-[#003B70] shadow-xl transition duration-300 hover:-translate-y-0.5 hover:bg-white sm:w-auto"
+            >
+              Submit an Industry Brief
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="#services"
+              className="inline-flex w-full items-center justify-center border border-white/50 px-7 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition duration-300 hover:border-[#FCAF17] hover:text-[#FCAF17] sm:w-auto"
+            >
+              Explore Services
+            </Link>
+          </motion.div>
+        </motion.div>
+        <div className="absolute inset-x-0 bottom-0 h-1.5 bg-[#FCAF17]" />
       </section>
 
+      <section id="services" className="scroll-mt-24 bg-white py-8 ">
+        <div className="mx-auto max-w-8xl px-5 sm:px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-10 max-w-3xl lg:mb-14"
+          >
+            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">What We Offer</span>
+            <h2 className="font-tahoma-font text-3xl font-bold tracking-tight text-[#003B70] sm:text-4xl lg:text-5xl">Industry Services</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-[#003B70]/70">
+              Practical routes into NUST expertise, facilities, and research teams, tailored to the scope of your organisation&apos;s challenge.
+            </p>
+          </motion.div>
 
-      {/* ── SERVICES ─────────────────────────────────────────────────────── */}
-      <section id="services" className="py-10 sm:py-14 bg-white">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6">
-          <div className="text-left mb-8 sm:mb-12 lg:mb-16">
-            <span className="text-[#FCAF17] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Industry Services</h2>
-          </div>
-
-          {/* Tab switcher */}
-          <div className="flex flex-wrap justify-items-start gap-4 mb-12 border-b border-slate-200 pb-4">
-            {services.map((s) => (
+          <div className="mb-7 flex gap-2 overflow-x-auto border-b border-[#003B70]/15 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" role="tablist" aria-label="Industry services">
+            {services.map((service) => (
               <button
-                key={s.id}
-                onClick={() => setActiveService(s.id)}
-                className={`inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] transition-colors duration-200 ${
-                  activeService === s.id
-                    ? 'text-slate-900 border-b-2 border-[#FCAF17]'
-                    : 'text-slate-500 hover:text-slate-900'
+                key={service.id}
+                type="button"
+                role="tab"
+                aria-selected={activeService === service.id}
+                onClick={() => setActiveService(service.id)}
+                className={`inline-flex shrink-0 items-center gap-2.5 px-4 py-3 text-xs font-bold uppercase tracking-[0.14em] transition-all duration-300 sm:px-5 ${
+                  activeService === service.id
+                    ? 'bg-[#003B70] text-white shadow-lg shadow-[#003B70]/15'
+                    : 'bg-[#003B70]/[0.04] text-[#003B70] hover:bg-[#FCAF17]'
                 }`}
               >
-                {s.title}
+                <span className={activeService === service.id ? 'text-[#FCAF17]' : 'text-[#003B70]'}>{service.icon}</span>
+                {service.title}
               </button>
             ))}
           </div>
@@ -250,121 +197,95 @@ export default function IndustryServicesPage({ faqs }: { faqs: FaqItem[] }) {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeService}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.35 }}
-              className="grid lg:grid-cols-2 gap-3 "
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="grid overflow-hidden border border-[#003B70]/15 bg-white shadow-[0_24px_70px_rgba(0,59,112,0.10)] lg:grid-cols-2"
             >
-              <div className=" bg-transparent">
-                <span className="text-[#FCAF17] font-bold text-[11px] uppercase tracking-[0.35em] mb-4 inline-block">Co-develop breakthrough solutions</span>
-                <h3 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">{active.title}</h3>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mb-8">
-                  {active.description}
-                </p>
-                <div className="grid mb-4">
-                  {active.bullets.map((b, i) => (
-                    <div key={i} className="flex items-start gap-3 p-2">
-                      <div className={` text-[#FCAF17] rounded-full p-2 shrink-0`}>
-                        <CheckCircle2 size={16} />
-                      </div>
-                      <p className="text-slate-700 text-sm leading-relaxed">{b}</p>
+              <div className="flex flex-col justify-center p-6 sm:p-9 lg:p-12">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center bg-[#FCAF17] text-[#003B70]">{active.icon}</div>
+                <span className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#FCAF17]">{active.tagline}</span>
+                <h3 className="font-tahoma-font text-2xl font-bold tracking-tight text-[#003B70] sm:text-3xl lg:text-4xl">{active.title}</h3>
+                <p className="mt-5 text-sm leading-7 text-[#003B70]/70 sm:text-base">{active.description}</p>
+                <div className="mt-7 grid gap-3">
+                  {active.bullets.map((bullet) => (
+                    <div key={bullet} className="flex items-start gap-3 border-l-2 border-[#FCAF17] bg-[#003B70]/[0.035] px-4 py-3">
+                      <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-[#FCAF17]" />
+                      <p className="text-sm leading-6 text-[#003B70]/80">{bullet}</p>
                     </div>
                   ))}
                 </div>
-                
               </div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                className="relative overflow-hidden border border-slate-200 w-full h-full bg-slate-100 "
-              >
-                <Image
-                  width={1000}
-                  height={1000}
-                  src={active.img}
-                  alt={active.title}
-                  className="w-full h-full object-cover"
-                />
-                
-              </motion.div>
+              <div className="relative min-h-[300px] overflow-hidden bg-[#003B70] sm:min-h-[420px] lg:min-h-[560px]">
+                <Image src={active.img} alt={active.title} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover transition-transform duration-700 hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#003B70]/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 border-t border-r border-white/30 bg-[#003B70]/90 px-5 py-4 text-[10px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-sm">
+                  NUST Industry Gateway
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
- <section id="engage" className="py-4 bg-[#F3EFE6] min-h-screen flex items-center">
-      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
-        {/* Header Section */}
-        <div className="mb-8 text-left">
-          <span className="text-[#FCAF17]  text-[11px] uppercase tracking-[0.15em] mb-4 block">
-            Simple Process
-          </span>
-          
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">
-            How to Engage ICON
-          </h2>
-          <p className=" max-w-2xl text-base leading-relaxed">
-            From your first enquiry to project delivery, ICON manages the entire process so you can focus on your business.
-          </p>
-        </div>
 
-        {/* Timeline Grid */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 lg:gap-10 relative">
-          {/* Connecting Line: 
-            Uses left/right 12.5% to align perfectly with the centers of the 1st and 4th columns in a 4-col grid.
-            top-6 aligns it with the vertical center of the w-12 h-12 (48px) circles.
-          */}
-          <div className="hidden md:block absolute top-6 left-[12.5%] right-[12.5%] h-[1px] bg-[#d5d0c5] z-0" />
+      <section id="engage" className="relative overflow-hidden bg-[#003B70] py-8">
+        <div className="absolute -left-32 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full border border-white/10" />
+        <div className="relative mx-auto max-w-8xl px-5 sm:px-8 lg:px-12">
+          <div className="mb-12 max-w-3xl lg:mb-16">
+            <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">Simple Process</span>
+            <h2 className="font-tahoma-font text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">How to Engage ICON</h2>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-white/75">
+              From your first enquiry to project delivery, ICON manages the process so your team can stay focused on the business outcome.
+            </p>
+          </div>
 
-          {/* Steps */}
-          {engagementSteps.map((item) => (
-            <motion.div
-              key={item.step}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: item.step * 0.1 }}
-              className="relative z-10 flex flex-col text-left"
-            >
-              {/* Number Circle */}
-              <div 
-                className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-medium text-base mb-6 md:mb-8 ${item.color}`}
+          <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="absolute left-[12.5%] right-[12.5%] top-8 hidden h-px bg-[#FCAF17]/50 lg:block" />
+            {engagementSteps.map((item) => (
+              <motion.article
+                key={item.step}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.45, delay: item.step * 0.08 }}
+                whileHover={{ y: -6 }}
+                className="relative z-10 border border-white/15 bg-white p-6 shadow-xl shadow-black/10 transition-shadow duration-300 hover:shadow-2xl"
               >
-                {item.step.toString().padStart(2, '0')}
-              </div>
-              
-              {/* Text Content */}
-              <h4 className="font-serif font-bold text-lg text-[#084C70] mb-3">
-                {item.title}
-              </h4>
-              <p className="text-[15px] text-slate-600 leading-relaxed pr-4">
-                {item.desc}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex h-14 w-14 items-center justify-center bg-[#FCAF17] text-[#003B70]">{item.icon}</div>
+                  <span className="font-tahoma-font text-sm font-bold text-[#003B70]/35">{item.step.toString().padStart(2, '0')}</span>
+                </div>
+                <h3 className="font-tahoma-font text-lg font-bold text-[#003B70]">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[#003B70]/70">{item.desc}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-8">
+        <div className="mx-auto max-w-8xl px-5 ">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">Industries We Serve</span>
+              <h2 className="font-tahoma-font text-3xl font-bold tracking-tight text-[#003B70] sm:text-4xl">Sector-Agnostic.<br />Expertise-Rich.</h2>
+              <p className="mt-5 max-w-xl text-base leading-7 text-[#003B70]/70">
+                ICON&apos;s faculty network spans every major industrial sector, ensuring that no challenge is too specialised or too broad.
               </p>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  
-
-      {/* ── SECTORS ────────────────────────────────────────────────────────── */}
-      <section className="py-10 sm:py-12 lg:py-16 bg-white border-t border-slate-100">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col ">
-            <div className="max-w-8xl text-left">
-              <span className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">Industries We Serve</span>
-              <h2 className="text-2xl sm:text-3xl font-serif text-slate-900">Sector-Agnostic, Expertise-Rich</h2>
-              <p className="text-slate-500 mt-3 text-sm leading-relaxed">
-                ICON's faculty network spans virtually every major industrial sector, ensuring that no challenge is too niche or too broad.
-              </p>
-            </div>
-            <div className="flex mt-4 flex-wrap gap-2 max-w-8xl">
-              {sectors.map((sec, i) => (
+            <div className="flex flex-wrap content-start gap-2.5">
+              {sectors.map((sector, index) => (
                 <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-blue-900 hover:text-white transition-colors cursor-default"
+                  key={sector}
+                  initial={{ opacity: 0, scale: 0.94 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.035 }}
+                  className="border border-[#003B70]/20 bg-white px-4 py-3 text-[11px] font-bold uppercase tracking-[0.12em] text-[#003B70] transition-colors duration-300 hover:border-[#003B70] hover:bg-[#003B70] hover:text-[#FCAF17]"
                 >
-                  {sec}
+                  {sector}
                 </motion.span>
               ))}
             </div>
@@ -372,123 +293,71 @@ export default function IndustryServicesPage({ faqs }: { faqs: FaqItem[] }) {
         </div>
       </section>
 
-      {/* ── FEATURED PARTNERS ─────────────────────────────────────────────── */}
-     
-
-      {/* ── CTA BANNER ───────────────────────────────────────────────────── */}
-       <section
-      id="industry-brief"
-      className="py-4 sm:py-8 bg-[#062539] text-white flex items-center min-h-screen"
-    >
-      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-start">
-        
-        {/* Left Column: Text Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-left max-w-lg"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-serif mb-6 leading-[1.2] text-white">
-            Ready to solve your industry bottleneck?
-          </h2>
-          <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Initiate a sponsored research project today. Our dedicated program
-            managers will match your challenge with the right faculty experts and
-            laboratory infrastructure.
-          </p>
-        </motion.div>
-
-        {/* Right Column: Form Section */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col gap-5"
-        >
-          <input
-            type="text"
-            name="website"
-            value={values.website}
-            onChange={setField('website')}
-            tabIndex={-1}
-            autoComplete="off"
-            aria-hidden="true"
-            className="absolute w-px h-px overflow-hidden opacity-0"
-            style={{ clip: 'rect(0,0,0,0)' }}
-          />
-
-          {/* Company Name */}
-          <input
-            type="text"
-            required
-            placeholder="Company Name"
-            value={values.organization}
-            onChange={setField('organization')}
-            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] focus:border-[#427b9e] focus:ring-0 outline-none transition"
-          />
-
-          {/* Professional Email */}
-          <input
-            type="email"
-            required
-            placeholder="Professional Email"
-            value={values.email}
-            onChange={setField('email')}
-            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] focus:border-[#427b9e] focus:ring-0 outline-none transition"
-          />
-
-          {/* Technical Domain / Area of Interest */}
-          <div className="relative">
-            <select
-              value={values.domain}
-              onChange={setField('domain')}
-              className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-[#6B8394] focus:border-[#427b9e] outline-none appearance-none cursor-pointer"
-            >
-              <option value="" disabled hidden>
-                Select Area of Interest...
-              </option>
-              {sectors.map((sector) => (
-                <option key={sector} value={sector} className="text-slate-900">
-                  {sector}
-                </option>
-              ))}
-            </select>
-            {/* Custom Chevron to match design */}
-            <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none">
-              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1.5L6 6.5L11 1.5" stroke="#6B8394" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+      <section id="industry-brief" className="scroll-mt-20 border-t-[6px] border-[#FCAF17] bg-[#003B70] py-8">
+        <div className="mx-auto grid max-w-8xl items-start gap-10 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16 ">
+          <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="max-w-xl lg:sticky lg:top-28">
+            <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">Start a Conversation</span>
+            <h2 className="font-tahoma-font text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">Ready to solve your industry bottleneck?</h2>
+            <p className="mt-5 text-base leading-7 text-white/75 sm:text-lg">
+              Share your challenge and our program managers will connect you with the right faculty experts and laboratory infrastructure.
+            </p>
+            <div className="mt-8 flex items-center gap-3 border-l-2 border-[#FCAF17] pl-4 text-sm leading-6 text-white/80">
+              <CheckCircle2 size={19} className="shrink-0 text-[#FCAF17]" />
+              Your submission is routed directly to the ICON Industry Desk.
             </div>
-          </div>
+          </motion.div>
 
-          {/* Challenge Description */}
-          <textarea
-            rows={4}
-            placeholder="Brief Description of the Challenge"
-            value={values.message}
-            onChange={setField('message')}
-            className="w-full bg-transparent border border-[#1c3e56] px-5 py-4 text-slate-300 placeholder:text-[#6B8394] resize-none focus:border-[#427b9e] outline-none transition"
-          ></textarea>
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="grid gap-5 bg-white p-5 shadow-2xl shadow-black/20 sm:p-8"
+          >
+            <input type="text" name="website" value={values.website} onChange={setField('website')} tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute h-px w-px overflow-hidden opacity-0" style={{ clip: 'rect(0,0,0,0)' }} />
 
-          {status === 'success' && (
-            <p className="text-emerald-400 text-sm font-medium">Thank you — your inquiry has been received. Our team will be in touch shortly.</p>
-          )}
-          {status === 'error' && <p className="text-red-400 text-sm font-medium">{error}</p>}
+            <div className="grid gap-5 sm:grid-cols-2">
+              <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#003B70]">
+                Company Name <span className="sr-only">required</span>
+                <input type="text" required placeholder="Your organisation" value={values.organization} onChange={setField('organization')} className="w-full border border-[#003B70]/20 bg-white px-4 py-3.5 text-sm font-normal normal-case tracking-normal text-[#003B70] outline-none transition placeholder:text-[#003B70]/40 focus:border-[#FCAF17] focus:ring-2 focus:ring-[#FCAF17]/20" />
+              </label>
+              <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#003B70]">
+                Professional Email <span className="sr-only">required</span>
+                <input type="email" required placeholder="name@company.com" value={values.email} onChange={setField('email')} className="w-full border border-[#003B70]/20 bg-white px-4 py-3.5 text-sm font-normal normal-case tracking-normal text-[#003B70] outline-none transition placeholder:text-[#003B70]/40 focus:border-[#FCAF17] focus:ring-2 focus:ring-[#FCAF17]/20" />
+              </label>
+            </div>
 
-          {/* Submit Button */}
-          <button type="submit" disabled={status === 'submitting'} className="w-full bg-[#D7A33B] text-[#062539] py-4 mt-2 font-bold hover:bg-[#c49231] transition flex items-center justify-center disabled:opacity-60">
-            {status === 'submitting' ? 'Submitting…' : 'Submit Research Inquiry'}
-          </button>
-        </motion.form>
+            <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#003B70]">
+              Area of Interest
+              <div className="relative">
+                <select value={values.domain} onChange={setField('domain')} className="w-full appearance-none border border-[#003B70]/20 bg-white px-4 py-3.5 pr-12 text-sm font-normal normal-case tracking-normal text-[#003B70] outline-none transition focus:border-[#FCAF17] focus:ring-2 focus:ring-[#FCAF17]/20">
+                  <option value="" disabled>Select an area of interest</option>
+                  {sectors.map((sector) => <option key={sector} value={sector}>{sector}</option>)}
+                </select>
+                <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2" width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="#003B70" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </label>
 
-      </div>
-    </section>
+            <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-[#003B70]">
+              Challenge Description
+              <textarea rows={5} placeholder="Tell us about the challenge, expected outcome, and timeline" value={values.message} onChange={setField('message')} className="w-full resize-none border border-[#003B70]/20 bg-white px-4 py-3.5 text-sm font-normal normal-case leading-6 tracking-normal text-[#003B70] outline-none transition placeholder:text-[#003B70]/40 focus:border-[#FCAF17] focus:ring-2 focus:ring-[#FCAF17]/20" />
+            </label>
+
+            {status === 'success' && <p role="status" className="border-l-4 border-[#FCAF17] bg-[#FCAF17]/15 px-4 py-3 text-sm font-medium text-[#003B70]">Thank you — your inquiry has been received. Our team will be in touch shortly.</p>}
+            {status === 'error' && <p role="alert" className="border-l-4 border-[#FCAF17] bg-[#003B70]/[0.06] px-4 py-3 text-sm font-medium text-[#003B70]">{error}</p>}
+
+            <button type="submit" disabled={status === 'submitting'} className="group inline-flex w-full items-center justify-center gap-3 bg-[#FCAF17] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-[#003B70] transition duration-300 hover:bg-[#003B70] hover:text-white disabled:cursor-not-allowed disabled:opacity-60">
+              {status === 'submitting' ? 'Submitting…' : 'Submit Research Inquiry'}
+              {status !== 'submitting' && <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />}
+            </button>
+          </motion.form>
+        </div>
+      </section>
+
       <FaqSection faqs={faqs} />
-
     </div>
   );
 }

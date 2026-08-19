@@ -409,7 +409,7 @@ export default function CommercializationPathwaysPage({ faqs }: { faqs: FaqItem[
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans overflow-x-hidden">
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section className="relative py-14 sm:py-16 lg:py-24 bg-white border-b border-slate-200 overflow-hidden">
+      <section className="relative py-8 bg-white border-b border-slate-200 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80')" }}

@@ -1,13 +1,14 @@
 "use client"
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   FlaskConical,
   Users,
-  GraduationCap,
   Layers,
-  ArrowRight,
   CheckCircle2,
+  ArrowRight,
 } from 'lucide-react';
 
 const services = [
@@ -76,9 +77,9 @@ function ServiceRow({
   const isEven = index % 2 === 0;
 
   return (
-    <div className="relative py-4  ">
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 relative">
-        <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-4 lg:gap-0 items-center">
+    <article className="relative py-4">
+      <div className="relative mx-auto max-w-8xl ">
+        <div className="grid items-center gap-7 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:gap-0">
 
           {/* ── Text side ── */}
           <motion.div
@@ -86,33 +87,33 @@ function ServiceRow({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className={`px-2 sm:px-4 lg:px-10 ${isEven ? 'lg:order-1' : 'lg:order-3'}`}
+            className={`relative px-1 sm:px-3 lg:px-10 ${isEven ? 'lg:order-1' : 'lg:order-3'}`}
           >
-            {/* overline */}
-            <div className="flex items-center gap-3 mb-6">
-              <span className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.35em]">
+            <div className="mb-5 flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center bg-[#FCAF17] text-[#003B70] lg:hidden">
+                {service.icon}
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#FCAF17] sm:text-[11px]">
                 {service.tagline}
               </span>
             </div>
 
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl  font-serif text-white mb-4 leading-tight tracking-tight">
+            <h3 className="font-tahoma-font text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl lg:text-4xl">
               {service.title}
             </h3>
 
-            <p className="text-white text-sm  leading-relaxed mb-6 sm:mb-8 max-w-md">
+            <p className="mt-5 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
               {service.desc}
             </p>
 
-            <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 lg:mb-10">
-              {service.bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-white">
-                  <CheckCircle2 size={14} className="text-[#FCAF17] mt-0.5 shrink-0" />
-                  {b}
+            <ul className="mt-6 space-y-3 border-l border-white/15 pl-4 sm:mt-7">
+              {service.bullets.map((bullet) => (
+                <li key={bullet} className="flex items-start gap-3 text-sm leading-6 text-white/80">
+                  <CheckCircle2 size={16} className="mt-1 shrink-0 text-[#FCAF17]" />
+                  {bullet}
                 </li>
               ))}
             </ul>
-
-           
           </motion.div>
 
           {/* ── Center column — connector node ── */}
@@ -124,27 +125,23 @@ function ServiceRow({
               transition={{ type: 'spring', stiffness: 240, damping: 18, delay: 0.25 }}
               className="relative flex items-center justify-center"
             >
-              {/* outer pulse ring */}
               <motion.div
                 animate={{ scale: [1, 1.5, 1], opacity: [0.4, 0, 0.4] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute w-14 h-14 rounded-full border border-blue-400/30"
+                className="absolute h-16 w-16 rounded-full border border-[#FCAF17]/40"
               />
-              {/* mid ring */}
-              <div className="absolute w-10 h-10 rounded-full border border-blue-500/40" />
-              {/* inner node */}
-              <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-blue-400 flex items-center justify-center text-blue-400 shadow-[0_0_24px_rgba(96,165,250,0.5)] z-10">
+              <div className="absolute h-12 w-12 rounded-full border border-[#FCAF17]/60" />
+              <div className="z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#FCAF17] bg-[#003B70] text-[#FCAF17] shadow-[0_0_24px_rgba(252,175,23,0.45)]">
                 {service.icon}
               </div>
             </motion.div>
 
-            {/* horizontal connector arms */}
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="absolute w-full h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent origin-center top-1/2"
+              className="absolute top-1/2 h-px w-full origin-center bg-gradient-to-r from-transparent via-[#FCAF17]/70 to-transparent"
             />
           </div>
 
@@ -154,34 +151,36 @@ function ServiceRow({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.7, delay: 0.12, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className={`px-2 sm:px-4 lg:px-10 ${isEven ? 'lg:order-3' : 'lg:order-1'}`}
+            className={`px-1 sm:px-3 lg:px-10 ${isEven ? 'lg:order-3' : 'lg:order-1'}`}
           >
-            <div className="relative overflow-hidden rounded-md h-[220px] sm:h-[300px] lg:h-[380px] xl:h-[440px] group">
-              <img
+            <div className="group relative h-[240px] overflow-hidden border border-white/15 bg-white/5 shadow-2xl shadow-black/20 sm:h-[330px] lg:h-[400px] xl:h-[440px]">
+              <Image
                 src={service.img}
                 alt={service.title}
-                className="w-full h-full object-cover transition-transform duration-[1800ms] ease-out group-hover:scale-105"
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#003B70]/80 via-transparent to-transparent" />
               <div
                 className={`absolute inset-0 ${
                   isEven
-                    ? 'bg-gradient-to-l from-transparent to-slate-900/20'
-                    : 'bg-gradient-to-r from-transparent to-slate-900/20'
+                    ? 'bg-gradient-to-l from-transparent to-[#003B70]/25'
+                    : 'bg-gradient-to-r from-transparent to-[#003B70]/25'
                 }`}
               />
-
-              
-
-              {/* watermark index */}
-              <div className="absolute top-4 right-5 text-white/[0.07] font-serif text-[110px] leading-none select-none pointer-events-none font-bold">
+              <div className="absolute left-0 top-0 h-1.5 w-24 bg-[#FCAF17] transition-all duration-500 group-hover:w-full" />
+              <div className="pointer-events-none absolute right-5 top-4 select-none font-tahoma-font text-[72px] font-bold leading-none text-white/15 sm:text-[100px]">
                 {String(index + 1).padStart(2, '0')}
+              </div>
+              <div className="absolute bottom-0 left-0 bg-[#FCAF17] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]">
+                ICON Industry Services
               </div>
             </div>
           </motion.div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -199,27 +198,40 @@ const IndustryServicesPortal = () => {
   const lineHeadY = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <div className="bg-[#274661] text-white relative py-4 overflow-hidden">
+    <section className="relative overflow-hidden bg-[#003B70] font-sans text-white ">
       <div
-        className="absolute inset-0 opacity-10 bg-fixed bg-cover pointer-events-none"
+        className="pointer-events-none absolute inset-0 bg-fixed bg-cover opacity-[0.08]"
         style={{ backgroundImage: "url('/industrial_bg.png')" }}
       />
 
-      {/* ── Section header ── */}
-      <div className="relative z-10  py-2 text-center">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-40 bg-gradient-to-b from-[#001F3D] via-[#003B70]/90 to-transparent backdrop-blur-xl [mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-14 left-1/2 z-[1] h-32 w-[85%] -translate-x-1/2 rounded-full bg-[#FCAF17]/10 blur-3xl"
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute -right-40 top-1/3 h-96 w-96 rounded-full border border-white/10" />
+
+      <div className="relative z-10 py-8 text-center sm:py-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto px-4 sm:px-6"
+          className="mx-auto max-w-3xl px-5 sm:px-8"
         >
-          
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl   text-white mb-3 leading-tight tracking-tight">
-            Industrial Services
+          <span className="mb-4 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.35em] text-[#FCAF17] sm:text-[11px]">
+            <span className="h-px w-8 bg-[#FCAF17]" />
+            Research to Industry
+            <span className="h-px w-8 bg-[#FCAF17]" />
+          </span>
+          <h2 className="font-tahoma-font text-3xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Industry Services
           </h2>
-          <p className="text-white text-sm sm:text-base lg:text-lg leading-relaxed font-light">
-            Four key avenues designed to seamlessly integrate NUST's research
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/70 sm:text-base lg:text-lg">
+            Four key avenues designed to seamlessly integrate NUST&apos;s research
             excellence, faculty expertise, and infrastructure with your corporate R&D needs.
           </p>
         </motion.div>
@@ -229,34 +241,28 @@ const IndustryServicesPortal = () => {
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="mx-auto mt-4 h-px w-48 origin-center bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
+          className="mx-auto mt-7 h-px w-48 origin-center bg-gradient-to-r from-transparent via-[#FCAF17]/70 to-transparent"
         />
       </div>
 
-      {/* ── Rows with scroll-driven vertical line ── */}
       <div ref={containerRef} className="relative z-10">
-
-        {/* ── Vertical track (faint, always visible) ── */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/[0.06]" />
-
-        {/* ── Animated fill line ── */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px overflow-hidden">
           <motion.div
             className="w-full h-full origin-top"
             style={{
               scaleY,
-              background: '#00558f',
+              background: '#FCAF17',
             }}
           />
         </div>
 
-        {/* ── Traveling glow dot ── */}
         <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 pointer-events-none overflow-hidden">
           <motion.div
-            className="absolute left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-cyan-300"
+            className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-[#FCAF17]"
             style={{
               top: lineHeadY,
-              boxShadow: '0 0 12px 4px rgba(103,232,249,0.7)',
+              boxShadow: '0 0 14px 5px rgba(252,175,23,0.55)',
             }}
           />
         </div>
@@ -266,9 +272,8 @@ const IndustryServicesPortal = () => {
         ))}
       </div>
 
-      {/* bottom fade to white
-      <div className="h-16 bg-gradient-to-b from-transparent to-slate-50 relative z-10" /> */}
-    </div>
+    
+    </section>
   );
 };
 

@@ -15,32 +15,32 @@ export default function FaqSection({ faqs }: { faqs: FaqItem[] }) {
   if (faqs.length === 0) return null;
 
   return (
-    <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
-      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
-        <div className="mb-12 sm:mb-16 text-left">
-          <span className="text-[#CA9F3B] font-bold text-xs uppercase tracking-[0.15em] mb-4 block">
+    <section id="faq" className="bg-[#003B70]/[0.035] py-8 font-sans ">
+      <div className="mx-auto max-w-8xl px-5 sm:px-8 ">
+        <div className="mb-10 text-left sm:mb-12">
+          <span className="mb-3 block text-[11px] font-bold uppercase tracking-[0.35em] text-[#FCAF17]">
             Knowledge Base
           </span>
-          <h2 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">
+          <h2 className="font-tahoma-font text-3xl font-bold tracking-tight text-[#003B70] sm:text-4xl lg:text-5xl">
             Frequently Asked Questions
           </h2>
         </div>
 
-        <div className="border-t border-[#E5E0D5]">
+        <div className="border-t border-[#003B70]/15">
           {faqs.map((faq) => {
             const isOpen = openId === faq.id;
             return (
-              <div key={faq.id} className="border-b border-[#E5E0D5]">
+              <div key={faq.id} className="border-b border-[#003B70]/15">
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
-                  className="w-full flex justify-between items-center py-6 sm:py-8 text-left focus:outline-none group"
+                  className="group flex w-full items-center justify-between py-6 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#FCAF17] focus-visible:ring-offset-4 sm:py-7"
                 >
-                  <span className="font-semibold text-base text-[#084C70] pr-8 group-hover:text-[#0a5e8a] transition-colors">
+                  <span className="pr-6 font-tahoma-font text-base font-bold text-[#003B70] transition-colors group-hover:text-[#003B70]/70 sm:text-lg">
                     {faq.question}
                   </span>
-                  <span className="text-[#CA9F3B] text-2xl font-light shrink-0 leading-none pb-1" aria-hidden="true">
+                  <span className={`flex h-9 w-9 shrink-0 items-center justify-center border text-xl leading-none transition-colors ${isOpen ? 'border-[#003B70] bg-[#003B70] text-[#FCAF17]' : 'border-[#FCAF17] bg-[#FCAF17] text-[#003B70]'}`} aria-hidden="true">
                     {isOpen ? '−' : '+'}
                   </span>
                 </button>
@@ -51,10 +51,10 @@ export default function FaqSection({ faqs }: { faqs: FaqItem[] }) {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      transition={{ duration: 0.28, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="pb-8 text-slate-600 text-base leading-relaxed pr-8 whitespace-pre-line">
+                      <div className="max-w-4xl whitespace-pre-line pb-7 pr-10 text-sm leading-7 text-[#003B70]/70 sm:text-base">
                         {faq.answer}
                       </div>
                     </motion.div>

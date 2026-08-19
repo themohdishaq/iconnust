@@ -258,7 +258,7 @@ const App = ({
 
       <IndustryServicesPortal />
 
-      <section className="py-4 max-w-8xl sm:py-8 lg:py-10 bg-white text-slate-900">
+      <section className="py-4 max-w-8xl sm:py-8 bg-white text-slate-900">
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div>
@@ -450,7 +450,7 @@ const App = ({
 
       {/* Initiate a Partnership (Contact Section) */}
       <section id="partner-with-us" className=" bg-white relative">
-        <div className="max-w-8xl mx-auto px-4 sm:px-6">
+        <div className="max-w-8xl mx-auto px-4 ">
           <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
             <div className="py-4 lg:col-span-5">
               <div className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-5 sm:mb-6 lg:mb-8">

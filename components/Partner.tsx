@@ -114,7 +114,7 @@ export default function PartnersSection({ partners }: { partners: Partner[] }) {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-slate-50 py-14 "
+      className="relative overflow-hidden bg-slate-50 py-4 "
     >
       <div className="mx-auto max-w-8xl px-6">
         <div className="mb-14 text-center">

@@ -6,6 +6,13 @@ import {
   ChevronRight,
   Activity,
   ArrowRight,
+  Lightbulb,
+  Search,
+  ShieldCheck,
+  Handshake,
+  FileCheck2,
+  Rocket,
+  TrendingUp,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -15,13 +22,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  LabelList,
-  PieChart,
-  Pie,
-  Cell,
 } from "recharts";
 import Link from 'next/link';
+import Image from 'next/image';
 import FaqSection, { type FaqItem } from '@/components/FaqSection';
 
 // --- YouTube Video Data ---
@@ -70,6 +73,51 @@ type IpBreakdownEntry = { name: string; value: number; color: string };
 type IpYearlyEntry = { year: string; industrialDesign: number; copyright: number; patents: number; trademark: number };
 type StatTileEntry = { label: string; value: number };
 
+const ttoStories = [
+  {
+    title: 'Invention Disclosure',
+    category: 'Discover',
+    description: 'Capture promising university inventions early through a confidential, structured review.',
+    image: '/industry-services/rnd.jpg',
+    icon: Lightbulb,
+  },
+  {
+    title: 'Market & Prior-Art Review',
+    category: 'Assess',
+    description: 'Evaluate novelty, commercial relevance, and the strongest route to real-world adoption.',
+    image: '/industry-services/consultancy.jpg',
+    icon: Search,
+  },
+  {
+    title: 'Intellectual Property Protection',
+    category: 'Protect',
+    description: 'Coordinate patents, designs, copyright, and trademark protection around the innovation.',
+    image: '/industry-services/patentwall.jpg',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Industry Matchmaking',
+    category: 'Connect',
+    description: 'Position technologies for relevant companies, investors, and development partners.',
+    image: '/industry-services/expertconsultancy.jpg',
+    icon: Handshake,
+  },
+  {
+    title: 'Licensing & Agreements',
+    category: 'Transfer',
+    description: 'Structure practical licensing terms that protect NUST, inventors, and industry partners.',
+    image: '/industry-services/facultybuilding.jpg',
+    icon: FileCheck2,
+  },
+  {
+    title: 'Spin-off & Market Launch',
+    category: 'Scale',
+    description: 'Support venture formation and the transition from a validated technology to market impact.',
+    image: '/industry-services/spinoffnust.jpg',
+    icon: Rocket,
+  },
+];
+
 // Precompute totals for the labels shown above each stacked bar
 const withTotal = (rows: IpYearlyEntry[]) =>
   rows.map((d) => ({
@@ -88,101 +136,10 @@ const fadeUp = {
   animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
 
-const TotalLabel = ({ x, y, width, value }: { x?: number; y?: number; width?: number; value?: string | number }) => {
-  if (value == null) return null;
-  return (
-    <text
-      x={x != null && width != null ? x + width / 2 : x}
-      y={y != null ? y - 8 : 0}
-      fill="#475569"
-      textAnchor="middle"
-      fontSize={12}
-      fontWeight={600}
-    >
-      {value}
-    </text>
-  );
-};
-
 const slideInLeft = {
   initial: { opacity: 0, x: -30 },
   animate: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" as const } }
 };
-
-// Reusable stacked-bar chart block used for both "IPs Filed" and "IPs Awarded"
-const IPStackedBarChart = ({
-  title,
-  data,
-  yAxisLabel,
-}: {
-  title: string;
-  data: (IpYearlyEntry & { total: number })[];
-  yAxisLabel: string;
-}) => (
-  <motion.div
-    initial="initial"
-    whileInView="animate"
-    viewport={{ once: true }}
-    variants={fadeUp}
-    className="bg-white p-6"
-  >
-    <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">{title}</h3>
-
-    <div className="h-[380px] w-full">
-      <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 800, height: 380 }}>
-        <BarChart data={data} margin={{ top: 24, right: 16, left: 16, bottom: 24 }}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-          <XAxis
-            dataKey="year"
-            axisLine={{ stroke: "#cbd5e1" }}
-            tickLine={false}
-            tick={{ fontSize: 12, fill: "#475569" }}
-            label={{ value: "Year", position: "insideBottom", offset: -8, style: { fontSize: 12, fill: "#64748b" } }}
-          />
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            tick={{ fontSize: 12, fill: "#475569" }}
-            label={{
-              value: yAxisLabel,
-              angle: -90,
-              position: "insideLeft",
-              offset: 0,
-              style: { fontSize: 12, fill: "#64748b", textAnchor: "middle" },
-            }}
-          />
-          <Tooltip
-            contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
-            cursor={{ fill: "#f1f5f9" }}
-          />
-          <Legend
-            verticalAlign="top"
-            align="center"
-            height={36}
-            iconType="square"
-            iconSize={10}
-            wrapperStyle={{ fontSize: 11, fontWeight: 600, color: "#475569" }}
-            formatter={(value) => {
-              const labels: Record<string, string> = {
-                industrialDesign: "Industrial Design",
-                copyright: "Copyright",
-                patents: "Patents",
-                trademark: "Trademark",
-              };
-              return labels[value] ?? value;
-            }}
-          />
-          <Bar dataKey="industrialDesign" stackId="ip" fill="#3b82f6" />
-          <Bar dataKey="copyright" stackId="ip" fill="#22c55e" />
-          <Bar dataKey="patents" stackId="ip" fill="#f97316" />
-          <Bar dataKey="trademark" stackId="ip" fill="#dc2626" radius={[3, 3, 0, 0]}>
-            <LabelList dataKey="total" content={<TotalLabel />} />
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  </motion.div>
-);
 
 const RndPortal = ({
   stats,
@@ -202,11 +159,17 @@ const RndPortal = ({
   const totalIPFiled = ipBreakdown.reduce((sum, d) => sum + d.value, 0);
   const ipsFiledDataWithTotal = withTotal(ipsFiled);
   const ipsAwardedDataWithTotal = withTotal(ipsAwarded);
+  const totalIPAwarded = ipsAwardedDataWithTotal.reduce((sum, row) => sum + row.total, 0);
+  const filedByYear = new Map(ipsFiledDataWithTotal.map((row) => [row.year, row.total]));
+  const awardedByYear = new Map(ipsAwardedDataWithTotal.map((row) => [row.year, row.total]));
+  const ttoTrend = Array.from(new Set([...filedByYear.keys(), ...awardedByYear.keys()]))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((year) => ({ year, filed: filedByYear.get(year) ?? 0, awarded: awardedByYear.get(year) ?? 0 }));
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
       {/* Hero Section */}
-      <section className="relative py-20  bg-slate-900 overflow-hidden">
+      <section className="relative py-8  bg-slate-900 overflow-hidden">
         <motion.div
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.4 }}
@@ -240,141 +203,167 @@ const RndPortal = ({
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LCAyNTUsLCAyNTUsIDAuMSkiLz48L3N2Zz4=')] opacity-30 z-0" />
       </section>
 
-      {/* Analytics Dashboard (Charts & Graphs) */}
-      <section id="our-impact" className="pt-4 bg-white">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">
-            By the Numbers
-          </div>
-          <div className="mb-8">
-            <h2 className="text-3xl sm:text-4xl font-serif text-[#003B70] mb-2">Innovation & Collaboration Metrics</h2>
-            <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 overflow-hidden mb-10">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className={`
-                  ${index % 2 === 0 ? "bg-[#0A2D4A]" : "bg-[#0E5E97]"}
-                  flex flex-col items-center justify-center
-                  h-36 sm:h-40 md:h-44
-                  border-b sm:border-b-0
-                  sm:border-r
-                  last:sm:border-r-0
-                  border-white/20
-                  transition-colors duration-300
-                  hover:brightness-110
-                `}
-              >
-                <h2
-                  className="
-                    text-[#D4A017]
-                    font-serif
-                    font-semibold
-                    text-3xl
-                    md:text-4xl
-                    leading-none
-                  "
-                >
-                  {stat.value.toLocaleString('en-US')}
-                </h2>
-
-                <p
-                  className="
-                    mt-3
-                    text-white
-                    text-[10px]
-                    sm:text-[10px]
-                    uppercase
-                    tracking-[0.2em]
-                    font-medium
-                  "
-                >
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* ROW 1: Donut chart, centered, alone in its own column */}
+      {/* TTO impact visualization: inspired by the supplied research-to-reality reference. */}
+      <section id="our-impact" className="bg-[#003B70]/[0.035] py-8">
+        <div className="mx-auto max-w-8xl px-5 ">
           <motion.div
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="flex flex-col items-center mb-4"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            className="mb-10 flex flex-col justify-between gap-6 lg:mb-14 lg:flex-row lg:items-end"
           >
-            <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">IP Area Key</h3>
-            <div className="flex flex-col sm:flex-row items-center gap-8">
-              <div className="relative w-[300px]  h-[300px] shrink-0">
-                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 300, height: 300 }}>
-                  <PieChart>
-                    <Pie
-                      data={ipBreakdown}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={50}
-                      outerRadius={100}
-                      paddingAngle={3}
-                      cornerRadius={3}
-                      dataKey="value"
-                      stroke="#fff"
-                      strokeWidth={3}
-                      label={({ value }) => value}
-                      labelLine={false}
-                    >
-                      {ipBreakdown.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      formatter={(value: any, name: any) => [String(value), String(name)]}
-                      contentStyle={{ borderRadius: "8px", border: "none", boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)" }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-
-                {/* Center label overlay */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                  <span className="text-2xl font-bold text-slate-900">{totalIPFiled}</span>
-                  <span className="text-[10px] uppercase tracking-wide text-slate-500 text-center leading-tight">
-                    Total IP Filed
-                  </span>
-                </div>
-              </div>
-
-              {/* Legend */}
-              <div className="space-y-2">
-                {ipBreakdown.map((entry) => (
-                  <div key={entry.name} className="flex items-center text-[13px] text-slate-700">
-                    <span
-                      className="w-3 h-3 rounded-sm mr-2 shrink-0"
-                      style={{ backgroundColor: entry.color }}
-                    />
-                    <span>
-                      {entry.name} <span className="text-slate-500">- {entry.value}</span>
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div className="max-w-3xl">
+              <h2 className="font-tahoma-font text-3xl font-bold tracking-tight text-[#003B70] sm:text-4xl lg:text-5xl">
+                From Research to <span className="text-[#FCAF17]">Real-World Impact</span>
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[#003B70]/70">
+                TTO helps university discoveries move through assessment, protection, industry connection, licensing, and venture creation in one coordinated pathway.
+              </p>
+            </div>
+            <div className="inline-flex w-fit items-center gap-3 border-l-2 border-[#FCAF17] bg-white px-5 py-4 text-sm font-semibold text-[#003B70] shadow-sm">
+              <TrendingUp size={20} className="text-[#FCAF17]" />
+              Current live metrics
             </div>
           </motion.div>
 
-          {/* ROW 2: IPs Filed + IPs Awarded, side by side */}
-          {/* <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <IPStackedBarChart
-              title="IPs Filed (2020 - 2026)"
-              data={ipsFiledDataWithTotal}
-              yAxisLabel="Number of IP Filed"
-            />
-            <IPStackedBarChart
-            
-              title="IPs Awarded (2020 - 2026)"
-              data={ipsAwardedDataWithTotal}
-              yAxisLabel="Number of IP Awarded"
-            />
-          </div> */}
+          {stats.length > 0 && (
+            <div className={`mb-8 grid overflow-hidden border border-[#003B70]/15 bg-[#003B70]/80 ${stats.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'}`}>
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.07 }}
+                  className="border-b border-white/15 p-6 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0 lg:p-7"
+                >
+                  <div className="font-tahoma-font text-3xl font-bold text-[#FCAF17] sm:text-4xl">{stat.value.toLocaleString('en-US')}</div>
+                  <div className="mt-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          <div className="grid gap-10 lg:gap-14">
+            <div>
+              <div className="mb-5 flex items-end justify-between gap-4">
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#FCAF17]">What TTO Moves Forward</span>
+                  <h3 className="mt-2 font-tahoma-font text-2xl font-bold text-[#003B70]">A connected commercialization portfolio</h3>
+                </div>
+                <span className="hidden text-xs font-semibold text-[#003B70]/55 sm:block">Six coordinated services</span>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {ttoStories.map((story, index) => {
+                  const Icon = story.icon;
+                  return (
+                    <motion.article
+                      key={story.title}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.25 }}
+                      transition={{ duration: 0.45, delay: index * 0.06 }}
+                      whileHover={{ y: -6 }}
+                      className="group relative min-h-[230px] overflow-hidden bg-[#003B70] shadow-lg"
+                    >
+                      <Image src={story.image} alt="" fill sizes="(min-width: 1024px) 22vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#003B70] via-[#003B70]/75 to-[#003B70]/15" />
+                      <div className="absolute inset-x-0 bottom-0 p-5">
+                        <div className="mb-3 flex items-center justify-between">
+                          <span className="bg-[#FCAF17] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]">{story.category}</span>
+                          <Icon size={19} className="text-[#FCAF17]" />
+                        </div>
+                        <h4 className="font-tahoma-font text-base font-bold leading-snug text-white">{story.title}</h4>
+                        <p className="mt-2 text-xs leading-5 text-white/70">{story.description}</p>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            </div>
+
+            <motion.aside
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              className="border border-[#003B70]/15 bg-white p-5 shadow-[0_24px_70px_rgba(0,59,112,0.12)] sm:p-7"
+            >
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#FCAF17]">TTO Performance</span>
+              <h3 className="mt-2 font-tahoma-font text-2xl font-bold text-[#003B70]">Intellectual property progression</h3>
+
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                <div className="bg-[#003B70] p-5 text-white">
+                  <div className="font-tahoma-font text-3xl font-bold text-[#FCAF17]">{totalIPFiled.toLocaleString('en-US')}</div>
+                  <div className="mt-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white/70">Total IP Filed</div>
+                </div>
+                <div className="border border-[#003B70]/20 bg-[#FCAF17] p-5 text-[#003B70]">
+                  <div className="font-tahoma-font text-3xl font-bold">{totalIPAwarded.toLocaleString('en-US')}</div>
+                  <div className="mt-2 text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]/70">Total IP Awarded</div>
+                </div>
+              </div>
+
+              <div className="mt-7">
+                <div className="mb-4 flex items-center justify-between gap-4">
+                  <h4 className="font-tahoma-font text-sm font-bold text-[#003B70]">Year-on-year IP activity</h4>
+                  <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-wider text-[#003B70]/65">
+                    <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 bg-[#003B70]" /> Filed</span>
+                    <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 bg-[#FCAF17]" /> Awarded</span>
+                  </div>
+                </div>
+                <div className="h-[285px] min-w-0">
+                  <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 520, height: 285 }}>
+                    <BarChart data={ttoTrend} margin={{ top: 10, right: 4, left: -24, bottom: 0 }} barGap={4}>
+                      <CartesianGrid stroke="#003B70" strokeOpacity={0.1} vertical={false} />
+                      <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#003B70', fontSize: 10, fontWeight: 600 }} />
+                      <YAxis axisLine={false} tickLine={false} allowDecimals={false} tick={{ fill: '#003B70', fontSize: 10 }} />
+                      <Tooltip cursor={{ fill: '#003B70', opacity: 0.04 }} contentStyle={{ border: '1px solid rgba(0,59,112,.15)', boxShadow: '0 12px 30px rgba(0,59,112,.12)', color: '#003B70' }} />
+                      <Bar dataKey="filed" name="IP Filed" fill="#003B70" radius={[3, 3, 0, 0]} />
+                      <Bar dataKey="awarded" name="IP Awarded" fill="#FCAF17" radius={[3, 3, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {ipBreakdown.length > 0 && (
+                <div className="mt-6 border-t border-[#003B70]/15 pt-5">
+                  <div className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#003B70]/60">Filed IP portfolio</div>
+                  <div className="grid gap-2.5">
+                    {ipBreakdown.map((entry) => {
+                      const share = totalIPFiled > 0 ? (entry.value / totalIPFiled) * 100 : 0;
+                      return (
+                        <div key={entry.name}>
+                          <div className="mb-1 flex justify-between gap-3 text-[11px] font-semibold text-[#003B70]">
+                            <span>{entry.name}</span><span>{entry.value}</span>
+                          </div>
+                          <div className="h-1.5 overflow-hidden bg-[#003B70]/10"><div className="h-full bg-[#FCAF17]" style={{ width: `${share}%` }} /></div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </motion.aside>
+          </div>
+
+          <div className="mt-8 overflow-hidden bg-[#003B70] p-6 sm:p-8">
+            <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#FCAF17]">The TTO Pathway</span>
+                <h3 className="mt-2 font-tahoma-font text-2xl font-bold text-white">One clear route from idea to impact</h3>
+              </div>
+              <p className="max-w-md text-sm leading-6 text-white/65">Each stage reduces uncertainty and prepares the technology for its next commercial decision.</p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+              {ttoStories.map((story, index) => (
+                <motion.div key={story.category} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.07 }} className="relative border border-white/15 bg-white/[0.06] p-4">
+                  <span className="font-tahoma-font text-xs font-bold text-[#FCAF17]">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="mt-3 text-xs font-bold uppercase tracking-[0.12em] text-white">{story.category}</div>
+                  {index < ttoStories.length - 1 && <ArrowRight size={15} className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-[#FCAF17] lg:block" />}
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -384,7 +373,7 @@ const RndPortal = ({
           <div className="flex justify-between items-end mb-12">
             <div>
               <span className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
-              <h2 className="text-4xl font-serif text-[#003B70]">ICON in Action</h2>
+              <h2 className="text-4xl font-serif text-[#003B70]">NUST Innovation Stories</h2>
             </div>
             <a href="https://www.youtube.com/@Research_NUST" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center space-x-2 text-blue-900 font-bold text-xs uppercase tracking-widest hover:underline">
               <span>View All on YouTube</span> <ChevronRight size={16} />
