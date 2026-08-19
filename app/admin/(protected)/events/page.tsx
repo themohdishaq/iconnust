@@ -6,7 +6,7 @@ import { deleteEventAction } from './actions';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminEventsListPage() {
-  const events = await Event.list();
+  const events = await Event.list({ status: 'all' });
 
   return (
     <div>
@@ -36,7 +36,14 @@ export default async function AdminEventsListPage() {
                   <span className="text-[9px] font-bold uppercase">{e.month}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-slate-900 truncate">{e.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-slate-900 truncate">{e.title}</h3>
+                    {e.status === 'draft' && (
+                      <span className="inline-flex shrink-0 items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700">
+                        Draft
+                      </span>
+                    )}
+                  </div>
                   <p className="text-slate-400 text-xs mt-0.5">{e.type} · {e.location} · {e.registered} registered</p>
                 </div>
                 <Link

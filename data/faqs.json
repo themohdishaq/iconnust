@@ -1,0 +1,128 @@
+[
+  {
+    "page": "innovation-collaboration",
+    "question": "How can an organization start a research collaboration with NUST?",
+    "answer": "Submit your organization’s challenge or research requirement through the collaboration inquiry form. ICON will review the brief and connect you with the most relevant NUST faculty, research centre, or laboratory.",
+    "order": 1
+  },
+  {
+    "page": "innovation-collaboration",
+    "question": "What kinds of collaborative research projects does ICON support?",
+    "answer": "ICON supports sponsored research, joint R&D, technology development, proof-of-concept work, product testing, multidisciplinary research programmes, and long-term strategic partnerships.",
+    "order": 2
+  },
+  {
+    "page": "innovation-collaboration",
+    "question": "How are intellectual-property rights handled in joint projects?",
+    "answer": "IP ownership, licensing rights, publication terms, confidentiality, and commercial use are agreed before work begins. ICON structures the agreement to protect both NUST researchers and collaborating partners.",
+    "order": 3
+  },
+  {
+    "page": "innovation-collaboration",
+    "question": "Can organizations access NUST laboratories and technical experts?",
+    "answer": "Yes. Based on the project scope and availability, ICON can facilitate access to relevant laboratories, research facilities, faculty experts, and specialized technical teams across NUST.",
+    "order": 4
+  },
+  {
+    "page": "innovation-collaboration",
+    "question": "How long does it take to identify a suitable research team?",
+    "answer": "Initial requirements are normally reviewed promptly. The matching timeline depends on the technical complexity, but ICON aims to identify and introduce suitable experts as early as possible after receiving a complete brief.",
+    "order": 5
+  },
+  {
+    "page": "industry-services",
+    "question": "How can ICON respond to an industry brief?",
+    "answer": "Our Industry Desk acknowledges all enquiries within 24 hours. Expert matching and an initial consultation call are typically arranged within 48–72 hours of receiving a brief.",
+    "order": 1
+  },
+  {
+    "page": "industry-services",
+    "question": "What sectors does ICON currently serve?",
+    "answer": "ICON engages with a diverse range of sectors, including Digital, AI & Intelligent Systems; Energy, Climate & Sustainability; Health, Pharma & Biomedical Systems; Agriculture & Food Systems; Mobility & Automotive Systems; Defence & Strategic Technologies; Finance & Digital Economy; Smart Infrastructure & Urban Systems; Education, Society & Human Development; Manufacturing & Industrial Technologies; Chemicals & Advanced Materials; Media, Creative & Digital Industries; Tourism & Hospitality; Government & Public Sector; International Organizations. ICON also remains open to engagements across other emerging and specialized sectors based on industry and partner requirements.",
+    "order": 2
+  },
+  {
+    "page": "industry-services",
+    "question": "What is the role of the Corporate Advisory Council (CAC) at NUST?",
+    "answer": "The Corporate Advisory Council (CAC) serves as a bridge between academia and industry by connecting organizations with relevant NUST faculty, researchers, students, laboratories and technical expertise. It facilitates collaboration, knowledge exchange, industry engagement and opportunities for joint research and innovation.",
+    "order": 3
+  },
+  {
+    "page": "industry-services",
+    "question": "How can an organization engage with NUST through the Corporate Advisory Council (CAC)?",
+    "answer": "CAC facilitates structured engagement between industry, government, NUST and other external stakeholders. Organizations can engage through industry consultations, collaborative projects, advisory engagements, faculty and student interactions, industry visits, faculty placements, and other customized collaboration opportunities.",
+    "order": 4
+  },
+  {
+    "page": "industry-services",
+    "question": "Can organizations share industry challenges or requirements with NUST?",
+    "answer": "Yes. Organizations can share specific challenges, technology requirements, research needs, skills gaps, or other areas of interest with CAC. The Council works with relevant NUST stakeholders to identify suitable expertise and explore potential solutions or collaboration opportunities.",
+    "order": 5
+  },
+  {
+    "page": "industry-services",
+    "question": "Can CAC help us connect with relevant NUST faculty or technical experts?",
+    "answer": "Yes. CAC can facilitate connections with relevant NUST faculty, researchers, schools, centres, and technical experts based on an organization’s specific requirements, subject to availability and the nature of the engagement.",
+    "order": 6
+  },
+  {
+    "page": "industry-services",
+    "question": "What types of industry–academia engagements can CAC facilitate?",
+    "answer": "CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcases and expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.",
+    "order": 7
+  },
+  {
+    "page": "industry-services",
+    "question": "What is Finding Innovative & Creative Solutions (FICS), and how can industry engage with it?",
+    "answer": "Finding Innovative & Creative Solutions (FICS) is NUST’s innovation and entrepreneurship platform that enables students to develop technology-driven solutions to real-world challenges. Industry can engage by sharing problem statements, mentoring teams, providing technical guidance, supporting promising ideas and exploring potential collaboration with innovative projects.",
+    "order": 8
+  },
+  {
+    "page": "commercialization",
+    "question": "What is the first step to commercialise my research?",
+    "answer": "Submit an Invention Disclosure Form (IDF) to ICON. This confidential document describes your invention and triggers a patentability and commercial viability assessment by the ICON team — before any publication or external disclosure.",
+    "order": 1
+  },
+  {
+    "page": "commercialization",
+    "question": "Can I choose how my IP is commercialised?",
+    "answer": "Yes. ICON works with inventors to understand their goals and recommends the most suitable pathway — licensing, spin-off, or sponsored research. The final approach is always agreed upon with the inventor.",
+    "order": 2
+  },
+  {
+    "page": "commercialization",
+    "question": "How can I protect my innovation through IP filing in Pakistan, and what does it cost?",
+    "answer": "ICON manages the entire IP protection process, including patent drafting, filing, and prosecution in Pakistan through IPO Pakistan and internationally through the PCT. Costs vary by IP type and jurisdiction; ICON provides a detailed estimate during evaluation.",
+    "order": 3
+  },
+  {
+    "page": "commercialization",
+    "question": "How are royalties or revenues shared with inventors?",
+    "answer": "Under NUST’s IP Policy, inventors typically receive 40–50% of net licensing revenues. For spin-offs, founders negotiate equity stakes. ICON ensures the framework is transparent and fair.",
+    "order": 4
+  },
+  {
+    "page": "commercialization",
+    "question": "Can students commercialise technology developed during their studies?",
+    "answer": "Yes. Student inventors who develop technology using university resources are covered by the IP Policy. ICON actively encourages student-led spin-offs and provides dedicated support through the incubation programme.",
+    "order": 5
+  },
+  {
+    "page": "commercialization",
+    "question": "How long does it take to license a technology?",
+    "answer": "Standard licensing negotiations take 4–10 weeks depending on complexity. ICON expedites this through standardised term sheets and a dedicated corporate licensing desk.",
+    "order": 6
+  },
+  {
+    "page": "commercialization",
+    "question": "Who owns the IP generated in a collaborative R&D project?",
+    "answer": "IP ownership is negotiated on a project-by-project basis. Industry sponsors can obtain exclusive or non-exclusive licenses. ICON ensures transparent agreements that protect both parties from the outset.",
+    "order": 7
+  },
+  {
+    "page": "commercialization",
+    "question": "Are testing services available on a one-off basis?",
+    "answer": "Absolutely. Clients can request individual tests or subscribe to a testing retainer for regular analytical needs. All services are covered by confidentiality agreements.",
+    "order": 8
+  }
+]

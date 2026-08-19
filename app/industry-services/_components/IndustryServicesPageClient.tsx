@@ -4,13 +4,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   FlaskConical, Briefcase, ChevronRight,
   Lightbulb, ShieldCheck, Users, ArrowRight,
-  CheckCircle2, Plus, Minus, Building2, Cpu,
+  CheckCircle2, Building2, Cpu,
   GraduationCap, TestTube, Globe, Handshake,
   BarChart3, Clock, Award, Mail, Phone
 } from 'lucide-react';
 import Image from 'next/image';
 import { useInquiryForm } from '@/lib/useInquiryForm';
 import Link from 'next/link';
+import FaqSection, { type FaqItem } from '@/components/FaqSection';
 
 // --- DATA ---
 const services = [
@@ -128,41 +129,6 @@ const partnersRowB = [
   { name: 'PTCL',                sector: 'Telecom Infrastructure',       img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80', size: 'sm' as const },
   { name: 'Turkish Aerospace',   sector: 'Defense & Aviation',           img: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80', size: 'lg' as const },
 ];
-const faqs = [
-  {
-    q: 'How can ICON respond to an industry brief?',
-    a: 'Our Industry Desk acknowledges all enquiries within 24 hours. Expert matching and an initial consultation call are typically arranged within 48–72 hours of receiving a brief.',
-  },
-  {
-    q: 'What sectors does ICON currently serve?',
-    a: 'ICON engages with a diverse range of sectors, including Digital, AI & Intelligent Systems; Energy, Climate & Sustainability; Health, Pharma & Biomedical Systems; Agriculture & Food Systems; Mobility & Automotive Systems; Defence & Strategic Technologies; Finance & Digital Economy; Smart Infrastructure & Urban Systems; Education, Society & Human Development; Manufacturing & Industrial Technologies; Chemicals & Advanced Materials; Media, Creative & Digital Industries; Tourism & Hospitality; Government & Public Sector; International Organizations. ICON also remains open to engagements across other emerging and specialized sectors based on industry and partner requirements.',
-  },
-  {
-    q: 'What is the role of the Corporate Advisory Council (CAC) at NUST?',
-    a: 'The Corporate Advisory Council (CAC) serves as a bridge between academia and industry by connecting organizations with relevant NUST faculty, researchers, students, laboratories and technical expertise. It facilitates collaboration, knowledge exchange, industry engagement and opportunities for joint research and innovation.',
-  },
-  {
-    q: 'How can an organization engage with NUST through the Corporate Advisory Council (CAC)?',
-    a: 'CAC facilitates structured engagement between industry, government, NUST and other external stakeholders. Organizations can engage through industry consultations, collaborative projects, advisory engagements, faculty and student interactions, industry visits, faculty placements, and other customized collaboration opportunities.',
-  },
-  {
-    q: 'Can organizations share industry challenges or requirements with NUST?',
-    a: 'Yes. Organizations can share specific challenges, technology requirements, research needs, skills gaps, or other areas of interest with CAC. The Council works with relevant NUST stakeholders to identify suitable expertise and explore potential solutions or collaboration opportunities.',
-  },
-  {
-    q: 'Can CAC help us connect with relevant NUST faculty or technical experts?',
-    a: 'Yes. CAC can facilitate connections with relevant NUST faculty, researchers, schools, centres, and technical experts based on an organization’s specific requirements, subject to availability and the nature of the engagement.',
-  },
-  {
-    q: 'What types of industry–academia engagements can CAC facilitate?',
-    a: 'CAC facilitates a wide range of engagements, including industry-sponsored projects, collaborative R&D, faculty placements, student industry visits, expert sessions, technology showcases and expos, and strategic partnerships. The nature of engagement can be tailored to the organization’s requirements.',
-  },
-  {
-    q: 'What is Finding Innovative & Creative Solutions (FICS), and how can industry engage with it?',
-    a: 'Finding Innovative & Creative Solutions (FICS) is NUST’s innovation and entrepreneurship platform that enables students to develop technology-driven solutions to real-world challenges. Industry can engage by sharing problem statements, mentoring teams, providing technical guidance, supporting promising ideas and exploring potential collaboration with innovative projects.',
-  },
-];
-
 // --- ANIMATION VARIANTS ---
 const stagger = {
   hidden: { opacity: 0 },
@@ -209,9 +175,8 @@ function PartnerCard({ name, sector, img, size }: { name: string; sector: string
   );
 }
 
-export default function IndustryServicesPage() {
+export default function IndustryServicesPage({ faqs }: { faqs: FaqItem[] }) {
   const [activeService, setActiveService] = useState<string>('rd');
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { values, setField, status, error, handleSubmit } = useInquiryForm('industry-services');
 
   const active = services.find((s) => s.id === activeService) ?? services[0];
@@ -223,11 +188,11 @@ export default function IndustryServicesPage() {
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative py-10 sm:py-14 lg:py-20 bg-white border-b border-slate-200 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: "url('/industry-services/icon-industry.jpg')" }}
         />
         <div className="max-w-8xl  px-6 relative z-10">
-          <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] my-2 block">
+          <div className="text-[#003B70] font-tahoma-font text-[11px] uppercase tracking-[0.4em] my-2 block">
             Industry Services
           </div>
           <motion.div
@@ -262,7 +227,7 @@ export default function IndustryServicesPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="text-left mb-8 sm:mb-12 lg:mb-16">
             <span className="text-[#FCAF17] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">What We Offer</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Our Industry Services</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900">Industry Services</h2>
           </div>
 
           {/* Tab switcher */}
@@ -287,7 +252,7 @@ export default function IndustryServicesPage() {
               key={activeService}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.35 }}
-              className="grid lg:grid-cols-2 gap-3 items-center"
+              className="grid lg:grid-cols-2 gap-3 "
             >
               <div className=" bg-transparent">
                 <span className="text-[#FCAF17] font-bold text-[11px] uppercase tracking-[0.35em] mb-4 inline-block">Co-develop breakthrough solutions</span>
@@ -298,7 +263,7 @@ export default function IndustryServicesPage() {
                 <div className="grid mb-4">
                   {active.bullets.map((b, i) => (
                     <div key={i} className="flex items-start gap-3 p-2">
-                      <div className={`${c.bg} ${c.text} rounded-full p-2 shrink-0`}>
+                      <div className={` text-[#FCAF17] rounded-full p-2 shrink-0`}>
                         <CheckCircle2 size={16} />
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">{b}</p>
@@ -325,7 +290,7 @@ export default function IndustryServicesPage() {
           </AnimatePresence>
         </div>
       </section>
- <section id="engage" className="py-8 bg-[#F3EFE6] min-h-screen flex items-center">
+ <section id="engage" className="py-4 bg-[#F3EFE6] min-h-screen flex items-center">
       <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full">
         {/* Header Section */}
         <div className="mb-8 text-left">
@@ -413,7 +378,7 @@ export default function IndustryServicesPage() {
       {/* ── CTA BANNER ───────────────────────────────────────────────────── */}
        <section
       id="industry-brief"
-      className="py-8 sm:py-12 bg-[#062539] text-white flex items-center min-h-screen"
+      className="py-4 sm:py-8 bg-[#062539] text-white flex items-center min-h-screen"
     >
       <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12 w-full grid md:grid-cols-2 gap-12 lg:gap-24 items-start">
         
@@ -486,9 +451,11 @@ export default function IndustryServicesPage() {
               <option value="" disabled hidden>
                 Select Area of Interest...
               </option>
-              <option value="manufacturing" className="text-slate-900">Manufacturing & Automation</option>
-              <option value="materials" className="text-slate-900">Material Sciences</option>
-              <option value="software" className="text-slate-900">Software & AI</option>
+              {sectors.map((sector) => (
+                <option key={sector} value={sector} className="text-slate-900">
+                  {sector}
+                </option>
+              ))}
             </select>
             {/* Custom Chevron to match design */}
             <div className="absolute inset-y-0 right-5 flex items-center pointer-events-none">
@@ -520,57 +487,7 @@ export default function IndustryServicesPage() {
 
       </div>
     </section>
-      {/* ── FAQs ─────────────────────────────────────────────────────────── */}
-     <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
-      <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
-        
-        {/* Header */}
-        <div className="mb-12 sm:mb-16 text-left">
-          <span className="text-[#CA9F3B] font-bold text-xs uppercase tracking-[0.15em] mb-4 block">
-            Knowledge Base
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        {/* FAQ List */}
-        <div className="border-t border-[#E5E0D5]">
-          {faqs.map((faq, i) => (
-            <div key={i} className="border-b border-[#E5E0D5]">
-              <button
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex justify-between items-center py-6 sm:py-8 text-left focus:outline-none group"
-              >
-                <span className="font-semibold text-base text-[#084C70] pr-8 group-hover:text-[#0a5e8a] transition-colors">
-                  {faq.q}
-                </span>
-                <span className="text-[#CA9F3B] text-2xl font-light shrink-0 leading-none pb-1">
-                  {openFaq === i ? '−' : '+'}
-                </span>
-              </button>
-              
-              <AnimatePresence>
-                {openFaq === i && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pb-8 text-slate-600 text-base leading-relaxed pr-8">
-                      {faq.a}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
+      <FaqSection faqs={faqs} />
 
     </div>
   );

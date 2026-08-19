@@ -105,7 +105,7 @@ function About() {
               <span className="text-[#0E5E97] font-bold text-[10px] uppercase tracking-[0.4em] mb-3 block">
                 Overview
               </span>
-              <h2 className="text-2xl sm:text-3xl font-serif text-slate-900 mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-serif text-[#003B70] mb-6 leading-tight">
                 About the ICON
               </h2>
               <p className="text-slate-600 leading-relaxed text-[15px] sm:text-base">
@@ -125,10 +125,10 @@ function About() {
 
       {/* Departments */}
       <section className="py-8 sm:py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8">
+        <div className="max-w-8xl mx-auto px-6 sm:px-8">
           <div className="mb-8 max-w-2xl">
          
-            <h2 className="text-2xl sm:text-3xl font-serif text-slate-900 leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-serif text-[#003B70] leading-tight">
                Constituent Offices
             </h2>
           </div>

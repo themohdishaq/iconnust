@@ -1,6 +1,8 @@
 import { query } from '@/lib/db';
 import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 
+export type NewsStatus = 'draft' | 'published';
+
 export interface INews {
   id: number;
   title: string;
@@ -12,6 +14,7 @@ export interface INews {
   date: string;
   readTime: string;
   featured: boolean;
+  status: NewsStatus;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +30,7 @@ interface NewsRow extends RowDataPacket {
   date: string;
   read_time: string;
   featured: number;
+  status: NewsStatus;
   created_at: Date;
   updated_at: Date;
 }
@@ -43,6 +47,7 @@ function mapRow(row: NewsRow): INews {
     date: row.date,
     readTime: row.read_time,
     featured: Boolean(row.featured),
+    status: row.status === 'draft' ? 'draft' : 'published',
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -50,19 +55,22 @@ function mapRow(row: NewsRow): INews {
 
 export type NewNews = Omit<INews, 'id' | 'createdAt' | 'updatedAt'>;
 
-async function list(options?: { limit?: number }): Promise<INews[]> {
-  const sql = options?.limit
-    ? `SELECT * FROM news ORDER BY created_at DESC LIMIT ${Number(options.limit)}`
-    : 'SELECT * FROM news ORDER BY created_at DESC';
-  const rows = await query<NewsRow[]>(sql);
+async function list(options?: { limit?: number; status?: 'draft' | 'published' | 'all' }): Promise<INews[]> {
+  const status = options?.status ?? 'published';
+  const limitClause = options?.limit ? ` LIMIT ${Number(options.limit)}` : '';
+  const whereClause = status === 'all' ? '' : ' WHERE status = ?';
+  const params = status === 'all' ? [] : [status];
+
+  const sql = `SELECT * FROM news${whereClause} ORDER BY created_at DESC${limitClause}`;
+  const rows = await query<NewsRow[]>(sql, params);
   return rows.map(mapRow);
 }
 
 async function search(q: string): Promise<INews[]> {
   const like = `%${q}%`;
   const rows = await query<NewsRow[]>(
-    'SELECT * FROM news WHERE title LIKE ? OR excerpt LIKE ? OR content LIKE ? ORDER BY created_at DESC',
-    [like, like, like]
+    'SELECT * FROM news WHERE status = ? AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ?) ORDER BY created_at DESC',
+    ['published', like, like, like]
   );
   return rows.map(mapRow);
 }
@@ -73,7 +81,7 @@ async function findById(id: string | number): Promise<INews | null> {
 }
 
 async function findBySlug(slug: string): Promise<INews | null> {
-  const rows = await query<NewsRow[]>('SELECT * FROM news WHERE slug = ? LIMIT 1', [slug]);
+  const rows = await query<NewsRow[]>('SELECT * FROM news WHERE slug = ? AND status = ? LIMIT 1', [slug, 'published']);
   return rows[0] ? mapRow(rows[0]) : null;
 }
 
@@ -86,15 +94,15 @@ async function slugExists(slug: string, excludeId?: string | number): Promise<bo
 
 async function listOthers(excludeId: string | number, limit: number): Promise<INews[]> {
   const rows = await query<NewsRow[]>(
-    `SELECT * FROM news WHERE id != ? ORDER BY created_at DESC LIMIT ${Number(limit)}`,
-    [excludeId]
+    `SELECT * FROM news WHERE id != ? AND status = ? ORDER BY created_at DESC LIMIT ${Number(limit)}`,
+    [excludeId, 'published']
   );
   return rows.map(mapRow);
 }
 
 async function create(data: NewNews): Promise<void> {
   await query(
-    'INSERT INTO news (title, slug, category, excerpt, content, image, date, read_time, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO news (title, slug, category, excerpt, content, image, date, read_time, featured, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [
       data.title,
       data.slug,
@@ -105,6 +113,7 @@ async function create(data: NewNews): Promise<void> {
       data.date,
       data.readTime,
       data.featured,
+      data.status,
     ]
   );
 }
@@ -121,6 +130,7 @@ async function update(id: string | number, data: Partial<NewNews>): Promise<bool
     date: 'date',
     readTime: 'read_time',
     featured: 'featured',
+    status: 'status',
   };
   for (const [key, column] of Object.entries(columnMap)) {
     const value = (data as Record<string, unknown>)[key];

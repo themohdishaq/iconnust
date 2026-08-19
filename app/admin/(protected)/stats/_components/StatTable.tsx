@@ -123,6 +123,7 @@ function AddRowForm({
 }
 
 export default function StatTable<T extends Row>({
+  id,
   title,
   description,
   columns,
@@ -131,6 +132,7 @@ export default function StatTable<T extends Row>({
   updateAction,
   deleteAction,
 }: {
+  id?: string;
   title: string;
   description?: string;
   columns: ColumnDef[];
@@ -140,7 +142,7 @@ export default function StatTable<T extends Row>({
   deleteAction: (id: number) => Promise<void>;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+    <div id={id} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 scroll-mt-28">
       <h2 className="text-base font-serif text-slate-900">{title}</h2>
       {description && <p className="text-slate-500 text-xs mt-0.5 mb-2">{description}</p>}
 

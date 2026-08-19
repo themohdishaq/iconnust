@@ -26,6 +26,7 @@ export default async function EditEventPage({ params }: { params: Promise<{ id: 
           desc: event.desc,
           registered: event.registered,
           order: event.order,
+          status: event.status,
         }}
       />
     </div>

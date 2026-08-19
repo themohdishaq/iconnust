@@ -42,7 +42,7 @@ function Footer() {
 
   return (
     <footer className="bg-[#004879] pt-4 pb-8 border-t border-slate-700">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+      <div className="max-w-8xl mx-auto px-6 sm:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1fr] pb-12 border-b border-slate-700/60 mb-7">
           
           <div>

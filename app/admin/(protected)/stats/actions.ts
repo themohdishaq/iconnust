@@ -6,6 +6,7 @@ import StatTile, { type StatTilePage } from '@/lib/models/StatTile';
 import IpBreakdown from '@/lib/models/IpBreakdown';
 import IpYearlyStat, { type IpChartType } from '@/lib/models/IpYearlyStat';
 import FinancialStat from '@/lib/models/FinancialStat';
+import TechPlaceStat from '@/lib/models/TechPlaceStat';
 
 export type FormState = { error?: string };
 
@@ -162,5 +163,47 @@ export async function updateFinancialStatAction(id: number, _prevState: FormStat
 export async function deleteFinancialStatAction(id: number): Promise<void> {
   await requireAdminSession();
   await FinancialStat.remove(id);
+  revalidateAll();
+}
+
+
+export async function createTechPlaceAction(_prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
+  const title = String(formData.get('title') || '').trim();
+  const value = Number(formData.get('value') || 0);
+  const subtitle = String(formData.get('subtitle') || '').trim();
+
+  if (!title || !subtitle) return { error: 'Title and subtitle are required.' };
+
+  const existing = await TechPlaceStat.list();
+  await TechPlaceStat.create({
+    title,
+    value,
+    subtitle,
+    order: existing.length,
+  });
+  revalidateAll();
+  return {};
+}
+
+export async function updateTechPlaceAction(id: number, _prevState: FormState, formData: FormData): Promise<FormState> {
+  await requireAdminSession();
+  const title = String(formData.get('title') || '').trim();
+  const subtitle = String(formData.get('subtitle') || '').trim();
+
+  if (!title || !subtitle) return { error: 'Title and subtitle are required.' };
+
+  await TechPlaceStat.update(id, {
+    title,
+    value: Number(formData.get('value') || 0),
+    subtitle,
+  });
+  revalidateAll();
+  return {};
+}
+
+export async function deleteTechPlaceAction(id: number): Promise<void> {
+  await requireAdminSession();
+  await TechPlaceStat.remove(id);
   revalidateAll();
 }

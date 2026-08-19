@@ -18,7 +18,8 @@ function buildDoc(formData: FormData) {
   const desc = String(formData.get('desc') || '').trim();
   const registered = Number(formData.get('registered') || 0);
   const order = Number(formData.get('order') || 0);
-  return { day, month, year, title, type, location, desc, registered, order };
+  const status = formData.get('status') === 'published' ? 'published' as const : 'draft' as const;
+  return { day, month, year, title, type, location, desc, registered, order, status };
 }
 
 export async function createEventAction(_prevState: FormState, formData: FormData): Promise<FormState> {
@@ -30,7 +31,9 @@ export async function createEventAction(_prevState: FormState, formData: FormDat
 
   await Event.create(doc);
 
-  await notifySubscribers({ subject: `New Event: ${doc.title}`, title: doc.title, path: '/news#events' });
+  if (doc.status === 'published') {
+    await notifySubscribers({ subject: `New Event: ${doc.title}`, title: doc.title, path: '/news#events' });
+  }
 
   revalidatePath('/admin/events');
   revalidatePath('/news');
@@ -47,6 +50,10 @@ export async function updateEventAction(id: string, _prevState: FormState, formD
   const updated = await Event.update(id, doc);
   if (!updated) {
     return { error: 'Event not found.' };
+  }
+
+  if (doc.status === 'published') {
+    await notifySubscribers({ subject: `Updated Event: ${doc.title}`, title: doc.title, path: '/news#events' });
   }
 
   revalidatePath('/admin/events');

@@ -1,6 +1,8 @@
 import { query } from '@/lib/db';
 import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 
+export type EventStatus = 'draft' | 'published';
+
 export interface IEvent {
   id: number;
   day: string;
@@ -12,6 +14,7 @@ export interface IEvent {
   desc: string;
   registered: number;
   order: number;
+  status: EventStatus;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +30,7 @@ interface EventRow extends RowDataPacket {
   description: string;
   registered: number;
   sort_order: number;
+  status: EventStatus;
   created_at: Date;
   updated_at: Date;
 }
@@ -43,6 +47,7 @@ function mapRow(row: EventRow): IEvent {
     desc: row.description,
     registered: row.registered,
     order: row.sort_order,
+    status: row.status === 'draft' ? 'draft' : 'published',
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -50,14 +55,21 @@ function mapRow(row: EventRow): IEvent {
 
 export type NewEvent = Omit<IEvent, 'id' | 'createdAt' | 'updatedAt'>;
 
-async function list(): Promise<IEvent[]> {
-  const rows = await query<EventRow[]>('SELECT * FROM events ORDER BY sort_order ASC, created_at DESC');
+async function list(options?: { status?: 'draft' | 'published' | 'all' }): Promise<IEvent[]> {
+  const status = options?.status ?? 'published';
+  const whereClause = status === 'all' ? '' : ' WHERE status = ?';
+  const params = status === 'all' ? [] : [status];
+  const sql = `SELECT * FROM events${whereClause} ORDER BY sort_order ASC, created_at DESC`;
+  const rows = await query<EventRow[]>(sql, params);
   return rows.map(mapRow);
 }
 
 async function search(q: string): Promise<IEvent[]> {
   const like = `%${q}%`;
-  const rows = await query<EventRow[]>('SELECT * FROM events WHERE title LIKE ? OR description LIKE ? OR location LIKE ? ORDER BY sort_order ASC, created_at DESC', [like, like, like]);
+  const rows = await query<EventRow[]>(
+    'SELECT * FROM events WHERE status = ? AND (title LIKE ? OR description LIKE ? OR location LIKE ?) ORDER BY sort_order ASC, created_at DESC',
+    ['published', like, like, like]
+  );
   return rows.map(mapRow);
 }
 
@@ -68,8 +80,8 @@ async function findById(id: string | number): Promise<IEvent | null> {
 
 async function create(data: NewEvent): Promise<void> {
   await query(
-    'INSERT INTO events (day, month, year, title, type, location, description, registered, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-    [data.day, data.month, data.year, data.title, data.type, data.location, data.desc, data.registered, data.order]
+    'INSERT INTO events (day, month, year, title, type, location, description, registered, sort_order, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [data.day, data.month, data.year, data.title, data.type, data.location, data.desc, data.registered, data.order, data.status]
   );
 }
 
@@ -86,6 +98,7 @@ async function update(id: string | number, data: Partial<NewEvent>): Promise<boo
     desc: 'description',
     registered: 'registered',
     order: 'sort_order',
+    status: 'status',
   };
   for (const [key, column] of Object.entries(columnMap)) {
     const value = (data as Record<string, unknown>)[key];

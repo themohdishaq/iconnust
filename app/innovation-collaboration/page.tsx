@@ -4,6 +4,7 @@ import { SITE_NAME } from "@/lib/seo";
 import StatTile from "@/lib/models/StatTile";
 import IpBreakdown from "@/lib/models/IpBreakdown";
 import IpYearlyStat from "@/lib/models/IpYearlyStat";
+import Faq from "@/lib/models/Faq";
 
 const title = "Innovation & Collaboration";
 const description =
@@ -27,11 +28,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const [tiles, ipBreakdown, ipsFiled, ipsAwarded] = await Promise.all([
+  const [tiles, ipBreakdown, ipsFiled, ipsAwarded, faqs] = await Promise.all([
     StatTile.list('innovation'),
     IpBreakdown.list(),
     IpYearlyStat.list('filed'),
     IpYearlyStat.list('awarded'),
+    Faq.list('innovation-collaboration'),
   ]);
 
   const stats = tiles.map((t) => ({ label: t.label, value: t.value }));
@@ -42,6 +44,7 @@ export default async function Page() {
       ipBreakdown={ipBreakdown}
       ipsFiled={ipsFiled}
       ipsAwarded={ipsAwarded}
+      faqs={faqs}
     />
   );
 }

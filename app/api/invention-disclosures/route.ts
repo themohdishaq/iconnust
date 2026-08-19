@@ -48,11 +48,6 @@ export async function POST(request: NextRequest) {
 
   const data = body as Record<string, unknown>;
 
-  // Honeypot: real users never fill this hidden field; bots often do.
-  if (typeof data.website === 'string' && data.website.trim() !== '') {
-    return NextResponse.json({ ok: true });
-  }
-
   if (typeof data.source !== 'string' || !VALID_SOURCES.includes(data.source as DisclosureSource)) {
     return NextResponse.json({ error: 'Invalid submission source.' }, { status: 400 });
   }

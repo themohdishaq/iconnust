@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CommercializationPageClient from "./_components/CommercializationPageClient";
 import { SITE_NAME } from "@/lib/seo";
+import Faq from "@/lib/models/Faq";
 
 const title = "Commercialisation";
 const description =
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <CommercializationPageClient />;
+export default async function Page() {
+  const faqs = await Faq.list('commercialization');
+  return <CommercializationPageClient faqs={faqs} />;
 }

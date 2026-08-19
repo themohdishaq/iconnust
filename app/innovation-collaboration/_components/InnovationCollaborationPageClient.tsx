@@ -22,6 +22,7 @@ import {
   Cell,
 } from "recharts";
 import Link from 'next/link';
+import FaqSection, { type FaqItem } from '@/components/FaqSection';
 
 // --- YouTube Video Data ---
 // To update videos: Go to https://www.youtube.com/@Research_NUST
@@ -128,7 +129,7 @@ const IPStackedBarChart = ({
     <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">{title}</h3>
 
     <div className="h-[380px] w-full">
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 800, height: 380 }}>
         <BarChart data={data} margin={{ top: 24, right: 16, left: 16, bottom: 24 }}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
           <XAxis
@@ -188,11 +189,13 @@ const RndPortal = ({
   ipBreakdown,
   ipsFiled,
   ipsAwarded,
+  faqs,
 }: {
   stats: StatTileEntry[];
   ipBreakdown: IpBreakdownEntry[];
   ipsFiled: IpYearlyEntry[];
   ipsAwarded: IpYearlyEntry[];
+  faqs: FaqItem[];
 }) => {
   const { values, setField, status, error, handleSubmit } = useInquiryForm('innovation-collaboration');
 
@@ -208,7 +211,7 @@ const RndPortal = ({
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.4 }}
           transition={{ duration: 2 }}
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80')] bg-cover bg-center"
+          className="absolute inset-0 bg-[url('/industry-services/rnd.jpg')] bg-cover bg-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-700 to-transparent" />
 
@@ -244,7 +247,7 @@ const RndPortal = ({
             By the Numbers
           </div>
           <div className="mb-8">
-            <h2 className="text-3xl sm:text-4xl font-serif text-slate-900 mb-2">Innovation & Collaboration Metrics</h2>
+            <h2 className="text-3xl sm:text-4xl font-serif text-[#003B70] mb-2">Innovation & Collaboration Metrics</h2>
             <p className="text-slate-500 text-sm">A snapshot of ICON's growing impact across collaborative projects, joint funding, and knowledge outputs.</p>
           </div>
 
@@ -305,7 +308,7 @@ const RndPortal = ({
             <h3 className="text-sm font-semibold text-slate-800 mb-2 text-center">IP Area Key</h3>
             <div className="flex flex-col sm:flex-row items-center gap-8">
               <div className="relative w-[300px]  h-[300px] shrink-0">
-                <ResponsiveContainer width="100%" height="100%">
+                <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 300, height: 300 }}>
                   <PieChart>
                     <Pie
                       data={ipBreakdown}
@@ -381,7 +384,7 @@ const RndPortal = ({
           <div className="flex justify-between items-end mb-12">
             <div>
               <span className="icon-brand-font-secondary font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Innovation Highlights</span>
-              <h2 className="text-4xl font-serif text-slate-900">ICON in Action</h2>
+              <h2 className="text-4xl font-serif text-[#003B70]">ICON in Action</h2>
             </div>
             <a href="https://www.youtube.com/@Research_NUST" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center space-x-2 text-blue-900 font-bold text-xs uppercase tracking-widest hover:underline">
               <span>View All on YouTube</span> <ChevronRight size={16} />
@@ -436,12 +439,14 @@ const RndPortal = ({
         </div>
       </section>
 
+      <FaqSection faqs={faqs} />
+
       {/* Engagement CTA */}
       <section id="propose-colloboration" className="py-16 bg-[#062539] text-white relative ">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&q=80')] opacity-5 bg-cover bg-center mix-blend-overlay" />
         <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
           <div className="max-w-8xl mx-auto px-6 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center text-center md:text-left">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8  text-center md:text-left">
               {/* Left: heading */}
               <div>
                 <h2 className="text-4xl  font-serif mb-4 md:mb-6 leading-tight">Ready to solve your industry bottleneck?</h2>

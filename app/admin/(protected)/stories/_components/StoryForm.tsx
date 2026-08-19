@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react';
 import Image from 'next/image';
-import SubmitButton from '@/components/admin/SubmitButton';
 import type { FormState } from '../actions';
 
 const inputClass =
@@ -11,6 +10,7 @@ const labelClass = 'block text-xs font-bold uppercase tracking-widest text-slate
 
 type Initial = {
   name: string; tag: string; desc: string; founder: string; funding: string; image: string; order: number;
+  status: 'draft' | 'published';
 };
 
 export default function StoryForm({
@@ -72,7 +72,25 @@ export default function StoryForm({
         </p>
       )}
 
-      <SubmitButton label={initial ? 'Update Story' : 'Add Story'} />
+      <div className="flex flex-wrap items-center gap-3 pt-2">
+        <button
+          type="submit"
+          name="status"
+          value="draft"
+          className="border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-lg transition-colors"
+        >
+          {initial?.status === 'draft' ? 'Save Draft' : 'Save as Draft'}
+        </button>
+
+        <button
+          type="submit"
+          name="status"
+          value="published"
+          className="bg-blue-900 hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-widest px-6 py-3 rounded-lg transition-colors"
+        >
+          {initial ? 'Publish Update' : 'Publish Story'}
+        </button>
+      </div>
     </form>
   );
 }

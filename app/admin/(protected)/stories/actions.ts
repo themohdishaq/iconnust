@@ -16,6 +16,7 @@ function buildDoc(formData: FormData) {
     founder: String(formData.get('founder') || '').trim(),
     funding: String(formData.get('funding') || '').trim(),
     order: Number(formData.get('order') || 0),
+    status: formData.get('status') === 'published' ? 'published' as const : 'draft' as const,
   };
 }
 

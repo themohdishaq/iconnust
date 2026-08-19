@@ -87,9 +87,9 @@ export default function NewsPageClient({
 
       {/* Hero */}
       <section className="relative pt-24 pb-20 bg-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10" />
+        <div className="absolute opacity-50 inset-0 bg-[url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80')] bg-cover bg-center opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-8xl mx-auto px-6 relative z-10">
           <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-3xl">
             <motion.div variants={fadeUp} className="inline-flex font-tahoma-font items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-8">
               <Newspaper size={14} />
@@ -108,7 +108,7 @@ export default function NewsPageClient({
       {/* Featured News */}
       {featuredNews && (
         <section className="bg-white py-12 border-b border-slate-100">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-8xl mx-auto px-6">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
 
               <motion.div variants={fadeUp} className="grid lg:grid-cols-2 gap-10 items-center">
@@ -141,7 +141,7 @@ export default function NewsPageClient({
 
       {/* News Grid */}
       <section className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-8xl mx-auto px-6">
         
 
           <AnimatePresence mode="wait">
@@ -192,7 +192,7 @@ export default function NewsPageClient({
       {/* Upcoming Events */}
       {events.length > 0 && (
         <section id="events" className="py-20 bg-slate-50 border-t border-slate-100">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-8xl mx-auto px-6">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
               <motion.div variants={fadeUp} className="mb-12">
                 <span className="text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Get Involved</span>
@@ -227,7 +227,7 @@ export default function NewsPageClient({
       {/* Success Stories */}
       {stories.length > 0 && (
         <section id="stories" className="py-20 bg-white border-t border-slate-100">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-8xl mx-auto px-6">
             <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
               <motion.div variants={fadeUp} className="flex items-end justify-between mb-12">
                 <div>

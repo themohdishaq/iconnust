@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run db:schema",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:schema": "node --env-file=.env.local scripts/apply-schema.mjs",
+    "db:schema": "node scripts/apply-schema.mjs",
     "db:seed": "node --env-file=.env.local scripts/seed-all.mjs",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
     "seed:content": "node --env-file=.env.local scripts/seed-content.mjs",

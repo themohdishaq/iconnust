@@ -5,13 +5,14 @@ import {
   FileText, ShieldCheck, Lightbulb, Briefcase,
   FlaskConical, Cpu, Building2, Globe,
   ArrowRight, ChevronRight, CheckCircle2,
-  Plus, Minus, Users, Award, Network,
+  Users, Award, Network,
   Layers, Microscope, Zap, BookOpen,
   BarChart3, Factory, TestTube, Mail, X
 } from 'lucide-react';
 import OrgChartSection from '@/components/OrganStruct';
 import FinancialChart from '@/components/BodStats';
 import Image from 'next/image';
+import FaqSection, { type FaqItem } from '@/components/FaqSection';
 
 // ── DATA ──────────────────────────────────────────────────────────────
 
@@ -233,42 +234,6 @@ const nustShowcaseProducts: PublishedTech[] = [
   },
 ];
 
-const faqs = [
-  {
-    q: 'What is the first step to commercialise my research?',
-    a: 'Submit an Invention Disclosure Form (IDF) to ICON. This confidential document describes your invention and triggers a patentability and commercial viability assessment by the ICON team — before any publication or external disclosure.',
-  },
-  {
-    q: 'Can I choose how my IP is commercialised?',
-    a: 'Yes. ICON works with inventors to understand their goals and recommends the most suitable pathway — licensing, spin-off, or sponsored research. The final approach is always agreed upon with the inventor.',
-  },
-  {
-    q: 'How to protect my innovaton through IP filling in Pakistan and how much at cost?',
-    a: 'ICON manages the entire IP protection process, including patent drafting, filing, and prosecution in Pakistan (IPO Pakistan) and internationally (PCT). Costs vary based on the type of IP and jurisdictions; ICON provides a detailed cost estimate during the evaluation phase.',
-  },
-  {
-    q: 'How are royalties or revenues shared with inventors?',
-    a: 'Under NUST\'s IP Policy, inventors typically receive 40–50% of net licensing revenues. For spin-offs, founders negotiate equity stakes. ICON ensures the framework is transparent and fair.',
-  },
-  {
-    q: 'Can students commercialise technology developed during their studies?',
-    a: 'Yes. Student inventors who develop technology using university resources are covered by the IP Policy. ICON actively encourages student-led spin-offs and provides dedicated support through the incubation programme.',
-  },
-  {
-    q: 'How long does it take to license a technology?',
-    a: 'Standard licensing negotiations take 4–10 weeks depending on complexity. ICON expedites this through standardised term sheets and a dedicated corporate licensing desk.',
-  },
-  
-  {
-    q: 'Who owns the IP generated in a collaborative R&D project?',
-    a: 'IP ownership is negotiated on a project-by-project basis. Industry sponsors can obtain exclusive or non-exclusive licenses. ICON ensures transparent agreements that protect both parties from the outset.',
-  },
-  {
-    q: 'Are testing services available on a one-off basis?',
-    a: 'Absolutely. Clients can request individual tests or subscribe to a testing retainer for regular analytical needs. All services are covered by confidentiality agreements.',
-  },
-];
-
 // ── ANIMATION ─────────────────────────────────────────────────────────
 
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
@@ -302,7 +267,6 @@ const emptyIdf = {
   fundingSource: '',
   priorDisclosure: 'no',
   priorDisclosureDetails: '',
-  website: '', // honeypot — must stay empty
 };
 
 // ── PAGE ──────────────────────────────────────────────────────────────
@@ -314,13 +278,11 @@ const emptyQuickForm = {
   phone: '',
   title: '',
   description: '',
-  website: '', // honeypot — must stay empty
 };
 
-export default function CommercializationPathwaysPage() {
+export default function CommercializationPathwaysPage({ faqs }: { faqs: FaqItem[] }) {
   const [activePathway, setActivePathway] = useState('licensing');
   const [activeTrl, setActiveTrl]         = useState('3');
-  const [openFaq, setOpenFaq]             = useState<number | null>(null);
   const [formData, setFormData] = useState(emptyQuickForm);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [formError, setFormError] = useState('');
@@ -364,7 +326,6 @@ export default function CommercializationPathwaysPage() {
           contactPhone: formData.phone,
           inventorNames: formData.name,
           description: formData.description,
-          website: formData.website,
         }),
       });
 
@@ -431,7 +392,6 @@ export default function CommercializationPathwaysPage() {
           fundingSource: idfData.fundingSource,
           priorDisclosure: idfData.priorDisclosure,
           priorDisclosureDetails: idfData.priorDisclosureDetails,
-          website: idfData.website,
         }),
       });
       if (!res.ok) {
@@ -451,16 +411,16 @@ export default function CommercializationPathwaysPage() {
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section className="relative py-14 sm:py-16 lg:py-24 bg-white border-b border-slate-200 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-20"
+          className="absolute inset-0 bg-cover bg-center opacity-50"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80')" }}
         />
         <div className="max-w-8xl  relative z-10 px-4">
           <div className="icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-4 block">
             Commercialisation Pathways
           </div>
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-7xl  mx-auto text-left flex flex-col items-left">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-8xl  mx-auto text-left flex flex-col items-left">
 
-            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl  font-serif text-slate-900 mb-5 leading-tight tracking-tight">
+            <motion.h1 variants={fadeUp} className="text-3xl sm:text-4xl md:text-5xl  font-tahoma-font mb-5 text-[#003B70] leading-tight tracking-tight">
               From University-Driven <br/>
               Research to Market Impact
             
@@ -488,7 +448,7 @@ export default function CommercializationPathwaysPage() {
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="text-left mb-10 sm:mb-14 lg:mb-16">
             <span className="text-[#C9962A] font-bold text-[10px] uppercase tracking-[0.4em] mb-4 block">Available Avenues</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-slate-900 mb-3">Commercialization Pathways</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-[#003B70] mb-3">Commercialization Pathways</h2>
             <p className="text-slate-500 mt-3 mx-auto text-sm sm:text-base">
               Following structured pathways, each suited to a different stage, goal, and type of innovation.
             </p>
@@ -613,26 +573,15 @@ export default function CommercializationPathwaysPage() {
       {/* ── CTA BANNER ────────────────────────────────────────────────── */}
       <section className="bg-[#0a2342] py-10 sm:py-14 lg:py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-
+        <div className="max-w-8xl mx-auto px-4 sm:px-6 relative z-10 grid sm:grid-cols-2 gap-2">
+        <div>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif font-tahoma-font text-white mb-3">Have an Innovation to Commercialise?</h2>
-          <p className="text-slate-300 max-w-2xl mx-auto mb-8 text-sm sm:text-base lg:text-lg leading-relaxed">
+          <p className="text-slate-300  mx-auto mb-8 text-sm sm:text-base lg:text-lg leading-relaxed">
             Whether you are at the idea stage or have a tested prototype, ICON&apos;s commercialisation team will identify the right pathway and support you every step of the way.
           </p>
+        </div>
           <div className="max-w-2xl mx-auto">
             <form onSubmit={handleFormSubmit} className="space-y-6">
-              <input
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleInputChange}
-                tabIndex={-1}
-                autoComplete="off"
-                aria-hidden="true"
-                className="absolute w-px h-px overflow-hidden opacity-0"
-                style={{ clip: 'rect(0,0,0,0)' }}
-              />
-
               {/* Name and Email */}
               <div className="grid sm:grid-cols-2 gap-4">
                 <input
@@ -712,48 +661,7 @@ export default function CommercializationPathwaysPage() {
         </div>
       </section>
 
-      {/* ── FAQs ──────────────────────────────────────────────────────── */}
-      <section id="faq" className="py-4 sm:py-8 bg-[#F9F7F1]">
-         <div className="max-w-8xl mx-auto px-6 sm:px-10 lg:px-12">
-
-        {/* Header */}
-        <div className="mb-12 sm:mb-16 text-left">
-          <span className="text-[#CA9F3B] font-bold text-xs uppercase tracking-[0.15em] mb-4 block">
-            Knowledge Base
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-serif icon-brand-font mb-6 tracking-tight">
-            Frequently Asked Questions
-          </h2>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="border-b border-[#E5E0D5]">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex justify-between items-center p-6 text-left focus:outline-none"
-                >
-                  <span className="font-bold text-slate-800 pr-4">{faq.q}</span>
-                  {openFaq === i
-                    ? <Minus size={18} className="text-blue-600 shrink-0" />
-                    : <Plus size={18} className="text-slate-400 shrink-0" />}
-                </button>
-                <AnimatePresence>
-                  {openFaq === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="px-6 pb-6 text-slate-600 text-sm leading-relaxed"
-                    >
-                      {faq.a}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
-        </div>
-        </div>
-      </section>
+      <FaqSection faqs={faqs} />
 
       {/* ── INVENTION DISCLOSURE MODAL ───────────────────────────────── */}
       <AnimatePresence>
@@ -809,14 +717,6 @@ export default function CommercializationPathwaysPage() {
                 </div>
               ) : (
               <form onSubmit={handleIdfSubmit} className="px-6 sm:px-8 py-6 sm:py-8 space-y-5 max-h-[70vh] overflow-y-auto">
-                <input
-                  type="text" name="website"
-                  value={idfData.website} onChange={handleIdfChange}
-                  tabIndex={-1} autoComplete="off" aria-hidden="true"
-                  className="absolute w-px h-px overflow-hidden opacity-0"
-                  style={{ clip: 'rect(0,0,0,0)' }}
-                />
-
                 <div>
                   <label className="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1.5">
                     Invention Title *

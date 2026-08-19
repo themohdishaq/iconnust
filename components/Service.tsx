@@ -106,7 +106,7 @@ function ServiceRow({
             <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8 lg:mb-10">
               {service.bullets.map((b, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-white">
-                  <CheckCircle2 size={14} className="text-blue-400 mt-0.5 shrink-0" />
+                  <CheckCircle2 size={14} className="text-[#FCAF17] mt-0.5 shrink-0" />
                   {b}
                 </li>
               ))}
@@ -199,7 +199,7 @@ const IndustryServicesPortal = () => {
   const lineHeadY = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
 
   return (
-    <div className="bg-slate-900 text-white relative overflow-hidden">
+    <div className="bg-[#274661] text-white relative py-4 overflow-hidden">
       <div
         className="absolute inset-0 opacity-10 bg-fixed bg-cover pointer-events-none"
         style={{ backgroundImage: "url('/industrial_bg.png')" }}

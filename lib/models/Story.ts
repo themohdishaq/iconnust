@@ -1,6 +1,8 @@
 import { query } from '@/lib/db';
 import type { RowDataPacket, ResultSetHeader } from 'mysql2';
 
+export type StoryStatus = 'draft' | 'published';
+
 export interface IStory {
   id: number;
   name: string;
@@ -10,6 +12,7 @@ export interface IStory {
   funding: string;
   image: string;
   order: number;
+  status: StoryStatus;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -23,6 +26,7 @@ interface StoryRow extends RowDataPacket {
   funding: string;
   image: string;
   sort_order: number;
+  status: StoryStatus;
   created_at: Date;
   updated_at: Date;
 }
@@ -37,6 +41,7 @@ function mapRow(row: StoryRow): IStory {
     funding: row.funding,
     image: row.image,
     order: row.sort_order,
+    status: row.status === 'draft' ? 'draft' : 'published',
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -44,14 +49,23 @@ function mapRow(row: StoryRow): IStory {
 
 export type NewStory = Omit<IStory, 'id' | 'createdAt' | 'updatedAt'>;
 
-async function list(): Promise<IStory[]> {
-  const rows = await query<StoryRow[]>('SELECT * FROM stories ORDER BY sort_order ASC, created_at DESC');
+async function list(options?: { status?: StoryStatus | 'all' }): Promise<IStory[]> {
+  const status = options?.status ?? 'published';
+  const whereClause = status === 'all' ? '' : ' WHERE status = ?';
+  const params = status === 'all' ? [] : [status];
+  const rows = await query<StoryRow[]>(
+    `SELECT * FROM stories${whereClause} ORDER BY sort_order ASC, created_at DESC`,
+    params
+  );
   return rows.map(mapRow);
 }
 
 async function search(q: string): Promise<IStory[]> {
   const like = `%${q}%`;
-  const rows = await query<StoryRow[]>('SELECT * FROM stories WHERE name LIKE ? OR description LIKE ? OR tag LIKE ? ORDER BY sort_order ASC, created_at DESC', [like, like, like]);
+  const rows = await query<StoryRow[]>(
+    'SELECT * FROM stories WHERE status = ? AND (name LIKE ? OR description LIKE ? OR tag LIKE ?) ORDER BY sort_order ASC, created_at DESC',
+    ['published', like, like, like]
+  );
   return rows.map(mapRow);
 }
 
@@ -61,7 +75,7 @@ async function findById(id: string | number): Promise<IStory | null> {
 }
 
 async function create(data: NewStory): Promise<void> {
-  await query('INSERT INTO stories (name, tag, description, founder, funding, image, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)', [
+  await query('INSERT INTO stories (name, tag, description, founder, funding, image, sort_order, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [
     data.name,
     data.tag,
     data.desc,
@@ -69,6 +83,7 @@ async function create(data: NewStory): Promise<void> {
     data.funding,
     data.image,
     data.order,
+    data.status,
   ]);
 }
 
@@ -83,6 +98,7 @@ async function update(id: string | number, data: Partial<NewStory>): Promise<boo
     funding: 'funding',
     image: 'image',
     order: 'sort_order',
+    status: 'status',
   };
   for (const [key, column] of Object.entries(columnMap)) {
     const value = (data as Record<string, unknown>)[key];

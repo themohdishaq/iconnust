@@ -116,13 +116,13 @@ export default function PartnersSection({ partners }: { partners: Partner[] }) {
       ref={sectionRef}
       className="relative overflow-hidden bg-slate-50 py-14 "
     >
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-8xl px-6">
         <div className="mb-14 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3"
+            className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-[#003B70] mb-3"
           >
             Our Partners
           </motion.h2>

@@ -3,38 +3,63 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Menu, X } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
+import {
+  BriefcaseBusiness,
+  Link2,
+  Mail,
+  Menu,
+  Search,
+  X,
+} from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
 
-function Navbar() {
-
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
   const [query, setQuery] = useState("");
-  const router = useRouter();
-  const handleSearch = () => {
-    const value = query.trim();
-    if (!value) return;
 
-    router.push(`/news?q=${encodeURIComponent(value)}`);
-  };
+  const router = useRouter();
+  const pathname = usePathname();
+  const { scrollY } = useScroll();
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 20);
   });
 
+  const handleSearch = () => {
+    const value = query.trim();
+
+    if (!value) return;
+
+    router.push(`/news?q=${encodeURIComponent(value)}`);
+  };
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about-us" },
-    { name: "Innovation & Collaboration", href: "/innovation-collaboration" },
+    {
+      name: "Innovation & Collaboration",
+      href: "/innovation-collaboration",
+    },
     { name: "Industry Services", href: "/industry-services" },
-    { name: "Commercialisation Pathways", href: "/commercialization" },
+    {
+      name: "Commercialisation Pathways",
+      href: "/commercialization",
+    },
     { name: "News", href: "/news" },
   ];
 
   return (
-    <div>
+    <>
+      {/* =========================================================
+          TOP UTILITY BAR
+      ========================================================== */}
       <motion.div
         initial={false}
         animate={{
@@ -42,109 +67,279 @@ function Navbar() {
           opacity: isScrolled ? 0 : 1,
           paddingTop: isScrolled ? 0 : 12,
           paddingBottom: isScrolled ? 0 : 12,
-          overflow: "hidden",
         }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="bg-[#00558F] border-b text-white border-blue-100"
+        transition={{
+          duration: 0.3,
+          ease: "easeInOut",
+        }}
+        className="relative z-[60] overflow-hidden bg-[#003B70] text-white"
       >
-        <div className="max-w-8xl mx-auto px-3 md:px-6 flex justify-between items-center">
-          <div className="flex font-tahoma-font  items-center border-transparent space-x-3.5 md:space-x-6 text-[10px] uppercase tracking-[0.2em] font-black">
-            
-            <Link href="/news#events" className=" transition-colors">
+        <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-5 md:px-8 lg:px-14">
+          {/* Left */}
+          <div className="flex items-center gap-5 text-[11px] font-bold uppercase tracking-[0.14em] md:gap-6">
+            <Link
+              href="/news#events"
+              className="transition-opacity hover:opacity-70"
+            >
               Events
             </Link>
-            <Link href="/team" className="transition-colors">
+
+            <span className="h-4 w-px bg-white/40" />
+
+            <Link
+              href="/team"
+              className="transition-opacity hover:opacity-70"
+            >
               Team
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="relative">
+
+          {/* Right */}
+          <div className="hidden items-center gap-6 lg:flex">
+            <div className="flex items-center gap-6 text-[11px] font-medium">
+              <Link
+                href="/careers"
+                className="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <BriefcaseBusiness size={14} />
+                Careers
+              </Link>
+
+              <Link
+                href="/news"
+                className="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <Link2 size={14} />
+                Media
+              </Link>
+
+              <Link
+                href="/contact-us"
+                className="flex items-center gap-2 transition-opacity hover:opacity-70"
+              >
+                <Mail size={14} />
+                Contact Us
+              </Link>
+            </div>
+
+            {/* Search */}
+            <div className="relative w-[300px]">
+              <Search
+                size={15}
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/70"
+              />
+
               <input
                 type="text"
                 value={query}
-                maxLength={30}
+                maxLength={50}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSearch();
+                  if (e.key === "Enter") {
+                    handleSearch();
+                  }
                 }}
-                placeholder="Search news, stories..."
-                className="pl-8 pr-4 py-1 text-[11px] text-black bg-slate-50 border border-slate-200 rounded-full w-48 focus:border-blue-900 transition-all outline-none"
+                placeholder="Search news, stories, insights..."
+                className="
+                  h-9 w-full rounded-full
+                  border border-white/30
+                  bg-white/5
+                  pl-11 pr-12
+                  text-[12px] text-white
+                  outline-none
+                  placeholder:text-white/65
+                  transition
+                  focus:border-white/60
+                  focus:bg-white/10
+                "
               />
+
               <button
-                onClick={handleSearch}> 
-              <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                onClick={handleSearch}
+                aria-label="Search"
+                className="absolute right-2 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full transition hover:bg-white/10"
+              >
+                <Search size={15} />
               </button>
             </div>
           </div>
         </div>
       </motion.div>
 
+      {/* =========================================================
+          MAIN NAVBAR
+      ========================================================== */}
       <motion.nav
         initial={false}
         animate={{
-          backgroundColor: isScrolled ? "#ffffff" : "rgba(255, 255, 255, 0.95)",
           boxShadow: isScrolled
-            ? "0 8px 24px rgba(15, 23, 42, 0.08)"
-            : "0 0 0 rgba(15, 23, 42, 0)",
-          backdropFilter: isScrolled ? "blur(0px)" : "blur(8px)",
+            ? "0px 8px 30px rgba(15,23,42,0.10)"
+            : "0px 0px 0px rgba(15,23,42,0)",
         }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="fixed w-full z-50 py-0 sm:py-2 mt-0"
+        transition={{ duration: 0.25 }}
+        className="sticky top-0 z-50 w-full bg-white"
       >
-        <div className="max-w-8xl mx-auto px-6 flex justify-between items-center relative">
-          <Link href="/" className="flex items-center">
-            <Image src="/icon-logo.png" alt="ICON Logo" width={200} height={100} className="rounded-sm" />
+        <div
+          className="
+            mx-auto flex
+            
+            w-full max-w-[1800px]
+            items-center justify-between
+            px-5 md:px-8 lg:px-14
+          "
+        >
+          {/* Logo */}
+          <Link
+            href="/"
+            className="relative flex shrink-0 items-center "
+          >
+            <Image
+              src="/icon-logo.png"
+              alt="Innovation & Commercialisation Office"
+              width={300}
+              height={80}
+              priority
+              className="
+                h-auto
+                
+                object-contain
+                sm:w-[200px]
+                xl:w-[220px]
+              "
+            />
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="group relative text-[16px] uppercase font-tahoma-font font-medium tracking-wide font-black transition-colors py-4 block icon-brand-font"
-              >
-                {/* <span className="transition-colors group-hover:text-blue-900">{link.name}</span> */}
-                <span className="absolute left-0 bottom-2 h-0.5 w-0 bg-blue-900 transition-all duration-300 group-hover:w-full" />
-                {link.name}
-              </Link>
-            ))}
+          {/* Desktop menu */}
+          <div className="hidden items-center gap-7 xl:flex 2xl:gap-10">
+            {navLinks.map((link) => {
+              const active =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="
+                    group relative
+                    whitespace-nowrap
+                    py-7
+                    text-[14px]
+                    font-semibold
+                    uppercase
+                    tracking-[0.02em]
+                    text-[#00558F]
+                    transition
+                    hover:text-[#003B70]
+                    2xl:text-[15px]
+                  "
+                >
+                  {link.name}
+
+                  <span
+                    className={`
+                      absolute bottom-[16px] left-0 h-[3px]
+                      rounded-full bg-[#FCAF17]
+                      transition-all duration-300
+                      ${
+                        active
+                          ? "w-full"
+                          : "w-0 group-hover:w-full"
+                      }
+                    `}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
+          {/* Mobile menu button */}
           <button
-            className="lg:hidden p-2"
+            className="
+              flex h-11 w-11 items-center justify-center
+              rounded-full text-[#00558F]
+              transition hover:bg-slate-100
+              xl:hidden
+            "
             onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
+        {/* Mobile menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-2xl overflow-hidden z-50"
+              initial={{
+                opacity: 0,
+                height: 0,
+              }}
+              animate={{
+                opacity: 1,
+                height: "auto",
+              }}
+              exit={{
+                opacity: 0,
+                height: 0,
+              }}
+              transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
+              className="absolute left-0 top-full w-full overflow-hidden border-t border-slate-100 bg-white shadow-xl xl:hidden"
             >
-              <div className="p-6 flex flex-col space-y-1">
+              <div className="space-y-1 p-5">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-base font-black uppercase text-slate-900 py-4 border-b border-slate-100 block"
                     onClick={() => setMobileMenuOpen(false)}
+                    className="
+                      block rounded-xl
+                      px-4 py-4
+                      text-sm font-bold uppercase
+                      text-[#00558F]
+                      transition
+                      hover:bg-[#00558F]/5
+                    "
                   >
                     {link.name}
                   </Link>
                 ))}
+
+                <div className="relative mt-4">
+                  <Search
+                    size={17}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+                  />
+
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleSearch();
+                      }
+                    }}
+                    placeholder="Search news, stories..."
+                    className="
+                      h-12 w-full rounded-full
+                      border border-slate-200
+                      pl-11 pr-5
+                      text-sm
+                      outline-none
+                      focus:border-[#00558F]
+                    "
+                  />
+                </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </motion.nav>
-    </div>
+    </>
   );
 }
-
-export default Navbar;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import IndustryServicesPageClient from "./_components/IndustryServicesPageClient";
 import { SITE_NAME } from "@/lib/seo";
+import Faq from "@/lib/models/Faq";
 
 const title = "Industry Services";
 const description =
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <IndustryServicesPageClient />;
+export default async function Page() {
+  const faqs = await Faq.list('industry-services');
+  return <IndustryServicesPageClient faqs={faqs} />;
 }

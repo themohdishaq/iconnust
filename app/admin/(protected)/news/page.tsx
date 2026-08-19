@@ -7,7 +7,7 @@ import { deleteNewsAction } from './actions';
 export const dynamic = 'force-dynamic';
 
 export default async function AdminNewsListPage() {
-  const news = await News.list();
+  const news = await News.list({ status: 'all' });
 
   return (
     <div>
@@ -39,6 +39,11 @@ export default async function AdminNewsListPage() {
                   <div className="flex items-center gap-2">
                     <h3 className="font-bold text-slate-900 truncate">{n.title}</h3>
                     {n.featured && <Star size={13} className="text-amber-500 shrink-0" fill="currentColor" />}
+                    {n.status === 'draft' && (
+                      <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.18em] text-amber-700">
+                        Draft
+                      </span>
+                    )}
                   </div>
                   <p className="text-slate-400 text-xs mt-0.5">{n.category} · {n.date}</p>
                 </div>

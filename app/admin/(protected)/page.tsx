@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight, Mail, Handshake } from 'lucide-react';
+import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight, Mail, Handshake, CircleHelp } from 'lucide-react';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
@@ -10,6 +10,7 @@ import InnovationInquiry from '@/lib/models/InnovationInquiry';
 import InventionDisclosure from '@/lib/models/InventionDisclosure';
 import Subscriber from '@/lib/models/Subscriber';
 import Partner from '@/lib/models/Partner';
+import Faq from '@/lib/models/Faq';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,12 +21,13 @@ const cards = [
   { key: 'events', label: 'Upcoming Events', href: '/admin/events', icon: CalendarDays },
   { key: 'stories', label: 'Success Stories', href: '/admin/stories', icon: Award },
   { key: 'partners', label: 'Partners', href: '/admin/partners', icon: Handshake },
+  { key: 'faqs', label: 'FAQs', href: '/admin/faqs', icon: CircleHelp },
   { key: 'team', label: 'Team Members', href: '/admin/team', icon: Users },
   { key: 'subscribers', label: 'Subscribers', href: '/admin/subscribers', icon: Mail },
 ] as const;
 
 export default async function AdminDashboardPage() {
-  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount, subscribersCount, partnersCount] = await Promise.all([
+  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount, subscribersCount, partnersCount, faqCount] = await Promise.all([
     News.count(),
     Event.count(),
     Story.count(),
@@ -36,6 +38,7 @@ export default async function AdminDashboardPage() {
     InventionDisclosure.count(),
     Subscriber.count(),
     Partner.count(),
+    Faq.count(),
   ]);
   const inquiriesCount = homeInq + industryInq + innovationInq;
 
@@ -48,6 +51,7 @@ export default async function AdminDashboardPage() {
     disclosures: disclosuresCount,
     subscribers: subscribersCount,
     partners: partnersCount,
+    faqs: faqCount,
   };
 
   return (

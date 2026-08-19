@@ -24,6 +24,7 @@ export default async function EditStoryPage({ params }: { params: Promise<{ id: 
           funding: story.funding,
           image: story.image,
           order: story.order,
+          status: story.status,
         }}
       />
     </div>

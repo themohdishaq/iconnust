@@ -16,6 +16,7 @@ import IndustryServicesPortal from "@/components/Service";
 import PartnersSection from "@/components/Partner";
 import Link from "next/link";
 import { useInquiryForm } from "@/lib/useInquiryForm";
+import HomeHero from "@/components/HomeHero";
 
 type HomeNewsItem = {
   id: string;
@@ -45,6 +46,7 @@ const AnimatedStatValue = ({ value }: { value: number }) => {
 };
 
 type StatTileData = { label: string; value: number };
+type TechPlaceCardData = { label: string; value: number; subtitle: string };
 type PartnerData = { name: string; logo: string | null };
 const partners: PartnerData[] = [
   { name: 'Toyota Indus Motor Company', logo: '/toyota.jpg' },
@@ -136,10 +138,33 @@ const partners: PartnerData[] = [
 //   { name: 'Pakistan Agricultural Research Council (PARC)', logo: '/Pakistan Agricultural Research Council (PARC).jpg' },
 //   { name: 'Pakistan Telecommunication Company Limited (PTCL)', logo: '/Pakistan Telecommunication Company Limited (PTCL).png' },
 // ];
+const homeImpactCardDefaults = [
+  {
+    label: "Licensed Tech",
+    count: 52,
+    icon: Layers,
+    sub: "Technologies actively licensed to industry partners",
+  },
+  {
+    label: "Spin-offs",
+    count: 80,
+    icon: Rocket,
+    sub: "Ventures founded on NUST intellectual property",
+  },
+  {
+    label: "Ready to License",
+    count: 10,
+    icon: BadgeCheck,
+    sub: "Cutting-edge technologies awaiting commercialisation",
+  },
+] as const;
+
 const App = ({
   stats,
+  techPlaceCards,
 }: {
   stats: StatTileData[];
+  techPlaceCards: TechPlaceCardData[];
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [newsArticles, setNewsArticles] = useState<HomeNewsItem[]>([]);
@@ -227,142 +252,13 @@ const App = ({
 
   return (
     <div className="min-h-screen  bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden w-full">
+      <HomeHero stats={stats}/>
       {/* Hero Section with Dynamic Slider and Integrated Live Dashboard */}
-      <section className=" w-full relative sm:pt-20 bg-white sm:mb-24 h-screen flex flex-col justify-between border-b border-slate-100">
-        {/* Background Images Slider */}
-        <div className="absolute top-0 right-0 w-full h-full pointer-events-none z-0">
-          <div
-            className="absolute inset-0"
-            style={{
-              maskImage:
-                "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-            }}
-          >
-            {heroSlides.map((slide, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-[2000ms] ease-in-out ${currentSlide === index ? "opacity-100 z-10" : "opacity-0 z-0"}`}
-              >
-                <Image
-                  src={slide.img}
-                  width={1000}
-                  height={1000}
-                  alt={`Slide ${index + 1}`}
-                  className={`w-full h-full object-cover transition-transform duration-[8000ms] ease-out ${currentSlide === index ? "scale-100" : "scale-110"}`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-blue-900/10 lg:via-transparent" />
-              </div>
-            ))}
-          </div>
-          {/* Decorative Floating Elements */}
-          <div className="absolute -top-20 -right-10 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 z-20 animate-pulse" />
-          <div className="absolute top-1/2 -left-10 w-40 h-40 bg-slate-100 rounded-full blur-2xl opacity-40 z-20" />
-        </div>
-
-        {/* Text Content Slider */}
-        <div className="max-w-8xl mx-auto px-4 sm:px-6 w-full relative z-20 flex-grow flex flex-col justify-center mb-6 sm:mb-10 lg:mb-16">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-            <div className="lg:col-span-7 relative h-[260px] sm:h-[320px] md:h-[360px] lg:h-[420px]">
-              {heroSlides.map((slide, index) => (
-                <div
-                  key={index}
-                  className={`absolute top-0 left-0 w-full transition-all duration-1000 ease-in-out ${
-                    currentSlide === index
-                      ? "opacity-100 translate-y-0 pointer-events-auto"
-                      : "opacity-0 translate-y-8 pointer-events-none"
-                  }`}
-                >
-                  <div className="inline-flex uppercase items-center space-x-2 text-[#C9962A] font-bold text-[10px] uppercase tracking-[0.4em] mb-4">
-                    <div className="w-12 h-px bg-[#C9962A]" />
-                    <span>{slide.tag}</span>
-                  </div>
-                  <h1 className="text-3xl sm:text-4xl uppercase md:text-5xl lg:text-6xl mt-4  font-tahoma-font font-medium text-slate-900 leading-[1.02]  tracking-tight">
-                    {slide.titleLine1} <br />
-                    <span className=" uppercase icon-brand-font font-tahoma-font drop-shadow-sm">
-                      {slide.highlight}
-                    </span>{" "}
-                    <br />
-                    {slide?.titleLine2}
-                  </h1>
-                </div>
-              ))}
-
-              {/* Slider Navigation Dots */}
-              <div className="absolute bottom-4 sm:bottom-8 lg:bottom-16 2xl:-bottom-10 left-0 flex space-x-3">
-                <div className=" flex flex-col pt-5">
-                  <Link
-                    href="#partner-with-us"
-                    className="cursor-pointer bg-[#FCAF17] text-[#0A2A40] px-5 py-3 font-black text-xs uppercase tracking-[0.2em]  transition-all shadow-xl shadow-blue-900/20 active:scale-95"
-                  >
-                    Partner with us
-                  </Link>
-
-                  <div className="flex left-0 flex space-x-3 mt-4 sm:mt-6 ">
-                    {heroSlides.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentSlide(idx)}
-                        className={`h-1.5 transition-all duration-500 rounded-full ${currentSlide === idx ? "w-10 bg-blue-900" : "w-3 bg-slate-200 hover:bg-blue-400"}`}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Live Dashboard - Impact Snapshot (Integrated Overlay) */}
-        <div className="max-w-6xl bg-[#00558F] mx-auto px-3  sm:px-6 mb-6 sm:mb-8 lg:mb-10 -top-10 sm:-top-16 lg:-top-24 2xl:-top-5 w-full relative z-30">
-          <div className="   overflow-hidden">
-            <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center ">
-              <div className="flex items-center space-x-3 text-white font-black text-[10px] uppercase tracking-[0.3em]">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span>Live Impact Engine</span>
-              </div>
-            </div>
-            <div className="grid items-center text-center grid-cols-2 lg:grid-cols-5 divide-x divide-y lg:divide-y-0 divide-slate-500">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: 0.08 * i,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className="p-3 relative overflow-hidden flex items-center justify-center text-center"
-                >
-                  {/* Background glow effect on hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                  <div className="relative z-10 flex flex-col items-center justify-center">
-                    <div className="flex items-baseline justify-center space-x-1 mb-1">
-                      <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-tahoma-font icon-brand-font-secondary transition-colors">
-                        <AnimatedStatValue value={stat.value} />
-                      </div>
-                      <span className="text-xl font-serif icon-brand-font-secondary font-bold">
-                        +
-                      </span>
-                    </div>
-                    <div className="text-[9px]  uppercase tracking-[0.15em] sm:tracking-[0.2em] font-black text-white transition-colors">
-                      {stat.label}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       <IndustryServicesPortal />
 
-      <section className="py-8 max-w-8xl sm:py-10 lg:py-12 bg-white text-slate-900">
+      <section className="py-4 max-w-8xl sm:py-8 lg:py-10 bg-white text-slate-900">
         <div className="max-w-8xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div>
@@ -370,7 +266,7 @@ const App = ({
                 <Mail size={14} />
                 <span>Knowledge Brief</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-slate-900 font-tahoma mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-[#003B70] font-tahoma mb-4">
                 The Innovation Brief
               </h2>
               <p className="text-slate-700 text-xs  lg:text-[16px] opacity-90 max-w-md">
@@ -443,40 +339,30 @@ const App = ({
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {[
-              {
-                label: "Licensed Tech",
-                count: "52",
-                icon: Layers,
-                sub: "Technologies actively licensed to industry partners",
-              },
-              {
-                label: "Spin-offs",
-                count: "80",
-                icon: Rocket,
-                sub: "Ventures founded on NUST intellectual property",
-              },
-              {
-                label: "Ready to License",
-                count: "10",
-                icon: BadgeCheck,
-                sub: "Cutting-edge technologies awaiting commercialisation",
-              },
-            ].map((item, i) => {
-              const Icon = item.icon;
+            {homeImpactCardDefaults.map((defaultCard, i) => {
+              const adminCard = techPlaceCards[i] ?? {
+                label: defaultCard.label,
+                value: defaultCard.count,
+                subtitle: defaultCard.sub,
+              };
+              const cardValue = Number.isFinite(Number(adminCard.value)) ? Number(adminCard.value) : defaultCard.count;
+              const Icon = defaultCard.icon;
+
               return (
                 <div
-                  key={i}
+                  key={defaultCard.label}
                   className="bg-white/5 border border-white/10 p-6 sm:p-7 lg:p-8 rounded-sm hover:bg-white/10 transition-all cursor-pointer group"
                 >
                   <div className="text-blue-400 mb-4 ">
                     <Icon size={28} />
                   </div>
-                  <div className="text-4xl font-Inter mb-2">{item.count}</div>
-                  <div className="text-lg font-serif text-white mb-2">
-                    {item.label}
+                  <div className="text-4xl font-Inter mb-2">
+                    {cardValue.toLocaleString("en-US")}
                   </div>
-                  <p className="text-white text-sm">{item.sub}</p>
+                  <div className="text-lg font-serif text-white mb-2">
+                    {defaultCard.label}
+                  </div>
+                  <p className="text-white text-sm">{adminCard.subtitle || defaultCard.sub}</p>
                 </div>
               );
             })}
@@ -494,7 +380,7 @@ const App = ({
             </div>
             <div className="flex items-center justify-between mb-6 sm:mb-8 lg:mb-10">
               <div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-slate-900 mb-3">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-[#003B70] mb-3">
                   News & Success Stories
                 </h2>
 
@@ -521,12 +407,12 @@ const App = ({
                 href={`/news/${news.slug}`}
                 className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48  overflow-hidden">
                   <Image
                     src={news.image}
                     alt={news.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     unoptimized
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -571,7 +457,7 @@ const App = ({
                 <div className="w-12 h-px bg-[#C9962A]" />
                 <span>Initiate Engagement</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl   font-serif text-slate-900 mb-5 leading-tight">
+              <h2 className="text-3xl sm:text-4xl   font-serif text-[#003B70] mb-5 leading-tight">
                 Partner with ICON
               </h2>
               <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10">

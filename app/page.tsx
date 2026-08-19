@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import HomePageClient from "./_components/HomePageClient";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import StatTile from "@/lib/models/StatTile";
+import TechPlaceStat from "@/lib/models/TechPlaceStat";
 
 const title = "Home";
 
@@ -46,11 +47,20 @@ const organizationJsonLd = {
 };
 
 export default async function Page() {
-  const tiles = await StatTile.list("home");
+  const [tiles, techPlaceStats] = await Promise.all([
+    StatTile.list("home"),
+    TechPlaceStat.list(),
+  ]);
 
   const stats = tiles.map((tile) => ({
     label: String(tile.label ?? ""),
     value: Number(tile.value ?? 0),
+  }));
+
+  const techPlaceCards = techPlaceStats.slice(0, 3).map((item) => ({
+    label: item.title,
+    value: Number(item.value ?? 0),
+    subtitle: item.subtitle,
   }));
 
   return (
@@ -62,7 +72,7 @@ export default async function Page() {
         }}
       />
 
-      <HomePageClient stats={stats} />
+      <HomePageClient stats={stats} techPlaceCards={techPlaceCards} />
     </>
   );
 }

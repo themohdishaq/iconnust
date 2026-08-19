@@ -29,7 +29,7 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
   return (
     <div className="min-h-screen flex bg-slate-50 text-slate-900">
       <Sidebar email={session.email} badges={badges} />
-      <main className="flex-1 min-w-0 p-8">{children}</main>
+      <main className="flex-1 min-w-0 h-screen overflow-y-auto p-8 scroll-smooth">{children}</main>
     </div>
   );
 }

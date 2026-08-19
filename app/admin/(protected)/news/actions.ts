@@ -36,6 +36,7 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
   const date = String(formData.get('date') || '').trim();
   const readTime = String(formData.get('readTime') || '3 min').trim();
   const featured = formData.get('featured') === 'on';
+  const status = formData.get('status') === 'draft' ? 'draft' : 'published';
   const imageFile = formData.get('image') as File | null;
 
   if (!title || !category || !excerpt || content.length === 0 || !date) {
@@ -48,9 +49,11 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
   const image = await saveUploadedImage(imageFile, 'news');
   const slug = await uniqueSlug(title);
 
-  await News.create({ title, slug, category, excerpt, content, image, date, readTime, featured });
+  await News.create({ title, slug, category, excerpt, content, image, date, readTime, featured, status });
 
-  await notifySubscribers({ subject: `New Article: ${title}`, title, path: `/news/${slug}` });
+  if (status === 'published') {
+    await notifySubscribers({ subject: `New Article: ${title}`, title, path: `/news/${slug}` });
+  }
 
   revalidatePath('/admin/news');
   revalidatePath('/news');
@@ -66,6 +69,7 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
   const date = String(formData.get('date') || '').trim();
   const readTime = String(formData.get('readTime') || '3 min').trim();
   const featured = formData.get('featured') === 'on';
+  const status = formData.get('status') === 'draft' ? 'draft' : 'published';
   const imageFile = formData.get('image') as File | null;
 
   if (!title || !category || !excerpt || content.length === 0 || !date) {
@@ -79,8 +83,8 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
 
   const update: Partial<{
     title: string; slug: string; category: string; excerpt: string;
-    content: string[]; date: string; readTime: string; featured: boolean; image: string;
-  }> = { title, category, excerpt, content, date, readTime, featured };
+    content: string[]; date: string; readTime: string; featured: boolean; image: string; status: 'draft' | 'published';
+  }> = { title, category, excerpt, content, date, readTime, featured, status };
 
   if (title !== existing.title) {
     update.slug = await uniqueSlug(title, id);
@@ -92,6 +96,10 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
   }
 
   await News.update(id, update);
+
+  if (status === 'published') {
+    await notifySubscribers({ subject: `Updated Article: ${title}`, title, path: `/news/${update.slug ?? existing.slug}` });
+  }
 
   revalidatePath('/admin/news');
   revalidatePath('/news');
