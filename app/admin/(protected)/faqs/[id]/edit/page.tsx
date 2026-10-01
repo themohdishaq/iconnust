@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Faq from '@/lib/models/Faq';
-import FaqForm from '../../_components/FaqForm';
+import FaqForm from '@/components/admin/faqs/FaqForm';
 import { updateFaqAction } from '../../actions';
 
 export default async function EditFaqPage({ params }: { params: Promise<{ id: string }> }) {

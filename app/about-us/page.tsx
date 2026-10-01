@@ -30,14 +30,14 @@ const departments = [
     name: "Corporate Advisory Council",
     description:
       "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government — engaging in advisory work, consultation, and joint R&D collaboration.",
-    image: "#",
+    image: "/main-pic/CAC_team.jpg",
   },
   {
     tag: "NIPO",
     name: "NUST Intellectual Property Office",
     description:
       "Offering IP services since 2008 — initially dedicated to TIC incubatees — NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
-    image: "#",
+    image: "/main-pic/IPO.jpg",
   },
   {
     tag: "TTO",
@@ -60,14 +60,14 @@ const departments = [
 function About() {
   return (
     <main className="relative overflow-hidden bg-white font-sans text-[#003B70]">
-      <section className="relative isolate flex min-h-[500px] items-center overflow-hidden bg-[#003B70] sm:min-h-[580px]">
+      <section className="relative isolate flex min-h-[400px] items-center overflow-hidden bg-[#003B70]">
         <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
           className="absolute inset-0 -z-20 bg-[url('/main-pic/BDO_team.jpg')] bg-cover bg-center bg-no-repeat"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#003B70] via-[#003B70]/92 to-[#003B70]/55" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#003B70] via-[#003B70]/15 " />
         <div className="absolute -right-20 top-12 h-72 w-72 rounded-full border border-white/15 sm:h-96 sm:w-96" />
         <div className="absolute -right-4 top-28 h-48 w-48 rounded-full border border-[#FCAF17]/50 sm:h-64 sm:w-64" />
 
@@ -80,7 +80,7 @@ function About() {
             </motion.div>
             <motion.h1 variants={fadeUp} className="font-tahoma-font text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
               Towards
-              <span className="mt-2 block text-[#FCAF17]">a tech-driven future</span>
+              <span className="mt-2 block text-[#FCAF17]">a Tech-driven Future</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
               We connect researchers, industry leaders, and entrepreneurs to transform ideas into meaningful impact through partnerships, intellectual property support, and collaborative innovation.
@@ -153,6 +153,7 @@ function About() {
                   className="grid overflow-hidden border border-[#003B70]/15 bg-white shadow-[0_20px_60px_rgba(0,59,112,0.08)] transition-shadow duration-300 hover:shadow-[0_26px_70px_rgba(0,59,112,0.14)] md:grid-cols-2"
                 >
                   <div className={`relative min-h-[260px] overflow-hidden bg-[#003B70] sm:min-h-[340px] lg:min-h-[430px] ${isAlternatingRight ? 'md:order-2' : 'md:order-1'}`}>
+                    {department.image ? (
                       <Image
                         src={department.image}
                         alt={department.name}
@@ -160,6 +161,11 @@ function About() {
                         sizes="(min-width: 768px) 50vw, 100vw"
                         className="object-cover transition-transform duration-700 hover:scale-105"
                       />
+                    ) : (
+                      <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#003B70] to-[#00558f]">
+                        <span className="text-6xl font-bold tracking-widest text-white/20 sm:text-8xl">{department.tag}</span>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#003B70]/65 via-transparent to-transparent" />
                     <div className="absolute bottom-0 left-0 bg-[#FCAF17] px-5 py-3 font-tahoma-font text-sm font-bold text-[#003B70]">{String(index + 1).padStart(2, '0')}</div>
                   </div>
@@ -174,7 +180,7 @@ function About() {
                     <p className="mt-5 text-sm leading-7 text-[#003B70]/70 sm:text-base">
                       {department.description}
                     </p>
-                    {department.link !== '#' && (
+                    {department.link && department.link !== '#' && (
                       <Link
                         href={department.link}
                         target="_blank"

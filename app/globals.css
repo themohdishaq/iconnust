@@ -1,17 +1,10 @@
 @import "tailwindcss";
 
-/* Local Tahoma font - place the font file in `public/fonts/Tahoma.ttf` */
+/* Use the bundled regular face; browsers synthesize bold when needed. */
 @font-face {
   font-family: 'TahomaLocal';
-  src: url('/fonts/Tahoma.ttf') format('truetype');
+  src: url('/fonts/tahoma.ttf') format('truetype');
   font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'TahomaLocal';
-  src: url('/fonts/Tahoma-Bold.ttf') format('truetype');
-  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -51,6 +44,7 @@
 }
 
 html {
+  position: relative;
   font-family: var(--font-sans);
 }
 
@@ -117,4 +111,26 @@ h6,
 /* ── number counter tabular digits ── */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+.linkedin-float {
+  animation: linkedin-float-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes linkedin-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linkedin-float {
+    animation: none;
+    transition: none;
+  }
 }

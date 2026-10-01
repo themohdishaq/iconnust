@@ -3,8 +3,8 @@ import IpBreakdown from '@/lib/models/IpBreakdown';
 import IpYearlyStat from '@/lib/models/IpYearlyStat';
 import FinancialStat from '@/lib/models/FinancialStat';
 import TechPlaceStat from '@/lib/models/TechPlaceStat';
-import StatTable from './_components/StatTable';
-import StatsSectionSelector from './_components/StatsSectionSelector';
+import StatTable from '@/components/admin/stats/StatTable';
+import StatsSectionSelector from '@/components/admin/stats/StatsSectionSelector';
 import {
   createStatTileAction,
   updateStatTileAction,

@@ -1,24 +1,7 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import { ArrowUpRight, Building2, Mail, MapPin, MapPinned, Phone } from 'lucide-react';
-import { SITE_NAME } from '@/lib/seo';
 
-const title = 'Contact Us';
-const description =
-  'Contact the ICON offices at NUST for innovation, intellectual property, industry collaboration, and technology-transfer support.';
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: '/contact' },
-  openGraph: {
-    title: `${title} | ${SITE_NAME}`,
-    description,
-    url: '/contact',
-  },
-};
-
-export const contactOffices = [
+const contactOffices = [
  
   {
     id: 'cac',

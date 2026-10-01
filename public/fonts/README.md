@@ -1,11 +1,5 @@
-Place your local Tahoma font files here.
+The bundled regular font is `tahoma.ttf`, referenced by `app/globals.css`.
+Filename casing must match for deployments on case-sensitive filesystems.
 
-Required filenames (or update `app/globals.css` accordingly):
-- Tahoma.ttf
-- Tahoma-Bold.ttf
-
-Optional optimized formats (recommended):
-- Tahoma.woff2
-- Tahoma.woff
-
-After adding files, restart the dev server so Next.js serves the static assets.
+Browsers synthesize bold from the regular face. If a licensed bold font is
+added later, define a separate weight-700 `@font-face` using its exact filename.

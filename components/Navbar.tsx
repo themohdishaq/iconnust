@@ -44,13 +44,13 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about-us" },
     {
-      name: "Innovation & Collaboration",
+      name: "Research and Innovation",
       href: "/innovation-collaboration",
     },
-    { name: "Industry Services", href: "/industry-services" },
+    { name: "Industrial Collaboration", href: "/industry-services" },
     {
       name: "Commercialisation Pathways",
-      href: "/commercialization",
+      href: "/commercialisation",
     },
     { name: "News", href: "/news" },
   ];
@@ -72,20 +72,11 @@ export default function Navbar() {
           duration: 0.3,
           ease: "easeInOut",
         }}
-        className="relative z-[60] overflow-hidden bg-[#003B70] text-white"
+        className="relative z-60 overflow-hidden bg-[#003B70] text-white"
       >
         <div className="mx-auto flex w-full max-w-[1800px] items-center justify-between px-5 md:px-8 lg:px-14">
           {/* Left */}
-          <div className="flex items-center gap-5 text-[11px] font-bold uppercase tracking-[0.14em] md:gap-6">
-            <Link
-              href="/news#events"
-              className="transition-opacity hover:opacity-70"
-            >
-              Events
-            </Link>
-
-            <span className="h-4 w-px bg-white/40" />
-
+          <div className="flex items-center gap-5 text-[11px] font-bold uppercase tracking-[0.14em] ">          
             <Link
               href="/team"
               className="transition-opacity hover:opacity-70"
@@ -97,21 +88,7 @@ export default function Navbar() {
           {/* Right */}
           <div className="hidden items-center gap-6 lg:flex">
             <div className="flex items-center gap-6 text-[11px] font-medium">
-              <Link
-                href="/careers"
-                className="flex items-center gap-2 transition-opacity hover:opacity-70"
-              >
-                <BriefcaseBusiness size={14} />
-                Careers
-              </Link>
 
-              <Link
-                href="/news"
-                className="flex items-center gap-2 transition-opacity hover:opacity-70"
-              >
-                <Link2 size={14} />
-                Media
-              </Link>
 
               <Link
                 href="/contact-us"
@@ -201,7 +178,6 @@ export default function Navbar() {
               priority
               className="
                 h-auto
-                
                 object-contain
                 sm:w-[200px]
                 xl:w-[220px]

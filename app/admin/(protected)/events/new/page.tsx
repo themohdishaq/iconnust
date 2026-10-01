@@ -1,4 +1,4 @@
-import EventForm from '../_components/EventForm';
+import EventForm from '@/components/admin/events/EventForm';
 import { createEventAction } from '../actions';
 
 export default function NewEventPage() {

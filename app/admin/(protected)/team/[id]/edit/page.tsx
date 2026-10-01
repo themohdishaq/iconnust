@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import TeamMember from '@/lib/models/TeamMember';
-import TeamMemberForm from '../../_components/TeamMemberForm';
+import TeamMemberForm from '@/components/admin/team/TeamMemberForm';
 import { updateTeamMemberAction } from '../../actions';
 
 export default async function EditTeamMemberPage({ params }: { params: Promise<{ id: string }> }) {

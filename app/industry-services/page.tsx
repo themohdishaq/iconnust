@@ -1,30 +1,17 @@
-import type { Metadata } from "next";
-import IndustryServicesPageClient from "./_components/IndustryServicesPageClient";
-import { SITE_NAME } from "@/lib/seo";
+import { IndustryHero, ServiceExplorer, EngagementSteps, IndustrySectors, IndustryInquiry } from '@/components/industry-services/IndustrySections';
+import FaqSection from '@/components/FaqSection';
 import Faq from "@/lib/models/Faq";
-
-const title = "Industry Services";
-const description =
-  "ICON bridges NUST's research capabilities with Pakistan's industries — offering R&D support, expert consultancy, workforce upskilling, and ISO-certified lab and testing services.";
-
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: {
-    canonical: "/industry-services",
-  },
-  openGraph: {
-    title: `${title} | ${SITE_NAME}`,
-    description,
-    url: "/industry-services",
-  },
-  twitter: {
-    title: `${title} | ${SITE_NAME}`,
-    description,
-  },
-};
 
 export default async function Page() {
   const faqs = await Faq.list('industry-services');
-  return <IndustryServicesPageClient faqs={faqs} />;
+  return (
+    <div className="min-h-screen overflow-x-hidden bg-white font-sans text-[#003B70]">
+      <IndustryHero />
+      <ServiceExplorer />
+      <EngagementSteps />
+      <IndustrySectors />
+      <IndustryInquiry />
+      <FaqSection faqs={faqs} />
+    </div>
+  );
 }

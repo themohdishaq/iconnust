@@ -1,4 +1,4 @@
-import StoryForm from '../_components/StoryForm';
+import StoryForm from '@/components/admin/stories/StoryForm';
 import { createStoryAction } from '../actions';
 
 export default function NewStoryPage() {

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Event from '@/lib/models/Event';
-import EventForm from '../../_components/EventForm';
+import EventForm from '@/components/admin/events/EventForm';
 import { updateEventAction } from '../../actions';
 
 export default async function EditEventPage({ params }: { params: Promise<{ id: string }> }) {

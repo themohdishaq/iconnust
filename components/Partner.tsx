@@ -17,17 +17,17 @@ function PartnerChip({ partner }: { partner: Partner }) {
       transition={{ duration: 0.25 }}
       className="flex items-center gap-4 bg-white border border-slate-200 rounded-xl px-5 py-4 shadow-sm hover:shadow-lg hover:border-blue-900/30 transition-all min-w-[300px]"
     >
-      <div className="flex h-14 w-24 items-center justify-center">
+      <div className="relative h-14 w-24 shrink-0">
         {partner.logo ? (
           <Image
             src={partner.logo}
             alt={partner.name}
-            width={90}
-            height={50}
-            className="max-h-12 w-auto object-contain"
+            fill
+            sizes="96px"
+            className="object-contain"
           />
         ) : (
-          <Building2 className="h-8 w-8 text-blue-900/40" />
+          <Building2 className="absolute inset-0 m-auto h-8 w-8 text-blue-900/40" />
         )}
       </div>
 

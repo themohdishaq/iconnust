@@ -1,4 +1,4 @@
-import TeamMemberForm from '../_components/TeamMemberForm';
+import TeamMemberForm from '@/components/admin/team/TeamMemberForm';
 import { createTeamMemberAction } from '../actions';
 
 export default function NewTeamMemberPage() {

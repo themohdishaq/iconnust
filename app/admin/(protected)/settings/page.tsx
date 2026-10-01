@@ -1,6 +1,6 @@
 import Admin from '@/lib/models/Admin';
 import { getSession } from '@/lib/auth';
-import SettingsForm from './_components/SettingsForm';
+import SettingsForm from '@/components/admin/settings/SettingsForm';
 
 export default async function AdminSettingsPage() {
   const session = await getSession();

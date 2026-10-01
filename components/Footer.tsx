@@ -6,7 +6,7 @@ import { ArrowUpRight, Globe2, Mail, MapPin, Phone } from 'lucide-react';
 const ecosystemLinks = [
   { label: 'Innovation & Collaboration', href: '/innovation-collaboration' },
   { label: 'Industry Services', href: '/industry-services' },
-  { label: 'Commercialisation Pathways', href: '/commercialization' },
+  { label: 'Commercialisation Pathways', href: '/commercialisation' },
 ];
 
 const organisationLinks = [

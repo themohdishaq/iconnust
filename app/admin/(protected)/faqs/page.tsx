@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Pencil, Trash2 } from 'lucide-react';
 import Faq, { FAQ_PAGES, isFaqPage, type FaqPage } from '@/lib/models/Faq';
-import FaqForm from './_components/FaqForm';
+import FaqForm from '@/components/admin/faqs/FaqForm';
 import { createFaqAction, deleteFaqAction } from './actions';
 
 export const dynamic = 'force-dynamic';

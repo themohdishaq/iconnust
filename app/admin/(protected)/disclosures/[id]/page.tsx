@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, Mail, Phone } from 'lucide-react';
 import InventionDisclosure from '@/lib/models/InventionDisclosure';
-import ApproveForm from '../_components/ApproveForm';
+import ApproveForm from '@/components/admin/disclosures/ApproveForm';
 import { approveDisclosureAction, rejectDisclosureAction, resetToPendingAction, deleteDisclosureAction } from '../actions';
 
 const statusBadge: Record<string, string> = {

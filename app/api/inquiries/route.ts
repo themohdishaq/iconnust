@@ -56,13 +56,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
-  if (typeof source !== 'string' || !(source in modelsBySource)) {
+  if (typeof source !== 'string' || !Object.hasOwn(modelsBySource, source)) {
     return NextResponse.json({ error: 'Invalid submission source.' }, { status: 400 });
   }
   if (typeof organization !== 'string' || organization.trim().length === 0 || organization.length > 200) {
     return NextResponse.json({ error: 'Company name is required.' }, { status: 400 });
   }
-  if (typeof email !== 'string' || !EMAIL_RE.test(email) || email.length > 200) {
+  if (typeof email !== 'string' || !EMAIL_RE.test(email.trim()) || email.length > 200) {
     return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 });
   }
   if (domain !== undefined && (typeof domain !== 'string' || domain.length > 200)) {
@@ -72,19 +72,38 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Message is too long.' }, { status: 400 });
   }
 
+  const optionalFields: Array<[string, unknown, number]> = [
+    ['name', name, 200],
+    ['industry', industry, 200],
+    ['phoneNumber', phoneNumber, 50],
+    ['province', province, 200],
+    ['address', address, 300],
+    ['briefAboutCompany', briefAboutCompany, 4000],
+  ];
+  for (const [field, value, maxLength] of optionalFields) {
+    if (value !== undefined && (typeof value !== 'string' || value.length > maxLength)) {
+      return NextResponse.json({ error: `Invalid ${field} value.` }, { status: 400 });
+    }
+  }
+
   const Model = modelsBySource[source];
-  await Model.create({
-    organization: organization.trim(),
-    name: typeof name === 'string' ? name.trim() : '',
-    industry: typeof industry === 'string' ? industry.trim() : '',
-    phoneNumber: typeof phoneNumber === 'string' ? phoneNumber.trim() : '',
-    email: email.trim().toLowerCase(),
-    province: typeof province === 'string' ? province.trim() : '',
-    address: typeof address === 'string' ? address.trim() : '',
-    briefAboutCompany: typeof briefAboutCompany === 'string' ? briefAboutCompany.trim() : '',
-    domain: typeof domain === 'string' ? domain.trim() : '',
-    message: typeof message === 'string' ? message.trim() : '',
-  });
+  try {
+    await Model.create({
+      organization: organization.trim(),
+      name: typeof name === 'string' ? name.trim() : '',
+      industry: typeof industry === 'string' ? industry.trim() : '',
+      phoneNumber: typeof phoneNumber === 'string' ? phoneNumber.trim() : '',
+      email: email.trim().toLowerCase(),
+      province: typeof province === 'string' ? province.trim() : '',
+      address: typeof address === 'string' ? address.trim() : '',
+      briefAboutCompany: typeof briefAboutCompany === 'string' ? briefAboutCompany.trim() : '',
+      domain: typeof domain === 'string' ? domain.trim() : '',
+      message: typeof message === 'string' ? message.trim() : '',
+    });
+  } catch (error) {
+    console.error('Failed to save inquiry:', error);
+    return NextResponse.json({ error: 'Your inquiry could not be saved. Please try again.' }, { status: 500 });
+  }
 
   await notifyDepartment(source as NotificationSource, [
     ['Organization', organization.trim()],

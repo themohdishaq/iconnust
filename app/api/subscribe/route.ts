@@ -28,11 +28,16 @@ export async function POST(request: NextRequest) {
 
   const { email } = body as Record<string, unknown>;
 
-  if (typeof email !== 'string' || !EMAIL_RE.test(email) || email.length > 300) {
+  if (typeof email !== 'string' || !EMAIL_RE.test(email.trim()) || email.length > 300) {
     return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 });
   }
 
-  await Subscriber.create({ email: email.trim().toLowerCase() });
+  try {
+    await Subscriber.create({ email: email.trim().toLowerCase() });
+  } catch (error) {
+    console.error('Failed to save subscription:', error);
+    return NextResponse.json({ error: 'Your subscription could not be saved. Please try again.' }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

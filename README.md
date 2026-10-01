@@ -16,7 +16,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the homepage by modifying `app/(home)/page.tsx`. The page auto-updates as you edit the file.
+
+## Folder structure
+
+- `app/<route>/page.tsx` owns page content, section order, and server-side data loading.
+- `app/<route>/layout.tsx` owns route metadata and shared route configuration. The root layout owns site-wide metadata and chrome.
+- `app/(home)/` contains the homepage and its metadata layout. This route group still serves `/`, and keeps home-only metadata and organization structured data out of other routes.
+- `components/<feature>/` contains interactive sections that pages import, such as charts, animated sections, and inquiry forms. Sections with independent state are separate components; the commercialisation experience keeps its shared disclosure-modal state together.
+- `components/admin/<feature>/` contains reusable admin forms and controls. Server actions remain beside their admin routes in `app/admin/(protected)/<feature>/actions.ts`.
+- `lib/` contains database models, server utilities, and shared hooks. Database queries stay in server pages rather than client components.
+
+The news article layout at `app/news/[slug]/layout.tsx` generates article-specific metadata. The special `app/not-found.tsx` retains its own 404 metadata so it does not affect valid routes.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

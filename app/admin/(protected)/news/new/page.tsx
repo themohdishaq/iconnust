@@ -1,4 +1,4 @@
-import NewsForm from '../_components/NewsForm';
+import NewsForm from '@/components/admin/news/NewsForm';
 import { createNewsAction } from '../actions';
 
 export default function NewNewsPage() {

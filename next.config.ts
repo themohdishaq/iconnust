@@ -18,6 +18,15 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/commercialisation/ipo-listing',
+        destination: '/innovation-collaboration/ipo-listing',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import News from '@/lib/models/News';
-import NewsForm from '../../_components/NewsForm';
+import NewsForm from '@/components/admin/news/NewsForm';
 import { updateNewsAction } from '../../actions';
 
 export default async function EditNewsPage({ params }: { params: Promise<{ id: string }> }) {

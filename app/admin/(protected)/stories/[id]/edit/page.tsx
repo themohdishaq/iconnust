@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Story from '@/lib/models/Story';
-import StoryForm from '../../_components/StoryForm';
+import StoryForm from '@/components/admin/stories/StoryForm';
 import { updateStoryAction } from '../../actions';
 
 export default async function EditStoryPage({ params }: { params: Promise<{ id: string }> }) {

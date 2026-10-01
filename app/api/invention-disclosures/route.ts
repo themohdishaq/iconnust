@@ -17,17 +17,22 @@ function str(v: unknown, max: number): string {
 }
 
 export async function GET() {
-  const published = await InventionDisclosure.listApproved();
+  try {
+    const published = await InventionDisclosure.listApproved();
 
-  return NextResponse.json(
-    published.map((d) => ({
-      id: d.id.toString(),
-      title: d.inventionTitle,
-      domain: d.domain,
-      status: d.displayStatus,
-      trl: d.trl,
-    }))
-  );
+    return NextResponse.json(
+      published.map((d) => ({
+        id: d.id.toString(),
+        title: d.inventionTitle,
+        domain: d.domain,
+        status: d.displayStatus,
+        trl: d.trl,
+      }))
+    );
+  } catch (error) {
+    console.error('Failed to load invention disclosures:', error);
+    return NextResponse.json({ error: 'Invention disclosures could not be loaded.' }, { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -72,23 +77,28 @@ export async function POST(request: NextRequest) {
   const department = str(data.department, 200);
   const contactPhone = str(data.contactPhone, 50);
 
-  await InventionDisclosure.create({
-    source: data.source as DisclosureSource,
-    inventionTitle,
-    domain,
-    inventorNames,
-    department,
-    studentOrEmployeeId: str(data.studentOrEmployeeId, 100),
-    contactEmail,
-    contactPhone,
-    conceptionDate: str(data.conceptionDate, 50),
-    description,
-    novelty: str(data.novelty, 4000),
-    applications: str(data.applications, 4000),
-    fundingSource: str(data.fundingSource, 300),
-    priorDisclosure,
-    priorDisclosureDetails: str(data.priorDisclosureDetails, 2000),
-  });
+  try {
+    await InventionDisclosure.create({
+      source: data.source as DisclosureSource,
+      inventionTitle,
+      domain,
+      inventorNames,
+      department,
+      studentOrEmployeeId: str(data.studentOrEmployeeId, 100),
+      contactEmail,
+      contactPhone,
+      conceptionDate: str(data.conceptionDate, 50),
+      description,
+      novelty: str(data.novelty, 4000),
+      applications: str(data.applications, 4000),
+      fundingSource: str(data.fundingSource, 300),
+      priorDisclosure,
+      priorDisclosureDetails: str(data.priorDisclosureDetails, 2000),
+    });
+  } catch (error) {
+    console.error('Failed to save invention disclosure:', error);
+    return NextResponse.json({ error: 'Your disclosure could not be saved. Please try again.' }, { status: 500 });
+  }
 
   await notifyDepartment('invention-disclosure', [
     ['Invention Title', inventionTitle],

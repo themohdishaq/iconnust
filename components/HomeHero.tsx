@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   ArrowRight,
   ChevronLeft,
@@ -80,6 +80,51 @@ const statIcons = [
   Globe2,
 ];
 
+function AnimatedStatValue({ value }: { value: string | number }) {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.6 });
+  const numericValue = Number.parseFloat(String(value)) || 0;
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let animationFrame = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+
+    const tick = (currentTime: number) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 4);
+      setDisplayValue(Math.round(numericValue * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(tick);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isInView, numericValue]);
+
+  const formattedValue = new Intl.NumberFormat("en-US").format(displayValue);
+
+  return (
+    <span
+      ref={ref}
+      className="
+        text-[25px]
+        font-bold
+        leading-none
+        md:text-[27px]
+      "
+    >
+      {formattedValue}
+    </span>
+  );
+}
+
 export default function HomeHero({ stats }: HomeHeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -134,10 +179,8 @@ export default function HomeHero({ stats }: HomeHeroProps) {
           min-h-screen
           w-full 
           overflow-hidden
-        
           bg-[#003B70]
           shadow-[0_25px_60px_rgba(0,48,91,0.14)]
-          
         "
       >
         {/* =====================================================
@@ -161,6 +204,7 @@ export default function HomeHero({ stats }: HomeHeroProps) {
               alt={`${item.titleLine1} ${item.highlight}`}
               fill
               priority={index === 0}
+              loading="eager"
               sizes="100vw"
               className={`
                 object-cover
@@ -188,7 +232,7 @@ export default function HomeHero({ stats }: HomeHeroProps) {
             absolute inset-0
             bg-gradient-to-r
             from-[#002C57]
-            via-[40%]
+            via-[20%]
             to-transparent
             lg:via-[#5389bf]/50
           "
@@ -324,22 +368,7 @@ export default function HomeHero({ stats }: HomeHeroProps) {
                     )}
                   </h1>
 
-                  {/* Description */}
-                  <p
-                    className="
-                      mt-7
-                      max-w-[650px]
-                      text-[15px]
-                      font-normal
-                      leading-[1.75]
-                      text-white/92
-                      sm:text-[16px]
-                      lg:text-[17px]
-                    "
-                  >
-                    {slide.desc}
-                  </p>
-
+                  
                   
                 </motion.div>
               </AnimatePresence>
@@ -351,12 +380,15 @@ export default function HomeHero({ stats }: HomeHeroProps) {
                       href="#partner-with-us"
                       className="
                         group
+                        relative
                         inline-flex
                         min-h-[58px]
                         items-center
                         justify-center
                         gap-4
+                        overflow-hidden
                         rounded-[8px]
+                        border border-[#FCAF17]
                         bg-[#FCAF17]
                         px-7
                         text-[12px]
@@ -366,21 +398,19 @@ export default function HomeHero({ stats }: HomeHeroProps) {
                         text-[#063A60]
                         shadow-[0_14px_35px_rgba(0,0,0,0.18)]
                         transition-all
-                        duration-300
+                        duration-500
                         hover:-translate-y-1
-                        hover:bg-[#ffb927]
                         hover:shadow-[0_18px_40px_rgba(0,0,0,0.25)]
                         active:translate-y-0
                       "
                     >
-                      <Users size={20} strokeWidth={1.8} />
-
-                      Partner With Us
-
-                      <ArrowRight
-                        size={19}
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      />
+                      <span className="absolute inset-0 -translate-x-full -translate-y-full bg-[#003B70] transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0 group-hover:translate-y-0" />
+                      <span className="absolute inset-0 rounded-[8px] border border-[#003B70] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                      <span className="relative z-10 flex items-center justify-center gap-4 text-[#063A60] transition-colors duration-300 group-hover:text-white">
+                        <Users size={20} strokeWidth={1.8} />
+                        Partner With Us
+                        <ArrowRight size={19} className="transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
                     </Link>
                   </div>
           {/* =================================================
@@ -436,18 +466,12 @@ export default function HomeHero({ stats }: HomeHeroProps) {
                           text-white
                         "
                       >
-                        <span
-                          className="
-                            text-[25px]
-                            font-bold
-                            leading-none
-                            md:text-[27px]
-                          "
-                        >
-                          {stat.value}
-                        </span>
+                        <AnimatedStatValue value={stat.value} />
 
-                        <span
+                        <motion.span
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
                           className="
                             ml-0.5
                             text-[20px]
@@ -455,7 +479,7 @@ export default function HomeHero({ stats }: HomeHeroProps) {
                           "
                         >
                           +
-                        </span>
+                        </motion.span>
                       </div>
 
                       <p
