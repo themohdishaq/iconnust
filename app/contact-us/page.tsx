@@ -151,7 +151,7 @@ export default function ContactPage() {
                     <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#FCAF17]">
                       Visit ICON at NUST
                     </span>
-                    <h2 className="mt-2 font-serif text-2xl sm:text-3xl">Our Islamabad campus office</h2>
+                    <h2 className="mt-2 font-serif text-2xl sm:text-3xl">Our Office</h2>
                     <div className="mt-4 flex items-start gap-3 text-sm leading-6 text-white/80 sm:text-base">
                       <MapPin size={18} className="mt-0.5 shrink-0 text-[#FCAF17]" />
                       CIE Building, NUST Campus, H-12, Islamabad, Pakistan

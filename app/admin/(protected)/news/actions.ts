@@ -10,6 +10,11 @@ import { notifySubscribers } from '@/lib/notifySubscribers';
 
 export type FormState = { error?: string };
 
+function parseOrder(formData: FormData): number | null {
+  const order = Number(String(formData.get('order') ?? '').trim() || 0);
+  return Number.isInteger(order) && order >= -2147483648 && order <= 2147483647 ? order : null;
+}
+
 function parseContent(raw: string): string[] {
   return raw
     .split(/\n\s*\n/)
@@ -38,6 +43,8 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
   const featured = formData.get('featured') === 'on';
   const status = formData.get('status') === 'draft' ? 'draft' : 'published';
   const imageFile = formData.get('image') as File | null;
+  const order = parseOrder(formData);
+  if (order === null) return { error: 'Display order must be a whole number between -2147483648 and 2147483647.' };
 
   if (!title || !category || !excerpt || content.length === 0 || !date) {
     return { error: 'Please fill in all required fields.' };
@@ -49,7 +56,7 @@ export async function createNewsAction(_prevState: FormState, formData: FormData
   const image = await saveUploadedImage(imageFile, 'news');
   const slug = await uniqueSlug(title);
 
-  await News.create({ title, slug, category, excerpt, content, image, date, readTime, featured, status });
+  await News.create({ title, slug, category, excerpt, content, image, date, readTime, featured, status, order });
 
   if (status === 'published') {
     await notifySubscribers({ subject: `New Article: ${title}`, title, path: `/news/${slug}` });
@@ -71,6 +78,8 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
   const featured = formData.get('featured') === 'on';
   const status = formData.get('status') === 'draft' ? 'draft' : 'published';
   const imageFile = formData.get('image') as File | null;
+  const order = parseOrder(formData);
+  if (order === null) return { error: 'Display order must be a whole number between -2147483648 and 2147483647.' };
 
   if (!title || !category || !excerpt || content.length === 0 || !date) {
     return { error: 'Please fill in all required fields.' };
@@ -83,8 +92,8 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
 
   const update: Partial<{
     title: string; slug: string; category: string; excerpt: string;
-    content: string[]; date: string; readTime: string; featured: boolean; image: string; status: 'draft' | 'published';
-  }> = { title, category, excerpt, content, date, readTime, featured, status };
+    content: string[]; date: string; readTime: string; featured: boolean; image: string; status: 'draft' | 'published'; order: number;
+  }> = { title, category, excerpt, content, date, readTime, featured, status, order };
 
   if (title !== existing.title) {
     update.slug = await uniqueSlug(title, id);
@@ -97,12 +106,16 @@ export async function updateNewsAction(id: string, _prevState: FormState, formDa
 
   await News.update(id, update);
 
-  if (status === 'published') {
+  const articleChanged = title !== existing.title || category !== existing.category
+    || excerpt !== existing.excerpt || JSON.stringify(content) !== JSON.stringify(existing.content)
+    || date !== existing.date || readTime !== existing.readTime || featured !== existing.featured
+    || status !== existing.status || Boolean(update.image);
+  if (status === 'published' && articleChanged) {
     await notifySubscribers({ subject: `Updated Article: ${title}`, title, path: `/news/${update.slug ?? existing.slug}` });
   }
 
   revalidatePath('/admin/news');
-  revalidatePath('/news');
+  revalidatePath('/news', 'layout');
   revalidatePath(`/news/${update.slug ?? existing.slug}`);
   redirect('/admin/news');
 }

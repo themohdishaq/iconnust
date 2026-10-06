@@ -46,6 +46,7 @@ export default async function AdminNewsListPage() {
                     )}
                   </div>
                   <p className="text-slate-400 text-xs mt-0.5">{n.category} · {n.date}</p>
+                  <p className="text-slate-500 text-xs mt-1">Display order: {n.order}</p>
                 </div>
                 <Link
                   href={`/admin/news/${n.id.toString()}/edit`}

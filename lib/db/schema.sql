@@ -1,4 +1,18 @@
--- ICON-NUST MySQL schema.
+-- ICON-NUST application schema (MySQL 8.0+).
+-- Select the target database before importing this file. The application's
+-- `npm run db:schema` command selects DB_NAME and creates it if necessary.
+-- This file creates all application tables without deleting existing data.
+-- CREATE TABLE IF NOT EXISTS does not upgrade existing tables; legacy column
+-- migrations and initial FAQ/portfolio data are handled by apply-schema.mjs.
+-- For existing production databases use `npm run db:migrate:production` to
+-- preview upgrades, then append `-- --apply` to execute the reviewed changes.
+-- Content and admin accounts are populated separately by the seed scripts.
+-- JSON columns contain arrays: news.content is paragraphs; team_members.focus
+-- is focus areas. Display dates stay strings to match the application models.
+
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Innovation portfolio: parent tables must precede the association table.
 
 CREATE TABLE IF NOT EXISTS innovation_sectors (
   slug VARCHAR(120) PRIMARY KEY,
@@ -10,8 +24,9 @@ CREATE TABLE IF NOT EXISTS innovation_sectors (
   industry_partners INT UNSIGNED NULL,
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_innovation_sectors_order (sort_order, title)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS innovation_projects (
   id VARCHAR(120) PRIMARY KEY,
@@ -24,17 +39,22 @@ CREATE TABLE IF NOT EXISTS innovation_projects (
   category VARCHAR(300) NOT NULL,
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_innovation_projects_order (sort_order, title)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS innovation_project_sectors (
   project_id VARCHAR(120) NOT NULL,
   sector_slug VARCHAR(120) NOT NULL,
   PRIMARY KEY (project_id, sector_slug),
-  FOREIGN KEY (project_id) REFERENCES innovation_projects(id) ON DELETE CASCADE,
-  FOREIGN KEY (sector_slug) REFERENCES innovation_sectors(slug) ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_project_sectors_sector (sector_slug, project_id),
+  CONSTRAINT fk_project_sectors_project
+    FOREIGN KEY (project_id) REFERENCES innovation_projects(id) ON DELETE CASCADE,
+  CONSTRAINT fk_project_sectors_sector
+    FOREIGN KEY (sector_slug) REFERENCES innovation_sectors(slug) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Authentication and schema bookkeeping.
 CREATE TABLE IF NOT EXISTS admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(200) NOT NULL,
@@ -47,13 +67,14 @@ CREATE TABLE IF NOT EXISTS admins (
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY uq_admins_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS schema_migrations (
   migration_key VARCHAR(190) PRIMARY KEY,
   applied_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Page content and form submissions.
 CREATE TABLE IF NOT EXISTS faqs (
   id INT AUTO_INCREMENT PRIMARY KEY,
   page ENUM('innovation-collaboration', 'industry-services', 'commercialization') NOT NULL,
@@ -62,8 +83,8 @@ CREATE TABLE IF NOT EXISTS faqs (
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_faqs_page_order (page, sort_order)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_faqs_page_order (page, sort_order, created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS invention_disclosures (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,8 +108,9 @@ CREATE TABLE IF NOT EXISTS invention_disclosures (
   trl VARCHAR(20) NOT NULL DEFAULT '',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_disclosures_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_disclosures_status_created (status, created_at DESC),
+  KEY idx_disclosures_status_updated (status, updated_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS home_inquiries (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -105,8 +127,8 @@ CREATE TABLE IF NOT EXISTS home_inquiries (
   status ENUM('new', 'read') NOT NULL DEFAULT 'new',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_home_inquiries_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_home_inquiries_status_created (status, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS industry_service_inquiries (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -123,8 +145,8 @@ CREATE TABLE IF NOT EXISTS industry_service_inquiries (
   status ENUM('new', 'read') NOT NULL DEFAULT 'new',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_industry_service_inquiries_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_industry_service_inquiries_status_created (status, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS innovation_inquiries (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -141,8 +163,8 @@ CREATE TABLE IF NOT EXISTS innovation_inquiries (
   status ENUM('new', 'read') NOT NULL DEFAULT 'new',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_innovation_inquiries_status (status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_innovation_inquiries_status_created (status, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS team_members (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -155,8 +177,9 @@ CREATE TABLE IF NOT EXISTS team_members (
   email VARCHAR(200) NOT NULL,
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_team_members_order (sort_order, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS stories (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -169,8 +192,10 @@ CREATE TABLE IF NOT EXISTS stories (
   sort_order INT NOT NULL DEFAULT 0,
   status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_stories_status_order (status, sort_order, created_at DESC),
+  KEY idx_stories_order (sort_order, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS events (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -185,8 +210,10 @@ CREATE TABLE IF NOT EXISTS events (
   sort_order INT NOT NULL DEFAULT 0,
   status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_events_status_order (status, sort_order, created_at DESC),
+  KEY idx_events_order (sort_order, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS subscriber (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -194,9 +221,12 @@ CREATE TABLE IF NOT EXISTS subscriber (
   email VARCHAR(300) NOT NULL,
   notify_enabled BOOLEAN NOT NULL DEFAULT TRUE,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_subscriber_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY uq_subscriber_email (email),
+  KEY idx_subscriber_notify_created (notify_enabled, created_at DESC),
+  KEY idx_subscriber_created (created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Statistics and charts managed through the admin dashboard.
 CREATE TABLE IF NOT EXISTS stat_tiles (
   id INT AUTO_INCREMENT PRIMARY KEY,
   page ENUM('home', 'innovation') NOT NULL,
@@ -205,8 +235,8 @@ CREATE TABLE IF NOT EXISTS stat_tiles (
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_stat_tiles_page (page)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_stat_tiles_page_order (page, sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS ip_breakdown (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -215,8 +245,9 @@ CREATE TABLE IF NOT EXISTS ip_breakdown (
   color VARCHAR(20) NOT NULL DEFAULT '#3B82C4',
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_ip_breakdown_order (sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS ip_yearly_stats (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -229,8 +260,8 @@ CREATE TABLE IF NOT EXISTS ip_yearly_stats (
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY idx_ip_yearly_chart_type (chart_type)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY idx_ip_yearly_chart_order (chart_type, sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS financial_stats (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -239,8 +270,9 @@ CREATE TABLE IF NOT EXISTS financial_stats (
   is_total BOOLEAN NOT NULL DEFAULT FALSE,
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_financial_stats_order (sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS tech_place_stats (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -249,9 +281,11 @@ CREATE TABLE IF NOT EXISTS tech_place_stats (
   subtitle VARCHAR(500) NOT NULL DEFAULT '',
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_tech_place_stats_order (sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- News publishing and industry partners.
 CREATE TABLE IF NOT EXISTS news (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(300) NOT NULL,
@@ -264,10 +298,13 @@ CREATE TABLE IF NOT EXISTS news (
   read_time VARCHAR(20) NOT NULL DEFAULT '3 min',
   featured BOOLEAN NOT NULL DEFAULT FALSE,
   status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+  sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  UNIQUE KEY uq_news_slug (slug)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY uq_news_slug (slug),
+  KEY idx_news_status_order (status, sort_order, created_at DESC, id DESC),
+  KEY idx_news_order (sort_order, created_at DESC, id DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS partners (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -276,5 +313,6 @@ CREATE TABLE IF NOT EXISTS partners (
   logo VARCHAR(500) NULL,
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_partners_order (sort_order, created_at DESC)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

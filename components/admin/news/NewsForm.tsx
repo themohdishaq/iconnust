@@ -2,7 +2,6 @@
 
 import { useActionState } from 'react';
 import Image from 'next/image';
-import SubmitButton from '@/components/admin/SubmitButton';
 import type { FormState } from '@/app/admin/(protected)/news/actions';
 
 const inputClass =
@@ -19,6 +18,7 @@ type Initial = {
   featured: boolean;
   status?: 'draft' | 'published';
   image: string;
+  order: number;
 };
 
 export default function NewsForm({
@@ -59,6 +59,12 @@ export default function NewsForm({
             Featured on News page
           </label>
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="news-order" className={labelClass}>Display Order</label>
+        <input id="news-order" type="number" name="order" step="1" min="-2147483648" max="2147483647" required defaultValue={initial?.order ?? 0} className={inputClass} />
+        <p className="mt-2 text-xs text-slate-500">Lower numbers appear first; higher numbers appear last. Articles with the same order show newest first.</p>
       </div>
 
       <div>

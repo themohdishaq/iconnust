@@ -9,8 +9,12 @@
     "start": "next start",
     "lint": "eslint",
     "db:schema": "node scripts/apply-schema.mjs",
+    "db:scribe:mitigate": "node scripts/db-scribe-mitigate.mjs",
+    "db:migrate": "node scripts/migrate-production.mjs",
+    "db:migrate:production": "node --env-file=.env.production.local scripts/migrate-production.mjs",
     "db:seed": "node --env-file=.env.local scripts/seed-all.mjs",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
+    "seed:team": "node scripts/seed-team.mjs",
     "seed:content": "node --env-file=.env.local scripts/seed-content.mjs",
     "seed:partners": "node --env-file=.env.local scripts/seed-partners.mjs",
     "seed:stats": "node --env-file=.env.local scripts/seed-stats.mjs"

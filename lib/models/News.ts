@@ -15,6 +15,7 @@ export interface INews {
   readTime: string;
   featured: boolean;
   status: NewsStatus;
+  order: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +32,7 @@ interface NewsRow extends RowDataPacket {
   read_time: string;
   featured: number;
   status: NewsStatus;
+  sort_order: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -48,6 +50,7 @@ function mapRow(row: NewsRow): INews {
     readTime: row.read_time,
     featured: Boolean(row.featured),
     status: row.status === 'draft' ? 'draft' : 'published',
+    order: row.sort_order,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
   };
@@ -61,7 +64,7 @@ async function list(options?: { limit?: number; status?: 'draft' | 'published' |
   const whereClause = status === 'all' ? '' : ' WHERE status = ?';
   const params = status === 'all' ? [] : [status];
 
-  const sql = `SELECT * FROM news${whereClause} ORDER BY created_at DESC${limitClause}`;
+  const sql = `SELECT * FROM news${whereClause} ORDER BY sort_order ASC, created_at DESC, id DESC${limitClause}`;
   const rows = await query<NewsRow[]>(sql, params);
   return rows.map(mapRow);
 }
@@ -69,7 +72,7 @@ async function list(options?: { limit?: number; status?: 'draft' | 'published' |
 async function search(q: string): Promise<INews[]> {
   const like = `%${q}%`;
   const rows = await query<NewsRow[]>(
-    'SELECT * FROM news WHERE status = ? AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ?) ORDER BY created_at DESC',
+    'SELECT * FROM news WHERE status = ? AND (title LIKE ? OR excerpt LIKE ? OR content LIKE ?) ORDER BY sort_order ASC, created_at DESC, id DESC',
     ['published', like, like, like]
   );
   return rows.map(mapRow);
@@ -94,7 +97,7 @@ async function slugExists(slug: string, excludeId?: string | number): Promise<bo
 
 async function listOthers(excludeId: string | number, limit: number): Promise<INews[]> {
   const rows = await query<NewsRow[]>(
-    `SELECT * FROM news WHERE id != ? AND status = ? ORDER BY created_at DESC LIMIT ${Number(limit)}`,
+    `SELECT * FROM news WHERE id != ? AND status = ? ORDER BY sort_order ASC, created_at DESC, id DESC LIMIT ${Number(limit)}`,
     [excludeId, 'published']
   );
   return rows.map(mapRow);
@@ -102,7 +105,7 @@ async function listOthers(excludeId: string | number, limit: number): Promise<IN
 
 async function create(data: NewNews): Promise<void> {
   await query(
-    'INSERT INTO news (title, slug, category, excerpt, content, image, date, read_time, featured, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO news (title, slug, category, excerpt, content, image, date, read_time, featured, status, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [
       data.title,
       data.slug,
@@ -114,6 +117,7 @@ async function create(data: NewNews): Promise<void> {
       data.readTime,
       data.featured,
       data.status,
+      data.order,
     ]
   );
 }
@@ -131,6 +135,7 @@ async function update(id: string | number, data: Partial<NewNews>): Promise<bool
     readTime: 'read_time',
     featured: 'featured',
     status: 'status',
+    order: 'sort_order',
   };
   for (const [key, column] of Object.entries(columnMap)) {
     const value = (data as Record<string, unknown>)[key];

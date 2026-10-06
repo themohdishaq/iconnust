@@ -67,6 +67,9 @@ const migrations = [
   'ALTER TABLE subscriber ADD COLUMN notify_enabled BOOLEAN NOT NULL DEFAULT TRUE',
   'ALTER TABLE subscriber ADD UNIQUE INDEX uq_subscriber_email (email)',
   "ALTER TABLE news ADD COLUMN status ENUM('draft', 'published') NOT NULL DEFAULT 'published'",
+  'ALTER TABLE news ADD COLUMN sort_order INT NOT NULL DEFAULT 0',
+  'ALTER TABLE news ADD INDEX idx_news_status_order (status, sort_order, created_at DESC, id DESC)',
+  'ALTER TABLE news ADD INDEX idx_news_order (sort_order, created_at DESC, id DESC)',
   "ALTER TABLE events ADD COLUMN status ENUM('draft', 'published') NOT NULL DEFAULT 'published'",
   "ALTER TABLE stories ADD COLUMN status ENUM('draft', 'published') NOT NULL DEFAULT 'published'",
   ...inquiryTables.flatMap((table) =>

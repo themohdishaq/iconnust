@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Mr Hassan Waqar Raja",
+    "title": "Director",
+    "dept": "ICON NUST",
+    "image": "/team/hassanwaqarraja.jpg",
+    "order": 0
+  },
+  {
+    "name": "Sundas Imran",
+    "title": "Senior Manager",
+    "dept": "CAC NUST",
+    "image": "/team/sundasimran.jpg",
+    "order": 1
+  },
+  {
+    "name": "Fawad kashan",
+    "title": "Senior Manager Corporate Relations",
+    "dept": "CAC NUST",
+    "image": "/team/fawadkashan.jpg",
+    "order": 2
+  },
+  {
+    "name": "Ambreen Munir",
+    "title": "Manager",
+    "dept": "TTO NUST",
+    "image": "/team/ambreenmuneer.jpg",
+    "order": 3
+  },
+  {
+    "name": "Eram Zaidi",
+    "title": "Consultant",
+    "dept": "IP&LA NUST",
+    "image": "/team/eramzaidi.jpg",
+    "order": 4
+  },
+  {
+    "name": "Muhammad Salman Khan",
+    "title": "Assistant Manager",
+    "dept": "IP&LA NUST",
+    "image": "/team/salmankhan.jpg",
+    "order": 5
+  },
+  {
+    "name": "Aasia",
+    "title": "Assistant Manager",
+    "dept": "IP&LA NUST",
+    "image": "/team/aasia.jpg",
+    "order": 6
+  },
+  {
+    "name": "Mr. Waseem Ahmed Mirza",
+    "title": "Senior General Manager",
+    "dept": "Business Development Office NUST",
+    "image": "/team/waseemahmad.png",
+    "order": 7
+  },
+  {
+    "name": "Muhammad Junaid",
+    "title": "Assistant Manager",
+    "dept": "Business Development Office NUST",
+    "image": "/team/muhammadjunaid.jpg",
+    "order": 8
+  }
+]

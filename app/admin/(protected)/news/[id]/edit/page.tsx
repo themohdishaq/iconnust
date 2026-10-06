@@ -26,6 +26,7 @@ export default async function EditNewsPage({ params }: { params: Promise<{ id: s
           featured: news.featured,
           status: news.status,
           image: news.image,
+          order: news.order,
         }}
       />
     </div>

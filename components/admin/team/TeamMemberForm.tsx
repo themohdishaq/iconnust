@@ -30,8 +30,8 @@ export default function TeamMemberForm({
           <input name="name" required defaultValue={initial?.name} className={inputClass} />
         </div>
         <div>
-          <label className={labelClass}>Email</label>
-          <input type="email" name="email" required defaultValue={initial?.email} className={inputClass} />
+          <label className={labelClass}>Email (optional)</label>
+          <input type="email" name="email" defaultValue={initial?.email} className={inputClass} />
         </div>
       </div>
 
@@ -46,8 +46,8 @@ export default function TeamMemberForm({
       </div>
 
       <div>
-        <label className={labelClass}>Bio</label>
-        <textarea name="bio" required defaultValue={initial?.bio} rows={4} className={inputClass} />
+        <label className={labelClass}>Bio (optional)</label>
+        <textarea name="bio" defaultValue={initial?.bio} rows={4} className={inputClass} />
       </div>
 
       <div>
@@ -68,6 +68,7 @@ export default function TeamMemberForm({
           </div>
         )}
         <input type="file" name="image" accept="image/*" required={!initial} className={inputClass} />
+        <p className="mt-2 text-xs text-slate-500">JPG, PNG, WEBP, or GIF, up to 5 MB.</p>
       </div>
 
       {state?.error && (

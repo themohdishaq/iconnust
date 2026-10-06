@@ -3,6 +3,8 @@ import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
 
+export const dynamic = 'force-dynamic';
+
 export default async function NewsPage({
   searchParams,
 }: {

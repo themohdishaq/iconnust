@@ -142,10 +142,7 @@ export default function SectorCatalog({ sector, projects, sectors }: SectorCatal
                     </div>
                   )}
                   <div className="mt-3 flex items-center justify-between gap-3 text-[10px] text-[#425A77]">
-                    <span className="inline-flex items-center gap-1.5"><Sprout size={13} aria-hidden="true" className="text-[#174B7E]" />{project.category}</span>
-                    <Link href="/contact-us" aria-label={`Enquire about ${project.title}`} className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F1F4F7] text-[#173A68] transition-colors hover:bg-[#FCAF17] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#003B70]">
-                      <ArrowRight size={16} aria-hidden="true" />
-                    </Link>
+                    <span className="inline-flex items-center gap-1.5"><Sprout size={13} aria-hidden="true" className="text-[#174B7E]" />{project.category}</span> 
                   </div>
                 </div>
               </article>

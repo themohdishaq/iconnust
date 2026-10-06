@@ -59,6 +59,115 @@ With the local development server running, `node scripts/test-innovation.mjs`
 checks API authorization, validation, CRUD, assignments, counts, uploads and page
 rendering using temporary entries that it removes afterward.
 
+## Managing news order
+
+In `/admin/news`, open an article and set **Display Order**. Lower numbers appear
+first and higher numbers appear last; equal values show newest articles first,
+with the ID breaking timestamp ties. This order applies to the admin list, public
+news grid, search results, API results, and related articles. The first featured
+article in that order is selected for the featured section. Reordering alone does
+not send subscriber notifications. Existing articles receive order `0`, preserving
+their previous newest-first order. Apply the database migration before deploying
+the new code: preview with `npm run db:migrate:production`, then execute with
+`npm run db:migrate:production -- --apply` using your cloud configuration.
+With the local development server running, `node scripts/test-news-order.mjs`
+checks order edits, invalid values, authorization, and sorting across news views
+using temporary articles that it removes afterward.
+
+## Managing the team
+
+The public `/team` page loads members from `team_members` on every request in the
+display order set by admins. Sign in at `/admin/team` to add, edit, reorder, or
+delete members. Names, titles, departments, and photos appear on the public page;
+bio and email are optional. Each write requires an authenticated admin session
+and refreshes both the admin list and the public page.
+
+To import the nine previously hardcoded members into an empty database once, run
+`npm run seed:team`. For the cloud production database use
+`node --env-file=.env.production.local scripts/seed-team.mjs` after applying its
+schema. The import preserves existing team records and records completion in
+`schema_migrations`, so reruns do not restore members deleted by admins. Without
+records, the public page displays an empty state. Keep `public/uploads/team`
+persistent on the hosting server so uploaded photos survive redeployments.
+With the local development server running, `node scripts/test-team.mjs` verifies
+authenticated CRUD, anonymous write rejection, photo uploads, display order, and
+public-page updates using temporary records that it removes afterward.
+
+## Updating an existing production database
+
+For a complete local-to-cloud schema update and record transfer, configure local
+credentials in `.env.local` and destination credentials in `.env.production.local`,
+then run **`npm run db:scribe:mitigate`**. This command performs the migration and
+transfer automatically; it requires Node.js 22. It saves the destination tables
+and records in a private JSON backup under `backups/db` before changes, updates
+both schemas, and transfers all application tables in a database transaction.
+Pause production writes during the transfer so records cannot change between
+the backup and import. Keep an independent provider snapshot for recovery too.
+
+Local values replace records with matching primary keys, including admin accounts
+and their password hashes. Cloud-only records remain. The command stops if a
+unique email or slug belongs to a different cloud primary key; data changes are
+rolled back, while schema changes already applied remain. Migration-history rows
+are merged without overwriting existing history. Rerunning synchronizes the same
+records without duplicating them. It sends no emails and does not run seed scripts.
+Uploaded image files are separate from database records: deploy `public/team` and
+`public/uploads` with the website. The command copies image paths, not files to a
+remote web server. `.env.production.local` is required, so a missing cloud setup
+cannot silently fall back to the local database.
+
+Use `db:migrate:production` for an existing cloud MySQL 8.0+ database. This
+command does not run seed scripts, reset passwords, overwrite content, or convert
+existing collations. It adds missing tables, columns with safe defaults, and
+indexes. Existing news, events, and stories receive `published` when their status
+column is first added; future records default to `draft`. Required columns needing
+a backfill, duplicate unique values, and incompatible foreign keys block the
+entire plan before execution. Arbitrary existing column types are not reconciled.
+
+Create a git-ignored `.env.production.local` in the project root with your actual
+cloud connection settings:
+
+```dotenv
+DB_HOST=your-cloud-mysql-host
+DB_PORT=3306
+DB_NAME=your-existing-database
+DB_USER=your-migration-user
+DB_PASSWORD=your-password
+DB_SSL=true
+# If the provider supplies its own certificate authority:
+# DB_SSL_CA_FILE=C:/path/to/provider-ca.pem
+```
+
+Take a provider snapshot or verified backup before applying the changes. Preview
+the plan and check the printed host and database name:
+
+```bash
+npm run db:migrate:production
+```
+
+You can also pass `-- --dry-run` explicitly. Run
+`node scripts/migrate-production.mjs --help` for usage without a connection.
+
+After reviewing the SQL, apply it during a maintenance window and verify it:
+
+```bash
+npm run db:migrate:production -- --apply
+npm run db:migrate:production
+```
+
+The final preview should show zero pending statements. Index changes request
+`ALGORITHM=INPLACE, LOCK=NONE`; they fail if MySQL cannot honor that request.
+Column changes and new tables may still take locks. The script limits metadata
+lock waits to ten seconds and serializes apply runs using a database advisory
+lock. MySQL DDL commits individually: an execution failure can leave earlier steps
+applied. Rerunning resumes from the current schema without repeating completed
+changes. Automatic collation conversion and foreign-key replacement need a
+separate reviewed migration because they can affect existing data and relations.
+
+`npm run db:migrate` previews the database configured by the normal environment.
+`node scripts/test-production-migration.mjs` tests upgrades in a temporary database
+using those credentials; it requires CREATE/DROP DATABASE privileges and removes
+only the database it creates.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
