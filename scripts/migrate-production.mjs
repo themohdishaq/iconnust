@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise';
-import nextEnv from '@next/env';
+import { parseEnv } from 'node:util';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
 if (args.length === 1 && args[0] === '--sync-data') {
@@ -20,11 +19,13 @@ if (args.includes('--help')) {
 
 Usage:
   npm run db:scribe:mitigate
-  node --env-file=.env.production.local scripts/migrate-production.mjs --dry-run
-  node --env-file=.env.production.local scripts/migrate-production.mjs --apply
+  node scripts/migrate-production.mjs --dry-run
+  node scripts/migrate-production.mjs --apply
 
-The npm command applies schema updates to the second database configured in
-.env.production.local. It adds missing tables, safe columns and indexes while
+The npm command applies schema updates using the DB_* environment variables
+configured in Plesk. No .env.production.local file is required or loaded.
+For local use, missing configuration is loaded from .env.local or .env.
+It adds missing tables, safe columns and indexes while
 preserving its existing records. It does not copy local data or run seed scripts.
 The default schema-only mode is a read-only preview. --apply executes its statements.
 Set DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD for your existing database.
@@ -38,11 +39,23 @@ That mode replaces matching records with local values; it is not used by the npm
 if (args.some(arg => !['--apply', '--dry-run'].includes(arg)) || args.includes('--apply') && args.includes('--dry-run')) {
   throw new Error('Usage: node scripts/migrate-production.mjs [--sync-data | --dry-run | --apply | --help]');
 }
-const root = fileURLToPath(new URL('../', import.meta.url));
-nextEnv.loadEnvConfig(root, false, { info() {}, error() {} });
+// Plesk supplies the connection through the process environment. Local files
+// are only a fallback; explicitly configured values always take precedence.
+if (!process.env.DB_HOST || !process.env.DB_USER || !process.env.DB_NAME) {
+  for (const filename of ['.env.local', '.env']) {
+    try {
+      const config = parseEnv(await readFile(new URL(`../${filename}`, import.meta.url), 'utf8'));
+      for (const [key, value] of Object.entries(config)) {
+        if (key.startsWith('DB_') && process.env[key] === undefined) process.env[key] = value;
+      }
+    } catch (error) {
+      if (error.code !== 'ENOENT') throw error;
+    }
+  }
+}
 const apply = args.includes('--apply');
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
-if (!DB_HOST || !DB_USER || !DB_NAME) throw new Error('Missing DB_HOST / DB_USER / DB_NAME.');
+if (!DB_HOST || !DB_USER || !DB_NAME) throw new Error('Missing DB_HOST / DB_USER / DB_NAME. Configure the database environment variables in Plesk or in .env.local / .env.');
 const quote = value => `\`${value.replaceAll('`', '``')}\``;
 const sql = await readFile(new URL('../lib/db/schema.sql', import.meta.url), 'utf8');
 const definitions = [...sql.matchAll(/CREATE TABLE IF NOT EXISTS (\w+) \(([\s\S]*?)\n\) ENGINE[^;]+;/g)];

@@ -95,8 +95,11 @@ public-page updates using temporary records that it removes afterward.
 
 ## Updating an existing production database
 
-To update the structure of a second existing database, configure its credentials
-in `.env.production.local` and run **`npm run db:scribe:mitigate`**. This command
+To update the structure of a second existing database, configure its `DB_HOST`,
+`DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` environment variables in Plesk
+and run **`npm run db:scribe:mitigate`**. No `.env.production.local` file is needed
+or loaded by the schema migration. It uses Plesk's process environment first,
+with `.env.local` and `.env` as fallbacks for missing local configuration. This command
 uses `scripts/migrate-production.mjs --apply` to add missing tables, columns with
 safe defaults, and indexes defined in `lib/db/schema.sql`. The second database
 can be hosted anywhere; it does not need to be a cloud service. Its existing
@@ -132,8 +135,8 @@ column is first added; future records default to `draft`. Required columns needi
 a backfill, duplicate unique values, and incompatible foreign keys block the
 entire plan before execution. Arbitrary existing column types are not reconciled.
 
-Create a git-ignored `.env.production.local` in the project root with your actual
-cloud connection settings:
+Configure these environment variables for the npm command in Plesk (or use
+`.env.local` / `.env` when running locally):
 
 ```dotenv
 DB_HOST=your-cloud-mysql-host
