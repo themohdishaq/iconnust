@@ -5,10 +5,25 @@ const title = "Home";
 
 const description =
   "Innovation & Commercialisation Office (ICON) at NUST bridges academic research and global industrial impact through technology licensing, spin-offs, sponsored R&D, and industry-facing lab services.";
-
+const keywords = [
+  "NUST ICON",
+  "NUST Innovation and Commercialisation Office",
+  "Innovation and Commercialization Office",
+  "technology licensing Pakistan",
+  "technology transfer office Pakistan",
+  "university spin-offs Pakistan",
+  "NUST IPO",
+  "NUST INTELLECTUAL PROPERTY OFFICE",
+  "sponsored research and development",
+  "industry lab services",
+  "NUST research commercialization",
+  "academia industry collaboration Pakistan",
+  "NUST Islamabad",
+];
 export const metadata: Metadata = {
   title,
   description,
+  keywords,
   alternates: {
     canonical: "/",
   },
@@ -27,7 +42,7 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: SITE_NAME,
-  alternateName: "Innovation Collaboration and Commercialisation Office, NUST",
+  alternateName: "Innovation & Commercialisation Office, NUST",
   url: SITE_URL,
   logo: `${SITE_URL}/icon-logo.png`,
   parentOrganization: {

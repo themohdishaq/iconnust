@@ -14,6 +14,7 @@ import FinancialChart from '@/components/BodStats';
 import Image from 'next/image';
 import FaqSection, { type FaqItem } from '@/components/FaqSection';
 import InnovationSectorExplorer from '@/components/commercialisation/InnovationSectorExplorer';
+import type { InnovationSector } from '@/lib/innovationSectors';
 
 // ── DATA ──────────────────────────────────────────────────────────────
 const researchVideos = {
@@ -302,7 +303,7 @@ const emptyQuickForm = {
   description: '',
 };
 
-export default function CommercializationExperience({ faqs }: { faqs: FaqItem[] }) {
+export default function CommercializationExperience({ faqs, sectors }: { faqs: FaqItem[]; sectors: InnovationSector[] }) {
   const [activePathway, setActivePathway] = useState('licensing');
   const [activeTrl, setActiveTrl] = useState('3');
   const [formData, setFormData] = useState(emptyQuickForm);
@@ -452,7 +453,7 @@ const staggerContainer = {
             
             </motion.h1>
             <motion.p variants={fadeUp} className="text-sm sm:text-base lg:text-xl text-slate-600 leading-relaxed font-light mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
-              ICON maps every avenue available to NUST innovators — licensing, spin-off creation, sponsored research, and IP protection — backed by world-class infrastructure and a proven commercialisation team.
+              ICON maps every avenue available to NUST innovators, licensing, spin-off creation, sponsored research, and IP protection, backed by world-class infrastructure and a proven commercialisation team.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
               <button
@@ -543,7 +544,7 @@ const staggerContainer = {
           </AnimatePresence>
         </div>
       </section>
-      <InnovationSectorExplorer />
+      <InnovationSectorExplorer sectors={sectors} />
       {/* ── CTA BANNER ────────────────────────────────────────────────── */}
       <section className="bg-[#0a2342] py-10 sm:py-14 lg:py-20 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />

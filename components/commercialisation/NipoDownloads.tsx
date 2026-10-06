@@ -79,7 +79,7 @@ export default function NipoDownloads() {
                     aria-expanded={isActive}
                     aria-controls="nipo-file-list"
                     onClick={() => setActiveCategory(isActive ? null : category.id)}
-                    className="inline-flex items-center gap-2 bg-[#FCAF17] px-4 py-2.5 text-xs font-bold text-[#003B70] transition-colors hover:bg-[#ffd16b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B97800]"
+                    className="inline-flex cursor-pointer items-center gap-2 bg-[#FCAF17] px-4 py-2.5 text-xs font-bold text-[#003B70] transition-colors hover:bg-[#ffd16b] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B97800]"
                   >
                     <Download size={16} aria-hidden="true" />
                     Download

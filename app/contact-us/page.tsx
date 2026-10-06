@@ -16,7 +16,7 @@ const contactOffices = [
    {
     id: 'nipo',
     shortName: 'NIPO',
-    name: 'National Innovation & Patent Office',
+    name: 'NUST Intellectual Property Office',
     summary: 'Intellectual property guidance, invention evaluation, patent filing, and protection support.',
     phone: '+92-51-90856235',
     email: 'gmipla@ric.nust.edu.pk',
@@ -174,8 +174,9 @@ export default function ContactPage() {
               <div className="relative min-h-[360px] border-t-4 border-[#FCAF17] bg-white lg:min-h-[440px] lg:border-l-4 lg:border-t-0">
                 
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d415.19614781481914!2d72.98269803610685!3d33.642410900000016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df967223019f1d%3A0x1cd4ec000a1e752c!2sTechOne%20NUST%20Incubator!5e0!3m2!1sen!2s!4v1787170596975!5m2!1sen!2s"
-                  title="Map showing the ICON office at NUST H-12 Islamabad"
+                
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2383.052259000432!2d72.98321310000001!3d33.6424337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38df9729d4a15ec9%3A0x712a581dbbf4a7a9!2sRIC%20Building!5e1!3m2!1sen!2s!4v1791189991538!5m2!1sen!2s"
+                  title="ICON office at NUST H-12 Islamabad"
                   className="absolute inset-0 h-full w-full border-0"
                   allowFullScreen
                   loading="lazy"

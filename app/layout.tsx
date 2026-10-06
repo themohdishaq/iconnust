@@ -9,7 +9,19 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/lib/seo";
-
+const keywords = [
+  "NUST ICON",
+  "NUST Innovation and Commercialisation Office",
+  "NUST Innovation and Commercialization Office",
+  "technology licensing Pakistan",
+  "technology transfer office Pakistan",
+  "university spin-offs Pakistan",
+  "sponsored research and development",
+  "industry lab services",
+  "NUST research commercialization",
+  "academia industry collaboration Pakistan",
+  "NUST Islamabad",
+];
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
@@ -36,18 +48,7 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: [
-    "ICON NUST",
-    "national university of science and technology nust",
-    "NUST innovation collaboration",
-    "nust university",
-    "Pakistan technology transfer",
-    "technology licensing Pakistan",
-    "university spin-offs",
-    "sponsored R&D",
-    "intellectual property NUST",
-    "technology transfer office Pakistan",
-  ],
+  keywords,
   authors: [{ name: SITE_NAME }],
   alternates: {
     canonical: "/",

@@ -31,6 +31,34 @@ The news article layout at `app/news/[slug]/layout.tsx` generates article-specif
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Managing the innovation portfolio
+
+Sign in and open **Admin → Sectors & Projects** (`/admin/innovation`). Add sectors,
+then add projects or spin-offs and select one or more sectors. Titles, descriptions,
+images, status, TRL highlights and display order can be edited. Sector URLs remain
+fixed after creation. Assigned sectors cannot be deleted until their projects are
+moved or removed. Counts are calculated from the assignments.
+
+Run `npm run db:schema` when setting up or updating a database. This creates the
+portfolio tables and imports `data/innovation-portfolio.json` once, tracked in
+`schema_migrations`. Subsequent runs preserve admin changes, including deletions.
+The seed maps the former Consumer Products & Design entry into Creative Industries,
+Media & Tourism so the previously unlisted BBQ Grill project is accessible.
+Public pages read MySQL directly; `lib/innovationSectors.ts` contains shared types.
+
+The API supports public `GET` and authenticated `POST` on `/api/innovation/sectors`
+and `/api/innovation/projects`, plus `GET`, `PUT` and `DELETE` on their `/{id}`
+routes (a sector's ID is its slug). Filter projects with `?sector=<slug>`.
+Send JSON using the shared `SectorInput` / `ProjectInput` fields, or multipart form
+data containing a JSON `data` field and an optional image `file`. Writes require
+the admin session cookie. Uploads use `public/uploads/innovation`; keep that
+directory persistent on the hosting server. Replaced images are retained to avoid
+breaking other entries that reuse an image path.
+
+With the local development server running, `node scripts/test-innovation.mjs`
+checks API authorization, validation, CRUD, assignments, counts, uploads and page
+rendering using temporary entries that it removes afterward.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

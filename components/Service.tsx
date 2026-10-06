@@ -21,7 +21,7 @@ const services = [
     img: '/industry-services/rnd.jpg',
     bullets: [
       'Joint research agreements with defined milestones',
-      'Access to 447+ research, teaching, key lab  centers',
+      'Access to 447+ research and teaching labs and key facilities',
       'Dedicated faculty PI matched to your domain',
     ],
   },

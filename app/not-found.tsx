@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Home, FlaskConical } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Page Not Found',
+  title: '404 | Page Not Found',
   robots: {
     index: false,
     follow: true,

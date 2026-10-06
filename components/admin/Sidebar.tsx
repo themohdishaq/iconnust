@@ -11,6 +11,7 @@ const links = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
   { href: '/admin/inquiries', label: 'Form Submissions', icon: Inbox },
   { href: '/admin/disclosures', label: 'Invention Disclosures', icon: FlaskConical },
+  { href: '/admin/innovation', label: 'Sectors & Projects', icon: FlaskConical },
   { href: '/admin/news', label: 'News', icon: Newspaper },
   { href: '/admin/events', label: 'Events', icon: CalendarDays },
   { href: '/admin/stories', label: 'Success Stories', icon: Award },

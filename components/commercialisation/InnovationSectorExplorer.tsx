@@ -14,7 +14,7 @@ import {
   Users,
   Wind,
 } from 'lucide-react';
-import { innovationSectors } from '@/lib/innovationSectors';
+import type { InnovationSector } from '@/lib/innovationSectors';
 
 const sectorIcons = {
   stethoscope: Stethoscope,
@@ -26,7 +26,7 @@ const sectorIcons = {
   settings: Settings,
 };
 
-export default function InnovationSectorExplorer() {
+export default function InnovationSectorExplorer({ sectors }: { sectors: InnovationSector[] }) {
   return (
     <section id="sector-explorer" className="bg-[#F3F6F9] py-10 sm:py-14">
       <div className="mx-auto max-w-8xl px-5 sm:px-8 lg:px-12">
@@ -49,12 +49,13 @@ export default function InnovationSectorExplorer() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {innovationSectors.map((sector, index) => {
+          {!sectors.length && <p className="text-sm text-[#456F9C]">No sectors are currently listed. Please check back soon.</p>}
+          {sectors.map((sector, index) => {
             const Icon = sectorIcons[sector.iconKey];
             return (
               <Link
                 key={sector.slug}
-                href={`/innovation-collaboration/sectors/${sector.slug}`}
+                href={`/commercialisation/sectors/${sector.slug}`}
                 aria-label={`Explore ${sector.title}`}
                 className="block rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#003B70]"
               >

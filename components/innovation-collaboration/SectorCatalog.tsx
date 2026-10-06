@@ -4,11 +4,12 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, BrainCircuit, CarFront, ChevronDown, FileText, Handshake, Leaf, Search, Settings, Shield, ShieldCheck, Sprout, Stethoscope, Users, Wind } from 'lucide-react';
-import { innovationSectors, type InnovationProject, type InnovationSector } from '@/lib/innovationSectors';
+import type { InnovationProject, InnovationSector } from '@/lib/innovationSectors';
 
 type SectorCatalogProps = {
   sector: InnovationSector;
   projects: InnovationProject[];
+  sectors: InnovationSector[];
 };
 
 const numberFormat = new Intl.NumberFormat('en-US');
@@ -22,7 +23,7 @@ const sectorIcons = {
   settings: Settings,
 };
 
-export default function SectorCatalog({ sector, projects }: SectorCatalogProps) {
+export default function SectorCatalog({ sector, projects, sectors }: SectorCatalogProps) {
   const SectorIcon = sectorIcons[sector.iconKey];
   const [activeFilter, setActiveFilter] = useState<'all' | 'project' | 'spin-off'>('all');
   const [search, setSearch] = useState('');
@@ -83,8 +84,8 @@ export default function SectorCatalog({ sector, projects }: SectorCatalogProps) 
           <Link href="/commercialisation#sector-explorer" className="inline-flex shrink-0 items-center gap-2 rounded-md bg-white px-3 py-2 text-xs font-semibold text-[#193459] shadow-sm transition-colors hover:bg-[#E8EEF5]">
             <ArrowLeft size={15} aria-hidden="true" /> All Sectors
           </Link>
-          {innovationSectors.map((item) => (
-            <Link key={item.slug} href={`/innovation-collaboration/sectors/${item.slug}`} aria-current={item.slug === sector.slug ? 'page' : undefined} className={`inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-xs font-semibold transition-colors ${item.slug === sector.slug ? 'bg-[#FCAF17] text-[#171717]' : 'bg-transparent text-[#193459] hover:bg-white'}`}>
+          {sectors.map((item) => (
+            <Link key={item.slug} href={`/commercialisation/sectors/${item.slug}`} aria-current={item.slug === sector.slug ? 'page' : undefined} className={`inline-flex shrink-0 items-center gap-2 rounded-md px-3 py-2 text-xs font-semibold transition-colors ${item.slug === sector.slug ? 'bg-[#FCAF17] text-[#171717]' : 'bg-transparent text-[#193459] hover:bg-white'}`}>
               {item.slug === sector.slug && <Leaf size={14} aria-hidden="true" />}
               {item.title}
             </Link>

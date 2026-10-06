@@ -114,5 +114,36 @@ if (appliedFaqSeed.length === 0) {
   }
 }
 
+const portfolioMigration = 'seed-innovation-portfolio-v1';
+const [portfolioApplied] = await connection.execute(
+  'SELECT migration_key FROM schema_migrations WHERE migration_key = ?', [portfolioMigration],
+);
+if (portfolioApplied.length === 0) {
+  const portfolio = JSON.parse(await readFile(path.join(__dirname, '../data/innovation-portfolio.json'), 'utf8'));
+  await connection.beginTransaction();
+  try {
+    for (const [order, sector] of portfolio.sectors.entries()) {
+      await connection.execute(
+        'INSERT INTO innovation_sectors (slug, title, description, icon_key, hero_image, sort_order) VALUES (?, ?, ?, ?, ?, ?)',
+        [sector.slug, sector.title, sector.description, sector.iconKey, sector.heroImage, order],
+      );
+    }
+    for (const [order, project] of portfolio.projects.entries()) {
+      await connection.execute(
+        'INSERT INTO innovation_projects (id, title, type, description, image, status, highlight, category, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [project.id, project.title, project.type, project.description, project.image, project.status || '', project.highlight || '', project.category, order],
+      );
+      for (const slug of project.sectorSlugs) {
+        await connection.execute('INSERT INTO innovation_project_sectors (project_id, sector_slug) VALUES (?, ?)', [project.id, slug]);
+      }
+    }
+    await connection.execute('INSERT INTO schema_migrations (migration_key) VALUES (?)', [portfolioMigration]);
+    await connection.commit();
+  } catch (err) {
+    await connection.rollback();
+    throw err;
+  }
+}
+
 console.log(`Schema applied to database "${DB_NAME}".`);
 await connection.end();

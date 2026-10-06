@@ -29,22 +29,22 @@ const departments = [
     tag: "CAC",
     name: "Corporate Advisory Council",
     description:
-      "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government — engaging in advisory work, consultation, and joint R&D collaboration.",
-    image: "/main-pic/CAC_team.jpg",
+      "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government, engaging in advisory work, consultation, and joint R&D collaboration.",
+    image: "/main-pic/CAC_team.png",
   },
   {
     tag: "NIPO",
     name: "NUST Intellectual Property Office",
     description:
-      "Offering IP services since 2008 — initially dedicated to TIC incubatees — NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
+      "Offering IP services since 2008, initially dedicated to TIC incubatees. NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
     image: "/main-pic/IPO.jpg",
   },
   {
     tag: "TTO",
     name: "Technology Transfer Office",
     description:
-      "Being cognizant of the significant role that universities play in the knowledge economy, NUST established its Technology Transfer Office in 2011. The office is responsible for transferring knowledge and translating scientific results into real-world innovation — building entrepreneurial spirit, organising the transfer of new technological approaches, and arranging early-stage financing for transfer projects. It works to place NUST's own innovations into local industry, maintaining a clear path from research to commercial exploitation.",
-    image: "/main-pic/TTO_team.jpg",
+      "Being cognizant of the significant role that universities play in the knowledge economy, NUST established its Technology Transfer Office in 2011. The office is responsible for transferring knowledge and translating scientific results into real-world innovation, building entrepreneurial spirit, organising the transfer of new technological approaches, and arranging early-stage financing for transfer projects. It works to place NUST's own innovations into local industry, maintaining a clear path from research to commercial exploitation.",
+    image: "/main-pic/TTO_Team.png",
     link: "#",
   },
   {
@@ -115,7 +115,7 @@ function About() {
                 ICON brings NUST&apos;s research and innovation together and translates those strengths into practical value for industry. Our relationships span SMEs, multinational companies, major national firms, public-sector organisations, and non-profit partners.
               </p>
               <p className="mt-5 text-base leading-8 text-[#003B70]/75 sm:text-lg">
-                Partners gain access to advanced research infrastructure, innovative ideas, world-class researchers, and talented students—creating shared value while supporting Pakistan&apos;s technological, social, and economic progress.
+                Partners gain access to advanced research infrastructure, innovative ideas, world-class researchers, and talented students creating shared value while supporting Pakistan&apos;s technological, social, and economic progress.
               </p>
               <div className="mt-7 grid gap-3 sm:grid-cols-3">
                 {['Research Access', 'Industry Partnerships', 'Commercial Impact'].map((item) => (

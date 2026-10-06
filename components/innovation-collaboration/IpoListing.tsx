@@ -130,8 +130,10 @@ export default function IpoListing() {
 
           <aside aria-labelledby="sector-filter-heading" className="border border-[#DCE2E9] bg-white lg:sticky lg:top-24">
             <div className="border-b border-[#E8EDF2] px-4 py-4">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#B97800]">Browse by discipline</p>
-              <h2 id="sector-filter-heading" className="mt-1 font-tahoma-font text-lg font-bold text-[#10233F]">Sectors</h2>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FCAF17]">Browse by discipline</p>
+              <h2 id="sector-filter-heading" className="sector-heading-pulse mt-1 inline-flex items-center gap-2 border-l-4 px-2 py-1 font-tahoma-font text-lg font-bold text-[#10233F]">
+                Sectors
+              </h2>
               <p className="mt-1 text-xs text-[#718298]">Filter IP records by research sector.</p>
             </div>
             <div className="max-h-[70vh] overflow-y-auto p-2">

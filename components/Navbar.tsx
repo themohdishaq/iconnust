@@ -45,7 +45,7 @@ export default function Navbar() {
     { name: "About", href: "/about-us" },
     {
       name: "Research and Innovation",
-      href: "/innovation-collaboration",
+      href: "/research-innovation",
     },
     { name: "Industrial Collaboration", href: "/industry-services" },
     {

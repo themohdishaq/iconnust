@@ -27,7 +27,7 @@ export default async function AdminNewsListPage() {
 
       <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
         {news.length === 0 ? (
-          <p className="p-8 text-center text-slate-400 text-sm">No news articles yet.</p>
+          <p className="p-8 text-center text-slate-400 text-sm">No news articles has been published.</p>
         ) : (
           <ul className="divide-y divide-slate-100">
             {news.map((n) => (

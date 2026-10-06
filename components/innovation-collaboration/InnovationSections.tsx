@@ -112,7 +112,7 @@ export function InnovationHero() {
               Transform Invention into <div className=" sm:py-4 text-[#FCAF17]">Innovation</div>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-lg text-slate-300 leading-relaxed mb-12 font-light">
-              We help you legally protect your innovations. Drive breakthrough research through seamless IP filing,multi-disciplinary research clusters with industry partners to co-create solutions and maximizing your potential to change the world tomorrow.
+              We help you legally protect your innovations. Drive breakthrough research through seamless IP filing, multi-disciplinary research clusters with industry partners to co-create solutions and maximizing your potential to change the world tomorrow.
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
               <Link href="#propose-colloboration" className="bg-[#FCAF17] text-[#0A2A40] px-8 py-4 font-black text-xs uppercase tracking-[0.2em]  transition-colors shadow-lg shadow-blue-900/50">

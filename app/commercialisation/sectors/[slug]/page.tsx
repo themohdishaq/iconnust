@@ -1,19 +1,18 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import SectorCatalog from '@/components/innovation-collaboration/SectorCatalog';
-import { getInnovationSector, getSectorProjects, innovationSectors } from '@/lib/innovationSectors';
+import { listInnovationPortfolio } from '@/lib/models/InnovationPortfolio';
+
+export const dynamic = 'force-dynamic';
 
 type SectorPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return innovationSectors.map((sector) => ({ slug: sector.slug }));
-}
-
 export async function generateMetadata({ params }: SectorPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const sector = getInnovationSector(slug);
+  const { sectors } = await listInnovationPortfolio();
+  const sector = sectors.find(s => s.slug === slug);
 
   if (!sector) return { title: 'Sector Not Found' };
 
@@ -21,21 +20,23 @@ export async function generateMetadata({ params }: SectorPageProps): Promise<Met
     title: `${sector.title} Innovations`,
     description: sector.description,
     alternates: {
-      canonical: `/innovation-collaboration/sectors/${sector.slug}`,
+      canonical: `/commercialisation/sectors/${sector.slug}`,
     },
   };
 }
 
 export default async function SectorPage({ params }: SectorPageProps) {
   const { slug } = await params;
-  const sector = getInnovationSector(slug);
+  const { sectors, projects } = await listInnovationPortfolio();
+  const sector = sectors.find(s => s.slug === slug);
 
   if (!sector) notFound();
 
   return (
     <SectorCatalog
       sector={sector}
-      projects={getSectorProjects(sector.slug)}
+      projects={projects.filter(p => p.sectorSlugs.includes(sector.slug))}
+      sectors={sectors}
     />
   );
 }

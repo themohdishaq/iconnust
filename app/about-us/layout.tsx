@@ -5,7 +5,7 @@ import {
   DEFAULT_OG_IMAGE,
 } from "@/lib/seo";
 
-const title = "About ICON NUST";
+const title = "About";
 const description =
   "Learn about the Innovation and Commercialisation Office (ICON) at NUST. Discover our mission, constituent offices, technology transfer initiatives, intellectual property services, corporate partnerships, and commitment to transforming research into real-world innovation.";
 

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ArrowUpRight, Globe2, Mail, MapPin, Phone } from 'lucide-react';
 
 const ecosystemLinks = [
-  { label: 'Innovation & Collaboration', href: '/innovation-collaboration' },
+  { label: 'Research and Innovation', href: '/research-innovation' },
   { label: 'Industry Services', href: '/industry-services' },
   { label: 'Commercialisation Pathways', href: '/commercialisation' },
 ];
@@ -88,13 +88,13 @@ function Footer() {
           <div>
             <h2 className="mb-5 font-tahoma-font text-sm font-bold uppercase tracking-[0.16em] text-white">Contact ICON</h2>
             <address className="space-y-4 not-italic">
-              <a href="mailto:director@icon.nust.edu.pk" className="group flex items-start gap-3 text-sm leading-6 text-white/70 transition-colors hover:text-[#FCAF17]">
+              <a href="mailto:info@icon.nust.edu.pk" className="group flex items-start gap-3 text-sm leading-6 text-white/70 transition-colors hover:text-[#FCAF17]">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-white/10 text-[#FCAF17] transition-colors group-hover:bg-[#FCAF17] group-hover:text-[#003B70]"><Mail size={15} /></span>
-                <span className="break-all pt-1.5">director@icon.nust.edu.pk</span>
+                <span className="break-all pt-1.5">info@icon.nust.edu.pk</span>
               </a>
               <a href="tel:+925190856230" className="group flex items-start gap-3 text-sm leading-6 text-white/70 transition-colors hover:text-[#FCAF17]">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-white/10 text-[#FCAF17] transition-colors group-hover:bg-[#FCAF17] group-hover:text-[#003B70]"><Phone size={15} /></span>
-                <span className="pt-1.5">+92-51-90856230</span>
+                <span className="pt-1.5">+92-51-90856242</span>
               </a>
               <a href="https://www.google.com/maps/search/?api=1&query=CIE+Building+NUST+H-12+Islamabad" target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-sm leading-6 text-white/70 transition-colors hover:text-[#FCAF17]">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-white/10 text-[#FCAF17] transition-colors group-hover:bg-[#FCAF17] group-hover:text-[#003B70]"><MapPin size={15} /></span>
