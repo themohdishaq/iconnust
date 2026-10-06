@@ -95,16 +95,25 @@ public-page updates using temporary records that it removes afterward.
 
 ## Updating an existing production database
 
-For a complete local-to-cloud schema update and record transfer, configure local
-credentials in `.env.local` and destination credentials in `.env.production.local`,
-then run **`npm run db:scribe:mitigate`**. This command performs the migration and
-transfer automatically; it requires Node.js 22. It saves the destination tables
+To update the structure of a second existing database, configure its credentials
+in `.env.production.local` and run **`npm run db:scribe:mitigate`**. This command
+uses `scripts/migrate-production.mjs --apply` to add missing tables, columns with
+safe defaults, and indexes defined in `lib/db/schema.sql`. The second database
+can be hosted anywhere; it does not need to be a cloud service. Its existing
+records stay in place. Local records are not copied, and seed scripts are not run.
+Rerunning skips completed changes. The supported legacy default and column changes
+are handled by the migration; arbitrary type changes, dropped columns and
+collation conversions require a separate reviewed migration.
+
+The optional data-transfer mode is separate: `node scripts/migrate-production.mjs
+--sync-data` reads `.env.local` as its source and `.env.production.local` as its
+destination. The full transfer requires Node.js 22. It saves the destination tables
 and records in a private JSON backup under `backups/db` before changes, updates
 both schemas, and transfers all application tables in a database transaction.
 Pause production writes during the transfer so records cannot change between
 the backup and import. Keep an independent provider snapshot for recovery too.
 
-Local values replace records with matching primary keys, including admin accounts
+In data-transfer mode, local values replace records with matching primary keys, including admin accounts
 and their password hashes. Cloud-only records remain. The command stops if a
 unique email or slug belongs to a different cloud primary key; data changes are
 rolled back, while schema changes already applied remain. Migration-history rows

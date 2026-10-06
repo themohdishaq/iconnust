@@ -138,17 +138,21 @@ export async function transferDatabase(sourceConfig, targetConfig, backupDirecto
   }
 }
 
+export async function transferConfiguredDatabase() {
+  const source = parseEnv(await readFile(path.join(root, '.env.local'), 'utf8'));
+  let destination;
+  try {
+    destination = parseEnv(await readFile(path.join(root, '.env.production.local'), 'utf8'));
+  } catch (error) {
+    if (error.code === 'ENOENT') throw new Error('Create .env.production.local with your cloud DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD and DB_SSL settings, then rerun npm run db:scribe:mitigate.');
+    throw error;
+  }
+  return transferDatabase(source, destination);
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
-    const source = parseEnv(await readFile(path.join(root, '.env.local'), 'utf8'));
-    let destination;
-    try {
-      destination = parseEnv(await readFile(path.join(root, '.env.production.local'), 'utf8'));
-    } catch (error) {
-      if (error.code === 'ENOENT') throw new Error('Create .env.production.local with your cloud DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD and DB_SSL settings, then rerun npm run db:scribe:mitigate.');
-      throw error;
-    }
-    await transferDatabase(source, destination);
+    await transferConfiguredDatabase();
   } catch (error) {
     // Print the reason without logging connection objects or row contents.
     console.error(error.message);

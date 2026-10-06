@@ -5,22 +5,38 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const args = process.argv.slice(2);
+if (args.length === 1 && args[0] === '--sync-data') {
+  try {
+    const { transferConfiguredDatabase } = await import('./db-scribe-mitigate.mjs');
+    await transferConfiguredDatabase();
+  } catch (error) {
+    console.error(error.message);
+    process.exit(1);
+  }
+  process.exit(0);
+}
 if (args.includes('--help')) {
   console.log(`Update existing MySQL tables using lib/db/schema.sql.
 
 Usage:
+  npm run db:scribe:mitigate
   node --env-file=.env.production.local scripts/migrate-production.mjs --dry-run
   node --env-file=.env.production.local scripts/migrate-production.mjs --apply
 
-The default is a read-only preview. --apply executes the pending statements.
+The npm command applies schema updates to the second database configured in
+.env.production.local. It adds missing tables, safe columns and indexes while
+preserving its existing records. It does not copy local data or run seed scripts.
+The default schema-only mode is a read-only preview. --apply executes its statements.
 Set DB_HOST, DB_PORT, DB_NAME, DB_USER and DB_PASSWORD for your existing database.
 Use DB_SSL=true and optionally DB_SSL_CA_FILE for your provider's CA certificate.
 Existing content and collations are preserved. Take a backup before applying.
-MySQL DDL commits each statement separately; rerun after fixing an error to resume.`);
+MySQL DDL commits each statement separately; rerun after fixing an error to resume.
+Optional separate data-transfer mode: node scripts/migrate-production.mjs --sync-data.
+That mode replaces matching records with local values; it is not used by the npm command.`);
   process.exit(0);
 }
 if (args.some(arg => !['--apply', '--dry-run'].includes(arg)) || args.includes('--apply') && args.includes('--dry-run')) {
-  throw new Error('Usage: node scripts/migrate-production.mjs [--dry-run | --apply | --help]');
+  throw new Error('Usage: node scripts/migrate-production.mjs [--sync-data | --dry-run | --apply | --help]');
 }
 const root = fileURLToPath(new URL('../', import.meta.url));
 nextEnv.loadEnvConfig(root, false, { info() {}, error() {} });
