@@ -76,6 +76,16 @@ using temporary articles that it removes afterward.
 
 ## Managing the team
 
+Run **`npm run db:update:team`** in Plesk to insert/update the local members listed
+in `data/team-members.json` in the configured database. It reads Plesk's `DB_*`
+environment variables, with `.env.local` / `.env` as local fallbacks, and never
+requires `.env.production.local`. It matches by name and updates title, department,
+photo path, and display order. Existing bio, email and focus values, unrelated
+members, and all other tables are preserved. Reruns update the same members rather
+than adding duplicates. Duplicate matching names stop and roll back the update.
+This imports the local JSON file, not live records from another MySQL server.
+Deploy the referenced `public/team` image files alongside the website.
+
 The public `/team` page loads members from `team_members` on every request in the
 display order set by admins. Sign in at `/admin/team` to add, edit, reorder, or
 delete members. Names, titles, departments, and photos appear on the public page;
