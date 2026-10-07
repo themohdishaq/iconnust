@@ -55,6 +55,22 @@ the admin session cookie. Uploads use `public/uploads/innovation`; keep that
 directory persistent on the hosting server. Replaced images are retained to avoid
 breaking other entries that reuse an image path.
 
+All API writes validate the browser Origin against `https://icon.nust.edu.pk`
+and the public request host. In production, HTTPS is assumed unless
+`X-Forwarded-Proto` specifies otherwise. Configure the reverse proxy to overwrite
+`X-Forwarded-Host` and `X-Forwarded-Proto` with the public host (including any
+nonstandard port) and protocol. If the proxy cannot preserve the public host,
+set `API_ALLOWED_ORIGINS` to a comma-separated list of full trusted origins,
+for example `https://icon.nust.edu.pk,https://www.icon.nust.edu.pk`.
+Restart the application after changing environment variables.
+Run `node scripts/test-request-origin.mjs` to check production/proxy origin
+validation without a database or running server.
+Run `node scripts/test-api-validation.mjs` to check route validation and admin
+session checks with isolated database/mail dependencies. Disclosures reject
+oversized fields and invalid dates instead of truncating them, and uploaded
+images must have a matching file signature. The news API accepts a positive
+integer `limit`, defaults to 3, and caps it at 20; invalid limits return 400.
+
 With the local development server running, `node scripts/test-innovation.mjs`
 checks API authorization, validation, CRUD, assignments, counts, uploads and page
 rendering using temporary entries that it removes afterward.

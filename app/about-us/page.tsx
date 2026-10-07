@@ -52,7 +52,7 @@ const departments = [
     name: "Business Development Office",
     description:
       "The Business Development Office (BDO) was established at RIC NUST in 2021 as a focal point for providing guidance and support to NUST constituent institutions and faculty members in activities related to industrial and consultancy projects with industries through tender-based business opportunities. BDO identifies and tracks strategic tender opportunities, facilitates collaboration between industry and NUST faculty, evaluates proposals, coordinates joint ventures and consortia, and supports the approval, negotiation, and execution of agreements. The office also works to strengthen industrial linkages and create commercial opportunities for NUST professors, students, spinoffs, and startups.",
-    image: "/main-pic/BDO_team.jpg",
+    image: "/main-pic/ric.jpeg",
     link: "#",
   },
 ]
@@ -65,7 +65,7 @@ function About() {
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0 -z-20 bg-[url('/main-pic/BDO_team.jpg')] bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 -z-20 bg-[url('/main-pic/ric.jpeg')] bg-cover bg-center bg-no-repeat"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#003B70] via-[#003B70]/15 " />
         <div className="absolute -right-20 top-12 h-72 w-72 rounded-full border border-white/15 sm:h-96 sm:w-96" />

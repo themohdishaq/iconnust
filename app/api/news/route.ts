@@ -3,10 +3,11 @@ import News from '@/lib/models/News';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const requestedLimit = Number(searchParams.get('limit'));
-  const limit = Number.isFinite(requestedLimit) && requestedLimit > 0
-    ? Math.min(Math.max(Math.floor(requestedLimit), 1), 20)
-    : 3;
+  const rawLimit = searchParams.get('limit');
+  if (rawLimit !== null && (!/^\d+$/.test(rawLimit) || !Number.isSafeInteger(Number(rawLimit)) || Number(rawLimit) < 1)) {
+    return NextResponse.json({ error: 'Limit must be a positive whole number.' }, { status: 400 });
+  }
+  const limit = rawLimit === null ? 3 : Math.min(Number(rawLimit), 20);
 
   try {
     const news = await News.list({ limit });

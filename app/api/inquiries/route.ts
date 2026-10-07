@@ -7,7 +7,8 @@ import type { InquiryModel } from '@/lib/models/inquiryModelFactory';
 import { isRateLimited } from '@/lib/rateLimit';
 import { notifyDepartment, type NotificationSource } from '@/lib/departments';
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { isValidRequestOrigin } from '@/lib/requestOrigin';
+import { isEmail, isRecord } from '@/lib/apiValidation';
 
 const modelsBySource: Record<string, InquiryModel> = {
   home: HomeInquiry,
@@ -21,6 +22,7 @@ function clientKey(request: NextRequest): string {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isValidRequestOrigin(request)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 });
   if (isRateLimited(clientKey(request))) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
   }
@@ -32,7 +34,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
-  if (typeof body !== 'object' || body === null) {
+  if (!isRecord(body)) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
@@ -62,7 +64,7 @@ export async function POST(request: NextRequest) {
   if (typeof organization !== 'string' || organization.trim().length === 0 || organization.length > 200) {
     return NextResponse.json({ error: 'Company name is required.' }, { status: 400 });
   }
-  if (typeof email !== 'string' || !EMAIL_RE.test(email.trim()) || email.length > 200) {
+  if (!isEmail(email, 200)) {
     return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 });
   }
   if (domain !== undefined && (typeof domain !== 'string' || domain.length > 200)) {

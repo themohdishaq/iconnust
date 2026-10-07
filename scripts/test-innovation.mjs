@@ -8,6 +8,7 @@ import path from 'node:path';
 
 nextEnv.loadEnvConfig(process.cwd());
 const base = process.env.INNOVATION_TEST_URL || 'http://localhost:3000';
+const expectedOrigin = process.env.NODE_ENV === 'production' ? 'https://icon.nust.edu.pk' : new URL(base).origin;
 assert.ok(new URL(base).hostname === 'localhost' || new URL(base).hostname === '127.0.0.1', 'Run this test against a local server only.');
 const token = await new SignJWT({ userId: 'integration-test', email: 'test@example.com', role: 'admin', expires: new Date(Date.now() + 600000).toISOString() })
   .setProtectedHeader({ alg: 'HS256' }).setIssuedAt().setExpirationTime('10m')
@@ -18,7 +19,7 @@ const sector = { slug: slugs[0], title: 'Integration test sector', description: 
 let projectId;
 let uploadedImage;
 
-async function call(url, { method = 'GET', data, body, authenticated = true, origin, sessionToken = token } = {}) {
+async function call(url, { method = 'GET', data, body, authenticated = true, origin = expectedOrigin, sessionToken = token } = {}) {
   const headers = {};
   if (authenticated) headers.Cookie = `session_token=${sessionToken}`;
   if (data) headers['Content-Type'] = 'application/json';
@@ -36,7 +37,8 @@ try {
   assert.equal((await call('sectors', { method: 'POST', data: sector, sessionToken: otpToken })).status, 401);
   assert.equal((await call('sectors', { method: 'POST', data: sector, origin: 'https://other.example' })).status, 403);
   assert.equal((await call('sectors', { method: 'POST', data: { ...sector, slug: 'Bad URL' } })).status, 400);
-  for (const slug of slugs) assert.equal((await call('sectors', { method: 'POST', data: { ...sector, slug } })).status, 201);
+  assert.equal((await call('sectors', { method: 'POST', data: { ...sector, slug: slugs[0] }, origin: expectedOrigin })).status, 201);
+  assert.equal((await call('sectors', { method: 'POST', data: { ...sector, slug: slugs[1] } })).status, 201);
   assert.equal((await call('sectors', { method: 'POST', data: sector })).status, 409);
 
   const project = { title: 'Integration test project', type: 'project', category: 'Testing', description: 'Temporary test project.', image: '', sectorSlugs: slugs, order: 999 };

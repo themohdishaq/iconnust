@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import Subscriber from '@/lib/models/Subscriber';
 import { isRateLimited } from '@/lib/rateLimit';
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import { isValidRequestOrigin } from '@/lib/requestOrigin';
+import { isEmail, isRecord } from '@/lib/apiValidation';
 
 function clientKey(request: NextRequest): string {
   const forwardedFor = request.headers.get('x-forwarded-for');
@@ -11,6 +11,7 @@ function clientKey(request: NextRequest): string {
 }
 
 export async function POST(request: NextRequest) {
+  if (!isValidRequestOrigin(request)) return NextResponse.json({ error: 'Invalid request origin.' }, { status: 403 });
   if (isRateLimited(clientKey(request))) {
     return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
   }
@@ -22,13 +23,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
-  if (typeof body !== 'object' || body === null) {
+  if (!isRecord(body)) {
     return NextResponse.json({ error: 'Invalid request body.' }, { status: 400 });
   }
 
   const { email } = body as Record<string, unknown>;
 
-  if (typeof email !== 'string' || !EMAIL_RE.test(email.trim()) || email.length > 300) {
+  if (!isEmail(email)) {
     return NextResponse.json({ error: 'A valid email is required.' }, { status: 400 });
   }
 

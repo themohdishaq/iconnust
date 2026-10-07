@@ -4,10 +4,8 @@ import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
-  Users,
   Rocket,
   BadgeCheck,
-  Globe,
   Mail,
   Send,
   Layers,
@@ -297,7 +295,7 @@ export function TechPlace({ techPlaceCards }: { techPlaceCards: TechPlaceCardDat
             <div className="flex gap-3">
               <Link
                 href="https://www.linkedin.com/company/icon-nust"
-                className="bg-white text-slate-900 px-6 py-3 font-black text-[12px] uppercase tracking-widest"
+                className="bg-white text-slate-900 px-6 py-3 font-black text-[12px]  tracking-widest"
               >
                 LinkedIn Feed
               </Link>
@@ -443,56 +441,23 @@ export function LatestNews() {
 export function PartnershipInquiry() {
   const { values, setField, status, error, handleSubmit } = useInquiryForm("home");
   return (
-<section id="partner-with-us" className=" bg-white relative">
-        <div className="max-w-8xl mx-auto px-4 ">
-          <div className="grid lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 xl:gap-20">
-            <div className="py-4 lg:col-span-5">
-              <div className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-5 sm:mb-6 lg:mb-8">
+<section id="partner-with-us" className="relative bg-white py-10 sm:py-14 lg:py-16">
+        <div className="mx-auto max-w-8xl px-4 sm:px-6">
+          <div className="mx-auto mb-8 sm:mb-10">
+              <div className="inline-flex items-center space-x-2 icon-brand-font-secondary font-bold text-[11px] uppercase tracking-[0.4em] mb-5">
                 <div className="w-12 h-px bg-[#C9962A]" />
                 <span>Initiate Engagement</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl   font-serif text-[#003B70] mb-5 leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#003B70] mb-4 leading-tight">
                 Partner with ICON
               </h2>
-              <p className="text-slate-500 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 lg:mb-10">
+              <p className="max-w-2xl text-slate-600 text-sm sm:text-base leading-relaxed">
                 Our team experts dedicated to facilitating long-term strategic
                 alliances.
               </p>
+          </div>
 
-              <div className="space-y-5 sm:space-y-7 lg:space-y-10">
-                <div className="flex items-start space-x-6">
-                  <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 shrink-0">
-                    <Globe size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-[11px] uppercase tracking-widest text-slate-400 mb-1">
-                      Scholar House
-                    </h4>
-                    <p className="text-slate-900 font-medium">
-                      Sector H-12, Islamabad, Pakistan
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-6">
-                  <div className="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 shrink-0">
-                    <Users size={20} />
-                  </div>
-                  <div>
-                    <h4 className="font-black text-[11px] uppercase tracking-widest text-slate-400 mb-1">
-                      Direct Outreach
-                    </h4>
-                    <a
-                      href="mailto:info@icon.nust.edu.pk"
-                      className="text-slate-900 font-medium hover:text-blue-900 transition-all"
-                    >
-                      info@icon.nust.edu.pk
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 bg-slate-50 p-5 sm:p-8 lg:p-12 xl:p-14 rounded-sm">
+          <div className="mx-auto max-w-8xl rounded-sm bg-slate-50 p-5 sm:p-8 lg:p-10">
               <form
                 onSubmit={handleSubmit}
                 className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8"
@@ -664,7 +629,6 @@ export function PartnershipInquiry() {
                   </button>{" "}
                 </div>{" "}
               </form>
-            </div>
           </div>
         </div>
         <PartnersSection partners={partners} />

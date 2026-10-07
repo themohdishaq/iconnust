@@ -27,11 +27,6 @@ const socialLinks = [
       </svg>
     ),
   },
-  {
-    name: 'ICON Website',
-    href: 'https://icon.nust.edu.pk',
-    icon: <Globe2 size={18} aria-hidden="true" />,
-  },
 ];
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {

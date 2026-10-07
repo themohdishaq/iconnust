@@ -4,6 +4,12 @@ export class PortfolioError extends Error {
   constructor(message: string, public status = 400) { super(message); }
 }
 
+export function validatePortfolioId(kind: 'sectors' | 'projects', id: string) {
+  if (id.length > 120 || !(kind === 'sectors' ? /^[a-z0-9]+(?:-[a-z0-9]+)*$/ : /^[a-zA-Z0-9_-]+$/).test(id)) {
+    throw new PortfolioError('Invalid entry ID.');
+  }
+}
+
 function text(data: Record<string, unknown>, key: string, max: number, required = false) {
   const value = data[key] ?? '';
   if (typeof value !== 'string') throw new PortfolioError(`${key} must be text.`);
@@ -25,11 +31,13 @@ function image(data: Record<string, unknown>, key: string, required = false) {
   if (value && !/^\/(?!\/)[a-zA-Z0-9_./%-]+$/.test(value)) {
     let url: URL;
     try { url = new URL(value); } catch { throw new PortfolioError(`${key} must be a local image path or supported HTTPS URL.`); }
-    if (url.protocol !== 'https:' || !['propakistani.pk', 'i.pinimg.com', 'images.unsplash.com'].includes(url.hostname)) {
+    if (url.protocol !== 'https:' || url.username || url.password || url.port || !['propakistani.pk', 'i.pinimg.com', 'images.unsplash.com'].includes(url.hostname)) {
       throw new PortfolioError('Upload an image or use an image URL from images.unsplash.com, i.pinimg.com or propakistani.pk.');
     }
   }
-  if (value.includes('..')) throw new PortfolioError('Image paths cannot contain parent directory references.');
+  let decoded: string;
+  try { decoded = decodeURIComponent(value); } catch { throw new PortfolioError('Image path contains invalid encoding.'); }
+  if (decoded.includes('..') || decoded.includes('\\') || decoded.startsWith('//')) throw new PortfolioError('Image paths cannot contain parent directory references.');
   return value;
 }
 
@@ -54,7 +62,7 @@ export function validatePortfolioInput(kind: 'sectors' | 'projects', value: unkn
     };
   }
   if (data.type !== 'project' && data.type !== 'spin-off') throw new PortfolioError('Please choose project or spin-off.');
-  if (!Array.isArray(data.sectorSlugs) || !data.sectorSlugs.length || data.sectorSlugs.length > 100 || data.sectorSlugs.some(s => typeof s !== 'string' || s.length > 120)) {
+  if (!Array.isArray(data.sectorSlugs) || !data.sectorSlugs.length || data.sectorSlugs.length > 100 || data.sectorSlugs.some(s => typeof s !== 'string' || s.length > 120 || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s))) {
     throw new PortfolioError('Select at least one sector (maximum 100).');
   }
   return {

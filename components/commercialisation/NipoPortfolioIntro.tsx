@@ -84,10 +84,10 @@ export default function NipoPortfolioIntro() {
   }, [selectedPortfolio]);
 
   const portfolioLinks = [
-    { item: IPO_PORTFOLIO.patent, subtitle: 'Inventions and technical solutions', icon: ShieldCheck },
+    { item: IPO_PORTFOLIO.patent, subtitle: 'Legal protection for a technical invention', icon: ShieldCheck },
     { item: IPO_PORTFOLIO.copyright, subtitle: 'Creative, literary and software works', icon: FileText },
-    { item: IPO_PORTFOLIO.design, subtitle: 'Product appearance and visual form', icon: Layers },
-    { item: IPO_PORTFOLIO.trademark, subtitle: 'Names, marks and product identity', icon: Globe },
+    { item: IPO_PORTFOLIO.design, subtitle: 'Protection of aesthetic and ornamental features', icon: Layers },
+    { item: IPO_PORTFOLIO.trademark, subtitle: 'Protection of brand names, marks and slogan', icon: Globe },
   ];
 
   return (

@@ -38,7 +38,7 @@ export async function decrypt(input: string): Promise<SessionPayload | null> {
       algorithms: ['HS256'],
     });
     return payload as unknown as SessionPayload;
-  } catch (error) {
+  } catch {
     // If token is expired or invalid, return null
     return null;
   }
@@ -182,8 +182,14 @@ export async function verifySessionForAPI(request: NextRequest): Promise<Session
     throw new Error('Unauthorized: Invalid or expired token');
   }
 
-  // Check if session has expired
-  if (session.expires && new Date(session.expires) < new Date()) {
+  // Pending OTP tokens use the same signing key but are not completed sessions.
+  if (typeof session.userId !== 'string' || !session.userId.trim() ||
+      typeof session.email !== 'string' || !session.email.trim() ||
+      typeof session.role !== 'string' || !session.role.trim()) {
+    throw new Error('Unauthorized: Invalid session payload');
+  }
+  const expires = new Date(session.expires).getTime();
+  if (!Number.isFinite(expires) || expires <= Date.now()) {
     throw new Error('Unauthorized: Session expired');
   }
 

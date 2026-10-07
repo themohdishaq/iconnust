@@ -31,12 +31,20 @@ export async function saveUploadedImage(file: File, folder: string): Promise<str
     throw new Error('File content does not match its extension.');
   }
 
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const matches = expectedMime === 'image/jpeg'
+    ? buffer.length >= 3 && buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]))
+    : expectedMime === 'image/png'
+      ? buffer.length >= 8 && buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))
+      : expectedMime === 'image/gif'
+        ? ['GIF87a', 'GIF89a'].includes(buffer.subarray(0, 6).toString('ascii'))
+        : buffer.length >= 12 && buffer.subarray(0, 4).toString('ascii') === 'RIFF' && buffer.subarray(8, 12).toString('ascii') === 'WEBP';
+  if (!matches) throw new Error('File content does not match its image type.');
+
   const dir = path.join(UPLOAD_ROOT, folder);
   await mkdir(dir, { recursive: true });
 
   const filename = `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${ext}`;
-  const buffer = Buffer.from(await file.arrayBuffer());
-
   await writeFile(path.join(dir, filename), buffer);
 
   return `/uploads/${folder}/${filename}`;

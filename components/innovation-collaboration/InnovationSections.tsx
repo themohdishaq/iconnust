@@ -156,14 +156,9 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                 From Research to <span className="text-[#FCAF17]">Real-World Impact</span>
               </h2>
               <p className="mt-5 max-w-8xl text-base leading-7 text-[#003B70]">
-                Before any commercialisation pathway can be pursued, ICON assists inventors in formally disclosing, evaluating, and protecting their intellectual property through national and international patent filings, design registrations, and trade secret strategies.
+                Before any commercialisation pathway can be pursued, ICON assists inventors in formally disclosing, evaluating, and protecting their intellectual property through national (IPO) and international (PCT) patent , design , and trade mark filing.
               </p>
-              <ul className="mt-4 max-w-8xl list-disc space-y-2 pl-5 text-sm leading-6 text-[#003B70] marker:text-[#FCAF17]">
-                <li>Invention Disclosure Form (IDF) submission and review</li>
-                <li>Patentability assessment and prior art search</li>
-                <li>National (IPO Pakistan) and international filings (PCT)</li>
-                <li>Drafting and filing of patent, industrial design, copyright and trade mark applications</li>
-              </ul>
+          
             </div>
             
           </motion.div>
@@ -280,7 +275,7 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                 <section aria-labelledby="ip-activity-chart-heading" className="min-w-0">
                   <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]/55">Yearly trend</span>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]/55">Last 6 Yearly trend</span>
                       <h4 id="ip-activity-chart-heading" className="mt-1 font-tahoma-font text-sm font-bold text-[#003B70]">IP filing activity</h4>
                     </div>
                     <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-wider text-[#003B70]/65">
