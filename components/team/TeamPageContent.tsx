@@ -14,12 +14,7 @@ export type PublicTeamMember = {
   image: string;
 };
 
-const coreValues = [
-  { title: 'Integrity', desc: 'Transparent, ethical, and accountable in every Commercialisation decision.', icon: <ShieldCheck size={24} /> },
-  { title: 'Innovation', desc: 'Relentlessly pursuing new models of academic-industry collaboration.', icon: <Lightbulb size={24} /> },
-  { title: 'Impact', desc: 'Measuring success by economic value created and problems solved.', icon: <TrendingUp size={24} /> },
-  { title: 'Inclusivity', desc: 'Supporting researchers, students, and startups across all disciplines.', icon: <Users size={24} /> },
-];
+
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -59,7 +54,7 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
               The People Behind <span className=" text-blue-400">ICON</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="text-sm sm:text-base  text-slate-300 font-light leading-relaxed mb-8 sm:mb-10 lg:mb-12 max-w-2xl">
-              ICON â€” the Innovation &amp; Commercialisation Office NUST â€” is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
+              ICON the Innovation &amp; Commercialisation Office NUST is powered by a dedicated team of technologists, IP specialists, program managers, and industry liaisons working to transform research into real-world impact.
             </motion.p>
           </motion.div>
         </div>
@@ -79,25 +74,14 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
                   Innovation &amp; Commercialisation Office
                 </h2>
                 <p className="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base lg:text-lg">
-                  ICON serves as NUST&apos;s central hub for bridging the gap between world-class academic research and industrial application. We orchestrate the full technology transfer lifecycle â€” from invention disclosure and IP protection to licensing, spin-off creation, and market deployment.
+                  ICON serves as NUST&apos;s central hub for bridging the gap between world-class academic research and industrial application. We orchestrate the full technology transfer lifecycle from invention disclosure and IP protection to licensing, spin-off creation, and market deployment.
                 </p>
                 <p className="text-slate-600 leading-relaxed mb-6 text-sm sm:text-base">
-                  Operating through three constituent offices â€” the Corporate Advisory Council (CAC), NUST Intellectual Property Office (NIPO), and Technology Transfer Office (TTO) â€” ICON touches every dimension of NUST&apos;s commercial innovation agenda.
+                  Operating through four constituent offices the Corporate Advisory Council (CAC), NUST Intellectual Property Office (NIPO), Technology Transfer Office (TTO) and Business Development Office (BDO) ICON touches every dimension of NUST&apos;s commercial innovation agenda.
                 </p>
               </motion.div>
 
-              {/* Core Values */}
-              <motion.div variants={fadeUp} className="grid grid-cols-2 gap-4">
-                {coreValues.map((v, i) => (
-                  <div key={i} className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 hover:shadow-md transition-shadow group">
-                    <div className="w-12 h-12 bg-blue-50 group-hover:bg-blue-900 text-blue-700 group-hover:text-white rounded-xl flex items-center justify-center mb-4 transition-all">
-                      {v.icon}
-                    </div>
-                    <h4 className="font-bold text-slate-900 mb-2">{v.title}</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed">{v.desc}</p>
-                  </div>
-                ))}
-              </motion.div>
+             
             </div>
           </motion.div>
         </div>
