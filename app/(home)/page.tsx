@@ -4,6 +4,8 @@ import { NewsletterSignup, TechPlace, LatestNews, PartnershipInquiry } from '@/c
 import StatTile from "@/lib/models/StatTile";
 import TechPlaceStat from "@/lib/models/TechPlaceStat";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const [tiles, techPlaceStats] = await Promise.all([
     StatTile.list("home"),
@@ -15,7 +17,7 @@ export default async function Page() {
     value: Number(tile.value ?? 0),
   }));
 
-  const techPlaceCards = techPlaceStats.slice(0, 3).map((item) => ({
+  const techPlaceCards = techPlaceStats.map((item) => ({
     label: item.title,
     value: Number(item.value ?? 0),
     subtitle: item.subtitle,

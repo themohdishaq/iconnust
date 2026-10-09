@@ -38,6 +38,7 @@ export default async function AdminTeamListPage() {
                 <div className="flex-1 min-w-0">
                   <h3 className="font-bold text-slate-900 truncate">{m.name}</h3>
                   <p className="text-slate-400 text-xs mt-0.5">{m.title}</p>
+                  {m.email && <p className="mt-1 break-all text-xs text-blue-700">{m.email}</p>}
                 </div>
                 <Link
                   href={`/admin/team/${m.id.toString()}/edit`}

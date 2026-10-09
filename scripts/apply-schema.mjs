@@ -3,6 +3,7 @@ import nextEnv from '@next/env';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { seedIpPortfolio } from './ip-portfolio-seed.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const { loadEnvConfig } = nextEnv;
@@ -148,5 +149,6 @@ if (portfolioApplied.length === 0) {
   }
 }
 
+await seedIpPortfolio(connection);
 console.log(`Schema applied to database "${DB_NAME}".`);
 await connection.end();

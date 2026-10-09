@@ -7,6 +7,8 @@ import IpBreakdown from "@/lib/models/IpBreakdown";
 import IpYearlyStat from "@/lib/models/IpYearlyStat";
 import Faq from "@/lib/models/Faq";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const [tiles, ipBreakdown, ipsFiled, ipsAwarded, faqs] = await Promise.all([
     StatTile.list('innovation'),

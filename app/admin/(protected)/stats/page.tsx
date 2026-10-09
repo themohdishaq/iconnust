@@ -91,7 +91,7 @@ export default async function AdminStatsPage() {
         <StatTable
           id="innovation-impact-tiles"
           title="Innovation & Collaboration — Impact Tiles"
-          description="The 3 stat tiles above the IP charts on the Innovation & Collaboration page."
+          description="All saved impact tiles appear above the IP charts on the Research & Innovation page."
           columns={tileColumns}
           rows={innovationTiles}
           createAction={createStatTileAction.bind(null, 'innovation')}
@@ -112,8 +112,8 @@ export default async function AdminStatsPage() {
 
         <StatTable
           id="ips-filed-by-year"
-          title="IPs Filed by Year (2020–2026)"
-          description="Stacked bar chart data on the Innovation & Collaboration page."
+          title="IPs Filed by Year"
+          description="Yearly filing totals on the Research & Innovation page. Additional rows for the same year are combined."
           columns={ipYearlyColumns}
           rows={ipsFiled}
           createAction={createIpYearlyStatAction.bind(null, 'filed')}
@@ -123,8 +123,8 @@ export default async function AdminStatsPage() {
 
         <StatTable
           id="ips-awarded-by-year"
-          title="IPs Awarded by Year (2020–2026)"
-          description="Stacked bar chart data on the Innovation & Collaboration page."
+          title="IPs Awarded by Year"
+          description="Yearly award totals on the Research & Innovation page. Additional rows for the same year are combined."
           columns={ipYearlyColumns}
           rows={ipsAwarded}
           createAction={createIpYearlyStatAction.bind(null, 'awarded')}
@@ -135,7 +135,7 @@ export default async function AdminStatsPage() {
         <StatTable
           id="financial-chart"
           title="Financial Chart (Commercialization Page)"
-          description="Currently not displayed on the public site — the chart is temporarily hidden, but its data stays editable here."
+          description="Financial data is retained for administration and is not displayed on the public website."
           columns={financialColumns}
           rows={financialStats}
           createAction={createFinancialStatAction}
@@ -145,8 +145,8 @@ export default async function AdminStatsPage() {
 
         <StatTable
           id="homepage-tech-place-cards"
-          title="Homepage Tech Place Cards (Fixed Titles / Editable Values & Text)"
-          description="These public card titles are locked on the homepage. Update the count and subtitle here to change the displayed numbers and descriptions."
+          title="Homepage Tech Place Cards"
+          description="Manage every card's title, count and subtitle. All saved rows appear on the homepage."
           columns={techPlaceColumns}
           rows={techPlaceStats}
           createAction={createTechPlaceAction}

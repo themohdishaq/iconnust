@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, BrainCircuit, CarFront, ChevronDown, FileText, Handshake, Leaf, Search, Settings, Shield, ShieldCheck, Sprout, Stethoscope, Users, Wind } from 'lucide-react';
+import { ArrowLeft, BrainCircuit, CarFront, ChevronDown, FileText, Handshake, Leaf, Search, Settings, Shield, ShieldCheck, Sprout, Stethoscope, Users, Wind } from 'lucide-react';
 import type { InnovationProject, InnovationSector } from '@/lib/innovationSectors';
 
 type SectorCatalogProps = {
@@ -127,14 +127,14 @@ export default function SectorCatalog({ sector, projects, sectors }: SectorCatal
             {visibleProjects.map((project) => (
               <article key={project.id} className="overflow-hidden rounded-lg border border-[#E1E6EC] bg-white shadow-[0_4px_14px_rgba(16,42,72,0.05)]">
                 <div className="relative aspect-[2.4/1] overflow-hidden bg-[#DCE7F0]">
-                  <ProjectImage src={project.image} title={project.title} />
+                  <ProjectImage key={project.image} src={project.image} title={project.title} />
                   <span className={`absolute left-2 top-2 rounded px-2 py-1 text-[9px] font-bold uppercase text-white ${project.type === 'spin-off' ? 'bg-[#E2A300]' : 'bg-[#0B55A0]'}`}>
                     {project.type === 'spin-off' ? 'Spin-off' : 'Project'}
                   </span>
                 </div>
                 <div className="p-3.5">
-                  <h3 className="font-tahoma-font text-base font-bold leading-snug text-[#0C1D3B]">{project.title}</h3>
-                  <p className="mt-1 text-xs leading-[1.45] text-[#405875]">{project.description}</p>
+                  <h3 className="break-words font-tahoma-font text-base font-bold leading-snug text-[#0C1D3B]">{project.title}</h3>
+                  <p className="mt-1 whitespace-pre-wrap break-words text-xs leading-[1.45] text-[#405875]">{project.description}</p>
                   {(project.status || project.highlight) && (
                     <div className="mt-2.5 flex flex-wrap gap-1.5">
                       {project.highlight && <span className="rounded bg-[#FFF0BD] px-2 py-1 text-[9px] font-medium text-[#4D3A0B]">{project.highlight}</span>}

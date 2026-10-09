@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight, Mail, Handshake, CircleHelp } from 'lucide-react';
+import { Newspaper, CalendarDays, Award, Users, Inbox, FlaskConical, ArrowRight, Mail, Handshake, CircleHelp, FileText } from 'lucide-react';
+import { countIpPortfolio } from '@/lib/models/IpPortfolio';
 import News from '@/lib/models/News';
 import Event from '@/lib/models/Event';
 import Story from '@/lib/models/Story';
@@ -15,6 +16,7 @@ import Faq from '@/lib/models/Faq';
 export const dynamic = 'force-dynamic';
 
 const cards = [
+  { key: 'ipPortfolio', label: 'IP Portfolio', href: '/admin/ip-portfolio', icon: FileText },
   { key: 'inquiries', label: 'Form Submissions', href: '/admin/inquiries', icon: Inbox },
   { key: 'disclosures', label: 'Invention Disclosures', href: '/admin/disclosures', icon: FlaskConical },
   { key: 'news', label: 'News Articles', href: '/admin/news', icon: Newspaper },
@@ -27,7 +29,7 @@ const cards = [
 ] as const;
 
 export default async function AdminDashboardPage() {
-  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount, subscribersCount, partnersCount, faqCount] = await Promise.all([
+  const [newsCount, eventsCount, storiesCount, teamCount, homeInq, industryInq, innovationInq, disclosuresCount, subscribersCount, partnersCount, faqCount, ipPortfolioCount] = await Promise.all([
     News.count(),
     Event.count(),
     Story.count(),
@@ -39,10 +41,12 @@ export default async function AdminDashboardPage() {
     Subscriber.count(),
     Partner.count(),
     Faq.count(),
+    countIpPortfolio(),
   ]);
   const inquiriesCount = homeInq + industryInq + innovationInq;
 
   const counts: Record<string, number> = {
+    ipPortfolio: ipPortfolioCount,
     news: newsCount,
     events: eventsCount,
     stories: storiesCount,

@@ -241,7 +241,7 @@ export function NewsletterSignup() {
                 <input
                   type="email"
                   required
-                  placeholder="Work Email"
+                  placeholder="Enter your email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   className="flex-grow bg-slate-50 border border-slate-300 px-2 py-2 sm:py-3 outline-none focus:bg-white focus:border-blue-500 transition-all rounded-sm placeholder:text-slate-400 text-slate-900 text-sm sm:text-base"
@@ -303,18 +303,13 @@ export function TechPlace({ techPlaceCards }: { techPlaceCards: TechPlaceCardDat
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-            {homeImpactCardDefaults.map((defaultCard, i) => {
-              const adminCard = techPlaceCards[i] ?? {
-                label: defaultCard.label,
-                value: defaultCard.count,
-                subtitle: defaultCard.sub,
-              };
-              const cardValue = Number.isFinite(Number(adminCard.value)) ? Number(adminCard.value) : defaultCard.count;
-              const Icon = defaultCard.icon;
+            {techPlaceCards.map((adminCard, i) => {
+              const cardValue = Number.isFinite(Number(adminCard.value)) ? Number(adminCard.value) : 0;
+              const Icon = homeImpactCardDefaults[i]?.icon ?? Layers;
 
               return (
                 <motion.div
-                  key={defaultCard.label}
+                  key={`${adminCard.label}-${i}`}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.35 }}
@@ -326,9 +321,9 @@ export function TechPlace({ techPlaceCards }: { techPlaceCards: TechPlaceCardDat
                   </div>
                   <AnimatedStatValue value={cardValue} />
                   <div className="text-lg font-serif text-white mb-2">
-                    {adminCard.label || defaultCard.label}
+                    {adminCard.label}
                   </div>
-                  <p className="text-white text-sm">{adminCard.subtitle || defaultCard.sub}</p>
+                  <p className="break-words text-white text-sm">{adminCard.subtitle}</p>
                 </motion.div>
               );
             })}
@@ -369,7 +364,7 @@ export function LatestNews() {
             <div className="flex items-center justify-between mb-6 sm:mb-8 lg:mb-10">
               <div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-serif text-[#003B70] mb-3">
-                  News & Success Stories
+                  Latest News
                 </h2>
 
                 <p className="text-slate-500 text-sm sm:text-base ">
@@ -449,7 +444,7 @@ export function PartnershipInquiry() {
                 <span>Initiate Engagement</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-serif text-[#003B70] mb-4 leading-tight">
-                Partner with ICON
+                Partner with NUST
               </h2>
               <p className="max-w-2xl text-slate-600 text-sm sm:text-base leading-relaxed">
                 Our team experts dedicated to facilitating long-term strategic

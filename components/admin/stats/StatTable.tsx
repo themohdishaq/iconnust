@@ -46,6 +46,8 @@ function ColumnInput({ column, defaultRow }: { column: ColumnDef; defaultRow?: R
       type={column.type}
       name={column.key}
       step={column.type === 'number' ? column.step ?? '1' : undefined}
+      min={column.type === 'number' ? 0 : undefined}
+      aria-label={column.label}
       defaultValue={defaultRow ? (defaultRow[column.key] as string | number) : undefined}
       placeholder={column.label}
       className={inputClass}
@@ -69,7 +71,8 @@ function StatRow<T extends Row>({
 
   return (
     <div className="border-t border-slate-100 py-3 first:border-t-0">
-      <form action={formAction} className="flex flex-wrap items-center gap-2">
+      <div className="flex items-start gap-2">
+      <form action={formAction} className="flex flex-1 flex-wrap items-center gap-2">
         {columns.map((c) => (
           <ColumnInput key={c.key} column={c} defaultRow={rowValues} />
         ))}
@@ -80,16 +83,20 @@ function StatRow<T extends Row>({
         >
           {isPending ? 'Saving…' : 'Save'}
         </button>
+      </form>
+      <form action={deleteAction.bind(null, row.id)} aria-label={`Delete row ${row.id}`}>
         <button
           type="submit"
-          formAction={deleteAction.bind(null, row.id)}
+          disabled={isPending}
           className="text-slate-400 hover:text-red-600 hover:bg-red-50 p-2 rounded-lg transition-colors"
           title="Delete row"
         >
           <Trash2 size={15} />
         </button>
       </form>
+      </div>
       {state?.error && <p className="text-red-600 text-xs font-bold mt-1.5">{state.error}</p>}
+      {state?.success && <p role="status" className="mt-1.5 text-xs text-emerald-700">{state.success}</p>}
     </div>
   );
 }
@@ -118,6 +125,7 @@ function AddRowForm({
         </button>
       </form>
       {state?.error && <p className="text-red-600 text-xs font-bold mt-1.5">{state.error}</p>}
+      {state?.success && <p role="status" className="mt-1.5 text-xs text-emerald-700">{state.success}</p>}
     </div>
   );
 }

@@ -8,8 +8,8 @@ export default async function TeamPage() {
 
   return (
     <TeamPageContent
-      members={members.map(({ id, name, title, dept, image }) => ({
-        id, name, title, dept, image,
+      members={members.map(({ id, name, title, dept, image, email }) => ({
+        id, name, title, dept, image, email,
       }))}
     />
   );

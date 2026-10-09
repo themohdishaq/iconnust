@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { SECTOR_ICONS, type InnovationPortfolio, type InnovationProject, type InnovationSector } from '@/lib/innovationSectors';
@@ -21,6 +22,47 @@ function Field({ name, label, value, required, maxLength, multiline, type = 'tex
   );
 }
 
+function ImageField({ name, value = '', required = false }: { name: 'image' | 'heroImage'; value?: string; required?: boolean }) {
+  const [imagePath, setImagePath] = useState(value);
+  const [uploadPreview, setUploadPreview] = useState('');
+  const [error, setError] = useState('');
+  const [failedPreview, setFailedPreview] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
+  const preview = uploadPreview || imagePath;
+
+  useEffect(() => () => { if (uploadPreview) URL.revokeObjectURL(uploadPreview); }, [uploadPreview]);
+
+  function clearUpload() {
+    if (fileRef.current) fileRef.current.value = '';
+    setUploadPreview(''); setError('');
+  }
+
+  return (
+    <div className="space-y-3">
+      <label className="block"><span className="mb-1.5 block text-xs font-semibold text-slate-600">{required ? 'Hero image path / URL (or upload below)' : 'Image path / URL (optional)'}</span><input name={name} value={imagePath} onChange={event => setImagePath(event.target.value)} maxLength={500} className={inputClass} /></label>
+      <label className="block"><span className="mb-1.5 block text-xs font-semibold text-slate-600">{value ? 'Replace image' : 'Upload image'}</span><input ref={fileRef} name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="w-full text-sm text-slate-500" onChange={event => {
+        const file = event.target.files?.[0];
+        if (!file) { clearUpload(); return; }
+        if (file.size > 5 * 1024 * 1024 || !/\.(jpe?g|png|webp|gif)$/i.test(file.name)) {
+          clearUpload(); setError('Choose a JPG, PNG, WEBP or GIF image up to 5 MB.'); return;
+        }
+        setError(''); setUploadPreview(URL.createObjectURL(file));
+      }} /><span className="mt-2 block text-xs text-slate-400">JPG, PNG, WEBP or GIF, up to 5 MB. A selected upload replaces the image path when you save.{required ? ' A hero image is required.' : ''}</span></label>
+      {error && <p role="alert" className="text-xs text-red-700">{error}</p>}
+      {preview && (
+        <div className="overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+          <p className="border-b border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600">{uploadPreview ? 'New image preview — save to apply' : 'Current image'}</p>
+          {failedPreview === preview ? <p className="p-4 text-xs text-amber-700">This image could not be loaded. Check the path or upload a replacement.</p> : <Image key={preview} src={preview} alt="Portfolio image preview" width={480} height={270} unoptimized className="h-44 w-full object-contain" onError={() => setFailedPreview(preview)} />}
+        </div>
+      )}
+      <div className="flex gap-4 text-xs font-semibold text-blue-800">
+        {uploadPreview && <button type="button" onClick={clearUpload}>Cancel selected upload</button>}
+        {!required && preview && <button type="button" onClick={() => { clearUpload(); setImagePath(''); }}>Remove image</button>}
+      </div>
+    </div>
+  );
+}
+
 export default function PortfolioManager({ portfolio }: { portfolio: InnovationPortfolio }) {
   const router = useRouter();
   const [kind, setKind] = useState<Kind>('sectors');
@@ -30,6 +72,7 @@ export default function PortfolioManager({ portfolio }: { portfolio: InnovationP
   const [notice, setNotice] = useState('');
   const [search, setSearch] = useState('');
   const [formVersion, setFormVersion] = useState(0);
+  const formRef = useRef<HTMLFormElement>(null);
   const sector = editing && 'slug' in editing ? editing : undefined;
   const project = editing && 'id' in editing ? editing : undefined;
 
@@ -41,7 +84,10 @@ export default function PortfolioManager({ portfolio }: { portfolio: InnovationP
     const form = new FormData(event.currentTarget);
     const data: Record<string, unknown> = Object.fromEntries(form.entries());
     delete data.file;
-    if (kind === 'projects') data.sectorSlugs = form.getAll('sectorSlugs');
+    if (kind === 'projects') {
+      data.sectorSlugs = form.getAll('sectorSlugs');
+      if (!(data.sectorSlugs as string[]).length) { setError('Select at least one sector for this project or spin-off.'); return; }
+    }
     if (kind === 'sectors' && !data.slug) {
       data.slug = String(data.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     }
@@ -95,8 +141,9 @@ export default function PortfolioManager({ portfolio }: { portfolio: InnovationP
                   <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
                   <p className="mt-1 text-xs text-slate-500">{isSector ? `${item.projects} projects · ${item.spinOffs} spin-offs` : `${item.type === 'spin-off' ? 'Spin-off' : 'Project'} · ${item.sectorSlugs.map(slug => portfolio.sectors.find(s => s.slug === slug)?.title ?? slug).join(', ')}`}</p>
                   {isSector && <Link href={`/commercialisation/sectors/${item.slug}`} target="_blank" className="mt-2 inline-block text-xs text-blue-800">View sector</Link>}
+                  {!isSector && item.sectorSlugs[0] && <Link href={`/commercialisation/sectors/${item.sectorSlugs[0]}`} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs text-blue-800">View on website</Link>}
                 </div>
-                <button disabled={busy} onClick={() => { setEditing(item); setError(''); setNotice(''); }} className="text-xs font-semibold text-blue-800" aria-label={`Edit ${item.title}`}>Edit</button>
+                <button disabled={busy} onClick={() => { setEditing(item); setFormVersion(value => value + 1); setError(''); setNotice(''); formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="text-xs font-semibold text-blue-800" aria-label={`Edit ${item.title}`}>Edit</button>
                 <button disabled={busy || (isSector && item.projects + item.spinOffs > 0)} title={isSector && item.projects + item.spinOffs > 0 ? 'Move or delete assigned projects first' : 'Delete'} onClick={() => remove(item)} className="text-xs font-semibold text-red-600 disabled:opacity-40" aria-label={`Delete ${item.title}`}>Delete</button>
               </li>;
             })}
@@ -104,7 +151,7 @@ export default function PortfolioManager({ portfolio }: { portfolio: InnovationP
           {!items.length && <p className="py-8 text-center text-sm text-slate-500">{search ? 'No matching entries.' : `No ${kind} yet. Use the form to add one.`}</p>}
           {kind === 'sectors' && <p className="mt-4 text-xs text-slate-500">To delete a sector, first move or delete its assigned projects and spin-offs.</p>}
         </section>
-        <form key={`${kind}-${sector?.slug ?? project?.id ?? 'new'}-${formVersion}`} onSubmit={save} className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
+        <form ref={formRef} key={`${kind}-${sector?.slug ?? project?.id ?? 'new'}-${formVersion}`} onSubmit={save} className="rounded-xl border border-slate-100 bg-white p-6 shadow-sm">
           <div className="mb-5 flex items-center justify-between">
             <h2 className="text-lg font-serif text-slate-900">{editing ? 'Edit' : 'Add'} {kind === 'sectors' ? 'Sector' : 'Project / Spin-off'}</h2>
             {editing && <button type="button" disabled={busy} onClick={reset} className="text-xs font-semibold text-slate-500">Cancel editing</button>}
@@ -122,8 +169,7 @@ export default function PortfolioManager({ portfolio }: { portfolio: InnovationP
               </div></div>
             </>}
             <Field name="description" label="Description" value={editing?.description} required maxLength={16000} multiline />
-            <Field name={kind === 'sectors' ? 'heroImage' : 'image'} label={kind === 'sectors' ? 'Hero image path / URL (or upload below)' : 'Image path / URL (optional)'} value={sector?.heroImage ?? project?.image} maxLength={500} />
-            <label className="block"><span className="mb-1.5 block text-xs font-semibold text-slate-600">Upload image</span><input name="file" type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="w-full text-sm text-slate-500" /><span className="mt-2 block text-xs text-slate-400">JPG, PNG, WEBP or GIF, up to 5 MB. An upload replaces the image path. Sector hero images are required.</span></label>
+            <ImageField name={kind === 'sectors' ? 'heroImage' : 'image'} value={sector?.heroImage ?? project?.image} required={kind === 'sectors'} />
             {kind === 'sectors' ? <div className="grid gap-4 sm:grid-cols-2"><Field name="ipAssets" label="IP assets (optional)" value={sector?.ipAssets} maxLength={100} /><Field name="industryPartners" label="Industry partners (optional)" type="number" min={0} value={sector?.industryPartners} /></div>
               : <><Field name="status" label="Status / IP protection (optional)" value={project?.status} maxLength={500} /><Field name="highlight" label="Highlight / TRL (optional)" value={project?.highlight} maxLength={300} /></>}
             <Field name="order" label="Display order (lower numbers first)" type="number" value={editing?.order ?? 0} />

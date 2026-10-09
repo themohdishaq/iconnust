@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  Users, ShieldCheck, Lightbulb, TrendingUp,
+  Users, Mail,
 } from 'lucide-react';
 
 export type PublicTeamMember = {
@@ -12,6 +12,7 @@ export type PublicTeamMember = {
   title: string;
   dept: string;
   image: string;
+  email: string;
 };
 
 
@@ -37,7 +38,7 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
     <div className="min-h-screen bg-white text-slate-900 font-sans">
 
       {/* Hero */}
-      <section className="relative py-8 pt-20 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800  overflow-hidden">
+      <section className="relative py-52 bg-gradient-to-br from-slate-900 via-[#0a2342] to-slate-800  overflow-hidden">
        <motion.div
                  initial={{ scale: 1.08, opacity: 0 }}
                  animate={{ scale: 1, opacity: 0.35 }}
@@ -64,7 +65,7 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
       <section className="py-10  bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
+            <div className="items-center">
               <motion.div variants={slideLeft}>
                 <div className="inline-flex items-center space-x-2 text-blue-700 font-bold text-[10px] uppercase tracking-[0.4em] mb-6">
                   <div className="w-8 h-px bg-blue-700" />
@@ -88,7 +89,7 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
       </section>
 
       {/* Leadership */}
-      <section id="leadership" className="py-10 sm:py-14 lg:py-20 bg-slate-50">
+      <section id="leadership" className="py-10  bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
             <motion.div variants={fadeUp} className="text-center mb-8 sm:mb-10 lg:mb-14">
@@ -104,7 +105,7 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
                 <motion.div key={leader.id} variants={fadeUp}
                   className="group bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
                   <div className="relative h-96 overflow-hidden ">
-                    <Image src={leader.image} alt={leader.name} fill sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]" />
+                    <Image key={leader.image} src={leader.image} alt={leader.name} fill sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   </div>
@@ -112,6 +113,12 @@ export default function TeamPageContent({ members }: { members: PublicTeamMember
                     <h3 className="font-bold text-slate-900 mb-1 group-hover:text-blue-900 transition-colors">{leader.name}</h3>
                     <p className="text-blue-700 text-xs font-bold mb-2 leading-tight">{leader.title}</p>
                     <p className="text-slate-400 text-xs">{leader.dept}</p>
+                    {leader.email?.trim() && (
+                      <a href={`mailto:${leader.email.trim()}`} className="mt-3 inline-flex max-w-full items-start gap-2 text-xs text-blue-700 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-900">
+                        <Mail size={14} aria-hidden="true" className="mt-0.5 shrink-0" />
+                        <span className="break-all">{leader.email.trim()}</span>
+                      </a>
+                    )}
 
                   </div>
                 </motion.div>

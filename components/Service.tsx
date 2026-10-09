@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { industryServiceMedia } from '@/lib/industryServiceMedia';
 import {
   FlaskConical,
   Users,
@@ -18,7 +19,7 @@ const services = [
     tagline: 'Co-develop breakthrough solutions',
     desc: 'Custom research projects designed to solve specific industrial bottlenecks through applied science and engineering. From feasibility studies to full-scale applied research, ICON structures industry-funded projects with clear IP agreements.',
     icon: <FlaskConical size={22} />,
-    img: '/industry-services/rnd.jpg',
+    ...industryServiceMedia.rnd,
     bullets: [
       'Joint research agreements with defined milestones',
       'Access to 447+ research and teaching labs and key facilities',
@@ -31,7 +32,7 @@ const services = [
     tagline: 'Pakistan-based expertise on demand',
     desc: 'Strategic guidance from renowned faculty across multiple domains, from AI implementation to structural engineering. ICON facilitates short-term advisory engagements, technical audits, and regulatory support for industry clients.',
     icon: <Users size={22} />,
-    img: '/industry-services/expertconsultancy.jpg',
+    ...industryServiceMedia.consultancy,
     bullets: [
       'Engineering, science, Architecture and other domains covered',
       'Technical audits, feasibility reviews & expert testimony',
@@ -43,7 +44,7 @@ const services = [
   tagline: 'Bridging academia with industry',
   desc: "Launched in 2018, the NUST Faculty Placement Program enables faculty members to work closely with industry, fostering collaborative R&D, innovation, process improvement, and technology transfer while strengthening academia-industry partnerships.",
   icon: <Users size={22} />, // or Briefcase, GraduationCap, Building2
-  img: '/capacity_building.jpeg',
+  ...industryServiceMedia.training,
   bullets: [
     'Industry placements lasting from a few days to several weeks',
     'Promotes collaborative R&D, innovation, and process improvement',
@@ -56,7 +57,7 @@ const services = [
     tagline: 'Precision analysis, certified results',
     desc: "Access to NUST's ISO-certified infrastructure, high-end analytical tools, and material testing facilities.",
     icon: <Layers size={22} />,
-    img: '/industry-services/labservices.jpg',
+    ...industryServiceMedia.testing,
     stat: '300+ Advanced Labs',
     bullets: [
       'ISO/IEC 17025-accredited testing facilities',
@@ -174,7 +175,7 @@ function ServiceRow({
                 {String(index + 1).padStart(2, '0')}
               </div>
               <div className="absolute bottom-0 left-0 bg-[#FCAF17] px-4 py-2 text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]">
-                ICON Industry Services
+                {service.subtitle}
               </div>
             </div>
           </motion.div>

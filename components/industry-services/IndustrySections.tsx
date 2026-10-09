@@ -8,6 +8,7 @@ import {
 import Image from 'next/image';
 import { useInquiryForm } from '@/lib/useInquiryForm';
 import Link from 'next/link';
+import { industryServiceMedia } from '@/lib/industryServiceMedia';
 
 // --- DATA ---
 const services = [
@@ -24,7 +25,7 @@ const services = [
       'Dedicated faculty PI matched to your domain',
       'Confidential project management end-to-end',
     ],
-    img: '/industry-services/rnd.jpg',
+    ...industryServiceMedia.rnd,
   },
   {
     id: 'consultancy',
@@ -39,7 +40,7 @@ const services = [
       'Technical audits, feasibility reviews, and expert testimony',
       'Fast turnaround with NDA protection',
     ],
-    img: '/industry-services/expertconsultancy.jpg',
+    ...industryServiceMedia.consultancy,
   },
   {
     id: 'training',
@@ -53,7 +54,7 @@ const services = [
       'Creates opportunities for student projects, internships, jobs, and professional training',
       'Promotes collaborative R&D, innovation, and process improvement',
     ],
-    img: '/capacity_building.jpeg',
+    ...industryServiceMedia.training,
   },
   {
     id: 'testing',
@@ -68,7 +69,7 @@ const services = [
       'Rapid turnaround with detailed technical reports',
       'Confidential testing under strict NDA protocols',
     ],
-    img: '/industry-services/labservices.jpg',
+    ...industryServiceMedia.testing,
   },
 ];
 
@@ -226,8 +227,8 @@ export function ServiceExplorer() {
               <div className="relative min-h-[300px] overflow-hidden bg-[#003B70] sm:min-h-[420px] lg:min-h-[560px]">
                 <Image src={active.img} alt={active.title} fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover transition-transform duration-700 hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#003B70]/70 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 border-t border-r border-white/30 bg-[#003B70]/90 px-5 py-4 text-[10px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-sm">
-                  NUST Industry Gateway
+                <div className="absolute bottom-0 left-0 max-w-full bg-[#FCAF17] px-4 py-2 text-[9px] font-bold uppercase leading-5 tracking-[0.18em] text-[#003B70]">
+                  {active.subtitle}
                 </div>
               </div>
             </motion.div>

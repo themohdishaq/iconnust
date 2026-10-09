@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import Image from 'next/image';
 import SubmitButton from '@/components/admin/SubmitButton';
 import type { FormState } from '@/app/admin/(protected)/team/actions';
@@ -21,6 +21,11 @@ export default function TeamMemberForm({
   initial?: Initial;
 }) {
   const [state, formAction] = useActionState(action, {});
+  const [photoPreview, setPhotoPreview] = useState('');
+  const [photoError, setPhotoError] = useState('');
+  const [failedPhoto, setFailedPhoto] = useState('');
+  const preview = photoPreview || initial?.image || '';
+  useEffect(() => () => { if (photoPreview) URL.revokeObjectURL(photoPreview); }, [photoPreview]);
 
   return (
     <form action={formAction} className="space-y-5 max-w-2xl">
@@ -30,8 +35,9 @@ export default function TeamMemberForm({
           <input name="name" required defaultValue={initial?.name} className={inputClass} />
         </div>
         <div>
-          <label className={labelClass}>Email (optional)</label>
-          <input type="email" name="email" defaultValue={initial?.email} className={inputClass} />
+          <label htmlFor="team-email" className={labelClass}>Email (optional)</label>
+          <input id="team-email" type="email" name="email" maxLength={200} defaultValue={initial?.email} className={inputClass} />
+          <p className="mt-2 text-xs text-slate-500">Displayed as a contact link on the public team card.</p>
         </div>
       </div>
 
@@ -61,13 +67,25 @@ export default function TeamMemberForm({
       </div>
 
       <div>
-        <label className={labelClass}>Photo {initial ? '(leave empty to keep current)' : ''}</label>
-        {initial?.image && (
-          <div className="relative w-28 h-28 mb-3 rounded-lg overflow-hidden border border-slate-200">
-            <Image src={initial.image} alt="" fill className="object-cover" />
+        <label htmlFor="team-photo" className={labelClass}>Photo {initial ? '(leave empty to keep current)' : ''}</label>
+        {preview && (
+          <div className="mb-3">
+            <p className="mb-2 text-xs font-semibold text-slate-500">{photoPreview ? 'New photo preview — save to apply' : 'Current photo'}</p>
+            <div className="relative h-48 w-48 overflow-hidden rounded-lg border border-slate-200 bg-slate-50">
+              {failedPhoto === preview ? <p className="p-3 text-xs text-amber-700">This photo could not be loaded. Upload a replacement.</p> : <Image key={preview} src={preview} alt="Team member photo preview" fill sizes="192px" unoptimized className="object-cover" onError={() => setFailedPhoto(preview)} />}
+            </div>
           </div>
         )}
-        <input type="file" name="image" accept="image/*" required={!initial} className={inputClass} />
+        <input id="team-photo" type="file" name="image" accept="image/jpeg,image/png,image/webp,image/gif" required={!initial} className={inputClass} onChange={event => {
+          const file = event.target.files?.[0];
+          setPhotoError('');
+          if (!file) { setPhotoPreview(''); return; }
+          if (file.size > 5 * 1024 * 1024 || !/\.(jpe?g|png|webp|gif)$/i.test(file.name)) {
+            event.target.value = ''; setPhotoPreview(''); setPhotoError('Choose a JPG, PNG, WEBP or GIF photo up to 5 MB.'); return;
+          }
+          setPhotoPreview(URL.createObjectURL(file));
+        }} />
+        {photoError && <p role="alert" className="mt-2 text-xs text-red-700">{photoError}</p>}
         <p className="mt-2 text-xs text-slate-500">JPG, PNG, WEBP, or GIF, up to 5 MB.</p>
       </div>
 

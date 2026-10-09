@@ -53,8 +53,8 @@ export default function NipoDownloads() {
       <div className="mx-auto max-w-8xl px-4 sm:px-6">
         <div className="mb-7 max-w-3xl">
           <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.3em] text-[#B17A00]">NIPO Resources</span>
-          <h2 id="nipo-downloads-heading" className="font-tahoma-font text-2xl font-bold text-[#003B70] sm:text-3xl">Download IP filling documents</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">Click Download on a category to see its filing forms and guidance, then select a document to download.</p>
+          <h2 id="nipo-downloads-heading" className="font-tahoma-font text-2xl font-bold text-[#003B70] sm:text-3xl">Need to File? Download Your Documents Here</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-600">Click on any IP category below to check the required forms and guidelines</p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

@@ -22,7 +22,7 @@ import {
 // Types
 // ----------------------
 
-type ChartData = {
+export type ChartData = {
   year: string;
   amount: number;
   isTotal: boolean;
@@ -51,7 +51,7 @@ const CustomTooltip = ({
   label,
 }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
-    const isTotal = label === "Total";
+    const isTotal = Boolean(payload[0].payload?.isTotal);
 
     return (
       <div
@@ -91,7 +91,10 @@ export default function FinancialChart({ data = defaultData }: { data?: ChartDat
     <section className="bg-[#0a2342] w-full font-sanss text-white relative overflow-hidden">
      
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 py-10 sm:px-6 relative z-10">
+        <h2 className="mb-2 font-serif text-2xl sm:text-3xl">Commercialisation impact</h2>
+        <p className="mb-6 text-sm text-slate-300">Revenue in PKR million by reporting period.</p>
+        <div className="overflow-x-auto">
         {/* Chart */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -99,6 +102,7 @@ export default function FinancialChart({ data = defaultData }: { data?: ChartDat
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-[#112d4e]/40 border border-white/5 rounded-3xl p-6 sm:p-8 backdrop-blur-sm shadow-2xl h-[450px] sm:h-[500px]"
+          style={{ minWidth: Math.max(400, data.length * 110) }}
         >
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -126,6 +130,7 @@ export default function FinancialChart({ data = defaultData }: { data?: ChartDat
               {/* X Axis */}
               <XAxis
                 dataKey="year"
+                interval={0}
                 axisLine={false}
                 tickLine={false}
                 tick={{ fill: "#94a3b8", fontSize: 13, fontWeight: 500 }}
@@ -169,6 +174,14 @@ export default function FinancialChart({ data = defaultData }: { data?: ChartDat
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
+        </div>
+        <div className="mt-6 overflow-x-auto">
+          <table className="w-full text-left text-sm">
+            <caption className="sr-only">Commercialisation revenue in PKR million</caption>
+            <thead><tr className="border-b border-white/20"><th scope="col" className="py-3">Reporting period</th><th scope="col" className="py-3 text-right">PKR million</th></tr></thead>
+            <tbody>{data.map((row, index) => <tr key={`${row.year}-${index}`} className={`border-b border-white/10 ${row.isTotal ? 'font-semibold text-teal-300' : 'text-slate-200'}`}><th scope="row" className="py-3 font-normal">{row.year}</th><td className="py-3 text-right tabular-nums">{row.amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td></tr>)}</tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

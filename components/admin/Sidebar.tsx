@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, Newspaper, CalendarDays, Award, Users, LogOut, Settings, Inbox, FlaskConical, BarChart3, Mail, Handshake, CircleHelp,
+  LayoutDashboard, Newspaper, CalendarDays, Award, Users, LogOut, Settings, Inbox, FlaskConical, BarChart3, Mail, Handshake, CircleHelp, FileText,
 } from 'lucide-react';
 import { logoutAction } from '@/app/admin/actions';
 
@@ -12,6 +12,7 @@ const links = [
   { href: '/admin/inquiries', label: 'Form Submissions', icon: Inbox },
   { href: '/admin/disclosures', label: 'Invention Disclosures', icon: FlaskConical },
   { href: '/admin/innovation', label: 'Sectors & Projects', icon: FlaskConical },
+  { href: '/admin/ip-portfolio', label: 'IP Portfolio', icon: FileText },
   { href: '/admin/news', label: 'News', icon: Newspaper },
   { href: '/admin/events', label: 'Events', icon: CalendarDays },
   { href: '/admin/stories', label: 'Success Stories', icon: Award },

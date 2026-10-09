@@ -21,14 +21,20 @@ function buildDoc(formData: FormData) {
   };
 }
 
+function validateDoc(doc: ReturnType<typeof buildDoc>) {
+  if (!doc.name || !doc.title || !doc.dept) return 'Please fill in all required fields.';
+  if ([doc.name, doc.title, doc.dept, doc.email].some(value => value.length > 200)) return 'Name, title, department and email must be 200 characters or fewer.';
+  if (doc.email && !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(doc.email)) return 'Please enter a valid email address or leave it blank.';
+  if (!Number.isInteger(doc.order) || doc.order < -2147483648 || doc.order > 2147483647) return 'Display order must be a valid whole number.';
+}
+
 export async function createTeamMemberAction(_prevState: FormState, formData: FormData): Promise<FormState> {
   await requireAdminSession();
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
-  if (!doc.name || !doc.title || !doc.dept) {
-    return { error: 'Please fill in all required fields.' };
-  }
+  const validationError = validateDoc(doc);
+  if (validationError) return { error: validationError };
   if (!imageFile || imageFile.size === 0) {
     return { error: 'Please choose a photo.' };
   }
@@ -39,7 +45,12 @@ export async function createTeamMemberAction(_prevState: FormState, formData: Fo
   } catch (error) {
     return { error: error instanceof Error ? error.message : 'Unable to upload the photo.' };
   }
-  await TeamMember.create({ ...doc, image });
+  try { await TeamMember.create({ ...doc, image }); }
+  catch (error) {
+    await deleteUploadedImage(image);
+    console.error('Unable to create team member:', error);
+    return { error: 'Unable to save the team member. Please try again.' };
+  }
 
   revalidatePath('/admin/team');
   revalidatePath('/team');
@@ -51,9 +62,8 @@ export async function updateTeamMemberAction(id: string, _prevState: FormState, 
   const doc = buildDoc(formData);
   const imageFile = formData.get('image') as File | null;
 
-  if (!doc.name || !doc.title || !doc.dept) {
-    return { error: 'Please fill in all required fields.' };
-  }
+  const validationError = validateDoc(doc);
+  if (validationError) return { error: validationError };
 
   const existing = await TeamMember.findById(id);
   if (!existing) {
@@ -70,10 +80,21 @@ export async function updateTeamMemberAction(id: string, _prevState: FormState, 
     }
   }
 
-  await TeamMember.update(id, update);
+  try {
+    const saved = await TeamMember.update(id, update);
+    if (!saved) {
+      if (update.image) await deleteUploadedImage(update.image);
+      return { error: 'Team member could not be updated. Refresh the page and try again.' };
+    }
+  } catch (error) {
+    if (update.image) await deleteUploadedImage(update.image);
+    console.error('Unable to update team member:', error);
+    return { error: 'Unable to save the team member. Please try again.' };
+  }
   if (update.image) await deleteUploadedImage(existing.image);
 
   revalidatePath('/admin/team');
+  revalidatePath('/admin/team/[id]/edit', 'page');
   revalidatePath('/team');
   redirect('/admin/team');
 }

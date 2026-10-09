@@ -10,7 +10,6 @@ import {
   BarChart3, Factory, TestTube, Mail, X
 } from 'lucide-react';
 import OrgChartSection from '@/components/OrganStruct';
-import FinancialChart from '@/components/BodStats';
 import Image from 'next/image';
 import FaqSection, { type FaqItem } from '@/components/FaqSection';
 import InnovationSectorExplorer from '@/components/commercialisation/InnovationSectorExplorer';
@@ -74,7 +73,7 @@ const pathways = [
       'International licensing via WIPO and partner networks',
     ],
     suitable: 'Best for researchers with patented or patent-pending technologies seeking industry adoption without forming a company.',
-    img: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80',
+    img: '/main-pic/technology_licence.png',
   },
   {
     id: 'spinoffs',

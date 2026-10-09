@@ -101,10 +101,10 @@ export default function NipoPortfolioIntro() {
             NUST Intellectual <span className="text-[#B97800]">Property Portfolio</span>
           </h2>
           <p className="mt-5 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-            NUST Intellectual Property Office (NIPO) supports the university&apos;s researchers, faculty, students and innovators in protecting intellectual property generated through research and innovation. NIPO assists inventors with drafting and filing applications with IPO Pakistan, while building awareness through seminars, webinars and capacity-building activities.
+            The NUST Intellectual Property Office (NIPO) supports the university's researchers, faculty members, students and innovators in protecting intellectual property generated through research and innovation. We work directly with inventors to draft and file their applications with IPO Pakistan, while also hosting workshops, webinars, and training sessions to spread awareness about how IP works.
           </p>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 sm:text-base">
-            Patents, copyrights, industrial designs and trademarks help safeguard ideas and create pathways to recognition, commercialisation and wider societal impact. NIPO works to strengthen IP culture across NUST and contribute to Pakistan&apos;s global intellectual property presence.
+            Patents, copyrights, industrial designs and trademarks help safeguard your ideas and create pathways to recognition, commercialization and wider societal impact. Our goal is to build a strong culture of innovation across NUST and help put Pakistan on the map in the global IP community.
           </p>
         <Link
           href="/research-innovation/ipo-listing"

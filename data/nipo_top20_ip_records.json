@@ -3,6 +3,7 @@
     {
       "ip_title": "Presso / Spice Dispenser (Class-03)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "19279-D",
       "award_date": "2020-08-10"
@@ -10,6 +11,7 @@
     {
       "ip_title": "Adapter for leakage testing",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Unknown",
       "application_no": "19823-D",
       "award_date": "2020-01-10"
@@ -17,6 +19,7 @@
     {
       "ip_title": "Encoder housing for ZFM scope",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Defence Engineering",
       "application_no": "19825-D",
       "award_date": "2019-11-07"
@@ -24,6 +27,7 @@
     {
       "ip_title": "OLED electronic circuit housing",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Electronics Engineering",
       "application_no": "19824-D",
       "award_date": "2023-05-09"
@@ -31,6 +35,7 @@
     {
       "ip_title": "Housing for 21 volt LIPO battery",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Electrical Engineering",
       "application_no": "19822-D",
       "award_date": "2019-11-07"
@@ -38,6 +43,7 @@
     {
       "ip_title": "Outdoor Breakfast Chair (Class-03)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "20162-D",
       "award_date": "2020-09-03"
@@ -45,6 +51,7 @@
     {
       "ip_title": "The Smart Shoe (Class-10)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Unknown",
       "application_no": "19800-D",
       "award_date": "2020-01-10"
@@ -52,6 +59,7 @@
     {
       "ip_title": "Hypersonic Space Transportation System",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Aerospace Engineering",
       "application_no": "19853-D",
       "award_date": "2019-11-07"
@@ -59,6 +67,7 @@
     {
       "ip_title": "Expandable Fog Harvester (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "19118-D",
       "award_date": "2018-06-28"
@@ -66,6 +75,7 @@
     {
       "ip_title": "Rocket Ramjet Integrated System (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Aerospace Engineering",
       "application_no": "19943-D",
       "award_date": "2020-08-10"
@@ -73,6 +83,7 @@
     {
       "ip_title": "Hybrid Darrieus-Savonius Micro Hydrokinetic Turbine (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Mechanical Engineering",
       "application_no": "19944-D",
       "award_date": "2020-02-10"
@@ -80,6 +91,7 @@
     {
       "ip_title": "Diesel Fuel Filtration and Dispensing System",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Automotive Engineering",
       "application_no": "19942-D",
       "award_date": "2019-11-20"
@@ -87,6 +99,7 @@
     {
       "ip_title": "EKKO Wave Therapeutic Device (Class-12)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "19921-D",
       "award_date": "2021-12-31"
@@ -94,6 +107,7 @@
     {
       "ip_title": "Domestic Grains Processor (Class-04)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "19119-D",
       "award_date": "2018-06-28"
@@ -101,6 +115,7 @@
     {
       "ip_title": "O-Box Product Series (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "19590-D",
       "award_date": "2018-11-13"
@@ -108,6 +123,7 @@
     {
       "ip_title": "Tea Scoop with Stainer/ Chashni (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Arts & Crafts",
       "application_no": "19297-D",
       "award_date": "2018-12-01"
@@ -115,6 +131,7 @@
     {
       "ip_title": "Leather Shaving Blade (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Manufacturing Engineering",
       "application_no": "18317-D",
       "award_date": "2017-04-04"
@@ -122,6 +139,7 @@
     {
       "ip_title": "Leather Fleshing Blade (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Manufacturing Engineering",
       "application_no": "18318-D",
       "award_date": "2017-04-25"
@@ -129,6 +147,7 @@
     {
       "ip_title": "Induction Heating Coil for Leather Fleshing / Shaving Blade (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Manufacturing Engineering",
       "application_no": "18949-D",
       "award_date": "2018-04-20"
@@ -136,15 +155,1201 @@
     {
       "ip_title": "1 DOF upper limb Prosthetic Gripper (Class-01)",
       "ip_type": "Industrial Design",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "19090-D",
       "award_date": "2018-05-24"
+    },
+    {
+      "ip_title": "6 DOF upper limb Prosthetic Gripper (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "19091-D",
+      "award_date": "2018-05-24"
+    },
+    {
+      "ip_title": "IOT Connected Ovitrap with Real Time Mosquito Count (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "19089-D",
+      "award_date": "2018-05-24"
+    },
+    {
+      "ip_title": "Pain Relieving Footwear (Class-10)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "19116-D",
+      "award_date": "2018-08-10"
+    },
+    {
+      "ip_title": "Ice Cream Garnishing Tool/ ICE-IT (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19273-D",
+      "award_date": "2019-01-09"
+    },
+    {
+      "ip_title": "Spinnet Cutter (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19292-D",
+      "award_date": "2018-12-01"
+    },
+    {
+      "ip_title": "De Yolker: Egg Yolk Seperator (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19287-D",
+      "award_date": "2018-12-01"
+    },
+    {
+      "ip_title": "Active IR Marker Cashing (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "19586-D",
+      "award_date": "2018-11-13"
+    },
+    {
+      "ip_title": "Integrated and Low Profile Foldable Staircase for Military & Commercial Vehicles (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "19588-D",
+      "award_date": "2018-11-13"
+    },
+    {
+      "ip_title": "Integrated Window Design with Ventilation and Night Mode for Military vehicles (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "19592-D",
+      "award_date": "2018-11-13"
+    },
+    {
+      "ip_title": "Tin Opener/ Twister (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19286-D",
+      "award_date": "2018-12-01"
+    },
+    {
+      "ip_title": "Ankle Foot Orthotic (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "19295-D",
+      "award_date": "2018-12-28"
+    },
+    {
+      "ip_title": "Six Degree of Freedom (DoF) Strain Measuring System (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Materials Engineering",
+      "application_no": "19409-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Electric Powered Wheel (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "19283-D",
+      "award_date": "2018-11-15"
+    },
+    {
+      "ip_title": "High Flowrate Water Pre-Filtration Box (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": "19413-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Herb Chopping and Grinding Device/ Verdure (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19282-D",
+      "award_date": "2018-12-01"
+    },
+    {
+      "ip_title": "Choping Board/ Shear (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19281-D",
+      "award_date": "2018-12-01"
+    },
+    {
+      "ip_title": "Design Tools (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19412-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Adaptive seating and sleeping unit",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19411-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Candy Box (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19416-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Fun Grate (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19419-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "SAHL: Tool Bags for Daily Wage Workers",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19173-D",
+      "award_date": "2019-01-09"
+    },
+    {
+      "ip_title": "Multipurpose Mixing Device/ Liquit (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19278-D",
+      "award_date": "2019-01-23"
+    },
+    {
+      "ip_title": "Spice Milling Device/ Miraki (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19276-D",
+      "award_date": "2019-01-23"
+    },
+    {
+      "ip_title": "Device to facilitate Music Learning (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19420-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Can Opener (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19417-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "E-Grate (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "19410-D",
+      "award_date": "2018-12-24"
+    },
+    {
+      "ip_title": "Instant Peeling Tool/ PECO (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19274-D",
+      "award_date": "2019-01-23"
+    },
+    {
+      "ip_title": "Water Melon Cutting Tool/ Wee-Vast (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19285-D",
+      "award_date": "2019-01-23"
+    },
+    {
+      "ip_title": "Multipurpose Kebab Coating Tool/ Dipcoat (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19275-D",
+      "award_date": "2019-01-23"
+    },
+    {
+      "ip_title": "Dreamcatcher Sleeping Unit for PTSD Patients (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19284-D",
+      "award_date": "2019-01-09"
+    },
+    {
+      "ip_title": "Spice Dispenser (Class-04)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19172-D",
+      "award_date": "2019-01-09"
+    },
+    {
+      "ip_title": "ECO Hearth: Domestic Bio-Gas Generator (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": "19169-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Turn-O: Rotatable BBQ Sticks (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19171-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Corrugated Potato Cutter (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19277-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Pepper Grinder/ Ambidexterous Grinder (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19280-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Vegetable Cutting Board/ Divers Cutting Board (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19288-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Butter Extractor Tool/ Butter Separator (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19289-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Chai-Making Appliance (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "19290-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Wearable Multipurpose Tool for Vegetable/ Fingertips (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19294-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Travelers Grater (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19296-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Citrus Juice Extractor/ Citrus Extenso (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19298-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Rolling Pin/ Sifter (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19300-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Transformable Furniture Unit (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19421-D",
+      "award_date": "2019-01-28"
+    },
+    {
+      "ip_title": "Dining Table Solution (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19293-D",
+      "award_date": "2019-07-17"
+    },
+    {
+      "ip_title": "MAPTU - Mobile Atmospheric Pollutant Telemetry Unit (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Environmental Engineering",
+      "application_no": "20058-D",
+      "award_date": "2020-08-10"
+    },
+    {
+      "ip_title": "Sixth Finger Actuator (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Robotics",
+      "application_no": "20085-D",
+      "award_date": "2020-07-02"
+    },
+    {
+      "ip_title": "Actuator of Exoskeleton Hand (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Robotics",
+      "application_no": "20083-D",
+      "award_date": "2020-07-02"
+    },
+    {
+      "ip_title": "Project XYZ: Digital Interaction Device",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Education & Learning",
+      "application_no": "19117-D",
+      "award_date": "2018-07-01"
+    },
+    {
+      "ip_title": "Fixed Dome Portable Biogas Plant (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "19587-D",
+      "award_date": "2019-02-26"
+    },
+    {
+      "ip_title": "Specialized Rig for Post-Fabrication Processing of Leather Flashing/Shaving Blades",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Manufacturing Engineering",
+      "application_no": "19425-D",
+      "award_date": "2019-02-26"
+    },
+    {
+      "ip_title": "Mountable lamp with onboard power generation mechanism for hand-pumps (Hand Pump dynamo Lamp)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": "19481-D",
+      "award_date": "2019-03-06"
+    },
+    {
+      "ip_title": "Water flow monitoring sleeve for downward bent hand-pump pipes (Discharge and Rain Monitor)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Water Resource Engineering",
+      "application_no": "19482-D",
+      "award_date": "2019-03-06"
+    },
+    {
+      "ip_title": "Flexes Counter for Hand-Pumps for Water Output Monitoring",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Water Resource Engineering",
+      "application_no": "19485-D",
+      "award_date": "2019-03-06"
+    },
+    {
+      "ip_title": "IoT Connected Water Throw Monitoring Sleeve (Discharge Throw Monitor)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Water Resource Engineering",
+      "application_no": "19480-D",
+      "award_date": "2019-03-06"
+    },
+    {
+      "ip_title": "Smart Dendrometer",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": "19685-D",
+      "award_date": "2019-06-24"
+    },
+    {
+      "ip_title": "Soil Moister Meter",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": "19684-D",
+      "award_date": "2019-06-24"
+    },
+    {
+      "ip_title": "Spring Forced Adjustable clamp for Pipes",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "19683-D",
+      "award_date": "2019-06-24"
+    },
+    {
+      "ip_title": "Semi-Pasive Upper Body Orthotic Device (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "19850-D",
+      "award_date": "2019-11-07"
+    },
+    {
+      "ip_title": "Wedge Press / Cheese Extractor Tool (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "19299-D",
+      "award_date": "2019-07-17"
+    },
+    {
+      "ip_title": "Suture Free Strip Bond Patch for Suture-less Wound Closure (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "19982-D",
+      "award_date": "2020-07-02"
+    },
+    {
+      "ip_title": "Brain Imaging Tools for Medical Diagnosis (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20087-D",
+      "award_date": "2020-07-22"
+    },
+    {
+      "ip_title": "Radar Casing of Ground Surveillance Radar NRV3 (MAHZ-1) (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "20559-D",
+      "award_date": "2022-02-21"
+    },
+    {
+      "ip_title": "Tripod of Ground Surveillance Radar NRV3 (MAHZ-1) (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "20561-D",
+      "award_date": "2022-02-21"
+    },
+    {
+      "ip_title": "Turn Tilt Platform of Ground Surveillance Radar NRV3 (MAHZ-1) (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "20560-D",
+      "award_date": "2021-06-04"
+    },
+    {
+      "ip_title": "Pyramid Enclosure Glazed Solar Collector (Class-03)\nModified Title: Solar Collector Apparatus (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Solar Thermal Engineering",
+      "application_no": "20406-D",
+      "award_date": "2021-08-03"
+    },
+    {
+      "ip_title": "Joy Stick Based Assembly for Acquisition of Retina Using Portable Device (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20168-D",
+      "award_date": "2021-01-11"
+    },
+    {
+      "ip_title": "Mobile Mount for Retina Acquisition (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20167-D",
+      "award_date": "2020-08-10"
+    },
+    {
+      "ip_title": "HESS Screening System (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Computer Engineering",
+      "application_no": "20165-D",
+      "award_date": "2022-06-02"
+    },
+    {
+      "ip_title": "Combined Braking System for Light Motorcycles (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Automotive Engineering",
+      "application_no": "20171-D",
+      "award_date": "2020-10-13"
+    },
+    {
+      "ip_title": "Inclined Concentric Quadrupole Magnetic Actuators for Targeted Drug Delivery (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20169-D",
+      "award_date": "2021-01-06"
+    },
+    {
+      "ip_title": "Two DOF Adjustable Metal Strip Feeding Device (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "19707-D",
+      "award_date": "2019-11-07"
+    },
+    {
+      "ip_title": "TRR Chassis for S-Band Phased Array Radar (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "RF & Microwave",
+      "application_no": "20252-D",
+      "award_date": "2020-10-02"
+    },
+    {
+      "ip_title": "Ankeli - Birdhouse (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "20320-D",
+      "award_date": "2021-01-14"
+    },
+    {
+      "ip_title": "Sparrow’s Nest Box (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "20330-D",
+      "award_date": "2021-01-11"
+    },
+    {
+      "ip_title": "Printoast-Toaster (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "20327-D",
+      "award_date": "2021-01-06"
+    },
+    {
+      "ip_title": "E-Toaster (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "20321-D",
+      "award_date": "2021-01-14"
+    },
+    {
+      "ip_title": "Smart Drill (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Power Tools",
+      "application_no": "20317-D",
+      "award_date": "2021-01-11"
+    },
+    {
+      "ip_title": "Triduo – Smart Drill (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Power Tools",
+      "application_no": "20325-D",
+      "award_date": "2021-01-14"
+    },
+    {
+      "ip_title": "Smart Drill for Craft Enthusiasts (Power Drill) (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Power Tools",
+      "application_no": "20323-D",
+      "award_date": "2021-03-31"
+    },
+    {
+      "ip_title": "Affordable, Smart and Innovative Drill for Domestic Users (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Power Tools",
+      "application_no": "20324-D",
+      "award_date": "2021-01-06"
+    },
+    {
+      "ip_title": "Tri-Fold (Air Pod) (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "20322-D",
+      "award_date": "2021-03-22"
+    },
+    {
+      "ip_title": "AMACHO - Man Groomer (Class 03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "20318-D",
+      "award_date": "2021-03-31"
+    },
+    {
+      "ip_title": "Pipe Inspection Robot (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Oil & Gas Engineering",
+      "application_no": "20453-D",
+      "award_date": "2021-01-14"
+    },
+    {
+      "ip_title": "AgriEye Mobile Unit (Class 12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "20405-D",
+      "award_date": "2021-01-11"
+    },
+    {
+      "ip_title": "Smart Portable Thermoelectric Vaccine Carrier (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20454-D",
+      "award_date": "2021-01-14"
+    },
+    {
+      "ip_title": "Single Motor Cable-Driven Exo-Skeleton Arm for Strength Augmentation (Class 01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Power Tools",
+      "application_no": "20381-D",
+      "award_date": "2022-02-21"
+    },
+    {
+      "ip_title": "CrasAir - Air Quality Monitoring Urban Unit (Class 12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "20386-D",
+      "award_date": "2022-02-03"
+    },
+    {
+      "ip_title": "Auto-Adjustable Linear Mechanism for Universal Boroscope (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "20562-D",
+      "award_date": "2021-09-27"
+    },
+    {
+      "ip_title": "Safely Removal of Recoil Spring during Disassembly of 14.5 mm Gun (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "20563-D",
+      "award_date": "2021-03-08"
+    },
+    {
+      "ip_title": "8 Wheeled Linear Actuator for Boroscope (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "20572-D",
+      "award_date": "2021-08-03"
+    },
+    {
+      "ip_title": "EKKO-Portable Vibration Therapy Device (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20634-D",
+      "award_date": "2021-12-15"
+    },
+    {
+      "ip_title": "Enclosure for Multipurpose MRI Coil (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20669-D",
+      "award_date": "2020-11-27"
+    },
+    {
+      "ip_title": "Autism Therapy Assistive Device (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20635-D",
+      "award_date": "2022-03-18"
+    },
+    {
+      "ip_title": "Wearable Fitness Device for Patients with Asthma (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "20636-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "EcoScape Pod: Physical Space for Office Employees to Help Relieve their Stress (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "20651-D",
+      "award_date": "2020-11-27"
+    },
+    {
+      "ip_title": "Footwear for People with Foot Deformities (Class-10)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "20653-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "E-Brace for Cure of Straight Neck Syndrome, Supporting Healthy Cervical Posture (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20654-D",
+      "award_date": "2021-09-27"
+    },
+    {
+      "ip_title": "Filtration and Monitoring Component for Vehicles (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Automotive Engineering",
+      "application_no": "20655-D",
+      "award_date": "2021-09-27"
+    },
+    {
+      "ip_title": "River and Ocean Cleanup Device (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Environmental Engineering",
+      "application_no": "20657-D",
+      "award_date": "2021-09-27"
+    },
+    {
+      "ip_title": "First Aid Immobilization Splint for Upper and Lower Extremities (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20658-D",
+      "award_date": "2021-08-17"
+    },
+    {
+      "ip_title": "Eco Greithe (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "20659-D",
+      "award_date": "2021-08-17"
+    },
+    {
+      "ip_title": "Boondh: Atmospheric Water Generator (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Water Resource Engineering",
+      "application_no": "20660-D",
+      "award_date": "2021-08-17"
+    },
+    {
+      "ip_title": "Plus One: Flood Rescue Transportation (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "20661-D",
+      "award_date": "2022-02-21"
+    },
+    {
+      "ip_title": "Grabet: Smart Automated Shopping Trolley (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Arts & Crafts",
+      "application_no": "20662-D",
+      "award_date": "2021-08-17"
+    },
+    {
+      "ip_title": "Interactive Tool for Visual Communication for Partially Sighted Children (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Biomedical Engineering",
+      "application_no": "20663-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "Rebin - A Kitchen Waste Bin which Helps to Recycle Organic Waste through Composting (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Environmental Engineering",
+      "application_no": "20666-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "Electrical and Portable Mosquito Repellent (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "20667-D",
+      "award_date": "2022-02-21"
+    },
+    {
+      "ip_title": "Livestock Live Monitoring Mobile Node (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Computer Vision",
+      "application_no": "21008-D",
+      "award_date": "2026-06-16"
+    },
+    {
+      "ip_title": "Livestock Live Monitoring Fixed Node (Class-12)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Computer Vision",
+      "application_no": "21009-D",
+      "award_date": "2026-06-16"
+    },
+    {
+      "ip_title": "Bladeless Penta-Copter (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Aerospace Engineering",
+      "application_no": "21010-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "Anxiety and Depression Trigger Identification and Prevention Device (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "21022-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "Gamification of Type 1 Diabetes Monitoring System for Kids (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "21012-D",
+      "award_date": "2022-03-18"
+    },
+    {
+      "ip_title": "Tidal Powered Table that Generates Electricity for a Raft Café (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Energy Engineering",
+      "application_no": "21013-D",
+      "award_date": "2022-06-02"
+    },
+    {
+      "ip_title": "Smart Portable Electrotherapy Device for Arthritic Hand Pain Relief (Class-03)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "21011-D",
+      "award_date": "2022-03-18"
+    },
+    {
+      "ip_title": "Rear Drag Reduction for Electric Vehicles (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Automotive Design",
+      "application_no": "21018-D",
+      "award_date": "2022-04-11"
+    },
+    {
+      "ip_title": "Smart Barrier for in City Traffic Jams (Class-04)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "21019-D",
+      "award_date": "2022-04-22"
+    },
+    {
+      "ip_title": "An Interactive Ventilation Solution for Confined and Basement Areas (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Civil Engineering",
+      "application_no": "21021-D",
+      "award_date": "2021-12-14"
+    },
+    {
+      "ip_title": "Enregy Metering Device",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Electronics Engineering",
+      "application_no": "21431-D",
+      "award_date": "2025-12-31"
+    },
+    {
+      "ip_title": "Battery Operated Wireless Sensorball-Interior Design",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Electrical Engineering",
+      "application_no": "21430-D",
+      "award_date": "2025-11-04"
+    },
+    {
+      "ip_title": "Hybrid Walk and Roll Quadruped Robot",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "-",
+      "award_date": "2022-10-04"
+    },
+    {
+      "ip_title": "Tank Al Khalid Gun Control Box PCB Tester (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Electronics Engineering",
+      "application_no": "21551-D",
+      "award_date": "2022-12-08"
+    },
+    {
+      "ip_title": "Holding device for Lux Meter (Class-01)",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Electronics Engineering",
+      "application_no": "21552-D",
+      "award_date": "2022-12-08"
+    },
+    {
+      "ip_title": "Pre-Cooler for Split Type Air Conditioner",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "21580-D",
+      "award_date": "2023-01-30"
+    },
+    {
+      "ip_title": "Fermat Spiral Path Disk Insulator",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "21581-D",
+      "award_date": "2022-12-21"
+    },
+    {
+      "ip_title": "Half Star Shaped Antenna foe Wifi 6E Applications",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "RF & Microwave",
+      "application_no": "21931-D",
+      "award_date": "2025-03-10"
+    },
+    {
+      "ip_title": "Linearly Orthogonal Polarized Triangular Patch Antenna for Satellite Internet",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "RF & Microwave",
+      "application_no": "21929-D",
+      "award_date": "2025-03-10"
+    },
+    {
+      "ip_title": "Millimeter Wave Antenna for 5G Applications",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "RF & Microwave",
+      "application_no": "21930-D",
+      "award_date": "2025-03-10"
+    },
+    {
+      "ip_title": "SitzPal",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21972-D",
+      "award_date": "2024-08-02"
+    },
+    {
+      "ip_title": "Gyroscopic Smart Power Drill",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21971-D",
+      "award_date": "2024-07-30"
+    },
+    {
+      "ip_title": "Interactive LED Learning Lamp",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21970-D",
+      "award_date": "2024-07-30"
+    },
+    {
+      "ip_title": "Ferragamo Lounge Chair",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21969-D",
+      "award_date": "2024-07-30"
+    },
+    {
+      "ip_title": "VAVEO",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21968-D",
+      "award_date": "2024-08-02"
+    },
+    {
+      "ip_title": "FieldView - Ball Tracking Device",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21967-D",
+      "award_date": "2024-08-02"
+    },
+    {
+      "ip_title": "FieldView - Foot Wearable Device",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "21966-D",
+      "award_date": "2024-07-30"
+    },
+    {
+      "ip_title": "Smart Glasses for Visually Challenged Individuals",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Consumer Appliances & Electronics",
+      "application_no": "22149-D",
+      "award_date": "2026-06-15"
+    },
+    {
+      "ip_title": "Progressive-Variable Screw Extruder",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "22805-D",
+      "award_date": "2025-04-14"
+    },
+    {
+      "ip_title": "Multi-DOF Upper Limb Prosthetic",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "22901-D",
+      "award_date": "2025-06-08"
+    },
+    {
+      "ip_title": "Printed Circuit Board of Multi Degree of Freedom Prosthesis",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Electronics Engineering",
+      "application_no": "22910-D",
+      "award_date": "2026-06-16"
+    },
+    {
+      "ip_title": "Sky-Guard Radar Power Supply",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "RF & Microwave",
+      "application_no": "22925-D",
+      "award_date": "2026-06-16"
+    },
+    {
+      "ip_title": "Garden Mosquito Trap",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "23063-D",
+      "award_date": "2026-01-27"
+    },
+    {
+      "ip_title": "Wally Mosquito Trap",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "23064-D",
+      "award_date": "2026-01-22"
+    },
+    {
+      "ip_title": "Egg Cradle Mosquito Trap",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "23065-D",
+      "award_date": "2026-01-22"
+    },
+    {
+      "ip_title": "Bike Side Car",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": "23067-D",
+      "award_date": "2026-01-22"
+    },
+    {
+      "ip_title": "Dental Scaler Actuator",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "23379-D",
+      "award_date": "2026-09-17"
+    },
+    {
+      "ip_title": "Hardware Integrated Driver Simulator for Tank VT-4",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "23510-D",
+      "award_date": "2026-09-17"
+    },
+    {
+      "ip_title": "Force Sensing Fruit Gripper",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Robotics",
+      "application_no": "23549-D",
+      "award_date": "2026-02-27"
+    },
+    {
+      "ip_title": "Battery Casing for Upper Limb Prosthesis",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": null,
+      "application_no": "23755-D",
+      "award_date": "2026-03-26"
+    },
+    {
+      "ip_title": "Biomimetic Owl-Wing Flapping UAV",
+      "ip_type": "Industrial Design",
+      "description": "",
+      "sector": "Defence Engineering",
+      "application_no": "23848-D",
+      "award_date": "2026-09-11"
     }
   ],
   "copyrights": [
     {
       "ip_title": "Web Portal National University of Science and Technology",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "NUST Ventures",
       "application_no": "F.21-2225/2013-COPR",
       "award_date": "2019-10-03"
@@ -152,6 +1357,7 @@
     {
       "ip_title": "A System for Detecting and Regulating Anxiety Using Haptics",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "F.21-1710/2020-COPR",
       "award_date": "2021-08-03"
@@ -159,6 +1365,7 @@
     {
       "ip_title": "Kisan Zar Zameen: Android Mobile Application for Precision Agriculture Services",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-2561/2020-COPR",
       "award_date": "2021-08-03"
@@ -166,6 +1373,7 @@
     {
       "ip_title": "EPIC-Web Application",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-36/2021-COPR",
       "award_date": "2021-08-24"
@@ -173,6 +1381,7 @@
     {
       "ip_title": "WebSAT - Web Application Security Assessment Toolkit",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-38/2021-COPR",
       "award_date": "2023-05-26"
@@ -180,6 +1389,7 @@
     {
       "ip_title": "Desktop Application \"Defender Diagnostic Scanner Pakistan\"",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Automotive Engineering",
       "application_no": "F.21-37/2021-COPR",
       "award_date": "2021-09-03"
@@ -187,6 +1397,7 @@
     {
       "ip_title": "Stochastic Attentions and Context Learning for Person Re-Identification in Surveillance Data",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-35/2021-COPR",
       "award_date": "2021-08-26"
@@ -194,6 +1405,7 @@
     {
       "ip_title": "Static Analysis Based Progressive Framework for Deep Unsupervised Malware Classification of Windows Portable Executable",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-45/2021-COPR",
       "award_date": "2021-09-30"
@@ -201,6 +1413,7 @@
     {
       "ip_title": "Impact of Indoor Multipath Channels on Timing Advance for URLLC in Industrial IoT",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-44/2021-COPR",
       "award_date": "2021-09-03"
@@ -208,6 +1421,7 @@
     {
       "ip_title": "Mubarak ATMS Software",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-844/2021-COPR",
       "award_date": "2023-08-28"
@@ -215,6 +1429,7 @@
     {
       "ip_title": "User Interface of Mubarak ATMS Software",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-845/2021-COPR",
       "award_date": "2023-08-28"
@@ -222,6 +1437,7 @@
     {
       "ip_title": "MetaMIC: A Platform for Meta-Analysis of MICroarrays",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Information Technology",
       "application_no": "F.21-1013/2021-COPR",
       "award_date": "2022-01-24"
@@ -229,6 +1445,7 @@
     {
       "ip_title": "GUITAR: A GUI for Transcriptomic Analysis of RNA-Seq Data",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Information Technology",
       "application_no": "F.21-1014/2021-COPR",
       "award_date": "2022-01-24"
@@ -236,6 +1453,7 @@
     {
       "ip_title": "SEQClick: Cloud Based SEQuencing Analysis at a Click",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Information Technology",
       "application_no": "F.21-1012/2021-COPR",
       "award_date": "2022-01-24"
@@ -243,6 +1461,7 @@
     {
       "ip_title": "Web Scraping, Data Analysis and Dashboard Generation for COVID-19 in R",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Information Technology",
       "application_no": "F.21-1015/2021-COPR",
       "award_date": "2022-01-24"
@@ -250,6 +1469,7 @@
     {
       "ip_title": "Pipeline for Automated Docking and Analysis by Using Openeye",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-1011/2021-COPR",
       "award_date": "2022-01-24"
@@ -257,6 +1477,7 @@
     {
       "ip_title": "VacSol: Reverse Vaccinology Pipeline",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-1023/2021-COPR",
       "award_date": "2021-09-29"
@@ -264,6 +1485,7 @@
     {
       "ip_title": "PanRV: Pangenome Reverse Vaccinology Pipeline",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-1022/2021-COPR",
       "award_date": "2021-09-29"
@@ -271,6 +1493,7 @@
     {
       "ip_title": "Quantifying Earnings Management in/through Stata",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-1016/2021-COPR",
       "award_date": "2021-09-03"
@@ -278,15 +1501,394 @@
     {
       "ip_title": "Quantifying Stock Price Crash Risk in Stata",
       "ip_type": "Copyright",
+      "description": "",
       "sector": "Software Engineering",
       "application_no": "F.21-1017/2021-COPR",
       "award_date": "2021-09-03"
+    },
+    {
+      "ip_title": "Intelligent Signal",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "F.21-2203/2021-COPR",
+      "award_date": "2022-04-28"
+    },
+    {
+      "ip_title": "Alamouti-Coded Cooperative NOMA with Imperfect Channel State Information",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "F.21-2542/2021-COPR",
+      "award_date": "2022-04-28"
+    },
+    {
+      "ip_title": "Epicare",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "F.21-2613/2021-COPR",
+      "award_date": "2023-09-14"
+    },
+    {
+      "ip_title": "A3 (Air Quality Awareness through AI)",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "F.21-2690/2021-COPR",
+      "award_date": "2022-01-24"
+    },
+    {
+      "ip_title": "Improving Image Super Resolution using Squeeze-and-Residual-Excitation with Holistic Attention in Deep Neural Networks",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Digital Image Processing",
+      "application_no": "3313/2021 Copr",
+      "award_date": "2024-02-26"
+    },
+    {
+      "ip_title": "An Attention based Distance Regression CNN for Nuclei Instance Segmentation and Type Classification in Digitized Histology Images",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Digital Image Processing",
+      "application_no": "F.21.3315/2021 Copr.",
+      "award_date": "2024-02-26"
+    },
+    {
+      "ip_title": "Orientation Aware Weapons Detection in Visual Data",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Computer Vision",
+      "application_no": "F-21.3316/2021 Copr.",
+      "award_date": "2024-02-26"
+    },
+    {
+      "ip_title": "Informative Attention based Person Re-Identification for Automated Surveillance",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Computer Vision",
+      "application_no": "F.21.3314/2021 Copr.",
+      "award_date": "2024-02-26"
+    },
+    {
+      "ip_title": "Live News Channel Analytics Framwork",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Information Technology",
+      "application_no": "725/2022",
+      "award_date": "2023-09-14"
+    },
+    {
+      "ip_title": "Knowledge-Aware Visual Question Answering Framework for developing visual learning apps for children",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "724/2022",
+      "award_date": "2023-09-14"
+    },
+    {
+      "ip_title": "Antiaffin An In-Silico Pipeline for the Generation of Affinity Maturated Antibody Structure from WildType",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "1786/2022",
+      "award_date": "2023-09-14"
+    },
+    {
+      "ip_title": "Software for the Annotation and Labeling of Gastroenterology Images",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "1854/2022",
+      "award_date": "2023-09-14"
+    },
+    {
+      "ip_title": "Mobihawk",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "3613/2022",
+      "award_date": "2023-05-26"
+    },
+    {
+      "ip_title": "FEAST: Firmware Extraction, Analysis and Security Assessment Tool",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "3620/2022",
+      "award_date": "2023-05-26"
+    },
+    {
+      "ip_title": "SVPN - Secure Virtual Private Network",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "3619/2022",
+      "award_date": "2023-05-26"
+    },
+    {
+      "ip_title": "WebGuard",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "3618/2022",
+      "award_date": "2023-05-26"
+    },
+    {
+      "ip_title": "Pasbaan",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "3614/2022",
+      "award_date": "2023-05-26"
+    },
+    {
+      "ip_title": "A Predictive Mimicker of Fracture Behavior in Fiber Reinforced Concrete Using Machine Learning",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "673/2023",
+      "award_date": "2023-09-27"
+    },
+    {
+      "ip_title": "Disease Specific Knowledge Graphs for Unstructured EMRs and Radiology Reports",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "671/2023",
+      "award_date": "2023-09-27"
+    },
+    {
+      "ip_title": "ActiPhe: A Deep Active Learning Framework for Cancer Phenotypes Labeling in Unstructured EHRs",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "672/2023",
+      "award_date": "2023-12-15"
+    },
+    {
+      "ip_title": "Qalam",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "1961/2023",
+      "award_date": "2023-08-09"
+    },
+    {
+      "ip_title": "User Interface of Qalam",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "1962/2023",
+      "award_date": "2023-08-09"
+    },
+    {
+      "ip_title": "A Self-Supervised Based Deep Learning Model for Survival Analysis of tumorigenesis Patients Using Whole Slide Image",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "4356/2023",
+      "award_date": "2024-04-09"
+    },
+    {
+      "ip_title": "Wheat Mapping from satellite Time Series Leveraging Superpixel-Based Active Learning for Data sparse Regions Across Multiple Years",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "4357/2023",
+      "award_date": "2024-04-09"
+    },
+    {
+      "ip_title": "Understanding Irritable Bowel Syndrome (IBS): Discovering Endophenotypes with Machine Learning",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "434-2024",
+      "award_date": "2024-05-27"
+    },
+    {
+      "ip_title": "Precision aquaculture through the use of computer vision for automated biomass estimation, disease detection and behavior analysis\"",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Aquaponics Engineering",
+      "application_no": "436/2024",
+      "award_date": "2024-05-15"
+    },
+    {
+      "ip_title": "Crop Type Classification using Multi-temporal Earth Observations Satellite Imagery",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "437/2024",
+      "award_date": "2024-05-15"
+    },
+    {
+      "ip_title": "UI of A Solar-Powered and loT based Apparatus for Cold Storage",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "2828/2024",
+      "award_date": "2026-06-09"
+    },
+    {
+      "ip_title": "Source code of a Solar-Powered and loT based Apparatus for Cold Storage",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "2829/2024",
+      "award_date": "2026-06-09"
+    },
+    {
+      "ip_title": "TB ScanAid: AI Guided Chest X-Ray Diagnosis of Tuberculosis",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": "4949/2024",
+      "award_date": "2025-05-16"
+    },
+    {
+      "ip_title": "User Interface of NUST Personality Index Portal",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "764/2025",
+      "award_date": "2026-07-23"
+    },
+    {
+      "ip_title": "Source Code of NUST Personality Index Portal",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "765/2025",
+      "award_date": "2026-06-18"
+    },
+    {
+      "ip_title": "Code for Tech4ASD",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "2292/2025",
+      "award_date": "2026-04-08"
+    },
+    {
+      "ip_title": "3D SegUX-Net Model MRI Segmentation Using Large Kernels",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "2521/2025",
+      "award_date": "2026-08-05"
+    },
+    {
+      "ip_title": "Code of 1-Opt Enhanced  MIMO Detector",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": "Software Engineering",
+      "application_no": "4532/2025",
+      "award_date": "2026-04-08"
+    },
+    {
+      "ip_title": "Enhancing Single Image Super-Resolution for Real World Remote Sensing Imagery",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "6011/2025",
+      "award_date": "2026-06-09"
+    },
+    {
+      "ip_title": "Blind Buddy - A Computer Based Device for Visually Impaired",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "5851/2025",
+      "award_date": "2026-03-03"
+    },
+    {
+      "ip_title": "Hematology Automated Intelligent Dye Expert - A Portable Laboratory for Hematology Precision",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "5841/2025",
+      "award_date": "2026-03-03"
+    },
+    {
+      "ip_title": "Machine Learning Based Thalassemia Detection System using CBC Reports",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "5846/2025",
+      "award_date": "2026-03-03"
+    },
+    {
+      "ip_title": "Progessive Climate Bot",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "5847/2025",
+      "award_date": "2026-03-03"
+    },
+    {
+      "ip_title": "Progessive Climate Bot Web Application",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "5848/2025",
+      "award_date": "2026-03-03"
+    },
+    {
+      "ip_title": "AI-Powered Osteopathy Screening Platform",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "6290/2025",
+      "award_date": "2026-05-19"
+    },
+    {
+      "ip_title": "Peer Perception Portal (PPI)",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "248/2026",
+      "award_date": "2026-04-08"
+    },
+    {
+      "ip_title": "Code of MADADGAR",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "587/2026",
+      "award_date": "2026-03-31"
+    },
+    {
+      "ip_title": "GUI of MADADGAR",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": null,
+      "award_date": "2026-04-08"
+    },
+    {
+      "ip_title": "Pakistan Search for Peace with afghanistan - Statecraft , Policy and Strategy",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "2116/2026",
+      "award_date": "2026-06-08"
+    },
+    {
+      "ip_title": "TumorDetect.AI: AI Based Intelligent Breast Tumor Detection Platform",
+      "ip_type": "Copyright",
+      "description": "",
+      "sector": null,
+      "application_no": "3156/2026",
+      "award_date": "2026-08-25"
     }
+  
   ],
   "utility_patents": [
     {
       "ip_title": "Anisotropic Stent Device for the Treatment of Coronary Heart Disease",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "26/2014",
       "award_date": "2020-08-11"
@@ -294,6 +1896,7 @@
     {
       "ip_title": "Counterintuitive Auxetic Intramedullary Bone Stent and Method for Treating Long Bone Fracture",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "77/2014",
       "award_date": "2020-08-11"
@@ -301,6 +1904,7 @@
     {
       "ip_title": "Retinal Screening System using mobile terminal and method thereof",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Biomedical Engineering",
       "application_no": "10-2017-0144440",
       "award_date": "2019-08-09"
@@ -308,6 +1912,7 @@
     {
       "ip_title": "Development of Pure and 1% Silver-Doped Titania (TiO2) Embedded Polyethylene Terephthalate (PET) Film Protector to Disinfect Bacterial Species on Mobile Phones",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Environmental Sciences",
       "application_no": "309/2015",
       "award_date": "2019-08-07"
@@ -315,6 +1920,7 @@
     {
       "ip_title": "A portable electrochemical DNA Aptasensor to diagnose active Tuberculosis at an earlier stage from raw biological sample",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Clinical Sciences",
       "application_no": "177/2019",
       "award_date": "2025-11-12"
@@ -322,6 +1928,7 @@
     {
       "ip_title": "A Portable electrochemical DNA aptasensor to rapidly diagnose active Tuberculosis (TB) and Multi Drug Resistant Tuberculosis (MDR) at an earlier stage from raw biological samples",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Clinical Sciences",
       "application_no": "175/2019",
       "award_date": "2025-11-12"
@@ -329,6 +1936,7 @@
     {
       "ip_title": "Single Portable electrochemical DNA aptasensor for robust diagnosis of active Tuberculosis (TB) and Multi Drug Resistant Tuberculosis (MDR-TB), extremely drug resistant (XDR-TB) and totally drug resistant tuberculosis (TDR-TB) all at an earlier stage from raw biological samples",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Clinical Sciences",
       "application_no": "176/2019",
       "award_date": "2025-11-12"
@@ -336,6 +1944,7 @@
     {
       "ip_title": "Non-contact wireless overhead power line monitoring system",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Electrical Engineering",
       "application_no": "197/2019",
       "award_date": "2021-11-03"
@@ -343,6 +1952,7 @@
     {
       "ip_title": "A Network on Chip Based Multiprocessor Architecture for implementing K-Means Clustering Algorithm",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Computer Science",
       "application_no": "10-2017-0097638",
       "award_date": "2019-10-04"
@@ -350,41 +1960,47 @@
     {
       "ip_title": "Automatic system for tap water mixer at constant outlet temperature using gas expansion",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Unknown",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2016-08-16"
     },
     {
       "ip_title": "Aiding Peripheral Blood Circulation by Electromechanical Means",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Biomedical Engineering",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2016-08-10"
     },
     {
       "ip_title": "Novel Burn Rate Gradient Method of Tackling Erosive Burning in High Length/Diameter Solid Rocket Motor",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Aerospace Engineering",
       "application_no": "1265/2007",
       "award_date": "2009-04-15"
     },
     {
-      "ip_title": "Interfacial Coupling Induced Mechanical Property Enhancement in Kevlar Epoxy Composites",
+      "ip_title": "Interfacial Coupling Induced Mechanical Property Enhancement  in Kevlar Epoxy Composites",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Materials Engineering",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2013-12-26"
     },
     {
       "ip_title": "Nano Polymer Retrofit for Blast Protection Application",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Defence Engineering",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2011-12-16"
     },
     {
       "ip_title": "Highly Loaded Particle Doped Thermoset Composites with Improved Mechanical Properties",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Materials Engineering",
       "application_no": "1541/2008",
       "award_date": "2011-10-12"
@@ -392,20 +2008,23 @@
     {
       "ip_title": "A Gravity Driven Sun Traking System for Box Type Solar Cookers",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Solar Thermal Engineering",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2015-08-18"
     },
     {
       "ip_title": "Mini Wheel for Mobile Robot",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Robotics",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2015-06-30"
     },
     {
       "ip_title": "A High Throughput, Low Interrupt Generic Micro-coded Architecture for Ultra High Speed Communication Protocols",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Computer Science",
       "application_no": "550/2011",
       "award_date": "2015-04-01"
@@ -413,6 +2032,7 @@
     {
       "ip_title": "Energy Recovery Device for Gas Fired Water Heater (Geyser)",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Thermal Engineering",
       "application_no": "400/2010",
       "award_date": "2016-05-27"
@@ -420,9 +2040,195 @@
     {
       "ip_title": "A Mould Free Process for Making Ultra Light Weight Wind Turbine Blades using Composite Materials",
       "ip_type": "Utility Patent",
+      "description": "",
       "sector": "Mechanical Engineering",
-      "application_no": "",
+      "application_no": null,
       "award_date": "2016-03-25"
+    },
+    {
+      "ip_title": "A Direct Drive Electric Generator for Vertcal Axis Wind Turbines",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": null,
+      "award_date": "2016-04-27"
+    },
+    {
+      "ip_title": "Hydrogen Sulphide Gas Apparatus",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": null,
+      "award_date": "2015-08-18"
+    },
+    {
+      "ip_title": "The Knee Separator for Comfort During Leisure and Sleep",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Healthcare",
+      "application_no": null,
+      "award_date": "2016-08-16"
+    },
+    {
+      "ip_title": "A Self Starting High Speed Vertical Axis Wind Turbine with Distributed Blade Sections",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": null,
+      "award_date": "2016-10-24"
+    },
+    {
+      "ip_title": "Joint Machinized Frame of Two Electric Vehicle",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Mechanical Engineering",
+      "application_no": null,
+      "award_date": "2016-04-27"
+    },
+    {
+      "ip_title": "A Compound Parabolic Solar Cooker with Five Vacum Tubes",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Solar Thermal Engineering",
+      "application_no": null,
+      "award_date": "2017-06-16"
+    },
+    {
+      "ip_title": "A self Elongating stick with Retractable Studs",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Unknown",
+      "application_no": null,
+      "award_date": "2017-09-21"
+    },
+    {
+      "ip_title": "Sub-Surface Delamination Detection Method using Thermal Imaging",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Materials Science",
+      "application_no": "121/2014",
+      "award_date": "2018-01-03"
+    },
+    {
+      "ip_title": "Slip Ring Device with Hollow Inner Core",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Electrical Engineering",
+      "application_no": "829/2012",
+      "award_date": "2019-07-01"
+    },
+    {
+      "ip_title": "Storage Device Architecture of High Performance Hybird Solid State Disk",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "24/2011",
+      "award_date": "2014-02-18"
+    },
+    {
+      "ip_title": "Novel Nano Catalyst System for the Protection of Fast Track Bio-Diesel Derived form non edibleOil",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Chemical Engineering",
+      "application_no": "12/714,730",
+      "award_date": "2011-09-01"
+    },
+    {
+      "ip_title": "Novel process and catalyst for carbon dioxide conversion to energy generation products",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Chemical Engineering",
+      "application_no": null,
+      "award_date": "2012-01-01"
+    },
+    {
+      "ip_title": "Method & System for Adaptive Anomaly-Based Instrusion Detection",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "12/692,165",
+      "award_date": "2014-08-05"
+    },
+    {
+      "ip_title": "Geometric Correction Appratus and Method Based on Recursive Bezier Patch Sub Division Cross Referance to Related Application",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "2014-0038594",
+      "award_date": "2014-06-12"
+    },
+    {
+      "ip_title": "Illegal Move Detection for Game Using inertial Sensors",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": null,
+      "award_date": "2013-01-01"
+    },
+    {
+      "ip_title": "Catalysts & Method for the Production of Biodiesel",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Chemical Engineering",
+      "application_no": "PCT/CA 2012/050466",
+      "award_date": "2013-01-17"
+    },
+    {
+      "ip_title": "System And Method For Displaying Panoramic Image Using Single Look-Up Table",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "15/089,993",
+      "award_date": "2018-01-16"
+    },
+    {
+      "ip_title": "Apparatus And Method For Correcting Color Of Image Projection Device",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Computer Science",
+      "application_no": "13/658,039",
+      "award_date": "2015-05-12"
+    },
+    {
+      "ip_title": "Fuel Cell Membrane Electrode",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Electrical Engineering",
+      "application_no": null,
+      "award_date": "2016-08-16"
+    },
+    {
+      "ip_title": "A Single Vacuum Tube based Solar Cooker",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Solar Thermal Engineering",
+      "application_no": "657/2010",
+      "award_date": "2012-01-11"
+    },
+    {
+      "ip_title": "A Process for Making Low Cost Wind Turbine Electric Generators",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Energy Engineering",
+      "application_no": null,
+      "award_date": "2014-07-08"
+    },
+    {
+      "ip_title": "Economical Production of Interferon Lambda (IFN-λ) Protein by its Overexpression through Relative Synonymous Codon Usage (RSCU)",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Healthcare Biotechnology",
+      "application_no": null,
+      "award_date": "2014-02-18"
+    },
+    {
+      "ip_title": "Novel Catalyst to Manufacture Carbon Nanotubes and Hydrogen Gas",
+      "ip_type": "Utility Patent",
+      "description": "",
+      "sector": "Nanotechnology",
+      "application_no": "12/032,680",
+      "award_date": "2011-08-20"
     }
+    
   ]
 }

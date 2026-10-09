@@ -20,6 +20,7 @@ import {
   Tooltip,
 } from "recharts";
 import Link from 'next/link';
+import { buildIpTrend } from '@/lib/impactStats';
 
 // --- YouTube Video Data ---
 // To update videos: Go to https://www.youtube.com/@Research_NUST
@@ -66,13 +67,6 @@ const researchVideos = {
 type IpBreakdownEntry = { name: string; value: number; color: string };
 type IpYearlyEntry = { year: string; industrialDesign: number; copyright: number; patents: number; trademark: number };
 type StatTileEntry = { label: string; value: number };
-
-// Precompute totals for the labels shown above each stacked bar
-const withTotal = (rows: IpYearlyEntry[]) =>
-  rows.map((d) => ({
-    ...d,
-    total: d.industrialDesign + d.copyright + d.patents + d.trademark,
-  }));
 
 // --- Animation Variants ---
 const staggerContainer = {
@@ -130,16 +124,9 @@ export function InnovationHero() {
 }
 
 export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: { stats: StatTileEntry[]; ipBreakdown: IpBreakdownEntry[]; ipsFiled: IpYearlyEntry[]; ipsAwarded: IpYearlyEntry[] }) {
-  const pieGradientId = React.useId();
   const [chartsInView, setChartsInView] = React.useState(false);
   const totalIPFiled = ipBreakdown.reduce((sum, d) => sum + d.value, 0);
-  const ipsFiledDataWithTotal = withTotal(ipsFiled);
-  const ipsAwardedDataWithTotal = withTotal(ipsAwarded);
-  const filedByYear = new Map(ipsFiledDataWithTotal.map((row) => [row.year, row.total]));
-  const awardedByYear = new Map(ipsAwardedDataWithTotal.map((row) => [row.year, row.total]));
-  const ttoTrend = Array.from(new Set([...filedByYear.keys(), ...awardedByYear.keys()]))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((year) => ({ year, filed: filedByYear.get(year) ?? 0, awarded: awardedByYear.get(year) ?? 0 }));
+  const ttoTrend = buildIpTrend(ipsFiled, ipsAwarded);
 
 
   return (
@@ -156,8 +143,7 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                 From Research to <span className="text-[#FCAF17]">Real-World Impact</span>
               </h2>
               <p className="mt-5 max-w-8xl text-base leading-7 text-[#003B70]">
-                Before any commercialisation pathway can be pursued, ICON assists inventors in formally disclosing, evaluating, and protecting their intellectual property through national (IPO) and international (PCT) patent , design , and trade mark filing.
-              </p>
+Before you can take your product or technology to the market, you need to make sure your hard work is properly secured. We help inventors take their first steps by formally recording, reviewing, and protecting their ideas. Whether you are filing locally through IPO Pakistan or looking at international routes like PCT patents, industrial designs, copyright and trademarks, we guide you through every stage of the process to lock down your ownership rights.              </p>
           
             </div>
             
@@ -169,7 +155,7 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
             <div className="mb-8 grid grid-cols-2 overflow-hidden border border-[#003B70]/15 bg-[#003B70] sm:grid-cols-3">
               {stats.map((stat, index) => (
                 <motion.div
-                  key={stat.label}
+                  key={`${stat.label}-${index}`}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -191,7 +177,7 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
               onViewportEnter={() => setChartsInView(true)}
               className="border border-[#003B70]/15 bg-white p-5 shadow-[0_24px_70px_rgba(0,59,112,0.12)] sm:p-7"
             >
-              <div className="mt-7 grid gap-7 border-t border-[#003B70]/15 pt-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-8">
+              <div className="mt-8 grid gap-8 border-t border-[#003B70]/15 pt-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)] lg:gap-10">
                 {ipBreakdown.length > 0 && (
                   <section aria-labelledby="filed-ip-chart-heading" className="min-w-0">
                     <div className="mb-3 flex items-center justify-between gap-3">
@@ -206,76 +192,48 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                         {chartsInView && (
                           <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 360, height: 240 }}>
                             <PieChart>
-                              <defs>
-                                {ipBreakdown.map((entry, index) => (
-                                  <linearGradient key={entry.name} id={`${pieGradientId}-${index}`} x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor={entry.color || '#003B70'} stopOpacity={0.7} />
-                                    <stop offset="55%" stopColor={entry.color || '#003B70'} />
-                                    <stop offset="100%" stopColor={entry.color || '#003B70'} />
-                                  </linearGradient>
-                                ))}
-                              </defs>
                               <Tooltip contentStyle={{ border: '1px solid rgba(0,59,112,.15)', boxShadow: '0 12px 30px rgba(0,59,112,.12)', color: '#003B70' }} />
                               <Pie
                                 data={ipBreakdown}
                                 dataKey="value"
                                 nameKey="name"
                                 cx="50%"
-                                cy="52%"
-                                outerRadius="78%"
-                                paddingAngle={5}
-                                cornerRadius={3}
-                                stroke="#fff"
-                                strokeWidth={3}
-                                tooltipType="none"
-                                rootTabIndex={-1}
-                                style={{ pointerEvents: 'none', filter: 'drop-shadow(0 7px 5px rgba(0,59,112,0.18))' }}
+                                cy="50%"
+                                outerRadius={82}
+                                paddingAngle={3}
+                                cornerRadius={2}
+                                stroke="#f9f9f9"
+                                strokeWidth={2}
                                 isAnimationActive
                                 animationBegin={120}
                                 animationDuration={950}
                                 animationEasing="ease-out"
                               >
-                                {ipBreakdown.map((entry) => <Cell key={`depth-${entry.name}`} fill={entry.color || '#003B70'} style={{ filter: 'brightness(0.65)' }} />)}
-                              </Pie>
-                              <Pie
-                                data={ipBreakdown}
-                                dataKey="value"
-                                nameKey="name"
-                                cx="50%"
-                                cy="46%"
-                                outerRadius="78%"
-                                paddingAngle={5}
-                                cornerRadius={3}
-                                stroke="#fff"
-                                strokeWidth={4}
-                                isAnimationActive
-                                animationBegin={120}
-                                animationDuration={950}
-                                animationEasing="ease-out"
-                              >
-                                {ipBreakdown.map((entry, index) => <Cell key={entry.name} fill={`url(#${pieGradientId}-${index})`} />)}
+                                {ipBreakdown.map((entry, index) => (
+                                  <Cell key={`${entry.name}-${index}`} fill={entry.color || '#003B70'} />
+                                ))}
                               </Pie>
                             </PieChart>
                           </ResponsiveContainer>
                         )}
                       </div>
                       <div className="grid grid-cols-1 content-center gap-x-3 gap-y-2 sm:pl-1">
-                      {ipBreakdown.map((entry) => (
-                        <div key={entry.name} className="flex min-w-0 items-center gap-2 text-[10px] text-[#385572]">
-                          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: entry.color || '#003B70' }} />
-                          <span className="truncate">{entry.name}</span>
-                          <span className="ml-auto font-semibold tabular-nums text-[#003B70]">{entry.value.toLocaleString('en-US')}</span>
-                        </div>
-                      ))}
+                        {ipBreakdown.map((entry, index) => (
+                          <div key={`${entry.name}-${index}`} className="flex min-w-0 items-center gap-2 text-[10px] text-[#385572]">
+                            <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: entry.color || '#003B70' }} />
+                            <span className="truncate">{entry.name}</span>
+                            <span className="ml-auto font-semibold tabular-nums text-[#003B70]">{entry.value.toLocaleString('en-US')}</span>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </section>
                 )}
 
-                <section aria-labelledby="ip-activity-chart-heading" className="min-w-0">
+                <section aria-labelledby="ip-activity-chart-heading" className="min-w-0 lg:border-l lg:border-[#003B70]/15 lg:pl-10">
                   <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                     <div>
-                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]/55">Last 6 Yearly trend</span>
+                      <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#003B70]/55">Yearly trend</span>
                       <h4 id="ip-activity-chart-heading" className="mt-1 font-tahoma-font text-sm font-bold text-[#003B70]">IP filing activity</h4>
                     </div>
                     <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-wider text-[#003B70]/65">
@@ -283,13 +241,31 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                       <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-full bg-[#FCAF17]" /> Awarded</span>
                     </div>
                   </div>
-                  <div className="h-[250px] min-w-0 sm:h-[285px]">
+                  <div className="overflow-x-auto">
+                  <div className="relative h-[250px] min-w-0 sm:h-[285px]" style={{ minWidth: Math.max(360, ttoTrend.length * 72) }}>
+                    <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 -rotate-90 text-[9px] font-bold uppercase tracking-[0.12em] text-[#003B70]/70">
+                      IP
+                    </span>
+                    <span className="pointer-events-none absolute bottom-[-2px] left-1/2 -translate-x-1/2 text-[9px] font-bold uppercase tracking-[0.12em] text-[#003B70]/70">
+                      Year
+                    </span>
                     {chartsInView && (
                       <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 520, height: 285 }}>
-                        <BarChart data={ttoTrend} margin={{ top: 12, right: 12, left: -18, bottom: 0 }} barGap={4}>
+                        <BarChart data={ttoTrend} margin={{ top: 18, right: 12, left: 18, bottom: 22 }} barGap={4}>
                           <CartesianGrid stroke="#003B70" strokeOpacity={0.1} vertical={false} />
-                          <XAxis dataKey="year" axisLine={false} tickLine={false} tick={{ fill: '#003B70', fontSize: 10, fontWeight: 600 }} />
-                          <YAxis axisLine={false} tickLine={false} allowDecimals={false} tick={{ fill: '#003B70', fontSize: 10 }} />
+                          <XAxis
+                            dataKey="year"
+                            interval={0}
+                            axisLine={false}
+                            tickLine={false}
+                            tick={{ fill: '#003B70', fontSize: 10, fontWeight: 600 }}
+                          />
+                          <YAxis
+                            axisLine={false}
+                            tickLine={false}
+                            allowDecimals={false}
+                            tick={{ fill: '#003B70', fontSize: 10 }}
+                          />
                           <Tooltip contentStyle={{ border: '1px solid rgba(0,59,112,.15)', boxShadow: '0 12px 30px rgba(0,59,112,.12)', color: '#003B70' }} />
                           <Bar dataKey="filed" name="IP Filed" fill="#003B70" radius={[4, 4, 0, 0]} isAnimationActive animationBegin={180} animationDuration={1000} animationEasing="ease-out" />
                           <Bar dataKey="awarded" name="IP Awarded" fill="#FCAF17" radius={[4, 4, 0, 0]} isAnimationActive animationBegin={260} animationDuration={1000} animationEasing="ease-out" />
@@ -297,6 +273,17 @@ export function InnovationImpact({ stats, ipBreakdown, ipsFiled, ipsAwarded }: {
                       </ResponsiveContainer>
                     )}
                   </div>
+                  </div>
+                  <details className="mt-5 text-xs text-[#003B70]">
+                    <summary className="cursor-pointer font-semibold">View yearly IP figures</summary>
+                    <div className="mt-3 overflow-x-auto">
+                      <table className="w-full text-left">
+                        <caption className="sr-only">IP filing and award totals by year</caption>
+                        <thead><tr className="border-b border-[#003B70]/15"><th scope="col" className="py-2">Year</th><th scope="col" className="py-2 text-right">Filed</th><th scope="col" className="py-2 text-right">Awarded</th></tr></thead>
+                        <tbody>{ttoTrend.map(row => <tr key={row.year} className="border-b border-[#003B70]/10"><th scope="row" className="py-2 font-normal">{row.year}</th><td className="py-2 text-right tabular-nums">{row.filed.toLocaleString('en-US')}</td><td className="py-2 text-right tabular-nums">{row.awarded.toLocaleString('en-US')}</td></tr>)}</tbody>
+                      </table>
+                    </div>
+                  </details>
                 </section>
               </div>
             </motion.aside>

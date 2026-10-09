@@ -55,6 +55,21 @@ CREATE TABLE IF NOT EXISTS innovation_project_sectors (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Authentication and schema bookkeeping.
+CREATE TABLE IF NOT EXISTS ip_portfolio_records (
+  id CHAR(36) PRIMARY KEY,
+  ip_title VARCHAR(500) NOT NULL,
+  ip_type ENUM('Utility Patent', 'Copyright', 'Industrial Design') NOT NULL,
+  sector VARCHAR(200) NOT NULL DEFAULT 'Unknown',
+  description TEXT NOT NULL,
+  application_no VARCHAR(200) NULL,
+  award_date DATE NULL,
+  status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_ip_portfolio_status_type (status, ip_type),
+  KEY idx_ip_portfolio_sector (sector)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS admins (
   id INT AUTO_INCREMENT PRIMARY KEY,
   email VARCHAR(200) NOT NULL,
@@ -174,7 +189,7 @@ CREATE TABLE IF NOT EXISTS team_members (
   bio TEXT NOT NULL,
   focus JSON NOT NULL,
   image VARCHAR(500) NOT NULL,
-  email VARCHAR(200) NOT NULL,
+  email VARCHAR(200) NOT NULL DEFAULT '',
   sort_order INT NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

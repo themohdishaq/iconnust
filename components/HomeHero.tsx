@@ -291,13 +291,12 @@ export default function HomeHero({
   const displayStats =
     useMemo(() => {
       if (
-        !stats ||
-        stats.length === 0
+        !stats
       ) {
         return fallbackStats;
       }
 
-      return stats.slice(0, 4);
+      return stats;
     }, [stats]);
 
   /*
@@ -757,7 +756,6 @@ export default function HomeHero({
                 divide-y
                 divide-white/20
                 md:grid-cols-4
-                md:divide-y-0
               "
             >
               {displayStats.map(
@@ -843,7 +841,7 @@ export default function HomeHero({
                         <p
                           className="
                             mt-1
-                            whitespace-nowrap
+                            break-words
                             text-[10px]
                             font-medium
                             text-white/85

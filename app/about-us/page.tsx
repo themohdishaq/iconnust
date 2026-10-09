@@ -29,21 +29,21 @@ const departments = [
     tag: "CAC",
     name: "Corporate Advisory Council",
     description:
-      "The Corporate Advisory Council is emerging as a pacemaker of Pakistan's micro-economy, forging alliances with large industrial giants, multinational companies, and SMEs alike. It continuously exchanges support with its industry partners, operating on a triple-helix model of Academia, Industry, and Government, engaging in advisory work, consultation, and joint R&D collaboration.",
+      "The Corporate Advisory Council is NUST's gateway to industry. Established in 2011, it builds long-term partnerships with national firms, multinationals, SMEs and public sector organisations, and connects them with the right faculty experts, labs and research teams. Working on a triple-helix model of academia, industry and government, CAC manages NUST's industry MoUs and facilitates advisory and consultancy engagements, industry challenges and joint R&D collaboration. It also brings academia and industry closer through student industry visits, innovation talks with industry leaders and faculty placements in partner organisations, creating shared value for partners and the university.",
     image: "/main-pic/CAC_team.png",
   },
   {
     tag: "NIPO",
     name: "NUST Intellectual Property Office",
     description:
-      "Offering IP services since 2008, initially dedicated to TIC incubatees. NIPO was formally established in February 2011 at NUST's Centre for Innovation and Entrepreneurship, H-12, Islamabad. The office evaluates inventions for commercial potential and facilitates the drafting and filing of intellectual property applications on behalf of NUST researchers.",
+      "The NUST Intellectual Property Office protects the ideas that emerge from NUST's research. Offering IP services since 2008 and formally established in February 2011 at the Research, Innovation and Commercialization, H-12, NIPO evaluates inventions for commercial potential. It supports researchers in drafting and filing patents, industrial designs, copyrights and trademarks, nationally with IPO Pakistan and internationally through the PCT. NIPO also builds IP awareness across campus through seminars, webinars and training.",
     image: "/main-pic/IPO.jpg",
   },
   {
     tag: "TTO",
     name: "Technology Transfer Office",
     description:
-      "Being cognizant of the significant role that universities play in the knowledge economy, NUST established its Technology Transfer Office in 2011. The office is responsible for transferring knowledge and translating scientific results into real-world innovation, building entrepreneurial spirit, organising the transfer of new technological approaches, and arranging early-stage financing for transfer projects. It works to place NUST's own innovations into local industry, maintaining a clear path from research to commercial exploitation.",
+      "Established in 2011, the Technology Transfer Office turns NUST research into products, services and ventures. It identifies technologies with market potential and structures licensing agreements with industry. It also supports the creation of spin-offs and helps arrange early-stage financing for transfer projects. The result is a clear path from the lab to the market.",
     image: "/main-pic/TTO_Team.png",
     link: "#",
   },
@@ -60,12 +60,12 @@ const departments = [
 function About() {
   return (
     <main className="relative overflow-hidden bg-white font-sans text-[#003B70]">
-      <section className="relative isolate flex min-h-[400px] items-center overflow-hidden bg-[#003B70]">
+      <section className="relative isolate flex min-h-[500px] items-center overflow-hidden bg-[#003B70]">
         <motion.div
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0 -z-20 bg-[url('/main-pic/ric.jpeg')] bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 -z-20 bg-[url('/main-pic/RIC_BUILDING.jpeg')] bg-[length:100%_100%] bg-no-repeat"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#003B70] via-[#003B70]/15 " />
         <div className="absolute -right-20 top-12 h-72 w-72 rounded-full border border-white/15 sm:h-96 sm:w-96" />

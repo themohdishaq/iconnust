@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 nextEnv.loadEnvConfig(root, false, { info() {}, error() {} });
+assert.ok(['localhost', '127.0.0.1'].includes(process.env.DB_HOST), 'Run migration tests against a local database only.');
 const database = `icon_migration_test_${randomUUID().replaceAll('-', '')}`;
 assert.match(database, /^icon_migration_test_[a-f0-9]{32}$/);
 assert.notEqual(database, process.env.DB_NAME);
@@ -18,6 +19,9 @@ const connection = await mysql.createConnection({
 });
 let created = false;
 const run = (...args) => execFileSync(process.execPath, ['scripts/migrate-production.mjs', ...args], {
+  cwd: root, env: { ...process.env, DB_NAME: database }, encoding: 'utf8', stdio: 'pipe',
+});
+const runProduction = (...args) => execFileSync(process.execPath, ['scripts/update-production-tables.mjs', ...args], {
   cwd: root, env: { ...process.env, DB_NAME: database }, encoding: 'utf8', stdio: 'pipe',
 });
 try {
@@ -41,6 +45,9 @@ try {
   await connection.query("INSERT INTO stories (name, tag, description, founder, funding, image) VALUES ('Existing story', 'Tag', 'Description', 'Founder', 'Funding', '/image.png')");
   await connection.query("INSERT INTO events (day, month, year, title, type, location, description) VALUES ('6', 'October', '2026', 'Existing event', 'Event', 'Location', 'Description')");
   await connection.query('DROP TABLE tech_place_stats');
+  await connection.query('DROP TABLE ip_portfolio_records');
+  await connection.query("INSERT INTO team_members (name, title, dept, bio, focus, image) VALUES ('Existing member', 'Director', 'ICON', '', '[]', '/team/existing.jpg')");
+  await connection.query('ALTER TABLE team_members DROP COLUMN email');
   const preview = run();
   assert.match(preview, /read-only preview/);
   const [before] = await connection.query('SHOW COLUMNS FROM news');
@@ -60,7 +67,29 @@ try {
   const [[subscriber]] = await connection.query('SELECT * FROM subscriber');
   assert.equal(subscriber.name, 'Existing subscriber');
   assert.equal(subscriber.notify_enabled, 1);
+  const [[member]] = await connection.query('SELECT * FROM team_members');
+  assert.equal(member.name, 'Existing member');
+  assert.equal(member.image, '/team/existing.jpg');
+  assert.equal(member.email, '', 'Missing team email is safely backfilled');
   assert.match(run(), /0 pending statements/);
+  assert.match(runProduction('--import-ip'), /IP portfolio import planned/);
+  const [[beforeImport]] = await connection.query('SELECT COUNT(*) AS total FROM ip_portfolio_records');
+  assert.equal(Number(beforeImport.total), 0, 'Production import preview must not insert rows');
+  assert.match(runProduction('--apply', '--import-ip'), /IP portfolio import complete/);
+  const seed = JSON.parse(await readFile(new URL('../data/nipo_top20_ip_records.json', import.meta.url), 'utf8'));
+  const expectedCount = Object.values(seed).flat().length;
+  const [ipRecords] = await connection.query('SELECT id FROM ip_portfolio_records ORDER BY id');
+  assert.equal(ipRecords.length, expectedCount);
+  await connection.execute("UPDATE ip_portfolio_records SET description = 'Existing admin edit' WHERE id = ?", [ipRecords[0].id]);
+  await connection.execute('DELETE FROM ip_portfolio_records WHERE id = ?', [ipRecords[1].id]);
+  assert.match(runProduction('--apply', '--import-ip'), /0 records added/);
+  const [[edited]] = await connection.execute('SELECT description FROM ip_portfolio_records WHERE id = ?', [ipRecords[0].id]);
+  assert.equal(edited.description, 'Existing admin edit');
+  const [[afterRepeat]] = await connection.query('SELECT COUNT(*) AS total FROM ip_portfolio_records');
+  assert.equal(Number(afterRepeat.total), expectedCount - 1, 'Repeat import preserves deletions');
+  await connection.execute('DELETE FROM schema_migrations WHERE migration_key = ?', ['seed-ip-portfolio-v1']);
+  assert.throws(() => runProduction('--apply', '--import-ip'), error => /already contains records/.test(error.stderr));
+  assert.match(runProduction(), /0 pending statements/);
   assert.match(run('--apply'), /0 pending statements/);
   // Preflight duplicate detection must prevent even unrelated earlier steps.
   await connection.query('ALTER TABLE subscriber DROP INDEX uq_subscriber_email');
@@ -72,7 +101,7 @@ try {
   await connection.query('DELETE FROM subscriber WHERE id = 2');
   assert.match(run('--apply'), /Migration complete/);
   assert.match(run(), /0 pending statements/);
-  console.log('PASS: read-only preview, legacy upgrade, missing table creation, preserved content, published backfill/draft defaults, repeat runs, duplicate preflight, and resumable migration.');
+  console.log('PASS: production preview/apply, legacy upgrades, missing tables and team email, preserved content, repeat runs, duplicate preflight, one-time IP import, preserved admin edits/deletions and unmarked-data protection.');
 } finally {
   if (created) await connection.query(`DROP DATABASE \`${database}\``);
   await connection.end();

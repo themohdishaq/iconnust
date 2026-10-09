@@ -59,7 +59,7 @@ if (!DB_HOST || !DB_USER || !DB_NAME) throw new Error('Missing DB_HOST / DB_USER
 const quote = value => `\`${value.replaceAll('`', '``')}\``;
 const sql = await readFile(new URL('../lib/db/schema.sql', import.meta.url), 'utf8');
 const definitions = [...sql.matchAll(/CREATE TABLE IF NOT EXISTS (\w+) \(([\s\S]*?)\n\) ENGINE[^;]+;/g)];
-if (definitions.length !== 21) throw new Error('Unexpected schema format; migration stopped.');
+if (definitions.length !== 22) throw new Error('Unexpected schema format; migration stopped.');
 if (process.env.DB_SSL && !['true', 'false'].includes(process.env.DB_SSL)) {
   throw new Error('DB_SSL must be true or false.');
 }
@@ -120,7 +120,7 @@ try {
     for (const rows of indexMap.values()) rows.sort((a, b) => a.Seq_in_index - b.Seq_in_index);
 
     for (const line of body.split('\n')) {
-      const match = line.match(/^  (\w+) ((?:VARCHAR|INT|TEXT|JSON|ENUM|DATETIME|BOOLEAN|DECIMAL)\b.*?)(?:,)?$/);
+      const match = line.match(/^  (\w+) ((?:CHAR|VARCHAR|INT|TEXT|JSON|ENUM|DATETIME|BOOLEAN|DECIMAL)\b.*?)(?:,)?$/);
       if (!match || columnMap.has(match[1])) continue;
       const [, name, definition] = match;
       if (/PRIMARY KEY|AUTO_INCREMENT/.test(definition) || (!/DEFAULT|\bNULL\b/.test(definition))
