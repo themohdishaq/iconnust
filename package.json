@@ -15,6 +15,7 @@
     "db:migrate": "node scripts/migrate-production.mjs",
     "db:migrate:production": "node scripts/migrate-production.mjs",
     "db:update:production": "node scripts/update-production-tables.mjs",
+    "db:update:ip-portfolio": "node scripts/update-ip-portfolio.mjs",
     "db:seed": "node --env-file=.env.local scripts/seed-all.mjs",
     "seed:admin": "node --env-file=.env.local scripts/seed-admin.mjs",
     "seed:team": "node scripts/seed-team.mjs",

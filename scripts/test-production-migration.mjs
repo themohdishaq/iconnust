@@ -24,6 +24,9 @@ const run = (...args) => execFileSync(process.execPath, ['scripts/migrate-produc
 const runProduction = (...args) => execFileSync(process.execPath, ['scripts/update-production-tables.mjs', ...args], {
   cwd: root, env: { ...process.env, DB_NAME: database }, encoding: 'utf8', stdio: 'pipe',
 });
+const runIpPortfolio = (...args) => execFileSync(process.execPath, ['scripts/update-ip-portfolio.mjs', ...args], {
+  cwd: root, env: { ...process.env, DB_NAME: database }, encoding: 'utf8', stdio: 'pipe',
+});
 try {
   await connection.query(`CREATE DATABASE \`${database}\``);
   created = true;
@@ -72,10 +75,10 @@ try {
   assert.equal(member.image, '/team/existing.jpg');
   assert.equal(member.email, '', 'Missing team email is safely backfilled');
   assert.match(run(), /0 pending statements/);
-  assert.match(runProduction('--import-ip'), /IP portfolio import planned/);
+  assert.match(runIpPortfolio(), /IP portfolio import planned/);
   const [[beforeImport]] = await connection.query('SELECT COUNT(*) AS total FROM ip_portfolio_records');
   assert.equal(Number(beforeImport.total), 0, 'Production import preview must not insert rows');
-  assert.match(runProduction('--apply', '--import-ip'), /IP portfolio import complete/);
+  assert.match(runIpPortfolio('--apply'), /IP portfolio import complete/);
   const seed = JSON.parse(await readFile(new URL('../data/nipo_top20_ip_records.json', import.meta.url), 'utf8'));
   const expectedCount = Object.values(seed).flat().length;
   const [ipRecords] = await connection.query('SELECT id FROM ip_portfolio_records ORDER BY id');
@@ -83,12 +86,14 @@ try {
   await connection.execute("UPDATE ip_portfolio_records SET description = 'Existing admin edit' WHERE id = ?", [ipRecords[0].id]);
   await connection.execute('DELETE FROM ip_portfolio_records WHERE id = ?', [ipRecords[1].id]);
   assert.match(runProduction('--apply', '--import-ip'), /0 records added/);
+  assert.match(runIpPortfolio('--apply'), /0 records added/);
   const [[edited]] = await connection.execute('SELECT description FROM ip_portfolio_records WHERE id = ?', [ipRecords[0].id]);
   assert.equal(edited.description, 'Existing admin edit');
   const [[afterRepeat]] = await connection.query('SELECT COUNT(*) AS total FROM ip_portfolio_records');
   assert.equal(Number(afterRepeat.total), expectedCount - 1, 'Repeat import preserves deletions');
   await connection.execute('DELETE FROM schema_migrations WHERE migration_key = ?', ['seed-ip-portfolio-v1']);
   assert.throws(() => runProduction('--apply', '--import-ip'), error => /already contains records/.test(error.stderr));
+  assert.throws(() => runIpPortfolio('--apply'), error => /already contains records/.test(error.stderr));
   assert.match(runProduction(), /0 pending statements/);
   assert.match(run('--apply'), /0 pending statements/);
   // Preflight duplicate detection must prevent even unrelated earlier steps.

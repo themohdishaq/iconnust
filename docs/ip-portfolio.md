@@ -18,6 +18,29 @@ This creates the portfolio table and schema bookkeeping table if necessary, and 
 
 After the import, MySQL is the source for the public portfolio and admin manager. Changes to the JSON file do not overwrite database records. Use the admin form to manage records and descriptions.
 
+## Production import
+
+With production database environment variables configured, preview and apply:
+
+```sh
+npm run db:update:ip-portfolio
+npm run db:update:ip-portfolio -- --apply
+```
+
+For an explicit production environment file:
+
+```sh
+node --env-file=.env.production scripts/update-ip-portfolio.mjs --apply
+```
+
+This command reuses the production schema migration and transactional one-time
+import. It reads patents, copyrights and industrial designs from
+`data/nipo_top20_ip_records.json`, including descriptions, and publishes them.
+It never loads local environment files automatically. Repeating the import
+preserves admin edits and deletions; it does not synchronize later JSON edits.
+Manage existing records through the admin dashboard. An existing nonempty
+portfolio without an import marker stops before applying changes.
+
 ## API
 
 - `GET /api/ip-portfolio`: published records only; no authentication required.
